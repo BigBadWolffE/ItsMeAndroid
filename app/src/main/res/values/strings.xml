@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">ItsMeAndroid</string>
+    <string name="next">Next</string>
+    <string name="email_or_mobile_phone">Email or Mobile Phone</string>
+    <string name="username">Username</string>
+    <string name="new_registration">New Registration</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="secret_question">Secret Question</string>
+    <string name="i_agree_terms_and_condition">I Agree Terms and Condition</string>
+    <string name="register">Register</string>
+    <string name="email_address">Email Address</string>
+    <string name="phone_number">Phone Number</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
