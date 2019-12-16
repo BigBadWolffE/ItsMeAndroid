@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.addcc.AddCcActivity"></activity>
+        <activity
+            android:name=".view.addcc.AddCcActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".view.message.MessageActivity" />
         <activity android:name=".view.profile.ProfileActivity" />
         <activity android:name=".view.inbox.InboxActivity" />

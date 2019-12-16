@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.message.MessageActivity;
 import com.indocyber.itsmeandroid.view.profile.ProfileActivity;
 
@@ -53,6 +54,10 @@ public class HomeFragment extends Fragment {
         mFabMembership = view.findViewById(R.id.fabMembership);
         mFabPersonal = view.findViewById(R.id.fabPersonal);
         mFabCreditCard = view.findViewById(R.id.fabCreditCard);
+        mFabCreditCard.setOnClickListener(creditCardView -> {
+            Intent intent = new Intent(getActivity(), AddCcActivity.class);
+            startActivity(intent);
+        });
     }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
