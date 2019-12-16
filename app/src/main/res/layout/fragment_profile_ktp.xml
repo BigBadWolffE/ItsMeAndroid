@@ -13,22 +13,50 @@
         android:paddingTop="10dp"
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
-        android:paddingBottom="10dp" >
+        android:paddingBottom="40dp" >
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/layoutProfileFotoKTP"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:id="@+id/imgProfileKTP"
-                android:src="@drawable/ic_profile_default_img" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="180dp"
+                    android:id="@+id/imgFotoKTP"
+                    android:src="@drawable/ic_profile_default_img" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imgTakeFotoKTP"
+                    android:src="@drawable/ic_profile_take_photo"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@id/imgFotoKTP"/>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imgShareFotoKTP"
+                    android:src="@drawable/ic_profile_share"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/imgTakeFotoKTP" />
+
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Jordan Setiawan"
+                android:id="@+id/txtProfileNamaKTP"
                 android:paddingTop="10dp"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
@@ -74,6 +103,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtProfileNoKTP"
                 android:text="01679765443368363"
                 android:paddingTop="10dp"
                 android:background="@null"
@@ -123,6 +153,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtProfileTanggalLahirKTP"
                 android:text=""
                 android:paddingTop="10dp"
                 android:background="@null"
@@ -183,7 +214,8 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerAgamaKTP"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -203,7 +235,8 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerStatusKTP" />
         </LinearLayout>
 
         <LinearLayout
@@ -224,7 +257,8 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerPekerjaanKTP" />
         </LinearLayout>
 
         <LinearLayout
@@ -245,7 +279,8 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerKWNKTP" />
         </LinearLayout>
 
         <LinearLayout
@@ -261,11 +296,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address" />
+                android:text="Address"
+                android:layout_marginBottom="5dp" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtProfileAlamatKTP"
                 android:background="@null"
                 android:inputType="textMultiLine"
                 android:text="Serpong Paradise Blok A no 12 Jl. Serpong Raya, Serpong Tangerang Selatan" />
@@ -296,11 +333,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RT" />
+                    android:text="RT"
+                    android:layout_marginBottom="5dp" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/txtProfileRTKTP"
                     android:background="@null"
                     android:inputType="number"
                     android:text="002" />
@@ -320,11 +359,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="RW" />
+                    android:text="RW"
+                    android:layout_marginBottom="5dp" />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/txtProfileRWKTP"
                     android:background="@null"
                     android:inputType="number"
                     android:text="002" />
@@ -349,7 +390,8 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerKelurahanKTP" />
         </LinearLayout>
 
         <LinearLayout
@@ -370,7 +412,8 @@
 
             <Spinner
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerKecamatanKTP" />
         </LinearLayout>
 
         <LinearLayout
