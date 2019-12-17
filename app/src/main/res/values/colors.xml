@@ -9,4 +9,5 @@
     <color name="grey2">#B4B4B4</color>
     <color name="colorwhite">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="primary_font_color">#5D5D5D</color>
 </resources>
