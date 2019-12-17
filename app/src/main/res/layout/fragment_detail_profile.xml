@@ -11,30 +11,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
-        android:paddingBottom="40dp" >
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingRight="@dimen/spacing_30"
+        android:paddingLeft="@dimen/spacing_30"
+        android:paddingBottom="@dimen/spacing_30" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutNamaLengkap"
-            android:paddingBottom="5dp"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama Lengkap" />
+                style="@style/textReg14Grey"
+                android:text="Nama Lengkap"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNamaLengkap"
+                style="@style/textReg18BoldBlack"
                 android:text="Jordan Setiawan"
-                android:paddingTop="10dp"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -44,42 +50,44 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutAlamat"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             app:layout_constraintTop_toBottomOf="@+id/layoutNamaLengkap">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address" />
+                android:text="Address"
+                style="@style/textReg14Grey" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/spacing_medium">
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
+                    style="@style/textReg18BoldBlack"
                     android:id="@+id/txtProfileAlamat"
-                    android:minLines="4"
-                    android:layout_gravity="top"
+                    android:minLines="2"
+                    android:gravity="top"
                     android:background="@null"
                     android:inputType="textMultiLine"
                     android:text="Serpong Paradise Blok A no 12 Jl. Serpong Raya, Serpong Tangerang Selatan" />
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="@dimen/spacing_mlarge"
                     android:layout_weight=".1"
                     android:id="@+id/imgEditAlamat"
                     android:src="@drawable/ic_profile_pencil_edit"
                     android:scaleType="fitCenter"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -87,8 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="5dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
             android:id="@+id/layoutEmailAddress"
             app:layout_constraintTop_toBottomOf="@+id/layoutAlamat">
@@ -96,18 +104,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email Address" />
+                android:text="Email Address"
+                style="@style/textReg14Grey"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/spacing_medium">
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
+                    style="@style/textReg18BoldBlack"
                     android:id="@+id/txtProfileEmail"
                     android:background="@null"
                     android:text="jordan.setiawan@gmail.com"
@@ -115,13 +125,13 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="@dimen/spacing_mlarge"
                     android:layout_weight=".1"
                     android:id="@+id/imgEditEmail"
                     android:src="@drawable/ic_profile_pencil_edit"
                     android:scaleType="fitCenter"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -129,8 +139,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="5dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
             android:id="@+id/layoutPhoneNumber"
             app:layout_constraintTop_toBottomOf="@+id/layoutEmailAddress">
@@ -138,18 +148,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone Number" />
+                android:text="Phone Number"
+                style="@style/textReg14Grey"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/spacing_medium">
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
+                    style="@style/textReg18BoldBlack"
                     android:id="@+id/txtProfileNoTelp"
                     android:background="@null"
                     android:text="081287777222"
@@ -157,13 +169,13 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="@dimen/spacing_mlarge"
                     android:layout_weight=".1"
                     android:id="@+id/imgEditNoTelp"
                     android:src="@drawable/ic_profile_pencil_edit"
                     android:scaleType="fitCenter"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -171,8 +183,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="5dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
             android:id="@+id/layoutPassword"
             app:layout_constraintTop_toBottomOf="@+id/layoutPhoneNumber">
@@ -180,18 +192,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Password" />
+                android:text="Password"
+                style="@style/textReg14Grey"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/spacing_medium">
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
+                    style="@style/textReg18BoldBlack"
                     android:id="@+id/txtProfilePassword"
                     android:background="@null"
                     android:text="hahahahhahhaha"
@@ -199,13 +213,13 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="@dimen/spacing_mlarge"
                     android:layout_weight=".1"
                     android:id="@+id/imgEditPassword"
                     android:src="@drawable/ic_profile_pencil_edit"
                     android:scaleType="fitCenter"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -213,8 +227,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="5dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
             android:id="@+id/layoutPin"
             app:layout_constraintTop_toBottomOf="@+id/layoutPassword">
@@ -222,18 +236,20 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="PIN" />
+                android:text="PIN"
+                style="@style/textReg14Grey"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:paddingTop="@dimen/spacing_medium">
 
                 <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
+                    style="@style/textReg18BoldBlack"
                     android:id="@+id/txtProfilePin"
                     android:background="@null"
                     android:text="060597"
@@ -241,13 +257,13 @@
 
                 <ImageView
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="@dimen/spacing_mlarge"
                     android:layout_weight=".1"
                     android:id="@+id/imgEditPin"
                     android:src="@drawable/ic_profile_pencil_edit"
                     android:scaleType="fitCenter"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -255,8 +271,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="5dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
             android:id="@+id/layoutSecretQuestion"
             app:layout_constraintTop_toBottomOf="@+id/layoutPin">
@@ -264,19 +280,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Secret question" />
+                android:text="Secret question"
+                style="@style/textReg14Grey"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:text="What is your hobby ?" />
+                android:text="What is your hobby ?"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileSecretQuestion"
+                style="@style/textReg18BoldBlack"
                 android:text="Playing Futsal"
-                android:paddingTop="10dp"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>

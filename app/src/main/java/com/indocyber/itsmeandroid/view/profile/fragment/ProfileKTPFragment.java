@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -22,6 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -45,6 +48,9 @@ public class ProfileKTPFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private CheckBox agreeCheck;
+    private Button saveBtn;
     private ImageView mFotoKTP, mTakeFotoKTP, mShareKTP;
     private EditText mNamaKTP, mAlamat, mNoKTP,
             mTglLahir, mRT, mRW;
@@ -94,6 +100,8 @@ public class ProfileKTPFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        agreeCheck = view.findViewById(R.id.cbAgreeTerms);
+        saveBtn = view.findViewById(R.id.btnSaveProfileKTP);
         mFotoKTP = view.findViewById(R.id.imgFotoKTP);
         mTakeFotoKTP = view.findViewById(R.id.imgTakeFotoKTP);
         mShareKTP = view.findViewById(R.id.imgShareFotoKTP);
@@ -123,6 +131,13 @@ public class ProfileKTPFragment extends Fragment {
         mRT.setTextColor(Color.BLACK);
         mRW.setEnabled(false);
         mRW.setTextColor(Color.BLACK);
+
+        agreeCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAgreement();
+            }
+        });
 
         mTakeFotoKTP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,6 +196,14 @@ public class ProfileKTPFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void checkAgreement() {
+        if (!agreeCheck.isChecked()) {
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_grey));
+        } else {
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+        }
     }
 
     private void initializeSpinner() {

@@ -10,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingRight="30dp"
-        android:paddingLeft="30dp"
-        android:paddingBottom="40dp" >
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingRight="@dimen/spacing_30"
+        android:paddingLeft="@dimen/spacing_30"
+        android:paddingBottom="@dimen/spacing_30" >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/spacing_middle"
             android:id="@+id/layoutProfileFotoNPWP"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -63,8 +63,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutNamaLengkap"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="10dp"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             android:background="@drawable/bottom_border_background"
             app:layout_constraintTop_toBottomOf="@+id/layoutProfileFotoNPWP">
 
@@ -72,13 +72,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nama Lengkap"
-                android:layout_marginBottom="5dp" />
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtProfileNamaNPWP"
+                style="@style/textReg18BoldBlack"
                 android:text="Jordan Setiawan"
-                android:paddingTop="10dp"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -88,8 +90,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutNoNPWP"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="10dp"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             android:background="@drawable/bottom_border_background"
             app:layout_constraintTop_toBottomOf="@+id/layoutNamaLengkap">
 
@@ -97,13 +99,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="No NPWP"
-                android:layout_marginBottom="5dp" />
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtProfileNoNPWP"
+                style="@style/textReg18BoldBlack"
                 android:text="01679765443368363"
-                android:paddingTop="10dp"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -113,22 +117,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutNIK"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             app:layout_constraintTop_toBottomOf="@+id/layoutNoNPWP">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="NIK"
-                android:layout_marginBottom="5dp"/>
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtProfileNIKNPWP"
+                style="@style/textReg18BoldBlack"
                 android:text="541614584158454136284"
-                android:paddingTop="10dp"
                 android:background="@null"
                 android:inputType="number" />
         </LinearLayout>
@@ -138,21 +144,24 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutBerlakuHingga"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="10dp"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             app:layout_constraintTop_toBottomOf="@+id/layoutNIK">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Berlaku Hingga"
-                android:layout_marginBottom="5dp"/>
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
+                style="@style/textReg18BoldBlack"
                 android:text="Seumur Hidup"
-                android:paddingTop="10dp"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@drawable/disable_grey_edittext"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -162,20 +171,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutAlamat"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             app:layout_constraintTop_toBottomOf="@+id/layoutBerlakuHingga">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address" />
+                android:text="Address"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:id="@+id/txtProfileAlamatNPWP"
+                style="@style/textReg18BoldBlack"
                 android:background="@null"
                 android:inputType="textMultiLine"
                 android:text="Serpong Paradise Blok A no 12 Jl. Serpong Raya, Serpong Tangerang Selatan" />
@@ -186,36 +198,26 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutAlamatKPP"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/spacing_medium"
             android:background="@drawable/bottom_border_background"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/spacing_mlarge"
             app:layout_constraintTop_toBottomOf="@+id/layoutAlamat">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kantor Pelayanan Pajak" />
+                android:text="Kantor Pelayanan Pajak"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:id="@+id/txtProfileAlamatKPP"
+                style="@style/textReg18BoldBlack"
                 android:background="@null"
                 android:inputType="textMultiLine"
                 android:text="KPP Paratama Jakarta Barat" />
         </LinearLayout>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:textColor="@color/colorwhite"
-            android:id="@+id/btnSaveProfileNPWP"
-            android:paddingBottom="5dp"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/button_primary"
-            app:layout_constraintTop_toBottomOf="@+id/layoutAlamatKPP"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
