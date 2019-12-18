@@ -5,7 +5,7 @@
 
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="replace"/>
+        tools:node="replace" />
 
     <application
         android:allowBackup="true"
@@ -15,8 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.message.MessageActivity"></activity>
-        <activity android:name=".view.profile.activity.ProfileActivity"
+        <activity android:name=".view.promo.activity.PromoActivity"
+            android:parentActivityName=".view.home.activity.HomeActivity"></activity>
+        <activity android:name=".view.message.MessageActivity" />
+        <activity
+            android:name=".view.profile.activity.ProfileActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />
         <activity android:name=".view.inbox.InboxActivity" />
         <activity android:name=".view.register.RegistrationActivity" />

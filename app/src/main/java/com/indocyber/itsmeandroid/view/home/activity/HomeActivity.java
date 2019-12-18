@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.blockcc.BlockCCFragment;
 import com.indocyber.itsmeandroid.view.contactcc.ContactCCFragment;
 import com.indocyber.itsmeandroid.view.home.fragment.HomeFragment;
+import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
+import com.indocyber.itsmeandroid.view.promo.fragment.AllPromoFragment;
 
 import org.w3c.dom.Text;
 
@@ -106,7 +109,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragment = new BlockCCFragment();
 
         } else if (id == R.id.navPromo) {
-
+            Intent intent = new Intent(this, PromoActivity.class);
+            startActivity(intent);
         } else if (id == R.id.navAboutUs) {
 
         } else if (id == R.id.navSettings) {

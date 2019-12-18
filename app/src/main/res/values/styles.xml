@@ -51,6 +51,12 @@
         <item name="android:textColor">@android:color/black</item>
     </style>
 
+    <style name="textReg14BoldPrimary">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
     <style name="textReg14BoldBlack">
         <item name="android:fontFamily">@font/interstate_bold</item>
         <item name="android:textSize">14sp</item>
