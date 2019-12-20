@@ -32,7 +32,6 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
-    
     <style name="CreditCardTextStyle">
         <item name="android:fontFamily">monospace</item>
         <item name="android:textColor">@color/colorwhite</item>
@@ -65,4 +64,41 @@
         <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingLeft">8dp</item>
     </style>
+
+    <style name="textReg18BoldBlack">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="textReg14Grey">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey2</item>
+    </style>
+
+    <style name="textReg14Black">
+        <item name="android:fontFamily">@font/interstate_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="textReg14BoldPrimary">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="textReg14BoldBlack">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="textReg14BoldWhite">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
 </resources>

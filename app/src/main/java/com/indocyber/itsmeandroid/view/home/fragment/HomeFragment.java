@@ -2,7 +2,6 @@ package com.indocyber.itsmeandroid.view.home.fragment;
 
 
 import android.content.Intent;
-import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,7 +19,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.message.MessageActivity;
-import com.indocyber.itsmeandroid.view.profile.ProfileActivity;
+import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 
 /**
  * A simple {@link Fragment} subclass.
