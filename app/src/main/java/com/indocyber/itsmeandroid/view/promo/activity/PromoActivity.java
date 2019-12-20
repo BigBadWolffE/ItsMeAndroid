@@ -8,11 +8,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
 import com.indocyber.itsmeandroid.view.promo.fragment.AllPromoFragment;
+import com.indocyber.itsmeandroid.view.promo.fragment.CollectionPromoFragment;
 import com.indocyber.itsmeandroid.view.promo.fragment.DiningPromoFragment;
 import com.indocyber.itsmeandroid.view.promo.fragment.NearbyPromoFragment;
 
@@ -22,8 +22,7 @@ import java.util.List;
 public class PromoActivity extends AppCompatActivity implements PromoMenuAdapter.Listener {
 
     private RecyclerView mPromoMenuRecycler;
-    private List<Integer> mResourceList = new ArrayList<>();
-    private PromoMenuAdapter mPromoMenuAdapter;
+    private PromoMenuAdapter mPromoMenuAdapter, mNearbyMenuAdapter, mDinningMenuAdapter, mCollectionMenuAdapter;
     private Fragment mFragmentIndicator = null;
 
     @Override
@@ -38,21 +37,57 @@ public class PromoActivity extends AppCompatActivity implements PromoMenuAdapter
         }
 
         mPromoMenuRecycler = findViewById(R.id.recyclerPromoHorizontalMenu);
-        mPromoMenuAdapter = new PromoMenuAdapter(mResourceList, getApplicationContext(), PromoActivity.this);
+        mPromoMenuAdapter = new PromoMenuAdapter(initializeMenu(), getApplicationContext(), PromoActivity.this);
+        mNearbyMenuAdapter = new PromoMenuAdapter(nearbyActive(), getApplicationContext(), PromoActivity.this);
+        mDinningMenuAdapter = new PromoMenuAdapter(dinningActive(), getApplicationContext(), PromoActivity.this);
+        mCollectionMenuAdapter = new PromoMenuAdapter(collectionActive(), getApplicationContext(), PromoActivity.this);
         LinearLayoutManager horizontalLayoutManager =
                 new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mPromoMenuRecycler.setLayoutManager(horizontalLayoutManager);
         mPromoMenuRecycler.setAdapter(mPromoMenuAdapter);
 
-        initializeMenu();
         loadFragment(mFragmentIndicator);
 
     }
 
-    private void initializeMenu() {
-        mResourceList.add(R.drawable.btn_all_active);
-        mResourceList.add(R.drawable.btn_nearby_unactive);
-        mResourceList.add(R.drawable.btn_dinning_unactive);
+    private List<Integer> initializeMenu() {
+        List<Integer> allActiveList = new ArrayList<>();
+        allActiveList.clear();
+        allActiveList.add(R.drawable.btn_all_active);
+        allActiveList.add(R.drawable.btn_nearby_unactive);
+        allActiveList.add(R.drawable.btn_dinning_unactive);
+        allActiveList.add(R.drawable.btn_collection_unactive);
+        return allActiveList;
+    }
+
+    private List<Integer> nearbyActive() {
+        List<Integer> nearbyActiveList = new ArrayList<>();
+        nearbyActiveList.clear();
+        nearbyActiveList.add(R.drawable.btn_all_unactive);
+        nearbyActiveList.add(R.drawable.btn_nearby_active);
+        nearbyActiveList.add(R.drawable.btn_dinning_unactive);
+        nearbyActiveList.add(R.drawable.btn_collection_unactive);
+        return nearbyActiveList;
+    }
+
+    private List<Integer> dinningActive() {
+        List<Integer> dinningActiveList = new ArrayList<>();
+        dinningActiveList.clear();
+        dinningActiveList.add(R.drawable.btn_all_unactive);
+        dinningActiveList.add(R.drawable.btn_nearby_unactive);
+        dinningActiveList.add(R.drawable.btn_dinning_active);
+        dinningActiveList.add(R.drawable.btn_collection_unactive);
+        return dinningActiveList;
+    }
+
+    private List<Integer> collectionActive() {
+        List<Integer> collectionActiveList = new ArrayList<>();
+        collectionActiveList.clear();
+        collectionActiveList.add(R.drawable.btn_all_unactive);
+        collectionActiveList.add(R.drawable.btn_nearby_unactive);
+        collectionActiveList.add(R.drawable.btn_dinning_unactive);
+        collectionActiveList.add(R.drawable.btn_collection_active);
+        return collectionActiveList;
     }
 
     private void loadFragment(Fragment fragment) {
@@ -70,11 +105,21 @@ public class PromoActivity extends AppCompatActivity implements PromoMenuAdapter
 
     @Override
     public void onClick(int position) {
-        if (position == 0)
+        if (position == 0) {
             loadFragment(new AllPromoFragment());
-        else if (position == 1)
+            mPromoMenuRecycler.swapAdapter(mPromoMenuAdapter, true);
+        } else if (position == 1) {
             loadFragment(new NearbyPromoFragment());
-        else if (position == 2)
+            mPromoMenuRecycler.swapAdapter(mNearbyMenuAdapter, true);
+        } else if (position == 2) {
             loadFragment(new DiningPromoFragment());
+            mPromoMenuRecycler.swapAdapter(mDinningMenuAdapter, true);
+        } else if (position == 3) {
+            loadFragment(new CollectionPromoFragment());
+            mPromoMenuRecycler.swapAdapter(mCollectionMenuAdapter, true);
+        }
     }
+
+
+
 }

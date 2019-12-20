@@ -31,6 +31,11 @@ public class PromoMenuAdapter extends RecyclerView.Adapter<PromoMenuAdapter.Menu
         this.mlistener = listener;
     }
 
+    public void updateData(List<Integer> mNewPromoMenuList) {
+        mPromoMenuList.clear();
+        mPromoMenuList.addAll(mNewPromoMenuList);
+    }
+
     @NonNull
     @Override
     public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,6 +52,7 @@ public class PromoMenuAdapter extends RecyclerView.Adapter<PromoMenuAdapter.Menu
             @Override
             public void onClick(View view) {
                 mlistener.onClick(position);
+                notifyDataSetChanged();
             }
         });
     }

@@ -8,8 +8,9 @@
     android:background="@android:color/transparent">
 
     <ImageView
-        android:layout_width="140dp"
-        android:layout_height="50dp"
+        android:layout_width="145dp"
+        android:layout_height="40dp"
+        android:scaleType="fitXY"
         android:id="@+id/imgPromoMenu"
         android:src="@drawable/btn_all_active"/>
 
