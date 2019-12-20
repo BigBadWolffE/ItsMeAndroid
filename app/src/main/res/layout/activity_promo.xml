@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.promo.activity.PromoActivity"
+    android:background="@color/colorPrimary"
+    android:paddingTop="@dimen/spacing_medium">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/white_radius_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:paddingLeft="@dimen/spacing_medium"
+            android:paddingRight="@dimen/spacing_medium">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPromoHorizontalMenu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".1"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight=".8"
+                android:id="@+id/frameLayoutPromo" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

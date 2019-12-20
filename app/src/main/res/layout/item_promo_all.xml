@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewPromoItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/spacing_middle"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="@dimen/spacing_middle">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/img_dummy_promoalacarte"
+                    android:scaleType="fitXY"
+                    android:id="@+id/imgPromoItem"/>
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_middle">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblAllPromoTitle"
+                    android:text="Bandar Jakarta Dining Exclusive"
+                    style="@style/textReg18BoldBlack"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblAllPromoDesc"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:text="Promo ini merupakan program promo kerjasama alacarte"
+                    style="@style/textReg14Black"
+                    app:layout_constraintTop_toBottomOf="@+id/lblAllPromoTitle"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    app:layout_constraintTop_toBottomOf="@id/lblAllPromoDesc">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Periode Promo"
+                            style="@style/textReg14BoldPrimary"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lblAllPromoTglPeriode"
+                            android:text="1-25 Desember 2019"
+                            style="@style/textReg14Black"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:padding="@dimen/spacing_middle"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@drawable/button_white_border_primary"
+                            style="@style/textReg14BoldPrimary"
+                            android:text="Mau Dong"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

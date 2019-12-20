@@ -1,0 +1,223 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.profile.fragment.ProfilePassportFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingRight="@dimen/spacing_30"
+        android:paddingLeft="@dimen/spacing_30"
+        android:paddingBottom="@dimen/spacing_30" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="@dimen/spacing_middle"
+            android:id="@+id/layoutProfileFotoPassport"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="180dp"
+                    android:id="@+id/imgFotoPassport"
+                    android:src="@drawable/ic_profile_default_img" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imgTakeFotoPassport"
+                    android:src="@drawable/ic_profile_take_photo"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@id/imgFotoPassport"/>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imgShareFotoPassport"
+                    android:src="@drawable/ic_profile_share"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/imgTakeFotoPassport" />
+
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutNamaLengkap"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:background="@drawable/bottom_border_background"
+            app:layout_constraintTop_toBottomOf="@+id/layoutProfileFotoPassport">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Lengkap"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileNamaPassport"
+                style="@style/textReg18BoldBlack"
+                android:text="Jordan Setiawan"
+                android:background="@null"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutNoPassport"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:background="@drawable/bottom_border_background"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNamaLengkap">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Passport"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileNoPassport"
+                style="@style/textReg18BoldBlack"
+                android:text="01679765443368363"
+                android:background="@null"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutKWN"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNoPassport">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kewarganegaraan"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileKWNPassport"
+                style="@style/textReg18BoldBlack"
+                android:text="Indonesia"
+                android:background="@null"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutTempatLahir"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutKWN">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tempat Lahir"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileTempatLahirPassport"
+                style="@style/textReg18BoldBlack"
+                android:background="@null"
+                android:inputType="textMultiLine"
+                android:text="Jakarta" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutTanggalLahir"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTempatLahir">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Lahir"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileTglLahirPassport"
+                style="@style/textReg18BoldBlack"
+                android:background="@null"
+                android:inputType="textMultiLine"
+                android:text="12 Jan 1992" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutBerlakuHingga"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTanggalLahir">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Berlaku Hingga"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                style="@style/textReg18BoldBlack"
+                android:text="12 Jan 2020"
+                android:paddingTop="@dimen/spacing_middle"
+                android:background="@drawable/disable_grey_edittext"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
