@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.addcc.AddCcActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="35"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:isScrollContainer="false"
+            android:paddingTop="0dp"
+            android:paddingBottom="16dp">
+
+            <RelativeLayout
+                android:id="@+id/rLayoutCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgCreditCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="false"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:src="@drawable/img_blank_cc_anz" />
+
+                <TextView
+                    android:id="@+id/lblCcNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXXX   XXXX   XXXX   XXXX"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
+
+                <TextView
+                    android:id="@+id/lblHolderLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Card holder"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="9dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
+
+                <TextView
+                    android:id="@+id/lblExpiryLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expires"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="9dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
+
+                <TextView
+                    android:id="@+id/lblCardHolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    style="@style/CreditCardTextStyle"
+                    android:text="Jordan Setiawan" />
+
+                <TextView
+                    android:id="@+id/lblExpiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    style="@style/CreditCardTextStyle"
+                    android:text="09/19" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60"
+            android:isScrollContainer="false"
+            android:background="@drawable/bgcardlayout">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingTop="20dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="@string/card_holder_name" />
+
+                <EditText
+                    android:id="@+id/txtCardHolder"
+                    android:inputType="text"
+                    style="@style/primaryFontBold"
+                    android:textSize="18sp"
+                    android:maxLength="30"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Ex. Jordan Setiawan" />
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Valid Card Number" />
+
+                <EditText
+                    android:id="@+id/txtCardNumber"
+                    android:inputType="text"
+                    style="@style/primaryFontBold"
+                    android:textSize="18sp"
+                    android:maxLength="16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:hint="Enter your card number" />
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Expiry Date" />
+
+                <EditText
+                    android:id="@+id/txtExpiryDate"
+                    android:inputType="text"
+                    style="@style/primaryFontBold"
+                    android:textSize="18sp"
+                    android:maxLength="5"
+                    android:layout_width="match_parent"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"
+                    android:hint="MM/YY" />
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Billing Address" />
+
+                <EditText
+                    android:id="@+id/txtBillingAddress"
+                    android:inputType="text"
+                    style="@style/primaryFontBold"
+                    android:textSize="18sp"
+                    android:maxLength="100"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your billing address" />
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Country" />
+
+                <Spinner
+                    android:id="@+id/spnCountry"
+                    android:inputType="text"
+                    style="@style/primaryFontBold"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:padding="0dp"
+                    android:textColor="@color/black"
+                    android:background="@drawable/bgspinner"
+                    android:hint="@string/username" />
+
+                <TextView
+                    android:layout_marginTop="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="City" />
+
+                <Spinner
+                    android:id="@+id/spnCity"
+                    android:inputType="text"
+                    android:textSize="18sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="4dp"
+                    android:padding="0dp"
+                    android:background="@drawable/bgspinner"
+                    android:hint="@string/username" />
+
+                <TextView
+                    android:layout_marginTop="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Postal Code" />
+
+                <EditText
+                    android:id="@+id/txtPostalCode"
+                    android:inputType="number"
+                    style="@style/primaryFontBold"
+                    android:textSize="18sp"
+                    android:maxLength="10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:hint="Enter your postal code" />
+
+                <Button
+                    android:id="@+id/btnCreditLimit"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Request Increase Limit"
+                    android:textColor="@color/colorPrimary"
+                    android:textAllCaps="false"
+                    android:textSize="16dp"
+                    style="@style/primaryFontBold"
+                    android:stateListAnimator="@null"
+                    android:outlineAmbientShadowColor="@color/colorwhite"
+                    android:shadowColor="@color/colorwhite"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/btn_rounded_reversed"/>
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                    <CheckBox
+                        android:id="@+id/chkTermsAgreement"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/i_agree_terms_and_condition" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnAddCc"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textSize="16dp"
+                    style="@style/primaryFontBold"
+                    android:stateListAnimator="@null"
+                    android:textColor="@color/colorwhite"
+                    android:background="@drawable/btn_rounded_primary"
+                    android:layout_marginBottom="32dp" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

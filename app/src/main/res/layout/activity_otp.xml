@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".view.otp.OtpActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bgcardlayout">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Masukkan Kode OTP"
+                android:textAlignment="center"
+                style="@style/primaryFont"
+                android:textFontWeight="550"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp" />
+
+            <TextView
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kami telah mengirimkan \nkode OTP ke 081287777222"
+                android:textAlignment="center"
+                style="@style/primaryFontBold"
+                android:lineSpacingExtra="6dp"
+                android:textColor="@color/primary_font_color"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <EditText
+                    android:id="@+id/txtOtp1"
+                    android:textAlignment="center"
+                    style="@style/primaryFont"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:textSize="40dp"
+                    android:textColor="@color/primary_font_color"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="50dp"
+                    android:layout_height="80dp" />
+
+                <EditText
+                    android:id="@+id/txtOtp2"
+                    android:textAlignment="center"
+                    style="@style/primaryFont"
+                    android:maxLength="1"
+                    android:inputType="number"
+                    android:textSize="40dp"
+                    android:textColor="@color/primary_font_color"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="50dp"
+                    android:layout_height="80dp" />
+
+                <EditText
+                    android:id="@+id/txtOtp3"
+                    android:textAlignment="center"
+                    style="@style/primaryFont"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="40dp"
+                    android:textColor="@color/primary_font_color"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="50dp"
+                    android:layout_height="80dp" />
+
+                <EditText
+                    android:id="@+id/txtOtp4"
+                    android:textAlignment="center"
+                    style="@style/primaryFont"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textSize="40dp"
+                    android:textColor="@color/primary_font_color"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_width="50dp"
+                    android:layout_height="80dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lblOtpTimer"
+                android:layout_marginTop="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/primaryFontBold"
+                android:textSize="18sp"
+                android:textColor="@color/primary_font_color"
+                android:textAlignment="center"
+                android:text="00:30" />
+
+            <TextView
+                android:id="@+id/lblResendOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                style="@style/primaryFontBold"
+                android:textSize="16sp"
+                android:textColor="@color/primary_font_color"
+                android:textAlignment="center"
+                android:text="Kirim Ulang OTP"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingBottom="50dp"
+            android:gravity="bottom"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btnConfirmationButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_rounded_primary"
+                android:text="Confirmation"
+                style="@style/primaryFont"
+                android:textAllCaps="false"
+                android:stateListAnimator="@null"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

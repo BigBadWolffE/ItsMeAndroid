@@ -32,6 +32,38 @@
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
     </style>
+    <style name="CreditCardTextStyle">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="primaryFont">
+        <item name="android:fontFamily">@font/interstate_regular</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="primaryFontLight">
+        <item name="android:fontFamily">@font/interstate_light</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="primaryFontBold">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="spinnerText" parent="@android:style/Widget.TextView">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textColor">@color/primary_font_color</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
 
     <style name="textReg18BoldBlack">
         <item name="android:fontFamily">@font/interstate_bold</item>
@@ -68,5 +100,5 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
-
+    
 </resources>

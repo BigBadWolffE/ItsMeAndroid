@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 def lifeCycleExtensionVersion = '1.1.1'
@@ -59,5 +63,7 @@ dependencies {
     implementation 'com.github.clans:fab:1.6.2'
     implementation 'com.github.GoodieBag:Pinview:v1.4'
 
+    implementation 'org.apache.commons:commons-text:1.8'
+    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 }

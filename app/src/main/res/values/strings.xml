@@ -8,7 +8,7 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="secret_question">Secret Question</string>
-    <string name="i_agree_terms_and_condition">I Agree Terms and Condition</string>
+    <string name="i_agree_terms_and_condition">I Agree <b>Terms and Condition</b></string>
     <string name="register">Register</string>
     <string name="email_address">Email Address</string>
     <string name="phone_number">Phone Number</string>
@@ -18,5 +18,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="card_holder_name">Card Holder\'s Name</string>
+    <string name="agreement_warning">
+        Please read and indicate your acceptance of the site\'s Terms of Service.
+    </string>
+    <string name="form_incomplete_warning">
+        Formulir belum dilengkapi. Silahkan isi semua kolom.
+    </string>
+    <string name="invalid_otp_alert">Kode OTP salah, silahkan ulangi kembali.</string>
 
 </resources>

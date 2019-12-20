@@ -15,6 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".view.notificationdetail.NotificationDetail"></activity>
+        <activity android:name=".view.billingdetail.BillingDetailActivity" />
+        <activity android:name=".view.billing.activity.BillingActivity" />
+        <activity android:name=".view.notification.activity.NotificationActivity" />
+        <activity android:name=".view.otp.OtpActivity" />
+        <activity android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity" />
+        <activity
+            android:name=".view.addcc.AddCcActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.message.MessageActivity" />
+        <activity android:name=".view.profile.ProfileActivity" />
         <activity android:name=".view.promo.activity.PromoActivity"
             android:parentActivityName=".view.home.activity.HomeActivity"></activity>
         <activity android:name=".view.message.MessageActivity" />
@@ -28,13 +39,21 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.login.LoginWithEmailActivity" />
         <activity android:name=".view.MainActivity" />
-        <activity android:name=".view.login.LoginOptionActivity">
+        <activity android:name=".view.login.LoginOptionActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.indocyber.itsmeandroid.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
+        </provider>
     </application>
 
 </manifest>
