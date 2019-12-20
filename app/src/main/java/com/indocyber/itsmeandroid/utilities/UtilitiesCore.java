@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.pdf.PdfRenderer;
 import android.media.Image;
+import android.os.ParcelFileDescriptor;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.util.TypedValue;
@@ -17,11 +19,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 
 import com.indocyber.itsmeandroid.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -69,6 +77,14 @@ public final class UtilitiesCore {
                 Bitmap.createScaledBitmap(bitmap, dstwidth, dstheight, true));
     }
 
+    /**
+     *
+     * @author Muhammad Faisal
+     * @param context
+     * @param message
+     * @param alertImage
+     * @param dismissListener
+     */
     public static void buildAlertDialog(
             Context context,
             String message,
@@ -97,6 +113,16 @@ public final class UtilitiesCore {
         dialog.getWindow().setAttributes(lp);
     }
 
+    /**
+     *
+     * @author Muhammad Faisal
+     * @param context
+     * @param message
+     * @param alertImage
+     * @param dismissListener
+     * @param width
+     * @param height
+     */
     public static void buildAlertDialog(
             Context context,
             Spanned message,
@@ -129,6 +155,11 @@ public final class UtilitiesCore {
         dialog.getWindow().setAttributes(lp);
     }
 
+    /**
+     * @author Muhammad Faisal
+     * @param amount
+     * @return
+     */
     public static String formatCurrency(int amount) {
         final Locale indonesia = new Locale("in", "ID");
         NumberFormat format = NumberFormat.getCurrencyInstance(indonesia);
@@ -136,4 +167,49 @@ public final class UtilitiesCore {
 
         return currency.replace(".",",");
     }
+
+    /**
+     *
+     * @author Muhammad Faisal
+     * @param imageView
+     * @param page
+     */
+    public static void openPdfFromAsset(ImageView imageView, int page, String fileName)
+            throws IOException {
+
+        File fileCopy = new File(imageView.getContext().getCacheDir(), fileName);
+        copyFileToCache(imageView.getContext(), fileCopy, fileName);
+
+        ParcelFileDescriptor fileDescriptor =
+                ParcelFileDescriptor.open(fileCopy, ParcelFileDescriptor.MODE_READ_ONLY);
+
+        PdfRenderer mPdfRenderer = new PdfRenderer(fileDescriptor);
+        PdfRenderer.Page mPdfPage = mPdfRenderer.openPage(page);
+
+        Bitmap bitmap = Bitmap
+                .createBitmap(mPdfPage.getWidth(), mPdfPage.getHeight(), Bitmap.Config.ARGB_8888);
+        mPdfPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+
+        imageView.setImageBitmap(bitmap);
+    }
+
+    public static void copyFileToCache(Context context, File file, String filename)
+            throws IOException {
+
+        if (!file.exists()) {
+            InputStream input = context.getAssets().open(filename);
+            FileOutputStream output = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int size;
+
+            while ((size = input.read(buffer)) != -1) {
+                output.write(buffer, 0, size);
+            }
+
+            input.close();
+            output.close();
+        }
+    }
+
+
 }

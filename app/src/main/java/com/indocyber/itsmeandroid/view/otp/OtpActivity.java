@@ -20,6 +20,11 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 
+/**
+ *
+ * @author Muhammad Faisal
+ * @version 1.0
+ */
 public class OtpActivity extends AppCompatActivity {
 
     private EditText mOtp1;
@@ -183,16 +188,12 @@ public class OtpActivity extends AppCompatActivity {
         startTimer();
     }
 
-    private void createToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        TextView toolbarText = findViewById(R.id.txtToolbar);
-        toolbarText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-        toolbarText.setText("Form Request Increase Credit Limit");
-        toolbar.setElevation(0);
-        Drawable backButton = UtilitiesCore.resizeDrawable(R.drawable.icoarrowback, this, 30, 30);
-        toolbar.setNavigationIcon(backButton);
-        toolbar.setNavigationOnClickListener(view -> finish());
+    private  void createToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setElevation(0f);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private boolean otpIsValid() {

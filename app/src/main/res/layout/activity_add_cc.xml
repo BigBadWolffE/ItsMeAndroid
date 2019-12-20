@@ -6,18 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".view.addcc.AddCcActivity">
 
-    <include
-        layout="@layout/app_bar_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary"
-        android:layout_marginTop="?attr/actionBarSize">
+        android:background="@color/colorPrimary" >
 
         <LinearLayout
             android:orientation="vertical"
@@ -237,7 +231,7 @@
 
                 <EditText
                     android:id="@+id/txtPostalCode"
-                    android:inputType="text"
+                    android:inputType="number"
                     style="@style/primaryFontBold"
                     android:textSize="18sp"
                     android:maxLength="10"
@@ -254,7 +248,9 @@
                     android:text="Request Increase Limit"
                     android:textColor="@color/colorPrimary"
                     android:textAllCaps="false"
-                    style="?android:attr/borderlessButtonStyle"
+                    android:textSize="16dp"
+                    style="@style/primaryFontBold"
+                    android:stateListAnimator="@null"
                     android:outlineAmbientShadowColor="@color/colorwhite"
                     android:shadowColor="@color/colorwhite"
                     android:layout_marginLeft="4dp"
@@ -285,7 +281,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/next"
                     android:textAllCaps="false"
-                    style="?android:attr/borderlessButtonStyle"
+                    android:textSize="16dp"
+                    style="@style/primaryFontBold"
+                    android:stateListAnimator="@null"
                     android:textColor="@color/colorwhite"
                     android:background="@drawable/btn_rounded_primary"
                     android:layout_marginBottom="32dp" />

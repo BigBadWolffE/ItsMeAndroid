@@ -23,6 +23,11 @@ import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import org.apache.commons.text.WordUtils;
 
+/**
+ *
+ * @author Muhammad Faisal
+ * @version 1.0
+ */
 public class RequestIncreaseLimitActivity extends AppCompatActivity {
 
     private TextView mCardNumber;
@@ -107,16 +112,12 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         formatCreditCard(mNumber, mHolderName, mExpiryDate);
     }
 
-    private void createToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        TextView toolbarText = findViewById(R.id.txtToolbar);
-        toolbarText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-        toolbarText.setText("Form Request Increase Credit Limit");
-        toolbar.setElevation(0);
-        Drawable backButton = UtilitiesCore.resizeDrawable(R.drawable.icoarrowback, this, 30, 30);
-        toolbar.setNavigationIcon(backButton);
-        toolbar.setNavigationOnClickListener(view -> finish());
+    private  void createToolbar() {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setElevation(0f);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void formatCreditCard(String cardNumber, String holderName, String expiryDate){

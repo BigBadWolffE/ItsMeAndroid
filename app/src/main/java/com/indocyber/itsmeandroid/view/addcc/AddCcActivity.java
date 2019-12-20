@@ -67,15 +67,11 @@ public final class AddCcActivity extends AppCompatActivity {
     }
 
     private  void createToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        TextView toolbarText = findViewById(R.id.txtToolbar);
-        toolbarText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-        toolbarText.setText("Add Credit Card");
-        toolbar.setElevation(0);
-        Drawable backButton = UtilitiesCore.resizeDrawable(R.drawable.icoarrowback, this, 30, 30);
-        toolbar.setNavigationIcon(backButton);
-        toolbar.setNavigationOnClickListener(view -> finish());
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setElevation(0f);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void initializeCardInput() {
