@@ -1,0 +1,114 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="ToolBarStyle" parent="ToolBarStyle.Base"/>
+
+    <style name="ToolBarStyle.Base" parent="">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="ToolBarStyle.Event" parent="ToolBarStyle">
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.Event.Toolbar.Title</item>
+    </style>
+
+    <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!--Any text styling can be done here-->
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="RippleStyleWhite">
+        <item name="mrl_rippleOverlay">true</item>
+        <item name="mrl_rippleColor">#80FFFFFF</item>
+        <item name="mrl_rippleHover">true</item>
+        <item name="mrl_rippleAlpha">0.2</item>
+    </style>
+
+    <style name="CreditCardTextStyle">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="primaryFont">
+        <item name="android:fontFamily">@font/interstate_regular</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="primaryFontLight">
+        <item name="android:fontFamily">@font/interstate_light</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="primaryFontBold">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textColor">@color/colorwhite</item>
+        <item name="android:textSize">14dp</item>
+    </style>
+
+    <style name="spinnerText" parent="@android:style/Widget.TextView">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textColor">@color/primary_font_color</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingLeft">8dp</item>
+    </style>
+
+    <style name="textReg18BoldBlack">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="textReg14Grey">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/grey2</item>
+    </style>
+
+    <style name="textReg14Black">
+        <item name="android:fontFamily">@font/interstate_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="textReg14BoldPrimary">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="textReg14BoldBlack">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="textReg14BoldWhite">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+
+</resources>

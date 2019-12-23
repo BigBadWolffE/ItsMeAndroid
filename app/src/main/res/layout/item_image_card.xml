@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_mlarge"
+        android:layout_marginTop="@dimen/spacing_middle"
+        android:layout_marginRight="@dimen/spacing_mlarge"
+        app:cardBackgroundColor="@color/colorwhite"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:id="@+id/rltv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/imgblankccanz" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="80dp"
+                    android:orientation="vertical"
+                    android:paddingRight="@dimen/spacing_mlarge"
+                    android:paddingLeft="@dimen/spacing_mlarge"
+                    android:paddingTop="@dimen/spacing_mlarge"
+                    >
+
+
+                    <TextView
+                        android:id="@+id/txtNumberCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:fontFamily="monospace"
+                        android:text="**** **** **** 9867"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                        android:textColor="@android:color/white" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_middle" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="NICK NAME"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_10" />
+
+                            <TextView
+                                android:id="@+id/txtNameCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="Anderson Thomas"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
+
+                        <LinearLayout
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="EXPIRE"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                                android:textColor="@color/grey_10" />
+
+                            <TextView
+                                android:id="@+id/txtExpireCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="monospace"
+                                android:text="05 / 24"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                                android:textColor="@android:color/white" />
+
+                        </LinearLayout>
+
+
+                        <View
+                            android:layout_width="@dimen/spacing_xlarge"
+                            android:layout_height="0dp" />
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_middle" />
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_medium" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rltv"
+                android:layout_marginLeft="@dimen/spacing_mlarge"
+                android:layout_marginRight="@dimen/spacing_mlarge"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icocctagihan" />
+
+                    <TextView
+                        android:id="@+id/txtCost"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="Rp 15000.000.00"
+                        android:textColor="#2d2d2d"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btnMore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/spacing_small"
+                        android:background="@drawable/btn_rounded_red"
+                        android:gravity="center"
+                        android:text="More..."
+                        android:textColor="@color/colorwhite" />
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icocalendartanggalcetak" />
+
+                    <TextView
+                        android:id="@+id/txtPrintDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="28 November 2019"
+                        android:textColor="#2d2d2d"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_medium"
+
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageButton
+                        android:layout_width="25dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:background="@null"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icoprintingjatuhtempo" />
+
+                    <TextView
+                        android:id="@+id/txtPrintDueDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/spacing_small"
+                        android:layout_weight="1"
+                        android:gravity="start"
+                        android:text="1 November 2019"
+                        android:textColor="#2d2d2d"
+
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

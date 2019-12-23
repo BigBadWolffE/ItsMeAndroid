@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/llAlertDialog"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bgalertlayout"
+    android:layout_gravity="center"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/imgAlertIcon"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:src="@drawable/ic_invalid" />
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:id="@+id/txtAlertMessage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            style="@style/primaryFont"
+            android:textColor="#5D5D5D"
+            android:textSize="16sp"
+            android:text="Your Card Number is Invalid!" />
+
+        <LinearLayout
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:layout_weight="3" >
+
+            <Button
+                android:id="@+id/btnAlertPositive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/primaryFont"
+                android:textAllCaps="false"
+                android:background="@drawable/btn_rounded_primary"
+                android:text="Close"/>
+
+            <Button
+                android:id="@+id/btnAlertNegative"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@drawable/btn_rounded_primary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,485 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.profile.fragment.ProfileKTPFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/spacing_middle"
+        android:paddingRight="@dimen/spacing_30"
+        android:paddingLeft="@dimen/spacing_30"
+        android:paddingBottom="@dimen/spacing_30" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="@dimen/spacing_middle"
+            android:id="@+id/layoutProfileFotoKTP"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="300dp"
+                    android:layout_height="180dp"
+                    android:id="@+id/imgFotoKTP"
+                    android:src="@drawable/ic_profile_default_img" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imgTakeFotoKTP"
+                    android:src="@drawable/ic_profile_take_photo"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignEnd="@id/imgFotoKTP"/>
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/imgShareFotoKTP"
+                    android:src="@drawable/ic_profile_share"
+                    android:scaleType="centerCrop"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toLeftOf="@+id/imgTakeFotoKTP" />
+
+            </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutNamaLengkap"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:background="@drawable/bottom_border_background"
+            app:layout_constraintTop_toBottomOf="@+id/layoutProfileFotoKTP">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Lengkap"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/textReg18BoldBlack"
+                android:text="Jordan Setiawan"
+                android:id="@+id/txtProfileNamaKTP"
+                android:background="@null"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutNoKtp"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:background="@drawable/bottom_border_background"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNamaLengkap">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No KTP"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/textReg18BoldBlack"
+                android:id="@+id/txtProfileNoKTP"
+                android:text="01679765443368363"
+                android:paddingTop="@dimen/spacing_middle"
+                android:background="@null"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutBerlakuHingga"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutNoKtp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Berlaku Hingga"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                style="@style/textReg18BoldBlack"
+                android:text="Seumur Hidup"
+                android:paddingTop="@dimen/spacing_middle"
+                android:background="@drawable/disable_grey_edittext"
+                android:inputType="textMultiLine"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutTanggalLahir"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutBerlakuHingga">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Lahir"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileTanggalLahirKTP"
+                style="@style/textReg18BoldBlack"
+                android:text=""
+                android:paddingTop="@dimen/spacing_middle"
+                android:background="@null"
+                android:inputType="textMultiLine" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutJenisKelamin"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTanggalLahir">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jenis Kelamin"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <RadioGroup
+                android:id="@+id/radioJenisKelamin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioLakiLaki"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textReg18BoldBlack"
+                    android:text="Laki - Laki"
+                    android:layout_marginRight="@dimen/spacing_mlarge"/>
+
+                <RadioButton
+                    android:id="@+id/radioPerempuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textReg18BoldBlack"
+                    android:text="Perempuan" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutAgama"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutJenisKelamin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agama"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerAgamaKTP"
+                style="@style/textReg18BoldBlack"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutStatus"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAgama">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerStatusKTP" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutPekerjaan"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutStatus">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pekerjaan"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerPekerjaanKTP"
+                style="@style/textReg18BoldBlack" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutKewarganegaraan"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPekerjaan">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kewarganegaraan"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerKWNKTP"
+                style="@style/textReg18BoldBlack" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutAlamat"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutKewarganegaraan">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtProfileAlamatKTP"
+                style="@style/textReg18BoldBlack"
+                android:background="@null"
+                android:inputType="textMultiLine"
+                android:text="Serpong Paradise Blok A no 12 Jl. Serpong Raya, Serpong Tangerang Selatan" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/layoutRTRW"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAlamat"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:orientation="vertical"
+                android:id="@+id/layoutRT"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:background="@drawable/bottom_border_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RT"
+                    style="@style/textReg14Grey"
+                    android:layout_marginBottom="@dimen/spacing_medium" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtProfileRTKTP"
+                    style="@style/textReg18BoldBlack"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:text="002" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".4"
+                android:orientation="vertical"
+                android:id="@+id/layoutRW"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:background="@drawable/bottom_border_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RW"
+                    style="@style/textReg14Grey"
+                    android:layout_marginBottom="@dimen/spacing_medium" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtProfileRWKTP"
+                    style="@style/textReg18BoldBlack"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:text="002" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutKelurahan"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutRTRW">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kelurahan"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerKelurahanKTP"
+                style="@style/textReg18BoldBlack" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/layoutKecamatan"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:background="@drawable/bottom_border_background"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            app:layout_constraintTop_toBottomOf="@+id/layoutKelurahan">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kecamatan"
+                style="@style/textReg14Grey"
+                android:layout_marginBottom="@dimen/spacing_medium"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinnerKecamatanKTP"
+                style="@style/textReg18BoldBlack"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:id="@+id/layoutAgreeTerms"
+            app:layout_constraintTop_toBottomOf="@id/layoutKecamatan">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cbAgreeTerms"
+                android:buttonTint="@color/colorPrimary"
+                android:text="I Agree "
+                style="@style/textReg14Black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms and Condition"
+                style="@style/textReg14BoldBlack"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="@style/textReg14BoldWhite"
+            android:id="@+id/btnSaveProfileKTP"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:background="@drawable/button_grey"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAgreeTerms"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

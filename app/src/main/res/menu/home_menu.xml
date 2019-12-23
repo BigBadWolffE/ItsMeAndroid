@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/actionMessage"
+        android:orderInCategory="100"
+        android:title=""
+        android:icon="@drawable/ic_email_white"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionProfile"
+        android:orderInCategory="100"
+        android:title=""
+        android:icon="@drawable/ic_account_white"
+        app:showAsAction="always" />
+</menu>
