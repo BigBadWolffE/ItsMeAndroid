@@ -68,7 +68,7 @@ public final class AddCcActivity extends AppCompatActivity {
 
     private  void createToolbar() {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setTitle("Add Credit Card");
             getSupportActionBar().setElevation(0f);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -240,6 +240,12 @@ public final class AddCcActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, OtpActivity.class);
         intent.putExtra("cardNumber", mCardNumber.getText().toString());
+        intent.putExtra("cardHolder", mCardHolderInput.getText().toString());
+        intent.putExtra("expiryDate", mCardExpiryInput.getText().toString());
+        intent.putExtra("billingAddress", mBillingAddressInput.getText().toString());
+        intent.putExtra("country", mCountryInput.getSelectedItemPosition());
+        intent.putExtra("city", mCityInput.getSelectedItemPosition());
+        intent.putExtra("postalCode", mPostalCodeInput.getText().toString());
         startActivity(intent);
     }
 

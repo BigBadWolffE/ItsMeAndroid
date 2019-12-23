@@ -3,15 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.indocyber.itsmeandroid">
 
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
+
+    <permission android:name="android.permission.CALL_PRIVILEGED"
         android:protectionLevel="signature|privileged" />
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+   
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:node="replace" />
+
 
     <application
         android:allowBackup="true"
@@ -21,8 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.blockcc.activity.BlockCCActivity"></activity>
-        <activity android:name=".view.contactcc.activity.ContactCCActivity" />
+
         <activity android:name=".view.editcreditcard.EditCreditCardActivity" />
         <activity
             android:name=".view.addmembership.AddMembershipActivity"
@@ -32,6 +34,7 @@
             android:name=".view.membershipsecuritycode.MembershipSecurityCodeActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
             android:name=".view.editcardsecuritycode.EditCardSecurityCodeActivity"
             android:screenOrientation="portrait"
@@ -39,6 +42,7 @@
         <activity
             android:name=".view.blockconfirmationpin.BlockConfirmationPinActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".view.notificationdetail.NotificationDetail" />
         <activity android:name=".view.billingdetail.BillingDetailActivity" />
         <activity android:name=".view.billing.activity.BillingActivity" />
@@ -48,38 +52,46 @@
         <activity
             android:name=".view.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.home.activity.HomeActivity"
+        <activity android:name=".view.home.activity.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.message.MessageActivity" /> <!-- <activity android:name=".view.profile.activity.ProfileActivity" /> -->
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".view.message.MessageActivity" />
+       <!-- <activity android:name=".view.profile.activity.ProfileActivity" />-->
+
         <activity
             android:name=".view.promo.activity.PromoActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />
+
         <activity
             android:name=".view.profile.activity.ProfileActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />
+
         <activity android:name=".view.inbox.InboxActivity" />
         <activity
             android:name=".view.register.RegistrationActivity"
-            android:screenOrientation="portrait" /> <!-- <activity android:name=".view.login.LoginOptionActivity" /> -->
+            android:screenOrientation="portrait" />
+       <!-- <activity android:name=".view.login.LoginOptionActivity" />-->
         <activity android:name=".view.login.LoginWithEmailActivity" />
         <activity android:name=".view.MainActivity" />
-        <activity
+
+       <activity
             android:name=".view.login.LoginOptionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
-<provider
+
+
+        <!--<provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"/>
-        -->
+            android:authorities="${applicationId}.provider"/>-->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.indocyber.itsmeandroid.provider"
@@ -87,8 +99,11 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
+
                 android:resource="@xml/provider_paths" />
         </provider>
+
     </application>
+
 
 </manifest>

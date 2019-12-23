@@ -3,8 +3,16 @@ package com.indocyber.itsmeandroid.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class ImageCardModel implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
     private int id;
     private int image;
     private String numberCard;
@@ -14,7 +22,26 @@ public class ImageCardModel implements Parcelable {
     private String printDate;
     private String printDueDate;
     private boolean isBlockedCard;
+    private String billingAddress;
+    private String country;
+    private String city;
+    private String postalCode;
+    private String lastBill;
+    private String minPayment;
+    private String availableCredit;
 
+    public ImageCardModel(int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {
+        this.image = image;
+        this.numberCard = numberCard;
+        this.nameCard = nameCard;
+        this.expireCard = expireCard;
+        this.cost = cost;
+        this.printDate = printDate;
+        this.printDueDate = printDueDate;
+        this.isBlockedCard = isBlockedCard;
+    }
+
+    @Ignore
     public ImageCardModel(int id, int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {
         this.id = id;
         this.image = image;
@@ -37,6 +64,13 @@ public class ImageCardModel implements Parcelable {
         printDate = in.readString();
         printDueDate = in.readString();
         isBlockedCard = in.readByte() != 0;
+        lastBill = in.readString();
+        minPayment = in.readString();
+        availableCredit = in.readString();
+        billingAddress = in.readString();
+        country = in.readString();
+        city = in.readString();
+        postalCode = in.readString();
     }
 
     @Override
@@ -139,5 +173,61 @@ public class ImageCardModel implements Parcelable {
 
     public void setBlockedCard(boolean blockedCard) {
         isBlockedCard = blockedCard;
+    }
+
+    public String getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(String billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getLastBill() {
+        return lastBill;
+    }
+
+    public void setLastBill(String lastBill) {
+        this.lastBill = lastBill;
+    }
+
+    public String getMinPayment() {
+        return minPayment;
+    }
+
+    public void setMinPayment(String minPayment) {
+        this.minPayment = minPayment;
+    }
+
+    public String getAvailableCredit() {
+        return availableCredit;
+    }
+
+    public void setAvailableCredit(String availableCredit) {
+        this.availableCredit = availableCredit;
     }
 }
