@@ -48,10 +48,11 @@
         <activity android:name=".view.billing.activity.BillingActivity" />
         <activity android:name=".view.notification.activity.NotificationActivity" />
         <activity android:name=".view.otp.OtpActivity" />
-        <activity android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity" />
+        <activity android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity"
+            android:parentActivityName=".view.requestincreaselimit.RequestIncreaseLimitActivity"/>
         <activity
             android:name=".view.addcc.AddCcActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".view.home.activity.HomeActivity" />
         <activity android:name=".view.home.activity.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -78,8 +79,6 @@
             android:name=".view.login.LoginOptionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
-
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

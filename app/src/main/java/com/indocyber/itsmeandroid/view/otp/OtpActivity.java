@@ -1,10 +1,10 @@
 package com.indocyber.itsmeandroid.view.otp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -17,8 +17,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
+import com.indocyber.itsmeandroid.viewmodel.AddCcViewModel;
+
+import dmax.dialog.SpotsDialog;
 
 /**
  *
@@ -37,6 +41,9 @@ public class OtpActivity extends AppCompatActivity {
     private int timerInterval = 30;
     private Handler mHandler = new Handler();
     private String mCardNumber;
+    private ImageCardModel cardData;
+    private AddCcViewModel viewModel;
+    private AlertDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +51,7 @@ public class OtpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otp);
         Bundle extras = getIntent().getExtras();
         mCardNumber = extras.getString("cardNumber");
+        createCardFromExtras(extras);
         createToolbar();
         initializeOtpInput();
         timer = findViewById(R.id.lblOtpTimer);
@@ -53,6 +61,48 @@ public class OtpActivity extends AppCompatActivity {
         confirmationButton = findViewById(R.id.btnConfirmationButton);
         confirmationButton.setOnClickListener(view -> confirm());
         startTimer();
+
+        viewModel = ViewModelProviders.of(this).get(AddCcViewModel.class);
+        observeViewModel();
+    }
+
+    // TODO: 23/12/2019 Delete after demo
+    private void createCardFromExtras(Bundle extras) {
+        String cardHolder = extras.getString("cardHolder");
+        String expiryDate = extras.getString("expiryDate");
+        String billingAddress = extras.getString("billingAddress");
+        String country = extras.getString("country");
+        String city = extras.getString("city");
+        String postalCode = extras.getString("postalCode");
+
+        cardData = new ImageCardModel(
+                randomizeCardImage(),
+                mCardNumber.trim(),
+                cardHolder,
+                expiryDate,
+                "Rp 20.000.000",
+                "15 November 2019",
+                "1 November 2019",
+                false
+                );
+        cardData.setBillingAddress(billingAddress);
+        cardData.setCountry(country);
+        cardData.setCity(city);
+        cardData.setPostalCode(postalCode);
+        cardData.setLastBill("Rp 15.000.000");
+        cardData.setMinPayment("Rp 1.500.000");
+        cardData.setAvailableCredit("Rp 5.000.000");
+    }
+
+    // TODO: 23/12/2019 Delete after demo
+    private int randomizeCardImage() {
+        int[] images = {
+                R.drawable.img_blank_cc_anz,
+                R.drawable.img_blank_cc_bca,
+                R.drawable.img_blank_cc_mandiri
+        };
+        int randomValue = (int)(Math.random() * images.length);
+        return images[randomValue];
     }
 
     private void initializeOtpInput(){
@@ -215,23 +265,54 @@ public class OtpActivity extends AppCompatActivity {
             );
             return;
         }
-        String styledText = "Penambahan Credit Card Anda<br>"
-                + "<big><b>" + mCardNumber + "</b></big><br>"
-                + "Berhasil";
-
-        UtilitiesCore.buildAlertDialog(
-                this,
-                Html.fromHtml(styledText),
-                R.drawable.ic_approved,
-                dialogInterface -> returnToHome(),
-                310,
-                320
-        );
+        viewModel.addCreditCard(cardData);
     }
 
     private void returnToHome(){
         Intent intent = new Intent(this, HomeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader = new SpotsDialog.Builder()
+                        .setCancelable(false)
+                        .setContext(OtpActivity.this)
+                        .build();
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+        viewModel.getIsSaved().observe(this, isSaved -> {
+            if (isSaved) {
+                String styledText = "Penambahan Credit Card Anda<br>"
+                        + "<big><b>" + mCardNumber + "</b></big><br>"
+                        + "Berhasil";
+
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        Html.fromHtml(styledText),
+                        R.drawable.ic_approved,
+                        dialogInterface -> returnToHome(),
+                        310,
+                        320
+                );
+            }
+        });
+
+        viewModel.getError().observe(this, error -> {
+            if (error.length() > 0) {
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        error,
+                        R.drawable.ic_invalid,
+                        null
+                );
+            }
+        });
     }
 }
