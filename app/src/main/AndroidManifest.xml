@@ -30,6 +30,16 @@
             android:name=".view.addmembership.AddMembershipActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".view.contactcc.activity.ContactCCActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".view.blockcc.activity.BlockCCActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".view.membershipsecuritycode.MembershipSecurityCodeActivity"
             android:screenOrientation="portrait"
