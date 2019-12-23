@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.contactcc.ContactCCFragment">
-
+    tools:context=".view.contactcc.activity.ContactCCActivity">
     <LinearLayout
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_width="match_parent"
@@ -37,5 +37,4 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/spacing_small"
         android:layout_marginRight="@dimen/spacing_small" />
-
 </LinearLayout>

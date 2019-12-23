@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -57,7 +59,7 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.indocyber.itsmeandroid.view.contactcc.ContactCCFragment.MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
+import static com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity.MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
 
 
 public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.ContactViewHolder> {
@@ -149,14 +151,33 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         //recycleEditTags
         lisTag.clear();
         lisTag.add(new EditTag(1, "Family"));
-        lisTag.add(new EditTag(2, "Business"));
-        lisTag.add(new EditTag(3, "Business"));
+        /*lisTag.add(new EditTag(2, "Business"));
+        lisTag.add(new EditTag(3, "Family"));
+        lisTag.add(new EditTag(4, "Business"));
+        lisTag.add(new EditTag(5, "Family"));
+        lisTag.add(new EditTag(6, "Business"));*/
         adapterTags = new EditTagsAdapter(activity);
         LinearLayoutManager lm = new LinearLayoutManager(activity,  LinearLayoutManager.HORIZONTAL, false);
         adapterTags.setListTags(lisTag);
         holder.recycle_EditTags.setLayoutManager(lm);
         holder.recycle_EditTags.setAdapter(adapterTags);
         holder.recycle_EditTags.setHasFixedSize(true);
+
+
+        holder.imgSend.setOnClickListener(v ->{
+            if (holder.edtxAddTag.length() > 0){
+                lisTag.add(new EditTag(lisTag.size() +1,holder.edtxAddTag.getText().toString()));
+
+
+                adapterTags.setListTags(lisTag);
+                holder.recycle_EditTags.setAdapter(adapterTags);
+
+                Toast.makeText(activity, "successfully add tag", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(activity, "field empty", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -180,6 +201,8 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         private Button btnChat;
         private Button btnSave;
         private RecyclerView recycle_EditTags;
+        private EditText edtxAddTag;
+        private ImageButton imgSend;
 
 
         ContactViewHolder(View itemView) {
@@ -199,6 +222,8 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             btnCall = itemView.findViewById(R.id.btnCall);
             btnChat = itemView.findViewById(R.id.btnChat);
             recycle_EditTags = itemView.findViewById(R.id.recycle_EditTags);
+            edtxAddTag = itemView.findViewById(R.id.edtxAddTag);
+            imgSend = itemView.findViewById(R.id.imgSend);
 
         }
     }
@@ -284,14 +309,23 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
                         MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
             }
         } else {
-
-            /*Bitmap icon = BitmapFactory.decodeResource(activity.getResources(),
-                    model.getImage());*/
             shareImage(model.getImage(), activity);
 
             // Permission has already been granted
         }
     }
+    public List<EditTag> reverseArrayList(List<EditTag> alist)
+    {
+        // Arraylist for storing reversed elements
+        List<EditTag> revArrayList = new ArrayList<EditTag>();
+        for (int i = alist.size() - 1; i >= 0; i--) {
 
+            // Append the elements in reverse order
+            revArrayList.add(alist.get(i));
+        }
+
+        // Return the reversed arraylist
+        return revArrayList;
+    }
 
 }

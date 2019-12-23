@@ -82,40 +82,56 @@
                         android:layout_marginTop="@dimen/spacing_large"
                         android:orientation="horizontal">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/btnContract"
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/btnContact"
+                            style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
-                            android:background="?attr/selectableItemBackground"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_xxxlarge"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="@dimen/spacing_small">
+                            android:layout_weight="1">
 
-                            <ImageView
+                            <androidx.cardview.widget.CardView
+
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/btncontact" />
+                                android:layout_height="wrap_content"
+                                android:background="?attr/selectableItemBackground"
+                                app:cardCornerRadius="@dimen/spacing_small">
 
-                        </androidx.cardview.widget.CardView>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/btncontact" />
 
-                        <androidx.cardview.widget.CardView
+                            </androidx.cardview.widget.CardView>
+                        </com.balysv.materialripple.MaterialRippleLayout>
+
+                        <com.balysv.materialripple.MaterialRippleLayout
                             android:id="@+id/btnChat"
+                            style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
-                            android:background="?attr/selectableItemBackgroundBorderless"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_medium"
                             android:layout_marginEnd="@dimen/spacing_xxxlarge"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="@dimen/spacing_small">
+                            android:layout_weight="1">
 
-                            <ImageView
+                            <androidx.cardview.widget.CardView
+
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/btnchat" />
+                                android:layout_height="wrap_content"
 
-                        </androidx.cardview.widget.CardView>
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                app:cardCornerRadius="@dimen/spacing_small">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/btnchat" />
+
+                            </androidx.cardview.widget.CardView>
+                        </com.balysv.materialripple.MaterialRippleLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -124,29 +140,40 @@
                         android:layout_marginTop="@dimen/spacing_large"
                         android:orientation="horizontal">
 
-                        <androidx.cardview.widget.CardView
+                        <com.balysv.materialripple.MaterialRippleLayout
                             android:id="@+id/btnBlock"
+                            style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_xxxlarge"
-                            android:layout_weight="1"
-                            app:cardCornerRadius="@dimen/spacing_small">
+                            android:layout_weight="1">
 
-                            <ImageView
+                            <androidx.cardview.widget.CardView
                                 android:layout_width="wrap_content"
-                                android:layout_height="45dp"
-                                android:scaleType="fitXY"
-                                android:src="@drawable/btnblock" />
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="@dimen/spacing_small">
 
-                        </androidx.cardview.widget.CardView>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/btnblock" />
 
-                        <androidx.cardview.widget.CardView
+                            </androidx.cardview.widget.CardView>
+                        </com.balysv.materialripple.MaterialRippleLayout>
+
+                        <com.balysv.materialripple.MaterialRippleLayout
                             android:id="@+id/btnCall"
+                            style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/spacing_medium"
                             android:layout_marginEnd="@dimen/spacing_xxxlarge"
-                            android:layout_weight="1"
+                            android:layout_weight="1">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             app:cardCornerRadius="@dimen/spacing_small">
 
                             <ImageView
@@ -156,6 +183,7 @@
                                 android:src="@drawable/btncall" />
 
                         </androidx.cardview.widget.CardView>
+                        </com.balysv.materialripple.MaterialRippleLayout>
                     </LinearLayout>
 
                     <androidx.viewpager.widget.ViewPager
@@ -170,7 +198,65 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.github.clans.fab.FloatingActionMenu
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btnMemberhip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:background="@drawable/btn_rounded_white"
+            android:padding="@dimen/spacing_medium"
+            android:text="Membership"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/btnPersonal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:background="@drawable/btn_rounded_white"
+            android:padding="@dimen/spacing_medium"
+            android:text="Personal"
+            android:textColor="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/btnCreditCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:background="@drawable/btn_rounded_white"
+            android:padding="@dimen/spacing_medium"
+            android:text="Credit Card"
+            android:textColor="@color/colorPrimary" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="@dimen/spacing_smlarge"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:layout_marginRight="@dimen/spacing_smlarge"
+            android:layout_marginBottom="@dimen/spacing_smlarge"
+            android:tint="@android:color/white"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal"
+            app:rippleColor="@android:color/white"
+            app:srcCompat="@drawable/fab_add" />
+
+
+    </LinearLayout>
+    <!--<com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fabMaster"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -209,6 +295,7 @@
         fab:menu_shadowYOffset="4dp"
         fab:menu_showShadow="true">
 
+
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fabMembership"
             android:layout_width="wrap_content"
@@ -234,14 +321,14 @@
             android:id="@+id/fabCreditCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@null"
             fab:fab_colorNormal="@color/colorPrimary"
             fab:fab_colorRipple="@color/colorAccent"
             fab:fab_label="Credit Card"
             fab:fab_size="mini" />
 
 
-    </com.github.clans.fab.FloatingActionMenu>
+    </com.github.clans.fab.FloatingActionMenu>-->
 
 
     <!-- TODO: Update blank fragment layout -->
