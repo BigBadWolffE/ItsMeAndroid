@@ -114,7 +114,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
 
     private  void createToolbar() {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setTitle("Request Increase Limit");
             getSupportActionBar().setElevation(0f);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

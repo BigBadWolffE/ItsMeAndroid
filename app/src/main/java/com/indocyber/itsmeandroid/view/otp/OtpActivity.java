@@ -77,7 +77,7 @@ public class OtpActivity extends AppCompatActivity {
 
         cardData = new ImageCardModel(
                 randomizeCardImage(),
-                mCardNumber.trim(),
+                mCardNumber.replace("   ", " "),
                 cardHolder,
                 expiryDate,
                 "Rp 20.000.000",
@@ -102,6 +102,7 @@ public class OtpActivity extends AppCompatActivity {
                 R.drawable.img_blank_cc_mandiri
         };
         int randomValue = (int)(Math.random() * images.length);
+        if(randomValue == images.length) randomValue = images.length - 1;
         return images[randomValue];
     }
 
@@ -240,7 +241,7 @@ public class OtpActivity extends AppCompatActivity {
 
     private  void createToolbar() {
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Login");
+            getSupportActionBar().setTitle("Confirmation OTP");
             getSupportActionBar().setElevation(0f);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

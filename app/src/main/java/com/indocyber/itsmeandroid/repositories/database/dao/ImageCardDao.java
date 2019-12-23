@@ -28,6 +28,9 @@ public interface ImageCardDao {
     @Query("Select * from imageCardModel")
     Observable<List<ImageCardModel>> getAll();
 
+    @Query("Select * from imageCardModel where isBlockedCard = 0 ")
+    Observable<List<ImageCardModel>> getActiveCard();
+
     @Query("Delete from imagecardmodel where id = :id")
     Completable delete(int id);
 }

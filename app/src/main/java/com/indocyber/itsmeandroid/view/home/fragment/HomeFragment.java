@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.view.home.fragment;
 
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -33,17 +35,22 @@ import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageHomeDashboardAdapter;
+import com.indocyber.itsmeandroid.view.inbox.InboxActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
 
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 
 import com.indocyber.itsmeandroid.view.message.MessageActivity;
 import com.indocyber.itsmeandroid.view.notification.activity.NotificationActivity;
+import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.core.Animations.initShowOut;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.rotateFab;
@@ -66,11 +73,13 @@ public class HomeFragment extends Fragment {
     private ImageHomeDashboardAdapter mImageHomeDashboardAdapter;
     private TabLayout mTabLayout;
     private MaterialRippleLayout btnBlock,btnCall,btnChat,btnContact;
+    private AlertDialog loader;
 
     private Button btnMemberhip, btnPersonal, btnCreditCard;
     private FloatingActionButton fab_add;
 
     private boolean rotate = false;
+    private HomeViewModel viewModel;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -112,8 +121,6 @@ public class HomeFragment extends Fragment {
 
     }
 
-
-
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         getActivity().getMenuInflater().inflate(R.menu.home_menu, menu);
@@ -132,7 +139,9 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
 
             setImageHomeSlider();
-            setImageCardSlider();
+            viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
+            viewModel.fetchCardList();
+            observeViewModel();
             fabAnimations();
            /* mFabMembership.setOnClickListener(v -> {
                     Intent i = new Intent(getActivity(), MembershipSecurityCodeActivity.class);
@@ -189,7 +198,7 @@ public class HomeFragment extends Fragment {
         int id = item.getItemId();
 
         if (id == R.id.actionMessage) {
-            Intent intent = new Intent(getActivity(), NotificationActivity.class);
+            Intent intent = new Intent(getActivity(), InboxActivity.class);
             startActivity(intent);
         } else if (id == R.id.actionProfile) {
             Intent intent = new Intent(getActivity(), ProfileActivity.class);
@@ -233,5 +242,27 @@ public class HomeFragment extends Fragment {
         list.setValue(listModel);
 
         return list;
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(getActivity(), isLoading -> {
+            if (isLoading) {
+                loader = new SpotsDialog.Builder()
+                        .setCancelable(false)
+                        .setContext(getContext())
+                        .build();
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+        viewModel.getCardList().observe(getActivity(), list -> {
+            ImageCardAdapter adapter = new ImageCardAdapter(getActivity(), list);
+            mViewPagerCard.setAdapter(adapter);
+            mViewPagerCard.setPageMargin(getResources()
+                    .getDimensionPixelOffset(R.dimen.viewpager_margin_overlap));
+            mViewPagerCard.setOffscreenPageLimit(list.size());
+        });
     }
 }

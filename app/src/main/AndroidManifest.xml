@@ -59,9 +59,7 @@
         <activity android:name=".view.notification.activity.NotificationActivity" />
         <activity android:name=".view.otp.OtpActivity" />
         <activity android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity" />
-        <activity
-            android:name=".view.addcc.AddCcActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.addcc.AddCcActivity" />
         <activity android:name=".view.home.activity.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
