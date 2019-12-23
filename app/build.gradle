@@ -41,6 +41,8 @@ dependencies {
 
     implementation "android.arch.lifecycle:extensions:$lifeCycleExtensionVersion"
 
+    implementation 'android.arch.persistence.room:runtime:1.0.0'
+
     implementation 'com.google.android.material:material:1.0.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
@@ -53,17 +55,28 @@ dependencies {
 
     implementation "com.android.support:palette-v7:$supportVersion"
 
-
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 
     testImplementation "org.mockito:mockito-inline:$mockitoVersion"
     testImplementation "android.arch.core:core-testing:1.1.1"
 
+    implementation 'com.balysv:material-ripple:1.0.2'
     implementation 'com.github.clans:fab:1.6.2'
     implementation 'com.github.GoodieBag:Pinview:v1.4'
+
+
+    implementation 'com.github.d-max:spots-dialog:1.1@aar'
+
+    implementation 'com.github.davidmigloz:number-keyboard:3.0.0'
+
+    implementation 'com.chaos.view:pinview:1.4.3'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     implementation 'org.apache.commons:commons-text:1.8'
     implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+
 }

@@ -8,20 +8,24 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.blockcc.BlockCCFragment;
+import com.indocyber.itsmeandroid.view.blockcc.fragment.BlockCCFragment;
 import com.indocyber.itsmeandroid.view.contactcc.ContactCCFragment;
 import com.indocyber.itsmeandroid.view.home.fragment.HomeFragment;
 import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
 import com.indocyber.itsmeandroid.view.promo.fragment.AllPromoFragment;
-
-import org.w3c.dom.Text;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -60,6 +64,42 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    public void getFragmentHome(){
+        Fragment currentFragment = new HomeFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_main, currentFragment)
+                .commit();
+        //setmToolbarHomeFragment();
+    }
+    public void getFragmentBlock(){
+        Fragment currentFragment = new BlockCCFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.content_main, currentFragment)
+                .addToBackStack(null)
+                .commit();
+        if (mToolbarText != null) {
+           mToolbarText.setText("Block");
+        }
+    }
+    public void setmToolbarBlockFragment(){
+        if (mToolbarText != null) {
+            mToolbarText.setText("Block");
+        }
+    }
+
+    public void setmToolbarContactFragment(){
+        if (mToolbarText != null) {
+            mToolbarText.setText("Contact");
+        }
+    }
+
+    public void setmToolbarHomeFragment(){
+        if (mToolbarText != null) {
+            mToolbarText.setText("Welcome back, Jordan");
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -104,8 +144,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             fragment = new ContactCCFragment();
 
         } else if (id == R.id.navBlock) {
-            title = "Block";
-            mToolbarText.setText(title);
+
+            setmToolbarBlockFragment();
             fragment = new BlockCCFragment();
 
         } else if (id == R.id.navPromo) {

@@ -36,11 +36,14 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/primaryFontLight"
+                android:textColor="#5D5D5D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/username" />
 
             <EditText
+                style="@style/primaryFontBold"
                 android:id="@+id/edtxUsername"
                 android:inputType="text"
                 android:layout_width="match_parent"
@@ -50,11 +53,14 @@
             <!--editext username-->
 
             <TextView
+                style="@style/primaryFontLight"
+                android:textColor="#5D5D5D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password" />
 
             <EditText
+                style="@style/primaryFontBold"
                 android:id="@+id/edtxPassword"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
@@ -75,6 +81,7 @@
                 android:textColor="#FFFFFF" />
 
             <TextView
+                style="@style/primaryFontBold"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

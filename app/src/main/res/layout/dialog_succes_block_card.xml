@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/icocheckapproved" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:gravity="center"
+        android:text="Credit card number"
+        android:textColor="#2d2d2d"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/txtNumberCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:gravity="center"
+        android:text="5432 xxx xxx 8900"
+        android:textColor="#2d2d2d"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:gravity="center"
+        android:text="Card Blocking is Successful"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnClose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:background="@drawable/btn_rounded_primary"
+        android:gravity="center"
+        android:padding="@dimen/spacing_small"
+        android:text="Close"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:textColor="@color/colorwhite" />
+</LinearLayout>

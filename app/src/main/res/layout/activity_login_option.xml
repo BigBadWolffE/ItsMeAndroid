@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.login.LoginOptionActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -47,19 +48,23 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
             <TextView
+                style="@style/primaryFontLight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
-                android:text="@string/username" />
+                android:text="@string/username"
+                android:textColor="#5D5D5D" />
 
             <EditText
                 android:id="@+id/edtxUsername"
+                style="@style/primaryFontBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:hint="@string/email_or_mobile_phone"
+                android:textSize="18sp"
                 tools:layout_editor_absoluteX="4dp"
                 tools:layout_editor_absoluteY="527dp" />
 
@@ -92,12 +97,13 @@
                     android:src="@drawable/icoregistration" />
 
                 <TextView
+                    style="@style/primaryFontBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/new_registration"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="false"
+    android:orientation="vertical">
+    <com.balysv.materialripple.MaterialRippleLayout
+        android:id="@+id/lytParent"
+        style="@style/RippleStyleWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_80"
+            android:scaleType="fitXY" />
+    </com.balysv.materialripple.MaterialRippleLayout>
+</RelativeLayout>

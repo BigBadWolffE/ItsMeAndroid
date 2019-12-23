@@ -44,11 +44,15 @@
                 android:orientation="vertical">
 
                 <TextView
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Full Name" />
 
                 <EditText
+                    android:textSize="18sp"
+                    style="@style/primaryFontBold"
                     android:id="@+id/edtxFullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -58,12 +62,16 @@
                 <!-- edittext_name-->
 
                 <TextView
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/email_address" />
 
                 <EditText
+                    android:textSize="18sp"
+                    style="@style/primaryFontBold"
                     android:id="@+id/edtxEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,21 +81,27 @@
                 <!-- edittext_email_address-->
 
                 <TextView
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:text="@string/phone_number" />
 
                 <EditText
+                    android:textSize="18sp"
+                    style="@style/primaryFontBold"
                     android:id="@+id/edtxPhonenumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone Number"
-                    android:inputType="text" />
+                    android:inputType="number" />
 
                 <!-- edittext_phone_number-->
 
                 <TextView
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -108,6 +122,8 @@
                 <!-- edittext_pin-->
 
                 <TextView
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
