@@ -59,9 +59,9 @@ public class EditTagsAdapter extends RecyclerView.Adapter<EditTagsAdapter.EditTa
         EditTag model = listTag.get(position);
         holder.txtTag.setText(model.getTag());
         holder.btnClose.setOnClickListener(v -> {
-           /* if (listener != null){
+            if (listener != null){
                 listener.itemClick(listTag,position);
-            }*/
+            }
         });
 
 
