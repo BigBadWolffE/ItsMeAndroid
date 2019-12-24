@@ -56,7 +56,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".view.message.MessageActivity" />
-       <!-- <activity android:name=".view.profile.activity.ProfileActivity" />-->
 
         <activity
             android:name=".view.promo.activity.PromoActivity"
@@ -78,8 +77,6 @@
             android:name=".view.login.LoginOptionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
-
-
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

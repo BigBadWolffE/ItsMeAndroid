@@ -61,9 +61,9 @@
                 app:tabIndicatorHeight="4dp"
                 app:tabTextColor="@color/colorPrimary"
                 app:tabMode="scrollable"
-                android:paddingTop="10dp"
-                android:paddingRight="30dp"
-                android:paddingLeft="20dp" />
+                android:paddingTop="@dimen/spacing_middle"
+                android:paddingRight="@dimen/spacing_mlarge"
+                android:paddingLeft="@dimen/spacing_middle" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerProfile"

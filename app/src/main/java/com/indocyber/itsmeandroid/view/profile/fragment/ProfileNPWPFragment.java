@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -21,14 +22,23 @@ import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
+import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,8 +56,16 @@ public class ProfileNPWPFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private TextView errorText;
+    private LinearLayout agreeLayout;
+    private CheckBox agreeCheck;
+    private Button saveBtn;
     private ImageView mFotoNPWP, mTakeFotoNPWP, mShareNPWP;
     private EditText mNamaNPWP, mAlamatKPP, mNoNPWP, mNIK, mAlamatNPWP;
+    private ProfileNPWPModel mNPWPModel;
+    private View mViewOnCreate;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     public ProfileNPWPFragment() {
         // Required empty public constructor
@@ -81,26 +99,30 @@ public class ProfileNPWPFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewOnCreate = view;
+        pref = getContext().getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+//        editor.remove("ProfileNPWP");
+//        editor.apply();
+        Gson gson = new Gson();
+        String paramUserData = pref.getString("ProfileNPWP", null);
+        mNPWPModel = gson.fromJson(paramUserData, ProfileNPWPModel.class);
+        Log.d("Cek", "Profile NPWP "+mNPWPModel);
 
-        mFotoNPWP = view.findViewById(R.id.imgFotoNPWP);
-        mTakeFotoNPWP = view.findViewById(R.id.imgTakeFotoNPWP);
-        mShareNPWP = view.findViewById(R.id.imgShareFotoNPWP);
-        mNamaNPWP = view.findViewById(R.id.txtProfileNamaNPWP);
-        mNoNPWP = view.findViewById(R.id.txtProfileNoNPWP);
-        mNIK = view.findViewById(R.id.txtProfileNIKNPWP);
-        mAlamatNPWP = view.findViewById(R.id.txtProfileAlamatNPWP);
-        mAlamatKPP = view.findViewById(R.id.txtProfileAlamatKPP);
+        initializeView();
 
-        mNamaNPWP.setEnabled(false);
-        mNamaNPWP.setTextColor(Color.BLACK);
-        mNoNPWP.setEnabled(false);
-        mNoNPWP.setTextColor(Color.BLACK);
-        mAlamatNPWP.setEnabled(false);
-        mAlamatNPWP.setTextColor(Color.BLACK);
-        mAlamatKPP.setEnabled(false);
-        mAlamatKPP.setTextColor(Color.BLACK);
-        mNIK.setEnabled(false);
-        mNIK.setTextColor(Color.BLACK);
+        if (mNPWPModel != null) {
+            setModelNotNull();
+            agreeLayout.setVisibility(View.GONE);
+            saveBtn.setVisibility(View.GONE);
+        }
+
+        agreeCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAgreement();
+            }
+        });
 
         mTakeFotoNPWP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,31 +134,133 @@ public class ProfileNPWPFragment extends Fragment {
         mShareNPWP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mFotoNPWP.getDrawable().getConstantState()
-                        .equals(getContext().getResources().getDrawable(R.drawable.ic_profile_default_img)
-                                .getConstantState())) {
-                    Toast.makeText(getContext(), "Tidak ada Foto yang dapat di bagikan", Toast.LENGTH_SHORT)
-                            .show();
-                } else {
-                    Bitmap bitmap = ((BitmapDrawable)mFotoNPWP.getDrawable()).getBitmap();
-                    Uri uri = getImageUri(getContext(), bitmap);
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                    shareIntent.setType("text/plain");
-//                    shareIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                    shareIntent.setType("image/jpeg");
-                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareFoto();
+            }
+        });
 
-                    try {
-                        startActivity(shareIntent);
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(getContext(), "Gagal membagikan foto", Toast.LENGTH_SHORT)
-                                .show();
-                    }
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (formValidation()) {
+                    ProfileNPWPModel mNPWPModelInside = new ProfileNPWPModel();
+                    mNPWPModelInside = setToModel();
+                    saveToSharedPreferences(mNPWPModelInside);
+                    Toast.makeText(getContext(), "Saved Sukses", Toast.LENGTH_SHORT).show();
+                    errorText.setVisibility(View.GONE);
                 }
             }
         });
 
+    }
+
+    private void setModelNotNull() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        mNPWPModel.getFotoNPWP().compress(Bitmap.CompressFormat.PNG, 100, out);
+        mFotoNPWP.setImageBitmap(mNPWPModel.getFotoNPWP());
+        mNamaNPWP.setText(mNPWPModel.getNamaLengkap());
+        mNoNPWP.setText(mNPWPModel.getNoNpwp());
+        mNIK.setText(mNPWPModel.getNik());
+        mAlamatNPWP.setText(mNPWPModel.getAlamat());
+        mAlamatKPP.setText(mNPWPModel.getAlamatKPP());
+    }
+
+    private void saveToSharedPreferences(ProfileNPWPModel model) {
+        Gson gson = new Gson();
+        String json = gson.toJson(model);
+        editor.putString("ProfileNPWP", json);
+        editor.commit();
+    }
+
+    private ProfileNPWPModel setToModel() {
+        ProfileNPWPModel mNPWPModelInside = new ProfileNPWPModel();
+        mNPWPModelInside.setNamaLengkap(mNamaNPWP.getText().toString());
+        mNPWPModelInside.setNoNpwp(mNoNPWP.getText().toString());
+        mNPWPModelInside.setAlamat(mAlamatNPWP.getText().toString());
+        mNPWPModelInside.setNik(mNIK.getText().toString());
+        mNPWPModelInside.setAlamatKPP(mAlamatKPP.getText().toString());
+        mNPWPModelInside.setFotoNPWP(((BitmapDrawable)mFotoNPWP.getDrawable()).getBitmap());
+        return mNPWPModelInside;
+    }
+
+    private boolean formValidation() {
+        if (mNamaNPWP.getText().length() == 0) {
+            setErrorText("Silahkan isi nama terlebih dahulu.");
+            return false;
+        } else if (mNoNPWP.getText().length() == 0) {
+            setErrorText("Silahkan isi nomor npwp terlebih dahulu.");
+            return false;
+        } else if (mNIK.getText().length() == 0) {
+            setErrorText("Silahkan isi NIK terlebih dahulu.");
+            return false;
+        } else if (mAlamatNPWP.getText().length() == 0) {
+            setErrorText("Silahkan isi alamat terlebih dahulu.");
+            return false;
+        } else if (mAlamatKPP.getText().length() == 0) {
+            setErrorText("Silahkan isi alamat kantor pelayanan pajak terlebih dahulu.");
+            return false;
+        } else if (mFotoNPWP.getDrawable().getConstantState()
+                .equals(getContext().getResources().getDrawable(R.drawable.ic_profile_default_img)
+                        .getConstantState())) {
+            setErrorText("Silahkan ambil foto terlebih dahulu.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void setErrorText(String text) {
+        errorText.setVisibility(View.VISIBLE);
+        errorText.setText(text);
+    }
+
+    private void shareFoto() {
+        if (mFotoNPWP.getDrawable().getConstantState()
+                .equals(getContext().getResources().getDrawable(R.drawable.ic_profile_default_img)
+                        .getConstantState())) {
+            Toast.makeText(getContext(), "Tidak ada Foto yang dapat di bagikan", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            Bitmap bitmap = ((BitmapDrawable)mFotoNPWP.getDrawable()).getBitmap();
+            Uri uri = getImageUri(getContext(), bitmap);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//                    shareIntent.setType("text/plain");
+//                    shareIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            shareIntent.setType("image/jpeg");
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try {
+                startActivity(shareIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(getContext(), "Gagal membagikan foto", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    private void initializeView() {
+        agreeCheck = mViewOnCreate.findViewById(R.id.cbAgreeTerms);
+        saveBtn = mViewOnCreate.findViewById(R.id.btnSaveProfileNPWP);
+        mFotoNPWP = mViewOnCreate.findViewById(R.id.imgFotoNPWP);
+        mTakeFotoNPWP = mViewOnCreate.findViewById(R.id.imgTakeFotoNPWP);
+        mShareNPWP = mViewOnCreate.findViewById(R.id.imgShareFotoNPWP);
+        mNamaNPWP = mViewOnCreate.findViewById(R.id.txtProfileNamaNPWP);
+        mNoNPWP = mViewOnCreate.findViewById(R.id.txtProfileNoNPWP);
+        mNIK = mViewOnCreate.findViewById(R.id.txtProfileNIKNPWP);
+        mAlamatNPWP = mViewOnCreate.findViewById(R.id.txtProfileAlamatNPWP);
+        mAlamatKPP = mViewOnCreate.findViewById(R.id.txtProfileAlamatKPP);
+        agreeLayout = mViewOnCreate.findViewById(R.id.layoutAgreeTerms);
+        errorText = mViewOnCreate.findViewById(R.id.errorText);
+    }
+
+    private void checkAgreement() {
+        if (!agreeCheck.isChecked()) {
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_grey));
+            saveBtn.setEnabled(false);
+        } else {
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
+        }
     }
 
     private Uri getImageUri(Context context, Bitmap bitmap) {

@@ -1,9 +1,11 @@
 package com.indocyber.itsmeandroid.view.profile.fragment;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -15,17 +17,27 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ProfilePassportModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class ProfilePassportFragment extends Fragment {
@@ -38,8 +50,20 @@ public class ProfilePassportFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private CheckBox agreeCheck;
+    private Button saveBtn;
     private ImageView mFotoPassport, mTakeFotoPassport, mSharePassport;
-    private EditText mNamaPassport, mKWNPassport, mNoPassport, mTglLahirPassport, mTempatLahirPassport;
+    private EditText mNamaPassport, mKWNPassport, mNoPassport, mTglLahirPassport, mTempatLahirPassport, mBerlakuPassport;
+    private View mViewOnCreated;
+    private TextView errorText;
+    private LinearLayout agreeLayout;
+    private int mYear, mMonth, mDay;
+    private String[] mMonthData = {"Januari", "Februari", "Maret", "April",
+            "Mei", "Juni", "Juli", "Agustus", "September",
+            "Oktober", "November", "Desember"};
+    private ProfilePassportModel mPassportModel = new ProfilePassportModel();
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
     
     public ProfilePassportFragment() {
         // Required empty public constructor
@@ -72,21 +96,44 @@ public class ProfilePassportFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewOnCreated = view;
+        pref = getContext().getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+//        editor.remove("ProfilePassport");
+//        editor.apply();
+        Gson gson = new Gson();
+        String paramUserData = pref.getString("ProfilePassport", null);
+        mPassportModel = gson.fromJson(paramUserData, ProfilePassportModel.class);
+        Log.d("Cek", "Profile Passport "+mPassportModel);
 
-        mFotoPassport = view.findViewById(R.id.imgFotoPassport);
-        mTakeFotoPassport = view.findViewById(R.id.imgTakeFotoPassport);
-        mSharePassport = view.findViewById(R.id.imgShareFotoPassport);
-        mNamaPassport = view.findViewById(R.id.txtProfileNamaPassport);
-        mNoPassport = view.findViewById(R.id.txtProfileNoPassport);
-        mKWNPassport = view.findViewById(R.id.txtProfileKWNPassport);
-        mTempatLahirPassport = view.findViewById(R.id.txtProfileTempatLahirPassport);
-        mTglLahirPassport = view.findViewById(R.id.txtProfileTglLahirPassport);
+        initializeView();
 
-        mNamaPassport.setEnabled(false);
-        mNoPassport.setEnabled(false);
-        mKWNPassport.setEnabled(false);
-        mTempatLahirPassport.setEnabled(false);
-        mTglLahirPassport.setEnabled(false);
+        if (mPassportModel != null) {
+            setModelNotNull();
+            agreeLayout.setVisibility(View.GONE);
+            saveBtn.setVisibility(View.GONE);
+        }
+
+        agreeCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                checkAgreement();
+            }
+        });
+
+        mTglLahirPassport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDate(mTglLahirPassport);
+            }
+        });
+
+        mBerlakuPassport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDate(mBerlakuPassport);
+            }
+        });
 
         mTakeFotoPassport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,30 +145,155 @@ public class ProfilePassportFragment extends Fragment {
         mSharePassport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mFotoPassport.getDrawable().getConstantState()
-                        .equals(getContext().getResources().getDrawable(R.drawable.ic_profile_default_img)
-                                .getConstantState())) {
-                    Toast.makeText(getContext(), "Tidak ada Foto yang dapat di bagikan", Toast.LENGTH_SHORT)
-                            .show();
-                } else {
-                    Bitmap bitmap = ((BitmapDrawable)mFotoPassport.getDrawable()).getBitmap();
-                    Uri uri = getImageUri(getContext(), bitmap);
-                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
-//                    shareIntent.setType("text/plain");
-//                    shareIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                    shareIntent.setType("image/jpeg");
-                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                shareImage();
+            }
+        });
 
-                    try {
-                        startActivity(shareIntent);
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(getContext(), "Gagal membagikan foto", Toast.LENGTH_SHORT)
-                                .show();
-                    }
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (formValidation()) {
+                    ProfilePassportModel mPassportModelInside = new ProfilePassportModel();
+                    mPassportModelInside = setToModel();
+                    saveToSharedPreferences(mPassportModelInside);
+                    Toast.makeText(getContext(), "Saved Sukses", Toast.LENGTH_SHORT).show();
+                    errorText.setVisibility(View.GONE);
                 }
             }
         });
+    }
+
+    private void setModelNotNull() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        mPassportModel.getFotoPassport().compress(Bitmap.CompressFormat.PNG, 100, out);
+        mFotoPassport.setImageBitmap(mPassportModel.getFotoPassport());
+        mNamaPassport.setText(mPassportModel.getNamaLengkap());
+        mNoPassport.setText(mPassportModel.getNoPassport());
+        mKWNPassport.setText(mPassportModel.getKwn());
+        mTempatLahirPassport.setText(mPassportModel.getTempatLahir());
+        mTglLahirPassport.setText(mPassportModel.getTglLahir());
+        mBerlakuPassport.setText(mPassportModel.getBerlaku());
+    }
+
+    private void saveToSharedPreferences(ProfilePassportModel mPassportModelInside) {
+        Gson gson = new Gson();
+        String json = gson.toJson(mPassportModelInside);
+        editor.putString("ProfilePassport", json);
+        editor.commit();
+    }
+
+    private ProfilePassportModel setToModel() {
+        ProfilePassportModel mPassportModelInside = new ProfilePassportModel();
+        mPassportModelInside.setNamaLengkap(mNamaPassport.getText().toString());
+        mPassportModelInside.setNoPassport(mNoPassport.getText().toString());
+        mPassportModelInside.setKwn(mKWNPassport.getText().toString());
+        mPassportModelInside.setTempatLahir(mTempatLahirPassport.getText().toString());
+        mPassportModelInside.setTglLahir(mTglLahirPassport.getText().toString());
+        mPassportModelInside.setBerlaku(mBerlakuPassport.getText().toString());
+        mPassportModelInside.setFotoPassport(((BitmapDrawable)mFotoPassport.getDrawable()).getBitmap());
+        return mPassportModelInside;
+    }
+
+    private boolean formValidation() {
+        if (mNamaPassport.getText().length() == 0) {
+            setErrorText("Silahkan isi nama terlebih dahulu.");
+            return false;
+        } else if (mNoPassport.getText().length() == 0) {
+            setErrorText("Silahkan isi nomor passport terlebih dahulu.");
+            return false;
+        } else if (mKWNPassport.getText().length() == 0) {
+            setErrorText("Silahkan isi kewarganegaraan terlebih dahulu.");
+            return false;
+        } else if (mTempatLahirPassport.getText().length() == 0) {
+            setErrorText("Silahkan isi tempat lahir terlebih dahulu.");
+            return false;
+        } else if (mTglLahirPassport.getText().length() == 0) {
+            setErrorText("Silahkan isi tanggal lahir terlebih dahulu.");
+            return false;
+        } else if (mBerlakuPassport.getText().length() == 0) {
+            setErrorText("Silahkan isi tanggal berlaku passport terlebih dahulu.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void setErrorText(String s) {
+        errorText.setVisibility(View.VISIBLE);
+        errorText.setText(s);
+    }
+
+    private void getDate(EditText editText) {
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
+                R.style.Theme_MaterialComponents_Light_Dialog_Alert,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        String dateValue = dayOfMonth + " " + mMonthData[monthOfYear] + " " + year;
+                        editText.setText(dateValue);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    private void shareImage() {
+        if (mFotoPassport.getDrawable().getConstantState()
+                .equals(getContext().getResources().getDrawable(R.drawable.ic_profile_default_img)
+                        .getConstantState())) {
+            Toast.makeText(getContext(), "Tidak ada Foto yang dapat di bagikan", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            Bitmap bitmap = ((BitmapDrawable)mFotoPassport.getDrawable()).getBitmap();
+            Uri uri = getImageUri(getContext(), bitmap);
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+//                    shareIntent.setType("text/plain");
+//                    shareIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+            shareIntent.setType("image/jpeg");
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try {
+                startActivity(shareIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(getContext(), "Gagal membagikan foto", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
+    private void initializeView() {
+        agreeLayout = mViewOnCreated.findViewById(R.id.layoutAgreeTerms);
+        errorText = mViewOnCreated.findViewById(R.id.errorText);
+        agreeCheck = mViewOnCreated.findViewById(R.id.cbAgreeTerms);
+        saveBtn = mViewOnCreated.findViewById(R.id.btnSaveProfilePassport);
+        mFotoPassport = mViewOnCreated.findViewById(R.id.imgFotoPassport);
+        mTakeFotoPassport = mViewOnCreated.findViewById(R.id.imgTakeFotoPassport);
+        mSharePassport = mViewOnCreated.findViewById(R.id.imgShareFotoPassport);
+        mNamaPassport = mViewOnCreated.findViewById(R.id.txtProfileNamaPassport);
+        mNoPassport = mViewOnCreated.findViewById(R.id.txtProfileNoPassport);
+        mKWNPassport = mViewOnCreated.findViewById(R.id.txtProfileKWNPassport);
+        mTempatLahirPassport = mViewOnCreated.findViewById(R.id.txtProfileTempatLahirPassport);
+        mTglLahirPassport = mViewOnCreated.findViewById(R.id.txtProfileTglLahirPassport);
+        mTglLahirPassport.setInputType(InputType.TYPE_NULL);
+        mBerlakuPassport = mViewOnCreated.findViewById(R.id.txtProfileBerlakuPassport);
+        mBerlakuPassport.setInputType(InputType.TYPE_NULL);
+    }
+
+    private void checkAgreement() {
+        if (!agreeCheck.isChecked()) {
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_grey));
+            saveBtn.setEnabled(false);
+        } else {
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
+        }
     }
 
     private Uri getImageUri(Context context, Bitmap bitmap) {
