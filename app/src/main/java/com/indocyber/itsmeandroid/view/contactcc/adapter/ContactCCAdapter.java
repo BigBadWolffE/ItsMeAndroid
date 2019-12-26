@@ -56,9 +56,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.hideKeyboard;
 import static com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity.MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
 
 
@@ -66,20 +70,27 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
     private final List<ImageCardModel> listCard = new ArrayList<>();
     private final Activity activity;
     private EditTagsAdapter adapterTags;
-    private List<EditTag> lisTag = new ArrayList<>();
+    private ArrayList<EditTag> lisTag = new ArrayList<>();
+    private sendItemClickListener listener;
 
     public ContactCCAdapter(Activity activity) {
         this.activity = activity;
     }
 
-    public void setListNotes(List<ImageCardModel> listCard) {
+    public void setListNotes(List<ImageCardModel> listCard, ArrayList<EditTag> lisTag) {
         final BlockCCCallback diffCallback = new BlockCCCallback(this.listCard, listCard);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+        this.lisTag.clear();
+        this.lisTag.addAll(lisTag);
         this.listCard.clear();
         this.listCard.addAll(listCard);
         diffResult.dispatchUpdatesTo(this);
     }
 
+    public void setSendItem(sendItemClickListener listener){
+        this.listener = listener;
+
+    }
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -119,7 +130,9 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             showAndHideTag(holder.linear_expands_tags);
         });
         holder.btnEdit.setOnClickListener(v -> {
+
             Intent intent = new Intent(activity, EditCardSecurityCodeActivity.class);
+            intent.putExtra(INTENT_ID,model.getId());
             activity.startActivity(intent);
         });
         holder.btnCall.setOnClickListener(v -> {
@@ -149,8 +162,8 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         }
 
         //recycleEditTags
-        lisTag.clear();
-        lisTag.add(new EditTag(1, "Family"));
+        //lisTag.clear();
+        //lisTag.add(new EditTag("1", "Family"));
         /*lisTag.add(new EditTag(2, "Business"));
         lisTag.add(new EditTag(3, "Family"));
         lisTag.add(new EditTag(4, "Business"));
@@ -163,16 +176,31 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         holder.recycle_EditTags.setAdapter(adapterTags);
         holder.recycle_EditTags.setHasFixedSize(true);
 
+        adapterTags.setOnBlockListener(new EditTagsAdapter.blockItemClickListener() {
+            @Override
+            public void itemClick(ArrayList<EditTag> list, int position) {
+                list.remove(position);
+                adapterTags.notifyDataSetChanged();
+                if (listener != null) {
+                    listener.itemClick(list);
+                }
+            }
+        });
 
         holder.imgSend.setOnClickListener(v ->{
             if (holder.edtxAddTag.length() > 0){
-                lisTag.add(new EditTag(lisTag.size() +1,holder.edtxAddTag.getText().toString()));
+                lisTag.add(new EditTag(getAlphaNumericString(10),holder.edtxAddTag.getText().toString()));
 
-
-                adapterTags.setListTags(lisTag);
-                holder.recycle_EditTags.setAdapter(adapterTags);
+                adapterTags.setListTags(reverseArrayList(lisTag));
+                //holder.recycle_EditTags.setAdapter(adapterTags);
+                adapterTags.notifyDataSetChanged();
 
                 Toast.makeText(activity, "successfully add tag", Toast.LENGTH_SHORT).show();
+                hideKeyboard(activity);
+                holder.edtxAddTag.setText("");
+                if (listener != null) {
+                    listener.itemClick(lisTag);
+                }
             }else {
                 Toast.makeText(activity, "field empty", Toast.LENGTH_SHORT).show();
             }
@@ -314,10 +342,12 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             // Permission has already been granted
         }
     }
-    public List<EditTag> reverseArrayList(List<EditTag> alist)
+
+
+    public ArrayList<EditTag> reverseArrayList(ArrayList<EditTag> alist)
     {
         // Arraylist for storing reversed elements
-        List<EditTag> revArrayList = new ArrayList<EditTag>();
+        ArrayList<EditTag> revArrayList = new ArrayList<EditTag>();
         for (int i = alist.size() - 1; i >= 0; i--) {
 
             // Append the elements in reverse order
@@ -327,5 +357,45 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         // Return the reversed arraylist
         return revArrayList;
     }
+    public interface sendItemClickListener {
+        void itemClick(List<EditTag> listTag);
+    }
+
+    static String getAlphaNumericString(int n)
+    {
+
+        // length is bounded by 256 Character
+        byte[] array = new byte[256];
+        new Random().nextBytes(array);
+
+        String randomString
+                = new String(array, Charset.forName("UTF-8"));
+
+        // Create a StringBuffer to store the result
+        StringBuffer r = new StringBuffer();
+
+        // remove all spacial char
+        String  AlphaNumericString
+                = randomString
+                .replaceAll("[^A-Za-z0-9]", "");
+
+        // Append first 20 alphanumeric characters
+        // from the generated random String into the result
+        for (int k = 0; k < AlphaNumericString.length(); k++) {
+
+            if (Character.isLetter(AlphaNumericString.charAt(k))
+                    && (n > 0)
+                    || Character.isDigit(AlphaNumericString.charAt(k))
+                    && (n > 0)) {
+
+                r.append(AlphaNumericString.charAt(k));
+                n--;
+            }
+        }
+
+        // return the resultant string
+        return r.toString();
+    }
+
 
 }

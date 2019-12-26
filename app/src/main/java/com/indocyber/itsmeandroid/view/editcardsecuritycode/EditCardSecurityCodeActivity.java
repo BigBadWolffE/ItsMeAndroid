@@ -28,12 +28,14 @@ import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+
 public class EditCardSecurityCodeActivity extends AppCompatActivity implements NumberKeyboardListener {
 
-    //private Pinview pinview;
-    //private EditText edit_query;
+
     private AlertDialog alertDialog;
     private PinView firstPinView;
+    private int intent_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,8 @@ public class EditCardSecurityCodeActivity extends AppCompatActivity implements N
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setElevation(0f);
         }
+
+        intent_id = getIntent().getExtras().getInt(INTENT_ID);
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
@@ -51,6 +55,7 @@ public class EditCardSecurityCodeActivity extends AppCompatActivity implements N
 
         NumberKeyboard numberKeyboard = (NumberKeyboard) findViewById(R.id.numberKeyboard);
         numberKeyboard.setListener(this);
+
 
 
     }
@@ -85,6 +90,7 @@ public class EditCardSecurityCodeActivity extends AppCompatActivity implements N
                                 alertDialog.dismiss();
                                 finish();
                                 Intent intent = new Intent(EditCardSecurityCodeActivity.this, EditCreditCardActivity.class);
+                                intent.putExtra(INTENT_ID,intent_id);
                                 startActivity(intent);
 
                             }, 800);

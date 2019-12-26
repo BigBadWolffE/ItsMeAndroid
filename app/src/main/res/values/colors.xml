@@ -18,4 +18,6 @@
     <color name="primary_font_color">#5D5D5D</color>
     <color name="main_red">#F24040</color>
 
+    <color name="grey_40">#999999</color>
+
 </resources>

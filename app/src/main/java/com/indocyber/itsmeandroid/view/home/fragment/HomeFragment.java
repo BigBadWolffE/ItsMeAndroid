@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.view.home.fragment;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -164,8 +165,18 @@ public class HomeFragment extends Fragment {
                 Intent i = new Intent(getActivity(), ContactCCActivity.class);
                 startActivity(i);
             });
+
+            btnCall.setOnClickListener(v -> {
+                dialPhoneNumber("123456789");
+            });
+
+            btnChat.setOnClickListener(v -> {
+
+            });
         }
     }
+
+
     private void fabAnimations() {
         initShowOut(btnMemberhip);
         initShowOut(btnPersonal);
@@ -233,5 +244,13 @@ public class HomeFragment extends Fragment {
         list.setValue(listModel);
 
         return list;
+    }
+
+    private void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 }
