@@ -42,34 +42,9 @@ public class CollectionPromoFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView mPromoCollectionRecycler;
-    private List<PromoCollectionModel> mResourceList = new ArrayList<>();
     private PromoCollectionAdapter mPromoCollectionAdapter;
     private HomeViewModel viewModel;
     private AlertDialog loader;
-
-    private int[] cardType = {
-            R.drawable.img_blank_cc_anz,
-            R.drawable.img_blank_cc_bca,
-            R.drawable.img_blank_cc_mandiri
-    };
-
-    private String[] cardHolder = {
-            "Jordan Setiawan",
-            "Jordan Setiawan",
-            "Jordan Setiawan"
-    };
-
-    private String[] cardNumber = {
-            "1234567890123456",
-            "0987654321098765",
-            "5678987654345098"
-    };
-
-    private String[] cardExpiry = {
-            "08/21",
-            "03/20",
-            "09/22"
-    };
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -110,13 +85,7 @@ public class CollectionPromoFragment extends Fragment {
         viewModel.fetchCardList();
         observeViewModel();
 
-        mResourceList = initialize();
         mPromoCollectionRecycler = view.findViewById(R.id.recyclerCollectionPromoList);
-        mPromoCollectionAdapter = new PromoCollectionAdapter(mResourceList, getActivity());
-        LinearLayoutManager horizontalLayoutManager =
-                new LinearLayoutManager(getActivity());
-        mPromoCollectionRecycler.setLayoutManager(horizontalLayoutManager);
-        mPromoCollectionRecycler.setAdapter(mPromoCollectionAdapter);
         
     }
 
@@ -137,16 +106,12 @@ public class CollectionPromoFragment extends Fragment {
         });
 
         viewModel.getCardList().observe((LifecycleOwner) getActivity(), list -> {
-
+            mPromoCollectionAdapter = new PromoCollectionAdapter(list, getActivity());
+            LinearLayoutManager horizontalLayoutManager =
+                    new LinearLayoutManager(getActivity());
+            mPromoCollectionRecycler.setLayoutManager(horizontalLayoutManager);
+            mPromoCollectionRecycler.setAdapter(mPromoCollectionAdapter);
         });
-    }
-
-    private List<PromoCollectionModel> initialize() {
-        List<PromoCollectionModel> allList = new ArrayList<>();
-        for (int i=0 ; i<cardType.length ; i++) {
-            allList.add(new PromoCollectionModel(cardType[i], cardNumber[i], cardHolder[i], cardExpiry[i]));
-        }
-        return allList;
     }
 
 }

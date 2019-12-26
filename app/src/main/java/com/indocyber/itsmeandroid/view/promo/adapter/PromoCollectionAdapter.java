@@ -23,8 +23,12 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Priority;
+import com.bumptech.glide.request.RequestOptions;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.EditTag;
+import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoCollectionModel;
 import com.indocyber.itsmeandroid.utilities.core.Animations;
 import com.indocyber.itsmeandroid.view.contactcc.adapter.EditTagsAdapter;
@@ -35,14 +39,14 @@ import java.util.List;
 import java.util.UUID;
 
 public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollectionAdapter.ItemViewHolder> {
-    private List<PromoCollectionModel> mPromoColl = new ArrayList<>();
+    private List<ImageCardModel> mPromoColl = new ArrayList<>();
     private Activity mContext;
     private ItemViewHolder mViewHolder;
     private EditTagsAdapter adapterTags;
     private List<EditTag> lisTag = new ArrayList<>();
     public static int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 200;
 
-    public PromoCollectionAdapter(List<PromoCollectionModel> mPromoColl, Activity mContext) {
+    public PromoCollectionAdapter(List<ImageCardModel> mPromoColl, Activity mContext) {
         this.mPromoColl = mPromoColl;
         this.mContext = mContext;
     }
@@ -59,10 +63,19 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
     @Override
     public void onBindViewHolder(@NonNull PromoCollectionAdapter.ItemViewHolder holder, int position) {
         this.mViewHolder = holder;
-        holder.cardType.setImageResource(mPromoColl.get(position).getCardType());
-        holder.cardHolder.setText(mPromoColl.get(position).getCardHolder());
-        holder.cardNumber.setText(onCardNumberChange(mPromoColl.get(position).getCardNumber()));
-        holder.cardExpiry.setText(mPromoColl.get(position).getCardExpiry());
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.bg_gradient_soft)
+                .error(R.drawable.bg_gradient_soft)
+                .priority(Priority.HIGH);
+
+        Glide.with(mContext)
+                .load(mPromoColl.get(position).getImage())
+                .apply(options)
+                .into(holder.cardType);
+
+        holder.cardHolder.setText(mPromoColl.get(position).getNameCard());
+        holder.cardNumber.setText(onCardNumberChange(mPromoColl.get(position).getNumberCard()));
+        holder.cardExpiry.setText(mPromoColl.get(position).getExpireCard());
 
         holder.btnTag.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -221,15 +234,14 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
         StringBuilder cuttingText = new StringBuilder(paddedText);
 
         for (int i=0 ; i<paddedText.length() ; i++) {
-            if (i>=3 && i<=11) {
-                cuttingText.setCharAt(i, 'X');
+            if (i>=4 && i<=13) {
+                if (paddedText.charAt(i) != ' ') {
+                    cuttingText.setCharAt(i, 'X');
+                }
             }
         }
 
-        String updatedText = cuttingText.substring(0, 4) + "   " + cuttingText.substring(4, 8) + "   "
-                + cuttingText.substring(8, 12) + "   " + cuttingText.substring(12, 16);
-
-        return updatedText;
+        return cuttingText.toString();
     }
 
     @Override
