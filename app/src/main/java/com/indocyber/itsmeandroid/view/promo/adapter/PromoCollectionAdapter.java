@@ -1,29 +1,48 @@
 package com.indocyber.itsmeandroid.view.promo.adapter;
 
-import android.content.Context;
-import android.media.Image;
-import android.util.Log;
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.EditTag;
 import com.indocyber.itsmeandroid.model.PromoCollectionModel;
+import com.indocyber.itsmeandroid.utilities.core.Animations;
+import com.indocyber.itsmeandroid.view.contactcc.adapter.EditTagsAdapter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollectionAdapter.ItemViewHolder> {
     private List<PromoCollectionModel> mPromoColl = new ArrayList<>();
-    private Context mContext;
+    private Activity mContext;
     private ItemViewHolder mViewHolder;
+    private EditTagsAdapter adapterTags;
+    private List<EditTag> lisTag = new ArrayList<>();
+    public static int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 200;
 
-    public PromoCollectionAdapter(List<PromoCollectionModel> mPromoColl, Context mContext) {
+    public PromoCollectionAdapter(List<PromoCollectionModel> mPromoColl, Activity mContext) {
         this.mPromoColl = mPromoColl;
         this.mContext = mContext;
     }
@@ -44,30 +63,157 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
         holder.cardHolder.setText(mPromoColl.get(position).getCardHolder());
         holder.cardNumber.setText(onCardNumberChange(mPromoColl.get(position).getCardNumber()));
         holder.cardExpiry.setText(mPromoColl.get(position).getCardExpiry());
-        if (position == 3) {
-            formatCardLabel(holder);
-            notifyDataSetChanged();
+
+        holder.btnTag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAndHideTag(holder.layoutExpandTags);
+            }
+        });
+
+        holder.btnCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Call someone", Toast.LENGTH_SHORT).show();
+//                dialPhoneNumber("089695658002");
+            }
+        });
+
+        holder.btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Chat someone", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.btnPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "show promo here", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Edit Something", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setRequestPermission(holder);
+            }
+        });
+
+        //recycleEditTags
+        lisTag.clear();
+        lisTag.add(new EditTag(1, "Family"));
+        lisTag.add(new EditTag(2, "Business"));
+        adapterTags = new EditTagsAdapter(mContext);
+        LinearLayoutManager lm = new LinearLayoutManager(mContext,  LinearLayoutManager.HORIZONTAL, false);
+        adapterTags.setListTags(lisTag);
+        holder.recycle_EditTags.setLayoutManager(lm);
+        holder.recycle_EditTags.setAdapter(adapterTags);
+        holder.recycle_EditTags.setHasFixedSize(true);
+
+    }
+
+    private void setRequestPermission(ItemViewHolder cardType) {
+        if (ContextCompat.checkSelfPermission(mContext,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(mContext,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(mContext,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+            } else {
+
+                ActivityCompat.requestPermissions(mContext,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+            }
+        } else {
+            shareImage(cardType);
         }
     }
 
-    private void formatCardLabel(ItemViewHolder holder) {
-        int[] position = {0,0};
-        holder.cardType.getLocationOnScreen(position);
-        int paddingLeft = (holder.cardType.getWidth() * 8 / 100);
-        int startYaxis  = (holder.cardType.getHeight() / 2);
+    private void shareImage(ItemViewHolder cardType) {
+        if (cardType.cardType.getDrawable().getConstantState()
+                .equals(mContext.getResources().getDrawable(R.drawable.ic_profile_default_img)
+                        .getConstantState())) {
+            Toast.makeText(mContext, "Tidak ada Foto yang dapat di bagikan", Toast.LENGTH_SHORT)
+                    .show();
+        } else {
+            Bitmap cardBitmap = loadBitmapFromView(cardType.cardLayout);
+            Intent shareIntent = new Intent();
+            if (cardBitmap != null) {
+                Uri uri = getImageUri(mContext, cardBitmap);
+                shareIntent = new Intent(Intent.ACTION_SEND);
+//                    shareIntent.setType("text/plain");
+//                    shareIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+                shareIntent.setType("image/jpeg");
+                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
 
-        holder.cardNumber.setX(position[0] + paddingLeft);
-        holder.cardNumber.setY(startYaxis + mContext.getResources().getDimension(R.dimen.spacing_medium));
-        holder.cardNumber.bringToFront();
+            try {
+                mContext.startActivity(shareIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(mContext, "Gagal membagikan foto", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
 
-        holder.cardHolderLabel.setX(position[0] + paddingLeft);
-        holder.cardHolderLabel.setY(holder.cardNumber.getY() + holder.cardNumber.getHeight()
-                + mContext.getResources().getDimension(R.dimen.spacing_large));
+    private Uri getImageUri(Activity context, Bitmap bitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                bitmap, UUID.randomUUID().toString() + ".png", "drawing");
+        return Uri.parse(path);
+    }
 
-        holder.cardExpiryLabel.setX(position[0] + paddingLeft
-                + holder.cardNumber.getWidth() - holder.cardExpiryLabel.getWidth());
-        holder.cardExpiryLabel.setY(holder.cardNumber.getY() + holder.cardNumber.getHeight()
-                + mContext.getResources().getDimension(R.dimen.spacing_large));
+    public static Bitmap loadBitmapFromView(View v) {
+        v.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT));
+        v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
+        Bitmap bitmap = Bitmap.createBitmap(v.getMeasuredWidth(),
+                v.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+
+        Canvas c = new Canvas(bitmap);
+        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
+        v.draw(c);
+        return bitmap;
+    }
+
+    private void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(mContext.getPackageManager()) != null) {
+            mContext.startActivity(intent);
+        }
+    }
+
+    private void showAndHideTag(LinearLayout view) {
+        if (view.getVisibility() == View.GONE) {
+            Animations.expand(view, new Animations.AnimListener() {
+                @Override
+                public void onFinish() {
+                    //empty
+                }
+            });
+        } else {
+            Animations.collapse(view);
+        }
     }
 
     private String onCardNumberChange(String text){
@@ -94,6 +240,11 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView cardType;
         TextView cardNumber, cardHolder, cardExpiry, cardHolderLabel, cardExpiryLabel;
+        private ImageView btnTag, btnEdit, btnPromo, btnShare, btnCall, btnChat;
+        private LinearLayout layoutExpandTags;
+        private RecyclerView recycle_EditTags;
+        private RelativeLayout cardLayout;
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             cardType = itemView.findViewById(R.id.imgCollectionPromoCard);
@@ -102,6 +253,15 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
             cardExpiry = itemView.findViewById(R.id.lblPromoCollectionCardExpiry);
             cardExpiryLabel = itemView.findViewById(R.id.lblPromoCollectionCardExpiryLabel);
             cardHolderLabel = itemView.findViewById(R.id.lblPromoCollectionCardHolderLabel);
+            btnCall = itemView.findViewById(R.id.imgCallPromoCollection);
+            btnChat = itemView.findViewById(R.id.imgChatPromoCollection);
+            btnEdit =  itemView.findViewById(R.id.imgEditPromoCollection);
+            btnPromo = itemView.findViewById(R.id.imgPromoPromoCollection);
+            btnTag = itemView.findViewById(R.id.imgTagPromoCollection);
+            btnShare = itemView.findViewById(R.id.imgSharePromoCollection);
+            layoutExpandTags = itemView.findViewById(R.id.layoutExpandTagsPromoCollection);
+            recycle_EditTags = itemView.findViewById(R.id.recycle_EditTags);
+            cardLayout = itemView.findViewById(R.id.layoutPromoCollectionCardType);
         }
     }
 }

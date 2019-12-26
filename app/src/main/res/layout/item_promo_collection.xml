@@ -2,9 +2,11 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:paddingTop="@dimen/spacing_middle"
     android:paddingBottom="@dimen/spacing_middle">
 
@@ -12,66 +14,73 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="360dp"
-            android:layout_height="220dp"
-            android:scaleType="fitXY"
-            android:id="@+id/imgCollectionPromoCard"
-            android:src="@drawable/img_blank_cc_mandiri"/>
-
-        <TextView
-            android:id="@+id/lblPromoCollectionCardNumber"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="XXXX   XXXX   XXXX   XXXX"
-            android:layout_marginTop="120dp"
-            android:layout_marginLeft="30dp"
-            android:textSize="16sp"
-            android:textAlignment="center"
-            android:textColor="@color/colorwhite" />
-
-        <TextView
-            android:id="@+id/lblPromoCollectionCardHolderLabel"
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
-            android:layout_marginLeft="30dp"
-            android:text="Card holder"
-            style="@style/textReg14BoldWhite"
-            android:textSize="9dp"
-            />
+            android:id="@+id/layoutPromoCollectionCardType">
 
-        <TextView
-            android:id="@+id/lblPromoCollectionCardExpiryLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="160dp"
-            android:layout_marginLeft="270dp"
-            android:text="Expires"
-            style="@style/textReg14BoldWhite"
-            android:textSize="9dp"
-            android:textAlignment="center"
-            android:textColor="@color/colorwhite" />
+            <ImageView
+                android:layout_width="360dp"
+                android:layout_height="220dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imgCollectionPromoCard"
+                android:src="@drawable/img_blank_cc_mandiri"/>
 
-        <TextView
-            android:id="@+id/lblPromoCollectionCardHolder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="175dp"
-            android:layout_marginLeft="30dp"
-            android:textSize="14dp"
-            style="@style/textReg14BoldWhite"
-            android:text="Jordan Setiawan" />
+            <TextView
+                android:id="@+id/lblPromoCollectionCardNumber"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="XXXX   XXXX   XXXX   XXXX"
+                android:layout_marginTop="120dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/colorwhite" />
 
-        <TextView
-            android:id="@+id/lblPromoCollectionCardExpiry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="175dp"
-            android:layout_marginLeft="265dp"
-            android:textSize="14dp"
-            style="@style/textReg14BoldWhite"
-            android:text="09/19" />
+            <TextView
+                android:id="@+id/lblPromoCollectionCardHolderLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:layout_marginLeft="30dp"
+                android:text="Card holder"
+                style="@style/textReg14BoldWhite"
+                android:textSize="9dp"
+                />
+
+            <TextView
+                android:id="@+id/lblPromoCollectionCardExpiryLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:layout_marginLeft="270dp"
+                android:text="Expires"
+                style="@style/textReg14BoldWhite"
+                android:textSize="9dp"
+                android:textAlignment="center"
+                android:textColor="@color/colorwhite" />
+
+            <TextView
+                android:id="@+id/lblPromoCollectionCardHolder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="175dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="14dp"
+                style="@style/textReg14BoldWhite"
+                android:text="Jordan Setiawan" />
+
+            <TextView
+                android:id="@+id/lblPromoCollectionCardExpiry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="175dp"
+                android:layout_marginLeft="265dp"
+                android:textSize="14dp"
+                style="@style/textReg14BoldWhite"
+                android:text="09/19" />
+        </RelativeLayout>
+
 
         <ImageView
             android:layout_width="50dp"
@@ -80,7 +89,7 @@
             android:id="@+id/imgChatPromoCollection"
             android:src="@drawable/ico_chat_green"
             android:scaleType="centerCrop"
-            android:layout_alignEnd="@id/imgCollectionPromoCard"/>
+            android:layout_alignEnd="@id/layoutPromoCollectionCardType"/>
 
         <ImageView
             android:layout_width="50dp"
@@ -126,6 +135,39 @@
             android:src="@drawable/ico_tag_green"
             android:scaleType="centerCrop"
             android:layout_toLeftOf="@+id/imgEditPromoCollection"/>
-
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/layoutExpandTagsPromoCollection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Card Tags"
+            android:textColor="#2d2d2d"
+            android:textSize="18sp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            app:cardBackgroundColor="@color/colorwhite"
+            app:cardCornerRadius="@dimen/spacing_medium">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                tools:listitem="@layout/item_edit_tag"
+
+                android:id="@+id/recycle_EditTags"/>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </LinearLayout>
