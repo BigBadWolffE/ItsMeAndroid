@@ -36,4 +36,7 @@ public interface ImageCardDao {
 
     @Query("Update imagecardmodel set isBlockedCard = 1 where id = :id")
     Completable blockCard(int id);
+
+    @Query("Update ImageCardModel set isBlockedCard = 1 where isBlockedCard = 0")
+    Completable blockAllCard();
 }

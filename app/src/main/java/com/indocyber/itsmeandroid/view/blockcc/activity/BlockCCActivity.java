@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.blockallconfirmation.BlockAllConfirmationActivity;
 import com.indocyber.itsmeandroid.view.blockcc.adapter.BlockCCAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.viewmodel.BlockCcViewModel;
@@ -46,6 +47,10 @@ public class BlockCCActivity extends AppCompatActivity {
 
         mRlvBlock = findViewById(R.id.rlvBlock);
         mBtnBlock = findViewById(R.id.btnBlock);
+        mBtnBlock.setOnClickListener(view -> {
+            Intent intent = new Intent(this, BlockAllConfirmationActivity.class);
+            startActivity(intent);
+        });
         mAdapter.refreshAdapter(new ArrayList<>());
         mRlvBlock.setAdapter(mAdapter);
         mRlvBlock.setLayoutManager(new LinearLayoutManager(this));
