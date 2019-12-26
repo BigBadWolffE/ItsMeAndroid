@@ -121,6 +121,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((HomeActivity) Objects.requireNonNull(getActivity())).setmToolbarHomeFragment();
+        viewModel.fetchCardList();
     }
 
 
@@ -244,10 +245,12 @@ public class HomeFragment extends Fragment {
     private void observeViewModel() {
         viewModel.getIsLoading().observe(getActivity(), isLoading -> {
             if (isLoading) {
-                loader = new SpotsDialog.Builder()
-                        .setCancelable(false)
-                        .setContext(getContext())
-                        .build();
+                if (loader == null) {
+                    loader = new SpotsDialog.Builder()
+                            .setCancelable(false)
+                            .setContext(getContext())
+                            .build();
+                }
                 loader.show();
             } else {
                 loader.dismiss();
@@ -262,4 +265,6 @@ public class HomeFragment extends Fragment {
             mViewPagerCard.setOffscreenPageLimit(list.size());
         });
     }
+
+
 }

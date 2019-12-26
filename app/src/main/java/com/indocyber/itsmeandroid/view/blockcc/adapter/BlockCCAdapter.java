@@ -41,12 +41,18 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
         this.activity = activity;
     }
 
-    public void setListNotes(List<ImageCardModel> listCard) {
-        final BlockCCCallback diffCallback = new BlockCCCallback(this.listCard, listCard);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-        this.listCard.clear();
-        this.listCard.addAll(listCard);
-        diffResult.dispatchUpdatesTo(this);
+//    public void setListNotes(List<ImageCardModel> listCard) {
+//        final BlockCCCallback diffCallback = new BlockCCCallback(this.listCard, listCard);
+//        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+//        this.listCard.clear();
+//        this.listCard.addAll(listCard);
+//        diffResult.dispatchUpdatesTo(this);
+//    }
+
+    public void refreshAdapter(List<ImageCardModel> newList) {
+        listCard.clear();
+        listCard.addAll(newList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -126,7 +132,7 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
             } else {
                 dialog.dismiss();
                 Intent intent = new Intent(activity, BlockConfirmationPinActivity.class);
-                intent.putExtra(INTENT_BLOCK_CONFIRMATION,model);
+                intent.putExtra(INTENT_BLOCK_CONFIRMATION, model);
                 activity.startActivity(intent);
             }
         });
