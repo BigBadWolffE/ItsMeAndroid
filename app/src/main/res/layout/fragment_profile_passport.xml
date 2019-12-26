@@ -79,8 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNamaPassport"
-                style="@style/textReg18BoldBlack"
-                android:text="Jordan Setiawan"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -106,10 +106,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNoPassport"
-                style="@style/textReg18BoldBlack"
-                android:text="01679765443368363"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"/>
+                android:inputType="number"/>
         </LinearLayout>
 
         <LinearLayout
@@ -133,8 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileKWNPassport"
-                style="@style/textReg18BoldBlack"
-                android:text="Indonesia"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="text" />
         </LinearLayout>
@@ -160,10 +160,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileTempatLahirPassport"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"
-                android:text="Jakarta" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -187,10 +187,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileTglLahirPassport"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"
-                android:text="12 Jan 1992" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -198,6 +198,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:id="@+id/layoutBerlakuHingga"
+            android:background="@drawable/bottom_border_background"
             android:paddingBottom="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_mlarge"
             app:layout_constraintTop_toBottomOf="@+id/layoutTanggalLahir">
@@ -212,12 +213,59 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:enabled="false"
-                style="@style/textReg18BoldBlack"
-                android:text="12 Jan 2020"
+                android:id="@+id/txtProfileBerlakuPassport"
+                style="@style/textReg16BoldBlack"
                 android:paddingTop="@dimen/spacing_middle"
-                android:background="@drawable/disable_grey_edittext"
-                android:inputType="textMultiLine"/>
+                android:background="@null"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:id="@+id/layoutAgreeTerms"
+            app:layout_constraintTop_toBottomOf="@id/layoutBerlakuHingga">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cbAgreeTerms"
+                android:buttonTint="@color/colorPrimary"
+                android:text="I Agree "
+                style="@style/textReg14Black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms and Condition"
+                style="@style/textReg14BoldBlack"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="@style/textReg14BoldWhite"
+            android:id="@+id/btnSaveProfilePassport"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:enabled="false"
+            android:background="@drawable/button_grey"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAgreeTerms"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/errorText"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:gravity="center_horizontal"
+            style="@style/textReg14BoldRed"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveProfilePassport"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

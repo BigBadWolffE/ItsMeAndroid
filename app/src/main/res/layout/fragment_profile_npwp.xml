@@ -79,8 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNamaNPWP"
-                style="@style/textReg18BoldBlack"
-                android:text="Jordan Setiawan"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -106,10 +106,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNoNPWP"
-                style="@style/textReg18BoldBlack"
-                android:text="01679765443368363"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"/>
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -133,8 +133,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNIKNPWP"
-                style="@style/textReg18BoldBlack"
-                android:text="541614584158454136284"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="number" />
         </LinearLayout>
@@ -159,7 +159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
                 android:text="Seumur Hidup"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@drawable/disable_grey_edittext"
@@ -187,10 +187,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileAlamatNPWP"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"
-                android:text="Serpong Paradise Blok A no 12 Jl. Serpong Raya, Serpong Tangerang Selatan" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -214,10 +214,60 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileAlamatKPP"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"
-                android:text="KPP Paratama Jakarta Barat" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_mlarge"
+            android:id="@+id/layoutAgreeTerms"
+            app:layout_constraintTop_toBottomOf="@id/layoutAlamatKPP">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cbAgreeTerms"
+                android:buttonTint="@color/colorPrimary"
+                android:text="I Agree "
+                style="@style/textReg14Black"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Terms and Condition"
+                style="@style/textReg14BoldBlack"/>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="@style/textReg14BoldWhite"
+            android:id="@+id/btnSaveProfileNPWP"
+            android:enabled="false"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:background="@drawable/button_grey"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAgreeTerms"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/errorText"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:gravity="center_horizontal"
+            style="@style/textReg14BoldRed"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveProfileNPWP"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

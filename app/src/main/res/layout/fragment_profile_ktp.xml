@@ -78,9 +78,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/textReg18BoldBlack"
-                android:text="Jordan Setiawan"
+                style="@style/textReg16BoldBlack"
                 android:id="@+id/txtProfileNamaKTP"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -105,12 +105,11 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
                 android:id="@+id/txtProfileNoKTP"
-                android:text="01679765443368363"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"/>
+                android:inputType="number"/>
         </LinearLayout>
 
         <LinearLayout
@@ -133,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
                 android:text="Seumur Hidup"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@drawable/disable_grey_edittext"
@@ -161,8 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileTanggalLahirKTP"
-                style="@style/textReg18BoldBlack"
-                android:text=""
+                style="@style/textReg16BoldBlack"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="textMultiLine" />
@@ -194,7 +192,8 @@
                     android:id="@+id/radioLakiLaki"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
+                    android:buttonTint="@color/colorPrimary"
                     android:text="Laki - Laki"
                     android:layout_marginRight="@dimen/spacing_mlarge"/>
 
@@ -202,7 +201,8 @@
                     android:id="@+id/radioPerempuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
+                    android:buttonTint="@color/colorPrimary"
                     android:text="Perempuan" />
             </RadioGroup>
         </LinearLayout>
@@ -228,7 +228,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerAgamaKTP"
-                style="@style/textReg18BoldBlack"/>
+                android:background="@drawable/spinner_background_without_stroke"
+                style="@style/textReg16BoldBlack"/>
         </LinearLayout>
 
         <LinearLayout
@@ -251,7 +252,9 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinnerStatusKTP" />
+                android:id="@+id/spinnerStatusKTP"
+                android:background="@drawable/spinner_background_without_stroke"
+                style="@style/textReg16BoldBlack" />
         </LinearLayout>
 
         <LinearLayout
@@ -275,7 +278,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerPekerjaanKTP"
-                style="@style/textReg18BoldBlack" />
+                android:background="@drawable/spinner_background_without_stroke"
+                style="@style/textReg16BoldBlack" />
         </LinearLayout>
 
         <LinearLayout
@@ -299,7 +303,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerKWNKTP"
-                style="@style/textReg18BoldBlack" />
+                android:background="@drawable/spinner_background_without_stroke"
+                style="@style/textReg16BoldBlack" />
         </LinearLayout>
 
         <LinearLayout
@@ -323,10 +328,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileAlamatKTP"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"
-                android:text="Serpong Paradise Blok A no 12 Jl. Serpong Raya, Serpong Tangerang Selatan" />
+                android:inputType="textMultiLine" />
         </LinearLayout>
 
         <LinearLayout
@@ -362,10 +367,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtProfileRTKTP"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
+                    android:paddingTop="@dimen/spacing_middle"
                     android:background="@null"
-                    android:inputType="number"
-                    android:text="002" />
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -390,10 +395,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtProfileRWKTP"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
+                    android:paddingTop="@dimen/spacing_middle"
                     android:background="@null"
-                    android:inputType="number"
-                    android:text="002" />
+                    android:inputType="number" />
             </LinearLayout>
         </LinearLayout>
 
@@ -418,7 +423,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerKelurahanKTP"
-                style="@style/textReg18BoldBlack" />
+                android:background="@drawable/spinner_background_without_stroke"
+                style="@style/textReg16BoldBlack" />
         </LinearLayout>
 
         <LinearLayout
@@ -442,7 +448,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/spinnerKecamatanKTP"
-                style="@style/textReg18BoldBlack"/>
+                android:background="@drawable/spinner_background_without_stroke"
+                style="@style/textReg16BoldBlack" />
         </LinearLayout>
 
         <LinearLayout
@@ -478,8 +485,21 @@
             android:paddingBottom="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_middle"
             android:background="@drawable/button_grey"
+            android:enabled="false"
             app:layout_constraintTop_toBottomOf="@+id/layoutAgreeTerms"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/errorText"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:gravity="center_horizontal"
+            style="@style/textReg14BoldRed"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/btnSaveProfileKTP"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

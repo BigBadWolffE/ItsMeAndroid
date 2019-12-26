@@ -39,8 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileNamaLengkap"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
                 android:text="Jordan Setiawan"
+                android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
         </LinearLayout>
@@ -71,8 +72,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
                     android:id="@+id/txtProfileAlamat"
+                    android:paddingTop="@dimen/spacing_medium"
                     android:minLines="2"
                     android:gravity="top"
                     android:background="@null"
@@ -117,9 +119,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
                     android:id="@+id/txtProfileEmail"
                     android:background="@null"
+                    android:layout_gravity="bottom"
+                    android:paddingTop="@dimen/spacing_middle"
                     android:text="jordan.setiawan@gmail.com"
                     android:inputType="textEmailAddress" />
 
@@ -161,9 +165,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
                     android:id="@+id/txtProfileNoTelp"
                     android:background="@null"
+                    android:layout_gravity="bottom"
+                    android:paddingTop="@dimen/spacing_middle"
                     android:text="081287777222"
                     android:inputType="number"/>
 
@@ -205,9 +211,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
                     android:id="@+id/txtProfilePassword"
                     android:background="@null"
+                    android:layout_gravity="bottom"
+                    android:paddingTop="@dimen/spacing_middle"
                     android:text="hahahahhahhaha"
                     android:inputType="textPassword"/>
 
@@ -249,9 +257,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".8"
-                    style="@style/textReg18BoldBlack"
+                    style="@style/textReg16BoldBlack"
                     android:id="@+id/txtProfilePin"
                     android:background="@null"
+                    android:layout_gravity="bottom"
+                    android:paddingTop="@dimen/spacing_middle"
                     android:text="060597"
                     android:inputType="textPassword"/>
 
@@ -295,7 +305,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtProfileSecretQuestion"
-                style="@style/textReg18BoldBlack"
+                style="@style/textReg16BoldBlack"
+                android:paddingTop="@dimen/spacing_middle"
                 android:text="Playing Futsal"
                 android:background="@null"
                 android:inputType="textMultiLine"/>
