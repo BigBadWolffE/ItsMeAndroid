@@ -24,18 +24,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".view.blockallconfirmation.BlockAllConfirmationActivity"></activity>
         <activity android:name=".view.editcreditcard.EditCreditCardActivity" />
         <activity
             android:name=".view.addmembership.AddMembershipActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".view.contactcc.activity.ContactCCActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden" />
-
         <activity
             android:name=".view.blockcc.activity.BlockCCActivity"
             android:screenOrientation="portrait"
