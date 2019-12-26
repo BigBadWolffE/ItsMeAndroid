@@ -131,7 +131,7 @@ public class HomeFragment extends Fragment {
         if (getActivity() != null) {
 
             setImageHomeSlider();
-            viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
+            viewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
             viewModel.fetchCardList();
             observeViewModel();
             fabAnimations();
