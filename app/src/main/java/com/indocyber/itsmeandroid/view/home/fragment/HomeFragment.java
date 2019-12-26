@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,28 +20,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
-
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
-
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageHomeDashboardAdapter;
 import com.indocyber.itsmeandroid.view.inbox.InboxActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
-
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
-
-import com.indocyber.itsmeandroid.view.message.MessageActivity;
-import com.indocyber.itsmeandroid.view.notification.activity.NotificationActivity;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 
@@ -161,6 +152,12 @@ public class HomeFragment extends Fragment {
 
             btnCreditCard.setOnClickListener(v -> {
                 Intent intent = new Intent(getActivity(), AddCcActivity.class);
+                startActivity(intent);
+            });
+
+            btnPersonal.setOnClickListener(view -> {
+                Intent intent  = new Intent(getActivity(), ProfileActivity.class);
+                intent.putExtra("GO_TO_KTP", 1);
                 startActivity(intent);
             });
 

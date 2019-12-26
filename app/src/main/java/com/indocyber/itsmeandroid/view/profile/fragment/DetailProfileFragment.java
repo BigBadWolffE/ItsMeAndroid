@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.view.profile.fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,7 +18,10 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ProfileDetailModel;
+import com.indocyber.itsmeandroid.model.ProfileKTPModel;
 
 public class DetailProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -28,6 +32,9 @@ public class DetailProfileFragment extends Fragment {
 
     private EditText mNamaLengkap, mAlamat, mEmailAddress, mNoTelp, mPass, mPin, mSecretQuestion;
     private ImageView mEditAlamat, mEditEmail, mEditNoTelp, mEditPass, mEditPin;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+    private ProfileDetailModel mDetailModel = new ProfileDetailModel();
 
     public DetailProfileFragment() {
         // Required empty public constructor
@@ -61,6 +68,12 @@ public class DetailProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        pref = getContext().getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+        Gson gson = new Gson();
+        String paramUserData = pref.getString("ProfileDetail", null);
+        mDetailModel = gson.fromJson(paramUserData, ProfileDetailModel.class);
+
         mNamaLengkap = view.findViewById(R.id.txtProfileNamaLengkap);
         mAlamat = view.findViewById(R.id.txtProfileAlamat);
         mEditAlamat = view.findViewById(R.id.imgEditAlamat);
@@ -73,6 +86,10 @@ public class DetailProfileFragment extends Fragment {
         mPin = view.findViewById(R.id.txtProfilePin);
         mEditPin = view.findViewById(R.id.imgEditPin);
         mSecretQuestion = view.findViewById(R.id.txtProfileSecretQuestion);
+
+        if (mDetailModel != null) {
+            setNotNull();
+        }
 
         mNamaLengkap.setEnabled(false);
         mNamaLengkap.setTextColor(Color.BLACK);
@@ -120,6 +137,42 @@ public class DetailProfileFragment extends Fragment {
                 mNoTelp.setInputType(InputType.TYPE_CLASS_PHONE);
             }
         });
+    }
 
+    private void setNotNull() {
+        mNamaLengkap.setText(mDetailModel.getNamaLengkap());
+        mAlamat.setText(mDetailModel.getAlamat());
+        mEmailAddress.setText(mDetailModel.getEmail());
+        mNoTelp.setText(mDetailModel.getNoTelp());
+        mPass.setText(mDetailModel.getPassword());
+        mPin.setText(mDetailModel.getPin());
+        mSecretQuestion.setText(mDetailModel.getHobby());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ProfileDetailModel mDetailModelInside = new ProfileDetailModel();
+        mDetailModelInside = setToModel();
+        saveToSharedPreferences(mDetailModelInside);
+    }
+
+    private void saveToSharedPreferences(ProfileDetailModel mDetailModelInside) {
+        Gson gson = new Gson();
+        String json = gson.toJson(mDetailModelInside);
+        editor.putString("ProfileDetail", json);
+        editor.commit();
+    }
+
+    private ProfileDetailModel setToModel() {
+        ProfileDetailModel mDetailModelInside = new ProfileDetailModel();
+        mDetailModelInside.setNamaLengkap(mNamaLengkap.getText().toString());
+        mDetailModelInside.setAlamat(mAlamat.getText().toString());
+        mDetailModelInside.setEmail(mEmailAddress.getText().toString());
+        mDetailModelInside.setNoTelp(mNoTelp.getText().toString());
+        mDetailModelInside.setPassword(mPass.getText().toString());
+        mDetailModelInside.setPin(mPin.getText().toString());
+        mDetailModelInside.setHobby(mSecretQuestion.getText().toString());
+        return mDetailModelInside;
     }
 }

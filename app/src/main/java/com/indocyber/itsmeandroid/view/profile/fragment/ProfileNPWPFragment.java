@@ -114,7 +114,8 @@ public class ProfileNPWPFragment extends Fragment {
         if (mNPWPModel != null) {
             setModelNotNull();
             agreeLayout.setVisibility(View.GONE);
-            saveBtn.setVisibility(View.GONE);
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
         }
 
         agreeCheck.setOnClickListener(new View.OnClickListener() {

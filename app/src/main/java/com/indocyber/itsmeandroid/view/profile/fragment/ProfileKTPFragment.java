@@ -22,6 +22,7 @@ import androidx.lifecycle.LiveData;
 
 import android.provider.MediaStore;
 import android.text.InputType;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,7 +136,8 @@ public class ProfileKTPFragment extends Fragment {
         if (mKTPModel != null) {
             setModelNotNull();
             agreeLayout.setVisibility(View.GONE);
-            saveBtn.setVisibility(View.GONE);
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
         }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {

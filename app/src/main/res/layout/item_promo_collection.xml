@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="160dp"
-            android:layout_marginLeft="290dp"
+            android:layout_marginLeft="270dp"
             android:text="Expires"
             style="@style/textReg14BoldWhite"
             android:textSize="9dp"
@@ -68,60 +68,60 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="175dp"
-            android:layout_marginLeft="285dp"
+            android:layout_marginLeft="265dp"
             android:textSize="14dp"
             style="@style/textReg14BoldWhite"
             android:text="09/19" />
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="190dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="195dp"
             android:id="@+id/imgChatPromoCollection"
             android:src="@drawable/ico_chat_green"
             android:scaleType="centerCrop"
             android:layout_alignEnd="@id/imgCollectionPromoCard"/>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="190dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="195dp"
             android:id="@+id/imgCallPromoCollection"
             android:src="@drawable/ico_call_green"
             android:scaleType="centerCrop"
             android:layout_toLeftOf="@+id/imgChatPromoCollection"/>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="190dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="195dp"
             android:id="@+id/imgSharePromoCollection"
             android:src="@drawable/ic_profile_share"
             android:scaleType="centerCrop"
             android:layout_toLeftOf="@+id/imgCallPromoCollection"/>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="190dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="195dp"
             android:id="@+id/imgPromoPromoCollection"
             android:src="@drawable/ico_percent_promo_green"
             android:scaleType="centerCrop"
             android:layout_toLeftOf="@+id/imgSharePromoCollection"/>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="190dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="195dp"
             android:id="@+id/imgEditPromoCollection"
             android:src="@drawable/ico_pencil_edit_green"
             android:scaleType="centerCrop"
             android:layout_toLeftOf="@+id/imgPromoPromoCollection"/>
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="190dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="195dp"
             android:id="@+id/imgTagPromoCollection"
             android:src="@drawable/ico_tag_green"
             android:scaleType="centerCrop"

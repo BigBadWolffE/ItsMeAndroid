@@ -56,9 +56,7 @@ public class LoginOptionActivity extends AppCompatActivity {
         Log.d("Cek", "Profile OnStop destroy");
         pref = getSharedPreferences("MyPref", 0);
         editor = pref.edit();
-        editor.remove("ProfileKTP");
-        editor.remove("ProfileNPWP");
-        editor.remove("ProfilePassport");
+        editor.clear();
         editor.apply();
     }
 
@@ -68,9 +66,7 @@ public class LoginOptionActivity extends AppCompatActivity {
         Log.d("Cek", "Profile Ondestroy");
         pref = getSharedPreferences("MyPref", 0);
         editor = pref.edit();
-        editor.remove("ProfileKTP");
-        editor.remove("ProfileNPWP");
-        editor.remove("ProfilePassport");
+        editor.clear();
         editor.apply();
     }
 }
