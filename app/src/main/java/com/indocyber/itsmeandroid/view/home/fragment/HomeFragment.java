@@ -25,6 +25,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.view.MainActivity;
 import com.indocyber.itsmeandroid.view.blockcc.fragment.BlockCCFragment;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
@@ -119,6 +120,15 @@ public class HomeFragment extends Fragment {
             mFabMembership.setOnClickListener(v -> {
                     Intent i = new Intent(getActivity(), MembershipSecurityCodeActivity.class);
                     startActivity(i);
+            });
+
+            mFabPersonal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent  = new Intent(getActivity(), ProfileActivity.class);
+                    intent.putExtra("GO_TO_KTP", 1);
+                    startActivity(intent);
+                }
             });
 
             btnBlock.setOnClickListener(v -> {

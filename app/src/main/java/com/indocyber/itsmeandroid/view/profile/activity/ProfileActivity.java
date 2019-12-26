@@ -7,10 +7,13 @@ import androidx.viewpager.widget.ViewPager;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -22,6 +25,7 @@ import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -35,6 +39,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private ImageView mTakePhotoBtn;
     private CircleImageView mFotoProfile;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +52,12 @@ public class ProfileActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(0f);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        pref = getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
+        String paramProfPic = pref.getString("ProfilePicture", null);
+
+        int fragmentId = getIntent().getIntExtra("GO_TO_KTP", 0);
 
         mViewPager = findViewById(R.id.viewPagerProfile);
         mTabLayout = findViewById(R.id.tabLayoutProfile);
@@ -59,6 +71,14 @@ public class ProfileActivity extends AppCompatActivity {
         mTabAdapter.addFragment(new ProfilePassportFragment(), "Passport");
         mViewPager.setAdapter(mTabAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
+        if (fragmentId != 0) {
+            mViewPager.setCurrentItem(fragmentId);
+        }
+
+        if (paramProfPic != null) {
+            Bitmap newProfpic = decodeImage(paramProfPic);
+            mFotoProfile.setImageBitmap(newProfpic);
+        }
 
         mTakePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +135,8 @@ public class ProfileActivity extends AppCompatActivity {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     mFotoProfile.setImageBitmap(imageBitmap);
+                    String encode = encodeImage(imageBitmap);
+                    saveToSharedPreferences(encode);
                     break;
                 case GALLERY_PICTURE:
                     Uri uri = data.getData();
@@ -122,11 +144,34 @@ public class ProfileActivity extends AppCompatActivity {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                         // Log.d(TAG, String.valueOf(bitmap));
                         mFotoProfile.setImageBitmap(bitmap);
+                        String end = encodeImage(bitmap);
+                        saveToSharedPreferences(end);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     break;
             }
         }
+    }
+
+    private void saveToSharedPreferences(String encode) {
+        editor.putString("ProfilePicture", encode);
+        editor.commit();
+    }
+
+    public String encodeImage(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return "data:image/png;base64," +encImage;
+    }
+
+    public Bitmap decodeImage(String base64){
+        base64 = base64.replace("data:image/png;base64,", "");
+        byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return decodedByte;
     }
 }

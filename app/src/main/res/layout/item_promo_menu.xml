@@ -14,47 +14,4 @@
         android:id="@+id/imgPromoMenu"
         android:src="@drawable/btn_all_active"/>
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="40dp"-->
-<!--        app:cardBackgroundColor="@color/colorPrimary"-->
-<!--        app:cardCornerRadius="@dimen/spacing_medium">-->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:paddingLeft="@dimen/spacing_medium">-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/lblPromoMenuName"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight=".5"-->
-<!--                android:text="All"-->
-<!--                style="@style/textReg14BoldWhite"/>-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight=".5"-->
-<!--                android:background="@drawable/left_radius_background">-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/imgPromoMenuIcon"-->
-<!--                    android:layout_width="40dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:src="@drawable/ic_profile_share"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:layout_constraintRight_toRightOf="parent"-->
-<!--                    app:layout_constraintLeft_toLeftOf="parent"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"/>-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </LinearLayout>-->
-
-<!--    </androidx.cardview.widget.CardView>-->
-
 </LinearLayout>
