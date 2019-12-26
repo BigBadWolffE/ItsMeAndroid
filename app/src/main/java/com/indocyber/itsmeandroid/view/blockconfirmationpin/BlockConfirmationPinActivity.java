@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.view.blockconfirmationpin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -22,6 +23,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
+import com.indocyber.itsmeandroid.viewmodel.BlockConfirmationPinViewModel;
 
 import dmax.dialog.SpotsDialog;
 
@@ -36,11 +39,12 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
 
     private AlertDialog alertDialog;
     private PinView firstPinView;
-
+    private BlockConfirmationPinViewModel viewModel;
 
     public static String INTENT_BLOCK_CONFIRMATION = "INTENT_BLOCK_CONFIRMATION";
     public static String INTENT_BLOCK_POSITION = "INTENT_BLOCK_POSITION";
     public static int REQUEST_BLOCK_DELETE = 101;
+    private AlertDialog loader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
         model = getIntent().getParcelableExtra(INTENT_BLOCK_CONFIRMATION);
 
         if (getSupportActionBar() != null) {
+            getSupportActionBar().setElevation(0f);
             getSupportActionBar().setTitle("Confirmation Pin");
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -57,19 +62,10 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
         mTxtNumberCard = findViewById(R.id.txtNumberCard);
         mTxtExpireCard = findViewById(R.id.txtExpireCard);
 
-
+        viewModel = ViewModelProviders.of(this).get(BlockConfirmationPinViewModel.class);
         mBtnConfirmation = findViewById(R.id.btnConfirmation);
         mBtnConfirmation.setOnClickListener(v -> {
-            alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(BlockConfirmationPinActivity.this).build();
-            alertDialog.show();
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    alertDialog.dismiss();
-                    showCustomDialog();
-                }
-            }, 2000);
-
+            viewModel.blockCard(model.getId());
         });
 
         mImageBlock = findViewById(R.id.imageBlock);
@@ -82,6 +78,7 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
         }
 
         setPinView();
+        observeViewModel();
     }
 
     private void setPinView() {
@@ -154,5 +151,25 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader = new SpotsDialog.Builder()
+                        .setCancelable(false)
+                        .setContext(BlockConfirmationPinActivity.this)
+                        .build();
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+        viewModel.getIsSuccess().observe(this, isSuccess -> {
+            if (isSuccess) {
+                showCustomDialog();
+            }
+        });
     }
 }
