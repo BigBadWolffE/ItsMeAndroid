@@ -45,89 +45,105 @@
 
                 <TextView
                     style="@style/primaryFontLight"
-                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Full Name" />
+                    android:text="Full Name"
+                    android:textColor="#5D5D5D" />
 
                 <EditText
-                    android:textSize="18sp"
-                    style="@style/primaryFontBold"
                     android:id="@+id/edtxFullname"
+                    style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Full Name"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <!-- edittext_name-->
 
                 <TextView
                     style="@style/primaryFontLight"
-                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/email_address" />
+                    android:text="@string/email_address"
+                    android:textColor="#5D5D5D" />
 
                 <EditText
-                    android:textSize="18sp"
-                    style="@style/primaryFontBold"
                     android:id="@+id/edtxEmail"
+                    style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email_address"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <!-- edittext_email_address-->
 
                 <TextView
                     style="@style/primaryFontLight"
-                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/phone_number" />
+                    android:text="@string/phone_number"
+                    android:textColor="#5D5D5D" />
 
                 <EditText
-                    android:textSize="18sp"
-                    style="@style/primaryFontBold"
                     android:id="@+id/edtxPhonenumber"
+                    style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone Number"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
 
                 <!-- edittext_phone_number-->
 
                 <TextView
                     style="@style/primaryFontLight"
-                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="Pin (6 digit)" />
+                    android:text="Pin (6 digit)"
+                    android:textColor="#5D5D5D" />
 
-                <com.goodiebag.pinview.Pinview
-                    android:id="@+id/pinView"
-                    android:layout_width="match_parent"
+                <com.chaos.view.PinView
+                    android:id="@+id/firstPinView"
+                    style="@style/PinWidget.PinView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cursorVisible="false"
-                    app:forceKeyboard="true"
-                    app:inputType="number"
-                    app:password="true"
-                    app:pinHeight="40dp"
-                    app:pinLength="6"
-                    app:pinWidth="40dp" />
+                    android:layout_gravity="center"
+
+                    android:cursorVisible="false"
+                    android:gravity="center"
+                    android:inputType="numberPassword"
+
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+                    app:cursorWidth="2dp"
+                    app:hideLineWhenFilled="true"
+                    app:itemCount="6"
+                    app:itemHeight="48dp"
+                    app:itemRadius="4dp"
+                    app:itemSpacing="0dp"
+                    app:itemWidth="48dp"
+                    app:lineColor="@color/grey1"
+                    app:lineWidth="2dp"
+                    app:viewType="rectangle" />
 
                 <!-- edittext_pin-->
 
                 <TextView
                     style="@style/primaryFontLight"
-                    android:textColor="#5D5D5D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/secret_question" />
+                    android:text="@string/secret_question"
+                    android:textColor="#5D5D5D" />
 
                 <Spinner
                     android:id="@+id/spnrQuestion"

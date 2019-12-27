@@ -16,12 +16,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 /**
- *
- *
- *@author
- *@version
+ * @author
  */
 
 public class HomeViewModel extends AndroidViewModel {
@@ -53,26 +51,16 @@ public class HomeViewModel extends AndroidViewModel {
         isLoading.setValue(true);
         disposable.add(
                 dao.getAll()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<List<ImageCardModel>>() {
-                    @Override
-                    public void onNext(List<ImageCardModel> imageCardModels) {
-                        isLoading.setValue(false);
-                        if(imageCardModels != null) cardList.setValue(imageCardModels);
-                    }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(imageCardModels -> {
+                            isLoading.setValue(false);
+                            if (imageCardModels != null) cardList.setValue(imageCardModels);
+                        }, e -> {
+                            isLoading.setValue(false);
+                            error.setValue(e.getMessage());
 
-                    @Override
-                    public void onError(Throwable e) {
-                        isLoading.setValue(false);
-                        error.setValue(e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                                isLoading.setValue(false);
-                            }
-                })
+                        })
         );
     }
 
@@ -80,26 +68,26 @@ public class HomeViewModel extends AndroidViewModel {
         isLoading.setValue(true);
         disposable.add(
                 dao.getActiveCard()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<List<ImageCardModel>>() {
-                    @Override
-                    public void onNext(List<ImageCardModel> imageCardModels) {
-                        isLoading.setValue(false);
-                        if(imageCardModels != null) cardList.setValue(imageCardModels);
-                    }
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<List<ImageCardModel>>() {
+                            @Override
+                            public void onNext(List<ImageCardModel> imageCardModels) {
+                                isLoading.setValue(false);
+                                if (imageCardModels != null) cardList.setValue(imageCardModels);
+                            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        isLoading.setValue(false);
-                        error.setValue(e.getMessage());
-                    }
+                            @Override
+                            public void onError(Throwable e) {
+                                isLoading.setValue(false);
+                                error.setValue(e.getMessage());
+                            }
 
-                    @Override
-                    public void onComplete() {
-                        isLoading.setValue(false);
-                    }
-                })
+                            @Override
+                            public void onComplete() {
+                                isLoading.setValue(false);
+                            }
+                        })
         );
     }
 

@@ -1,20 +1,19 @@
 package com.indocyber.itsmeandroid.model;
 
 public class EditTag {
-    private int id;
+    private String  id;
     private String tag;
 
-
-    public EditTag(int id, String tag) {
+    public EditTag(String id, String tag) {
         this.id = id;
         this.tag = tag;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

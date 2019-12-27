@@ -43,7 +43,7 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
     private Activity mContext;
     private ItemViewHolder mViewHolder;
     private EditTagsAdapter adapterTags;
-    private List<EditTag> lisTag = new ArrayList<>();
+    private ArrayList<EditTag> lisTag = new ArrayList<>();
     public static int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 200;
 
     public PromoCollectionAdapter(List<ImageCardModel> mPromoColl, Activity mContext) {
@@ -133,8 +133,8 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
 
         //recycleEditTags
         lisTag.clear();
-        lisTag.add(new EditTag(1, "Family"));
-        lisTag.add(new EditTag(2, "Business"));
+        lisTag.add(new EditTag("1", "Family"));
+        lisTag.add(new EditTag("2", "Business"));
         adapterTags = new EditTagsAdapter(mContext);
         LinearLayoutManager lm = new LinearLayoutManager(mContext,  LinearLayoutManager.HORIZONTAL, false);
         adapterTags.setListTags(lisTag);

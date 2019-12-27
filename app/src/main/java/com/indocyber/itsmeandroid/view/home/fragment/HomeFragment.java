@@ -3,10 +3,12 @@ package com.indocyber.itsmeandroid.view.home.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,20 +22,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
+
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
+
+import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageHomeDashboardAdapter;
 import com.indocyber.itsmeandroid.view.inbox.InboxActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
+
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
+
+import com.indocyber.itsmeandroid.view.message.MessageActivity;
+import com.indocyber.itsmeandroid.view.notification.activity.NotificationActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 
@@ -171,6 +181,18 @@ public class HomeFragment extends Fragment {
                 Intent i = new Intent(getActivity(), ContactCCActivity.class);
                 startActivity(i);
             });
+
+            btnChat.setOnClickListener(v -> {
+                Intent i = new Intent(getActivity(), ChatActivity.class);
+                startActivity(i);
+            });
+
+            btnCall.setOnClickListener(v -> {
+                dialPhoneNumber("123456789");
+            });
+
+
+
         }
     }
     private void fabAnimations() {
@@ -265,6 +287,13 @@ public class HomeFragment extends Fragment {
             mViewPagerCard.setOffscreenPageLimit(list.size());
         });
     }
-
+    private void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 
 }
+

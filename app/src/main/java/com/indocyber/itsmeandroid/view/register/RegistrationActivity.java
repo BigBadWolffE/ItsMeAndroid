@@ -1,20 +1,46 @@
 package com.indocyber.itsmeandroid.view.register;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
+import com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPinActivity;
+import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
+import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
+import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+
+import dmax.dialog.SpotsDialog;
+
+import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 
 public class RegistrationActivity extends AppCompatActivity {
     private String idQuestion;
@@ -23,6 +49,15 @@ public class RegistrationActivity extends AppCompatActivity {
     private String nameAnswer;
     private Spinner mSpnrQuestion;
     private Spinner mSpnrAnswer;
+    private Button buttonRegister;
+
+    private EditText edtxFullname;
+    private EditText edtxEmail;
+    private EditText edtxPhonenumber;
+    private PinView pinView;
+    private CheckBox checkboxRegister;
+    private AlertDialog loader;
+    private Preference preference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +69,63 @@ public class RegistrationActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        preference = new Preference(this);
         mSpnrQuestion = findViewById(R.id.spnrQuestion);
         mSpnrAnswer = findViewById(R.id.spnrAnswer);
 
+        edtxFullname = findViewById(R.id.edtxFullname);
+        edtxEmail = findViewById(R.id.edtxEmail);
+        edtxPhonenumber = findViewById(R.id.edtxPhonenumber);
+        edtxPhonenumber = findViewById(R.id.edtxPhonenumber);
+
+        checkboxRegister = findViewById(R.id.checkboxRegister);
+
+        pinView = findViewById(R.id.firstPinView);
+
+        buttonRegister = findViewById(R.id.buttonRegister);
+
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(RegistrationActivity.this)
+                .build();
+
         setSpinnerAnswer();
         setSpinnerQuestion();
+        setPinView();
+        checkRegister();
+    }
+
+    private void checkRegister() {
+
+        buttonRegister.setOnClickListener(v -> {
+
+
+            if (edtxFullname.getText().length() == 0) {
+                edtxFullname.setError("field empty");
+                edtxFullname.requestFocus();
+            } else if (edtxEmail.getText().length() == 0) {
+                edtxEmail.setError("field empty");
+                edtxEmail.requestFocus();
+            } else if (edtxPhonenumber.getText().length() == 0) {
+                edtxPhonenumber.setError("field empty");
+                edtxPhonenumber.requestFocus();
+            } else if (pinView.getText().length() == 0) {
+                snackBarIconError(RegistrationActivity.this, "Pin empty");
+            } else if (!checkboxRegister.isChecked()) {
+
+                UtilitiesCore.buildAlertDialog(
+                        RegistrationActivity.this,
+                        "Please read and indicate your acceptance of the site's Terms of Service",
+                        R.drawable.ic_invalid,
+                        null
+                );
+            } else {
+                loader.show();
+
+                showCustomDialog();
+
+            }
+        });
     }
 
     @Override
@@ -51,7 +138,27 @@ public class RegistrationActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setSpinnerQuestion(){
+    private void setPinView() {
+        pinView.setTextColor(
+                ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
+
+        pinView.setItemCount(6);
+        pinView.setItemHeight(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
+        pinView.setItemWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
+        pinView.setItemRadius(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_radius));
+        pinView.setItemSpacing(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_spacing));
+        pinView.setLineWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_line_width));
+        pinView.setAnimationEnable(true);// start animation when adding text
+        pinView.setCursorVisible(false);
+
+        pinView.setCursorWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_cursor_width));
+
+        pinView.setItemBackgroundColor(Color.WHITE);
+
+        pinView.setHideLineWhenFilled(false);
+    }
+
+    private void setSpinnerQuestion() {
         try {
             List<HashMap<String, String>> listSpinner = new ArrayList<HashMap<String, String>>();
 
@@ -92,7 +199,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    private void setSpinnerAnswer(){
+    private void setSpinnerAnswer() {
         try {
             List<HashMap<String, String>> listSpinner = new ArrayList<HashMap<String, String>>();
 
@@ -131,5 +238,31 @@ public class RegistrationActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void showCustomDialog() {
+        final Dialog dialog = new Dialog(RegistrationActivity.this);
+        dialog.setContentView(R.layout.dialog_succes_block_card);
+        dialog.setCancelable(false);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        final Button btnClose = (Button) dialog.findViewById(R.id.btnClose);
+
+
+        btnClose.setOnClickListener(v -> {
+            loader.dismiss();
+            finish();
+            preference.setLoginFirstTime(true);
+            Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
+            startActivity(i);
+        });
+
+
+        dialog.show();
+        dialog.getWindow().setAttributes(lp);
     }
 }

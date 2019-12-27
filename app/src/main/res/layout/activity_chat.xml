@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorwhite"
+    android:orientation="vertical"
+    tools:context=".view.chat.ChatActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <ImageButton
+            android:layout_marginBottom="10dp"
+            android:id="@+id/lyt_back"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/spacing_medium"
+            android:paddingRight="@dimen/spacing_medium"
+            app:srcCompat="@drawable/ic_arrow_back" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/spacing_small"
+            android:paddingRight="@dimen/spacing_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bank Mandiri"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white"
+                app:fontFamily="sans-serif-medium" />
+
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Online"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_10" />-->
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.Toolbar
+
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="-20dp"
+        android:layout_weight="1"
+        android:background="@drawable/bgcardlayoutblue"
+        android:padding="@dimen/spacing_medium">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleChat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/spacing_medium"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:scrollbars="vertical"
+            android:scrollingCache="true" />
+
+        <!-- <View
+             android:layout_width="match_parent"
+             android:layout_height="2dp"
+             android:layout_alignParentTop="true"
+             android:background="@drawable/bg_gradient_soft"
+             android:rotation="180" />-->
+
+    </RelativeLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorwhite"
+        android:orientation="horizontal"
+        android:padding="@dimen/spacing_medium">
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_small"
+            android:layout_weight="1"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xmlarge"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_small"
+                android:paddingRight="@dimen/spacing_small">
+
+
+                <EditText
+                    android:id="@+id/textContent"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:hint="Write a message..."
+                    android:imeOptions="actionSearch"
+                    android:padding="@dimen/spacing_middle" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_small"
+            android:clickable="true"
+            android:gravity="center"
+            android:tint="@android:color/white"
+            app:backgroundTint="@color/colorPrimary"
+            app:elevation="1dp"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/icosend"
+            app:useCompatPadding="false" />
+
+    </LinearLayout>
+</LinearLayout>

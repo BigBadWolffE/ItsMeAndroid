@@ -97,8 +97,8 @@
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:fontFamily="monospace"
                     android:text="**** **** **** 9867"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
 
                 <View
                     android:layout_width="0dp"
@@ -134,7 +134,9 @@
                     </LinearLayout>
 
                     <LinearLayout
-
+                        android:layout_marginRight="-15dp"
+                        android:layout_gravity="end"
+                        android:gravity="end"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -262,9 +264,9 @@
                         tools:listitem="@layout/item_edit_tag" />
 
                     <LinearLayout
-                        android:background="@drawable/btn_rounded_white"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/btn_rounded_white"
                         android:orientation="horizontal"
                         android:padding="@dimen/spacing_large">
 
@@ -272,11 +274,11 @@
 
                             android:id="@+id/edtxAddTag"
                             style="@style/primaryFontBold"
-                            android:textColor="@color/black2"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:hint="Add Tag"
+                            android:textColor="@color/black2"
                             android:textSize="18sp" />
 
                         <ImageButton

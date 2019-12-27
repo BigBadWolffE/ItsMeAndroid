@@ -1,8 +1,10 @@
 package com.indocyber.itsmeandroid.utilities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfRenderer;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +26,7 @@ import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.indocyber.itsmeandroid.R;
 
 import java.io.File;
@@ -31,6 +35,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -210,6 +216,34 @@ public final class UtilitiesCore {
             output.close();
         }
     }
+    public static void hideKeyboard(Activity activity) {
+        View view = activity.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+    }
+    public static String getFormattedTimeEvent(Long time) {
+        SimpleDateFormat newFormat = new SimpleDateFormat("h:mm a");
+        return newFormat.format(new Date(time));
+    }
 
+    public static void snackBarIconError(Activity activity, String message) {
+        View parent_view = activity.findViewById(android.R.id.content);
+        final Snackbar snackbar = Snackbar.make(parent_view, "", Snackbar.LENGTH_SHORT);
+        //inflate view
+        View custom_view = activity.getLayoutInflater().inflate(R.layout.snackbar_icon_text, null);
 
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackBarView.setPadding(0, 0, 0, 0);
+
+        ((TextView) custom_view.findViewById(R.id.message)).setText(message);
+        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_close);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(activity.getResources().getColor(R.color.red_600));
+        snackBarView.addView(custom_view, 0);
+        snackbar.show();
+    }
 }
