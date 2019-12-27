@@ -4,12 +4,14 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 
 import java.util.List;
 
 import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 /**
@@ -26,7 +28,10 @@ public interface ImageCardDao {
     Completable insert(ImageCardModel card);
 
     @Query("Select * from imageCardModel")
-    Observable<List<ImageCardModel>> getAll();
+    Flowable<List<ImageCardModel>> getAll();
+
+    @Query("Select * from imageCardModel where id = :id")
+    Flowable<ImageCardModel> getCardById(int id);
 
     @Query("Select * from imageCardModel where isBlockedCard = 0 ")
     Observable<List<ImageCardModel>> getActiveCard();
@@ -39,4 +44,7 @@ public interface ImageCardDao {
 
     @Query("Update ImageCardModel set isBlockedCard = 1 where isBlockedCard = 0")
     Completable blockAllCard();
+
+    @Update()
+    Completable update(ImageCardModel note);
 }

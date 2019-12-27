@@ -3,6 +3,7 @@ package com.indocyber.itsmeandroid.view.home.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -81,7 +82,6 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -93,12 +93,10 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         btnMemberhip = view.findViewById(R.id.btnMemberhip);
         btnPersonal = view.findViewById(R.id.btnPersonal);
         btnCreditCard = view.findViewById(R.id.btnCreditCard);
         fab_add = view.findViewById(R.id.fab_add);
-
 
         mViewPager = view.findViewById(R.id.imagePage);
         mTabLayout = view.findViewById(R.id.tabDots);
@@ -108,8 +106,6 @@ public class HomeFragment extends Fragment {
         btnContact = view.findViewById(R.id.btnContact);
         btnCall = view.findViewById(R.id.btnCall);
         btnChat = view.findViewById(R.id.btnChat);
-
-
     }
 
     @Override
@@ -123,7 +119,6 @@ public class HomeFragment extends Fragment {
         ((HomeActivity) Objects.requireNonNull(getActivity())).setmToolbarHomeFragment();
         viewModel.fetchCardList();
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -139,8 +134,6 @@ public class HomeFragment extends Fragment {
                     Intent i = new Intent(getActivity(), MembershipSecurityCodeActivity.class);
                     startActivity(i);
             });*/
-
-
 
             btnMemberhip.setOnClickListener(v -> {
                 Intent i = new Intent(getActivity(), MembershipSecurityCodeActivity.class);
@@ -171,8 +164,17 @@ public class HomeFragment extends Fragment {
                 Intent i = new Intent(getActivity(), ContactCCActivity.class);
                 startActivity(i);
             });
+
+            btnCall.setOnClickListener(v -> {
+                dialPhoneNumber("123456789");
+            });
+
+            btnChat.setOnClickListener(v -> {
+
+            });
         }
     }
+
     private void fabAnimations() {
         initShowOut(btnMemberhip);
         initShowOut(btnPersonal);
@@ -191,6 +193,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -266,5 +269,11 @@ public class HomeFragment extends Fragment {
         });
     }
 
-
+    private void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 }

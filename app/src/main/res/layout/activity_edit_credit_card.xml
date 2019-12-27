@@ -60,7 +60,7 @@
                             android:layout_marginTop="@dimen/spacing_medium"
                             android:fontFamily="monospace"
                             android:text="XXXX XXXX XXXX XXXX"
-                            android:maxLength="19"
+
 
                             android:textSize="14sp"
                             android:textColor="@android:color/white" />
@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Valid Card Number"
                     android:inputType="number"
-                    android:maxLength="16"
+
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 

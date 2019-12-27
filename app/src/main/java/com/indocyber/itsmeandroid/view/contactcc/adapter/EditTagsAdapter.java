@@ -20,7 +20,7 @@ import java.util.List;
 
 
 public class EditTagsAdapter extends RecyclerView.Adapter<EditTagsAdapter.EditTagsViewHolder> {
-    private List<EditTag> listTag = new ArrayList<>();
+    private ArrayList<EditTag> listTag = new ArrayList<>();
     private final Activity activity;
     private blockItemClickListener listener;
 
@@ -39,7 +39,7 @@ public class EditTagsAdapter extends RecyclerView.Adapter<EditTagsAdapter.EditTa
 
     }
 
-    public void setListTags(List<EditTag> listCard) {
+    public void setListTags(ArrayList<EditTag> listCard) {
         final EdittTagsCallback diffCallback = new EdittTagsCallback(this.listTag, listCard);
         final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
         this.listTag.clear();
@@ -62,6 +62,7 @@ public class EditTagsAdapter extends RecyclerView.Adapter<EditTagsAdapter.EditTa
             if (listener != null){
                 listener.itemClick(listTag,position);
             }
+
         });
 
 
@@ -87,7 +88,7 @@ public class EditTagsAdapter extends RecyclerView.Adapter<EditTagsAdapter.EditTa
     }
 
     public interface blockItemClickListener {
-        void itemClick(List<EditTag> listTag, int position);
+        void itemClick(ArrayList<EditTag> listTag, int position);
     }
 
 }
