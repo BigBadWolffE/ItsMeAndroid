@@ -45,6 +45,7 @@ import com.indocyber.itsmeandroid.model.EditTag;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.core.Animations;
 import com.indocyber.itsmeandroid.view.blockcc.adapter.BlockCCCallback;
+import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.editcardsecuritycode.EditCardSecurityCodeActivity;
 
 import com.squareup.picasso.Picasso;
@@ -140,6 +141,10 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         });
         holder.btnShare.setOnClickListener(v -> {
             setRequestPermission(model);
+        });
+        holder.btnChat.setOnClickListener(v ->{
+            Intent i = new Intent(activity, ChatActivity.class);
+            activity.startActivity(i);
         });
 
         //logic block card

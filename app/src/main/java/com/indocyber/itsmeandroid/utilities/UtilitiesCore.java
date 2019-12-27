@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfRenderer;
@@ -25,6 +26,7 @@ import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.indocyber.itsmeandroid.R;
 
 import java.io.File;
@@ -226,5 +228,22 @@ public final class UtilitiesCore {
     public static String getFormattedTimeEvent(Long time) {
         SimpleDateFormat newFormat = new SimpleDateFormat("h:mm a");
         return newFormat.format(new Date(time));
+    }
+
+    public static void snackBarIconError(Activity activity, String message) {
+        View parent_view = activity.findViewById(android.R.id.content);
+        final Snackbar snackbar = Snackbar.make(parent_view, "", Snackbar.LENGTH_SHORT);
+        //inflate view
+        View custom_view = activity.getLayoutInflater().inflate(R.layout.snackbar_icon_text, null);
+
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackBarView = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackBarView.setPadding(0, 0, 0, 0);
+
+        ((TextView) custom_view.findViewById(R.id.message)).setText(message);
+        ((ImageView) custom_view.findViewById(R.id.icon)).setImageResource(R.drawable.ic_close);
+        (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(activity.getResources().getColor(R.color.red_600));
+        snackBarView.addView(custom_view, 0);
+        snackbar.show();
     }
 }

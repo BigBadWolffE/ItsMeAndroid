@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.login.LoginWithEmailActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -22,50 +23,52 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="-15dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="-15dp"
         app:cardCornerRadius="20dp">
 
         <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
             android:orientation="vertical">
 
             <TextView
                 style="@style/primaryFontLight"
-                android:textColor="#5D5D5D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/username" />
+                android:text="@string/username"
+                android:textColor="#5D5D5D" />
 
             <EditText
-                style="@style/primaryFontBold"
                 android:id="@+id/edtxUsername"
-                android:inputType="text"
+                style="@style/primaryFontBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/username" />
+                android:hint="@string/username"
+                android:inputType="text"
+                android:textColor="@color/black" />
 
             <!--editext username-->
 
             <TextView
                 style="@style/primaryFontLight"
-                android:textColor="#5D5D5D"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/password" />
+                android:text="@string/password"
+                android:textColor="#5D5D5D" />
 
             <EditText
-                style="@style/primaryFontBold"
                 android:id="@+id/edtxPassword"
-                android:inputType="textPassword"
+                style="@style/primaryFontBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password" />
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:textColor="@color/black" />
 
             <!--editext password-->
 
@@ -82,14 +85,14 @@
 
             <TextView
                 style="@style/primaryFontBold"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"
                 android:text="@string/forgot_password"
-                android:textSize="20sp"/>
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
