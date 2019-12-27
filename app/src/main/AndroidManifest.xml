@@ -23,7 +23,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity android:name=".view.blockallconfirmation.BlockAllConfirmationActivity"></activity>
-        <activity android:name=".view.chat.ChatActivity"></activity>
+<!--        <activity android:name=".view.chat.ChatActivity"></activity>-->
         <activity android:name=".view.editcreditcard.EditCreditCardActivity" />
         <activity
             android:name=".view.addmembership.AddMembershipActivity"

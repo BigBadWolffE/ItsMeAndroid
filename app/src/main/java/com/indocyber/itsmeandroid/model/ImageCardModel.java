@@ -8,6 +8,9 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class ImageCardModel implements Parcelable {
 
@@ -29,6 +32,7 @@ public class ImageCardModel implements Parcelable {
     private String lastBill;
     private String minPayment;
     private String availableCredit;
+    private List<String> tagList;
 
     public ImageCardModel(int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {
         this.image = image;
@@ -39,6 +43,7 @@ public class ImageCardModel implements Parcelable {
         this.printDate = printDate;
         this.printDueDate = printDueDate;
         this.isBlockedCard = isBlockedCard;
+        this.tagList = new ArrayList<>();
     }
 
     @Ignore
@@ -229,5 +234,13 @@ public class ImageCardModel implements Parcelable {
 
     public void setAvailableCredit(String availableCredit) {
         this.availableCredit = availableCredit;
+    }
+
+    public List<String> getTagList() {
+        return tagList;
+    }
+
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
     }
 }
