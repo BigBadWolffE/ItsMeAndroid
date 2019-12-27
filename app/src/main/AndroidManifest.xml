@@ -83,6 +83,10 @@
        <!-- <activity android:name=".view.login.LoginOptionActivity" />-->
         <activity android:name=".view.login.LoginWithEmailActivity" />
         <activity android:name=".view.MainActivity" />
+
+        <activity android:name=".view.chat.ChatActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity android:name=".view.login.LoginOptionActivity"
         android:theme="@style/AppTheme.NoActionBar"/>
 
