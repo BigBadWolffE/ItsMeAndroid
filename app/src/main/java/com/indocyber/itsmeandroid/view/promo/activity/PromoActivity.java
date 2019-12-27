@@ -107,16 +107,16 @@ public class PromoActivity extends AppCompatActivity implements PromoMenuAdapter
     public void onClick(int position) {
         if (position == 0) {
             loadFragment(new AllPromoFragment());
-            mPromoMenuRecycler.swapAdapter(mPromoMenuAdapter, true);
+            mPromoMenuRecycler.swapAdapter(mPromoMenuAdapter, false);
         } else if (position == 1) {
             loadFragment(new NearbyPromoFragment());
-            mPromoMenuRecycler.swapAdapter(mNearbyMenuAdapter, true);
+            mPromoMenuRecycler.swapAdapter(mNearbyMenuAdapter, false);
         } else if (position == 2) {
             loadFragment(new DiningPromoFragment());
-            mPromoMenuRecycler.swapAdapter(mDinningMenuAdapter, true);
+            mPromoMenuRecycler.swapAdapter(mDinningMenuAdapter, false);
         } else if (position == 3) {
             loadFragment(new CollectionPromoFragment());
-            mPromoMenuRecycler.swapAdapter(mCollectionMenuAdapter, true);
+            mPromoMenuRecycler.swapAdapter(mCollectionMenuAdapter, false);
         }
     }
 

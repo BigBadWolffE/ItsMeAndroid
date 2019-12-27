@@ -2,13 +2,9 @@ package com.indocyber.itsmeandroid.view.promo.fragment;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.PromoCollectionModel;
-import com.indocyber.itsmeandroid.model.PromoCollectionModel;
-import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
-import com.indocyber.itsmeandroid.view.promo.adapter.PromoCollectionAdapter;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoCollectionAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import dmax.dialog.SpotsDialog;
 
@@ -45,6 +34,7 @@ public class CollectionPromoFragment extends Fragment {
     private PromoCollectionAdapter mPromoCollectionAdapter;
     private HomeViewModel viewModel;
     private AlertDialog loader;
+    private View mViewOnCreated;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -80,12 +70,11 @@ public class CollectionPromoFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewOnCreated = view;
 
         viewModel = ViewModelProviders.of((FragmentActivity) getActivity()).get(HomeViewModel.class);
-        viewModel.fetchCardList();
+        viewModel.fetchAllCardList();
         observeViewModel();
-
-        mPromoCollectionRecycler = view.findViewById(R.id.recyclerCollectionPromoList);
         
     }
 
@@ -106,6 +95,7 @@ public class CollectionPromoFragment extends Fragment {
         });
 
         viewModel.getCardList().observe((LifecycleOwner) getActivity(), list -> {
+            mPromoCollectionRecycler = mViewOnCreated.findViewById(R.id.recyclerCollectionPromoList);
             mPromoCollectionAdapter = new PromoCollectionAdapter(list, getActivity());
             LinearLayoutManager horizontalLayoutManager =
                     new LinearLayoutManager(getActivity());
