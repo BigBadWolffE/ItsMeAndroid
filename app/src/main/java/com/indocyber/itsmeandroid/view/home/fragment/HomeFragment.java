@@ -28,6 +28,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
+//import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
@@ -170,7 +171,8 @@ public class HomeFragment extends Fragment {
             });
 
             btnChat.setOnClickListener(v -> {
-
+//                Intent i = new Intent(getActivity(), ChatActivity.class);
+//                startActivity(i);
             });
         }
     }

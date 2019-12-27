@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -221,5 +223,8 @@ public final class UtilitiesCore {
             }
         }
     }
-
+    public static String getFormattedTimeEvent(Long time) {
+        SimpleDateFormat newFormat = new SimpleDateFormat("h:mm a");
+        return newFormat.format(new Date(time));
+    }
 }
