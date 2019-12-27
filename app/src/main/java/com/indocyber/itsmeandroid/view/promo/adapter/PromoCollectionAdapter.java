@@ -120,6 +120,17 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
             }
         });
 
+        if (mPromoColl.get(position).isBlockedCard()) {
+            holder.blockedLayout.setVisibility(View.VISIBLE);
+            holder.blockedLayout.bringToFront();
+            holder.btnShare.setEnabled(false);
+            holder.btnEdit.setEnabled(false);
+            holder.btnPromo.setEnabled(false);
+            holder.btnChat.setEnabled(false);
+            holder.btnCall.setEnabled(false);
+            holder.btnTag.setEnabled(false);
+        }
+
         //recycleEditTags
         lisTag.clear();
         lisTag.add(new EditTag(1, "Family"));
@@ -255,7 +266,7 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
         private ImageView btnTag, btnEdit, btnPromo, btnShare, btnCall, btnChat;
         private LinearLayout layoutExpandTags;
         private RecyclerView recycle_EditTags;
-        private RelativeLayout cardLayout;
+        private RelativeLayout cardLayout, blockedLayout;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -274,6 +285,7 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
             layoutExpandTags = itemView.findViewById(R.id.layoutExpandTagsPromoCollection);
             recycle_EditTags = itemView.findViewById(R.id.recycle_EditTags);
             cardLayout = itemView.findViewById(R.id.layoutPromoCollectionCardType);
+            blockedLayout = itemView.findViewById(R.id.layoutPromoCollectionCardBlocked);
         }
     }
 }

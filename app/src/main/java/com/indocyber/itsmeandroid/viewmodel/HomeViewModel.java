@@ -49,6 +49,33 @@ public class HomeViewModel extends AndroidViewModel {
         return error;
     }
 
+    public void fetchAllCardList() {
+        isLoading.setValue(true);
+        disposable.add(
+                dao.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<List<ImageCardModel>>() {
+                    @Override
+                    public void onNext(List<ImageCardModel> imageCardModels) {
+                        isLoading.setValue(false);
+                        if(imageCardModels != null) cardList.setValue(imageCardModels);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        isLoading.setValue(false);
+                        error.setValue(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                                isLoading.setValue(false);
+                            }
+                })
+        );
+    }
+
     public void fetchCardList() {
         isLoading.setValue(true);
         disposable.add(

@@ -15,6 +15,82 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:layout_width="360dp"
+            android:layout_height="220dp"
+            android:background="@drawable/bg_gradient_dark"
+            android:id="@+id/layoutPromoCollectionCardBlocked"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:id="@+id/imgCollectionBlockedImage"
+                android:src="@drawable/imgtitleblocked" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblYourCreditCardisBlocked"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_centerHorizontal="true"
+                android:text="Your Credit Card is Blocked"
+                android:layout_below="@+id/imgCollectionBlockedImage"
+                style="@style/textReg14BoldWhite"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/layoutBlockedTime"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/lblYourCreditCardisBlocked"
+                android:layout_marginTop="@dimen/spacing_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="From"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    style="@style/textReg14BoldWhite"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblBlockedTime"
+                    android:text="10/10/2019 14:15 Pm"
+                    style="@style/textReg14BoldWhite"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/layoutBlockedBy"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/layoutBlockedTime"
+                android:layout_marginTop="@dimen/spacing_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    style="@style/textReg14BoldWhite"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblBlockedBy"
+                    android:text="Jordan Setiawan"
+                    style="@style/textReg14BoldWhite"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/layoutPromoCollectionCardType">
@@ -33,9 +109,10 @@
                 android:text="XXXX   XXXX   XXXX   XXXX"
                 android:layout_marginTop="120dp"
                 android:layout_marginLeft="30dp"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textAlignment="center"
-                android:textColor="@color/colorwhite" />
+                android:textColor="@color/colorwhite"
+                android:fontFamily="monospace"/>
 
             <TextView
                 android:id="@+id/lblPromoCollectionCardHolderLabel"
