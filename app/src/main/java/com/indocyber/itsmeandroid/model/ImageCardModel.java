@@ -43,7 +43,6 @@ public class ImageCardModel implements Parcelable {
         this.printDate = printDate;
         this.printDueDate = printDueDate;
         this.isBlockedCard = isBlockedCard;
-        this.tagList = new ArrayList<>();
     }
 
     @Ignore

@@ -122,12 +122,12 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
 
         //recycleEditTags
         lisTag.clear();
-        lisTag.add(new EditTag(1, "Family"));
-        lisTag.add(new EditTag(2, "Business"));
-        adapterTags = new EditTagsAdapter(mContext);
-        LinearLayoutManager lm = new LinearLayoutManager(mContext,  LinearLayoutManager.HORIZONTAL, false);
-        adapterTags.setListTags(lisTag);
-        holder.recycle_EditTags.setLayoutManager(lm);
+//        lisTag.add(new EditTag(1, "Family"));
+//        lisTag.add(new EditTag(2, "Business"));
+//        adapterTags = new EditTagsAdapter(mContext);
+//        LinearLayoutManager lm = new LinearLayoutManager(mContext,  LinearLayoutManager.HORIZONTAL, false);
+//        adapterTags.setListTags(lisTag);
+//        holder.recycle_EditTags.setLayoutManager(lm);
         holder.recycle_EditTags.setAdapter(adapterTags);
         holder.recycle_EditTags.setHasFixedSize(true);
 

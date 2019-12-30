@@ -4,15 +4,18 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.TypeConverters;
 import androidx.room.Update;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.repositories.database.typeconverter.ListStringTypeConverter;
 
 import java.util.List;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 
 /**
  *
@@ -27,7 +30,7 @@ public interface ImageCardDao {
     @Insert
     Completable insert(ImageCardModel card);
 
-    @Query("Select * from imageCardModel")
+    @Query("Select * from imageCardModel order by id")
     Flowable<List<ImageCardModel>> getAll();
 
     @Query("Select * from imageCardModel where id = :id")
@@ -47,4 +50,19 @@ public interface ImageCardDao {
 
     @Update()
     Completable update(ImageCardModel note);
+
+    @Query("Select tagList from ImageCardModel where id = :id")
+    Single<List<String>> getTaglistByCardId(int id);
+
+    @Query("Update ImageCardModel set tagList = :newTagList where id = :id")
+    Completable updateCardTagList(int id, String newTagList);
+
+    @Query("Select tagList from ImageCardModel")
+    Observable<List<String>> getAllTagList();
+
+    @Query("Select * from ImageCardModel where id = :id")
+    Observable<ImageCardModel> getSingleCardObservable(int id);
+
+    @Query("Select * from ImageCardModel A where tagList like :tag")
+    Observable<List<ImageCardModel>> getCardByTag(String tag);
 }
