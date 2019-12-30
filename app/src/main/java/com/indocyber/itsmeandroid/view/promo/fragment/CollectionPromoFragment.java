@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -20,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoCollectionAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.PromotionViewModel;
 
 import dmax.dialog.SpotsDialog;
 
@@ -32,9 +36,10 @@ public class CollectionPromoFragment extends Fragment {
 
     private RecyclerView mPromoCollectionRecycler;
     private PromoCollectionAdapter mPromoCollectionAdapter;
-    private HomeViewModel viewModel;
+    private PromotionViewModel viewModel;
     private AlertDialog loader;
     private View mViewOnCreated;
+    private Spinner mTagSpinner;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -71,9 +76,14 @@ public class CollectionPromoFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewOnCreated = view;
-
-        viewModel = ViewModelProviders.of((FragmentActivity) getActivity()).get(HomeViewModel.class);
+        mTagSpinner = view.findViewById(R.id.spinnerCollectionTagPromo);
+        String[] emptyArray = {""};
+        mTagSpinner.setAdapter(
+                new ArrayAdapter<>(view.getContext(), R.layout.spinner_item_text, emptyArray));
+        viewModel = ViewModelProviders.of((FragmentActivity) getActivity())
+                .get(PromotionViewModel.class);
         viewModel.fetchAllCardList();
+        viewModel.getAllTaglist();
         observeViewModel();
         
     }
@@ -101,6 +111,27 @@ public class CollectionPromoFragment extends Fragment {
                     new LinearLayoutManager(getActivity());
             mPromoCollectionRecycler.setLayoutManager(horizontalLayoutManager);
             mPromoCollectionRecycler.setAdapter(mPromoCollectionAdapter);
+        });
+
+        viewModel.getTagList().observe((LifecycleOwner) getActivity(), tags -> {
+            if (tags == null) {
+                return;
+            }
+            mTagSpinner.setAdapter(
+                    new ArrayAdapter<>(getActivity(), R.layout.spinner_item_text, tags));
+            mTagSpinner.setSelection(0, false);
+            mTagSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    String tag = (String)mTagSpinner.getSelectedItem();
+                    viewModel.getCardByTag(tag);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         });
     }
 
