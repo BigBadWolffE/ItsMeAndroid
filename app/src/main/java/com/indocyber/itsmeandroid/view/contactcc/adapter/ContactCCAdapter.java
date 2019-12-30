@@ -291,6 +291,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("image/*");
                 i.putExtra(Intent.EXTRA_STREAM, getLocalBitmapUri(bitmap, context));
+                //i.putExtra(Intent.EXTRA_TEXT, "Card Membership");
                 context.startActivity(Intent.createChooser(i, "Share Image"));
             }
 

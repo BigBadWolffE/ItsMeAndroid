@@ -48,12 +48,13 @@ public class RegistrationActivity extends AppCompatActivity {
     private String nameQuestion;
     private String nameAnswer;
     private Spinner mSpnrQuestion;
-    private Spinner mSpnrAnswer;
+    //private Spinner mSpnrAnswer;
     private Button buttonRegister;
 
     private EditText edtxFullname;
     private EditText edtxEmail;
     private EditText edtxPhonenumber;
+    private EditText edtxAnswer;
     private PinView pinView;
     private CheckBox checkboxRegister;
     private AlertDialog loader;
@@ -71,12 +72,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
         preference = new Preference(this);
         mSpnrQuestion = findViewById(R.id.spnrQuestion);
-        mSpnrAnswer = findViewById(R.id.spnrAnswer);
+
 
         edtxFullname = findViewById(R.id.edtxFullname);
         edtxEmail = findViewById(R.id.edtxEmail);
         edtxPhonenumber = findViewById(R.id.edtxPhonenumber);
         edtxPhonenumber = findViewById(R.id.edtxPhonenumber);
+        edtxAnswer = findViewById(R.id.edtxAnswer);
 
         checkboxRegister = findViewById(R.id.checkboxRegister);
 
@@ -89,7 +91,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 .setContext(RegistrationActivity.this)
                 .build();
 
-        setSpinnerAnswer();
+
         setSpinnerQuestion();
         setPinView();
         checkRegister();
@@ -100,16 +102,19 @@ public class RegistrationActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(v -> {
 
 
-            if (edtxFullname.getText().length() == 0) {
+            if (edtxFullname.getText().toString().isEmpty()) {
                 edtxFullname.setError("field empty");
                 edtxFullname.requestFocus();
-            } else if (edtxEmail.getText().length() == 0) {
+            } else if (edtxEmail.getText().toString().isEmpty()) {
                 edtxEmail.setError("field empty");
                 edtxEmail.requestFocus();
-            } else if (edtxPhonenumber.getText().length() == 0) {
+            } else if (edtxPhonenumber.getText().toString().isEmpty()) {
                 edtxPhonenumber.setError("field empty");
                 edtxPhonenumber.requestFocus();
-            } else if (pinView.getText().length() == 0) {
+            } else if (edtxAnswer.getText().toString().isEmpty()){
+                edtxAnswer.setError("field empty");
+                edtxAnswer.requestFocus();
+            }else if (pinView.getText().toString().isEmpty()) {
                 snackBarIconError(RegistrationActivity.this, "Pin empty");
             } else if (!checkboxRegister.isChecked()) {
 
@@ -199,46 +204,7 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    private void setSpinnerAnswer() {
-        try {
-            List<HashMap<String, String>> listSpinner = new ArrayList<HashMap<String, String>>();
 
-            /*String[] idSpinner = {"1", "2", "3"};
-            String[] nameSpinner = {"Donasi Kemanusiaan", "Donasi Pendidikan", "Donasi Kesehatan"};*/
-
-            HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("id", "1");
-            hm.put("level_name", "Playing futsal");
-            listSpinner.add(hm);
-            /*for (int i = 0; i < 3; i++) {
-                HashMap<String, String> hm = new HashMap<String, String>();
-                hm.put("id", idSpinner[i]);
-                hm.put("level_name", nameSpinner[i]);
-                listSpinner.add(hm);
-            }*/
-            String[] from = {"id", "level_name"};
-            int[] to = {R.id.id_spinner, R.id.nama_spinner};
-            SimpleAdapter adapter = new SimpleAdapter(this, listSpinner, R.layout.layout_spinner, from, to);
-            mSpnrAnswer.setAdapter(adapter);
-            mSpnrAnswer.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long idLong) {
-                    HashMap<String, String> hm = (HashMap<String, String>) parent.getAdapter().getItem(position);
-                    String id = hm.get("id");
-                    String level_name = hm.get("level_name");
-                   /* typeId = id;
-                    typeName = level_name;*/
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void showCustomDialog() {
         final Dialog dialog = new Dialog(RegistrationActivity.this);

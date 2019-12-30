@@ -145,6 +145,8 @@
                     android:text="@string/secret_question"
                     android:textColor="#5D5D5D" />
 
+
+
                 <Spinner
                     android:id="@+id/spnrQuestion"
                     android:layout_width="match_parent"
@@ -152,12 +154,17 @@
                     android:layout_marginTop="5dp"
                     android:spinnerMode="dropdown" />
 
-                <Spinner
-                    android:id="@+id/spnrAnswer"
+                <EditText
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:id="@+id/edtxAnswer"
+                    style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:spinnerMode="dropdown" />
+                    android:hint="Secret Question"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="@dimen/spacing_large"/>
 
                 <!-- spinner secret question-->
 

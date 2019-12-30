@@ -93,13 +93,13 @@
 
                             <androidx.cardview.widget.CardView
 
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="?attr/selectableItemBackground"
                                 app:cardCornerRadius="@dimen/spacing_small">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="45dp"
                                     android:scaleType="fitXY"
                                     android:src="@drawable/btncontact" />
@@ -118,14 +118,14 @@
 
                             <androidx.cardview.widget.CardView
 
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
 
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 app:cardCornerRadius="@dimen/spacing_small">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="45dp"
                                     android:scaleType="fitXY"
                                     android:src="@drawable/btnchat" />
@@ -149,12 +149,12 @@
                             android:layout_weight="1">
 
                             <androidx.cardview.widget.CardView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 app:cardCornerRadius="@dimen/spacing_small">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="45dp"
                                     android:scaleType="fitXY"
                                     android:src="@drawable/btnblock" />
@@ -172,12 +172,12 @@
                             android:layout_weight="1">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:cardCornerRadius="@dimen/spacing_small">
 
                             <ImageView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:scaleType="fitXY"
                                 android:src="@drawable/btncall" />

@@ -170,7 +170,7 @@
 
                 android:cursorVisible="false"
                 android:layout_centerHorizontal="true"
-                android:inputType="number"
+                android:inputType="numberPassword"
 
                 android:textSize="18sp"
                 android:textStyle="bold"
