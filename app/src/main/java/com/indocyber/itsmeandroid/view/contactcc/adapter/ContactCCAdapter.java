@@ -43,9 +43,9 @@ import com.indocyber.itsmeandroid.BuildConfig;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.EditTag;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.core.Animations;
 import com.indocyber.itsmeandroid.view.blockcc.adapter.BlockCCCallback;
-import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.editcardsecuritycode.EditCardSecurityCodeActivity;
 
 import com.squareup.picasso.Picasso;
@@ -63,35 +63,30 @@ import java.util.List;
 import java.util.Random;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.TAG_ADD;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.TAG_REMOVE;
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.hideKeyboard;
 import static com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity.MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE;
 
 
 public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.ContactViewHolder> {
-    private final List<ImageCardModel> listCard = new ArrayList<>();
+    private List<ImageCardModel> listCard = new ArrayList<>();
     private final Activity activity;
-    private EditTagsAdapter adapterTags;
-    private ArrayList<EditTag> lisTag = new ArrayList<>();
-    private sendItemClickListener listener;
+//    private List<String> lisTag = new ArrayList<>();
+    private SaveTagClickListener listener;
 
-    public ContactCCAdapter(Activity activity) {
+    public ContactCCAdapter(Activity activity, SaveTagClickListener listener, List<ImageCardModel> cardList) {
         this.activity = activity;
-    }
-
-    public void setListNotes(List<ImageCardModel> listCard, ArrayList<EditTag> lisTag) {
-        final BlockCCCallback diffCallback = new BlockCCCallback(this.listCard, listCard);
-        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
-        this.lisTag.clear();
-        this.lisTag.addAll(lisTag);
-        this.listCard.clear();
-        this.listCard.addAll(listCard);
-        diffResult.dispatchUpdatesTo(this);
-    }
-
-    public void setSendItem(sendItemClickListener listener){
         this.listener = listener;
-
+        this.listCard = cardList;
     }
+
+    public void refreshCardList(List<ImageCardModel> newCardList) {
+        listCard.clear();
+        listCard.addAll(newCardList);
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public ContactViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -101,116 +96,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
 
     @Override
     public void onBindViewHolder(@NonNull ContactViewHolder holder, int position) {
-        ImageCardModel model = listCard.get(position);
-
-        //setText
-        holder.txtNameCard.setText(model.getNameCard());
-        holder.txtNumberCard.setText(model.getNumberCard());
-        holder.txtExpireCard.setText(model.getExpireCard());
-
-
-        holder.linear_expands_tags.setVisibility(View.GONE);
-        holder.rltvBlocked.bringToFront();
-
-        RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.bg_gradient_soft)
-                .error(R.drawable.bg_gradient_soft)
-                .priority(Priority.HIGH);
-
-        Glide.with(activity)
-                .load(model.getImage())
-                .apply(options)
-                .into(holder.imageBlock);
-
-
-        //onClick
-        holder.btnTag.setOnClickListener(v -> {
-            showAndHideTag(holder.linear_expands_tags);
-        });
-        holder.btnSave.setOnClickListener(v -> {
-            showAndHideTag(holder.linear_expands_tags);
-        });
-        holder.btnEdit.setOnClickListener(v -> {
-
-            Intent intent = new Intent(activity, EditCardSecurityCodeActivity.class);
-            intent.putExtra(INTENT_ID,model.getId());
-            activity.startActivity(intent);
-        });
-        holder.btnCall.setOnClickListener(v -> {
-            dialPhoneNumber("021595929");
-        });
-        holder.btnShare.setOnClickListener(v -> {
-            setRequestPermission(model);
-        });
-        holder.btnChat.setOnClickListener(v ->{
-            Intent i = new Intent(activity, ChatActivity.class);
-            activity.startActivity(i);
-        });
-
-        //logic block card
-        if (!model.isBlockedCard()) {
-            holder.rltvBlocked.setVisibility(View.GONE);
-            holder.btnTag.setEnabled(true);
-            holder.btnEdit.setEnabled(true);
-            holder.btnPromo.setEnabled(true);
-            holder.btnShare.setEnabled(true);
-            holder.btnCall.setEnabled(true);
-            holder.btnChat.setEnabled(true);
-        } else {
-            holder.rltvBlocked.setVisibility(View.VISIBLE);
-            holder.btnTag.setEnabled(false);
-            holder.btnEdit.setEnabled(false);
-            holder.btnPromo.setEnabled(false);
-            holder.btnShare.setEnabled(false);
-            holder.btnCall.setEnabled(false);
-            holder.btnChat.setEnabled(false);
-        }
-
-        //recycleEditTags
-        //lisTag.clear();
-        //lisTag.add(new EditTag("1", "Family"));
-        /*lisTag.add(new EditTag(2, "Business"));
-        lisTag.add(new EditTag(3, "Family"));
-        lisTag.add(new EditTag(4, "Business"));
-        lisTag.add(new EditTag(5, "Family"));
-        lisTag.add(new EditTag(6, "Business"));*/
-        adapterTags = new EditTagsAdapter(activity);
-        LinearLayoutManager lm = new LinearLayoutManager(activity,  LinearLayoutManager.HORIZONTAL, false);
-        adapterTags.setListTags(lisTag);
-        holder.recycle_EditTags.setLayoutManager(lm);
-        holder.recycle_EditTags.setAdapter(adapterTags);
-        holder.recycle_EditTags.setHasFixedSize(true);
-
-        adapterTags.setOnBlockListener(new EditTagsAdapter.blockItemClickListener() {
-            @Override
-            public void itemClick(ArrayList<EditTag> list, int position) {
-                list.remove(position);
-                adapterTags.notifyDataSetChanged();
-                if (listener != null) {
-                    listener.itemClick(list);
-                }
-            }
-        });
-
-        holder.imgSend.setOnClickListener(v ->{
-            if (holder.edtxAddTag.length() > 0){
-                lisTag.add(new EditTag(getAlphaNumericString(10),holder.edtxAddTag.getText().toString()));
-
-                adapterTags.setListTags(reverseArrayList(lisTag));
-                //holder.recycle_EditTags.setAdapter(adapterTags);
-                adapterTags.notifyDataSetChanged();
-
-                Toast.makeText(activity, "successfully add tag", Toast.LENGTH_SHORT).show();
-                hideKeyboard(activity);
-                holder.edtxAddTag.setText("");
-                if (listener != null) {
-                    listener.itemClick(lisTag);
-                }
-            }else {
-                Toast.makeText(activity, "field empty", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        holder.bind(listCard.get(position));
     }
 
     @Override
@@ -236,7 +122,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         private RecyclerView recycle_EditTags;
         private EditText edtxAddTag;
         private ImageButton imgSend;
-
+        private EditTagsAdapter adapterTags;
 
         ContactViewHolder(View itemView) {
             super(itemView);
@@ -259,6 +145,91 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             imgSend = itemView.findViewById(R.id.imgSend);
 
         }
+
+        public void bind(ImageCardModel model) {
+            //setText
+            txtNameCard.setText(model.getNameCard());
+            txtNumberCard.setText(model.getNumberCard());
+            txtExpireCard.setText(model.getExpireCard());
+            linear_expands_tags.setVisibility(View.GONE);
+            rltvBlocked.bringToFront();
+
+            RequestOptions options = new RequestOptions()
+                    .placeholder(R.drawable.bg_gradient_soft)
+                    .error(R.drawable.bg_gradient_soft)
+                    .priority(Priority.HIGH);
+
+            Glide.with(activity)
+                    .load(model.getImage())
+                    .apply(options)
+                    .into(imageBlock);
+
+
+            //onClick
+            btnTag.setOnClickListener(v -> {
+                showAndHideTag(linear_expands_tags);
+            });
+            btnSave.setOnClickListener(v -> {
+                ImageCardModel newCard = model;
+                newCard.setTagList(adapterTags.getListTag());
+                listener.save(model);
+                showAndHideTag(linear_expands_tags);
+            });
+            btnEdit.setOnClickListener(v -> {
+                Intent intent = new Intent(activity, EditCardSecurityCodeActivity.class);
+                intent.putExtra(INTENT_ID,model.getId());
+                activity.startActivity(intent);
+            });
+            btnCall.setOnClickListener(v -> {
+                dialPhoneNumber("021595929");
+            });
+            btnShare.setOnClickListener(v -> {
+                setRequestPermission(model);
+            });
+
+            //logic block card
+            if (!model.isBlockedCard()) {
+                rltvBlocked.setVisibility(View.GONE);
+                btnTag.setEnabled(true);
+                btnEdit.setEnabled(true);
+                btnPromo.setEnabled(true);
+                btnShare.setEnabled(true);
+                btnCall.setEnabled(true);
+                btnChat.setEnabled(true);
+            } else {
+                rltvBlocked.setVisibility(View.VISIBLE);
+                btnTag.setEnabled(false);
+                btnEdit.setEnabled(false);
+                btnPromo.setEnabled(false);
+                btnShare.setEnabled(false);
+                btnCall.setEnabled(false);
+                btnChat.setEnabled(false);
+            }
+
+            adapterTags = new EditTagsAdapter(activity, model.getTagList());
+            LinearLayoutManager lm =
+                    new LinearLayoutManager(activity,  LinearLayoutManager.HORIZONTAL, false);
+            recycle_EditTags.setLayoutManager(lm);
+            recycle_EditTags.setAdapter(adapterTags);
+            recycle_EditTags.setHasFixedSize(true);
+
+            adapterTags.setOnBlockListener(new EditTagsAdapter.blockItemClickListener() {
+                @Override
+                public void itemClick(int tagPosition) {
+                    adapterTags.tagAction(edtxAddTag.getText().toString(), TAG_REMOVE);
+                }
+            });
+
+            //Add Tag Button
+            imgSend.setOnClickListener(v ->{
+                if (edtxAddTag.length() > 0){
+                    hideKeyboard(activity);
+                    adapterTags.tagAction(edtxAddTag.getText().toString(), TAG_ADD);
+                } else {
+                    Toast.makeText(activity, "field empty", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void dialPhoneNumber(String phoneNumber) {
@@ -269,7 +240,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         }
     }
 
-    private void showAndHideTag(LinearLayout view) {
+    public void showAndHideTag(LinearLayout view) {
 
         if (view.getVisibility() == View.GONE) {
             Animations.expand(view, new Animations.AnimListener() {
@@ -350,10 +321,10 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
     }
 
 
-    public ArrayList<EditTag> reverseArrayList(ArrayList<EditTag> alist)
+    public ArrayList<String> reverseArrayList(ArrayList<String> alist)
     {
         // Arraylist for storing reversed elements
-        ArrayList<EditTag> revArrayList = new ArrayList<EditTag>();
+        ArrayList<String> revArrayList = new ArrayList<>();
         for (int i = alist.size() - 1; i >= 0; i--) {
 
             // Append the elements in reverse order
@@ -363,8 +334,9 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         // Return the reversed arraylist
         return revArrayList;
     }
-    public interface sendItemClickListener {
-        void itemClick(List<EditTag> listTag);
+
+    public interface SaveTagClickListener {
+        void save(ImageCardModel model);
     }
 
     static String getAlphaNumericString(int n)

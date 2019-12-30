@@ -8,7 +8,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -22,28 +21,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
-
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
-
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
-
-import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageHomeDashboardAdapter;
 import com.indocyber.itsmeandroid.view.inbox.InboxActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
-
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
-
-import com.indocyber.itsmeandroid.view.message.MessageActivity;
-import com.indocyber.itsmeandroid.view.notification.activity.NotificationActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 
@@ -91,7 +81,6 @@ public class HomeFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,12 +92,10 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         btnMemberhip = view.findViewById(R.id.btnMemberhip);
         btnPersonal = view.findViewById(R.id.btnPersonal);
         btnCreditCard = view.findViewById(R.id.btnCreditCard);
         fab_add = view.findViewById(R.id.fab_add);
-
 
         mViewPager = view.findViewById(R.id.imagePage);
         mTabLayout = view.findViewById(R.id.tabDots);
@@ -118,8 +105,6 @@ public class HomeFragment extends Fragment {
         btnContact = view.findViewById(R.id.btnContact);
         btnCall = view.findViewById(R.id.btnCall);
         btnChat = view.findViewById(R.id.btnChat);
-
-
     }
 
     @Override
@@ -133,7 +118,6 @@ public class HomeFragment extends Fragment {
         ((HomeActivity) Objects.requireNonNull(getActivity())).setmToolbarHomeFragment();
         viewModel.fetchCardList();
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -149,8 +133,6 @@ public class HomeFragment extends Fragment {
                     Intent i = new Intent(getActivity(), MembershipSecurityCodeActivity.class);
                     startActivity(i);
             });*/
-
-
 
             btnMemberhip.setOnClickListener(v -> {
                 Intent i = new Intent(getActivity(), MembershipSecurityCodeActivity.class);
@@ -183,18 +165,16 @@ public class HomeFragment extends Fragment {
             });
 
             btnChat.setOnClickListener(v -> {
-                Intent i = new Intent(getActivity(), ChatActivity.class);
-                startActivity(i);
+//                Intent i = new Intent(getActivity(), ChatActivity.class);
+//                startActivity(i);
             });
 
             btnCall.setOnClickListener(v -> {
                 dialPhoneNumber("123456789");
             });
-
-
-
         }
     }
+
     private void fabAnimations() {
         initShowOut(btnMemberhip);
         initShowOut(btnPersonal);
@@ -213,6 +193,7 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -243,7 +224,6 @@ public class HomeFragment extends Fragment {
         });
 
     }
-
 
     public static LiveData<List<ImageCardModel>> dataImageCard() {
         MutableLiveData<List<ImageCardModel>> list = new MutableLiveData<>();
@@ -287,6 +267,7 @@ public class HomeFragment extends Fragment {
             mViewPagerCard.setOffscreenPageLimit(list.size());
         });
     }
+
     private void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
@@ -294,6 +275,5 @@ public class HomeFragment extends Fragment {
             startActivity(intent);
         }
     }
-
 }
 

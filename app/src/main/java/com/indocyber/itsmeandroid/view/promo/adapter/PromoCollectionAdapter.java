@@ -41,14 +41,17 @@ import java.util.UUID;
 public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollectionAdapter.ItemViewHolder> {
     private List<ImageCardModel> mPromoColl = new ArrayList<>();
     private Activity mContext;
-    private ItemViewHolder mViewHolder;
-    private EditTagsAdapter adapterTags;
-    private ArrayList<EditTag> lisTag = new ArrayList<>();
     public static int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE = 200;
 
     public PromoCollectionAdapter(List<ImageCardModel> mPromoColl, Activity mContext) {
         this.mPromoColl = mPromoColl;
         this.mContext = mContext;
+    }
+
+    public void refreshCardList(List<ImageCardModel> newCardList) {
+        mPromoColl.clear();
+        mPromoColl.addAll(newCardList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -62,7 +65,7 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
 
     @Override
     public void onBindViewHolder(@NonNull PromoCollectionAdapter.ItemViewHolder holder, int position) {
-        this.mViewHolder = holder;
+        ImageCardModel card = mPromoColl.get(position);
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.bg_gradient_soft)
                 .error(R.drawable.bg_gradient_soft)
@@ -120,7 +123,7 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
             }
         });
 
-        if (mPromoColl.get(position).isBlockedCard()) {
+        if (card.isBlockedCard()) {
             holder.blockedLayout.setVisibility(View.VISIBLE);
             holder.blockedLayout.bringToFront();
             holder.btnShare.setEnabled(false);
@@ -132,12 +135,8 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
         }
 
         //recycleEditTags
-        lisTag.clear();
-        lisTag.add(new EditTag("1", "Family"));
-        lisTag.add(new EditTag("2", "Business"));
-        adapterTags = new EditTagsAdapter(mContext);
+        EditTagsAdapter adapterTags = new EditTagsAdapter(mContext, card.getTagList());
         LinearLayoutManager lm = new LinearLayoutManager(mContext,  LinearLayoutManager.HORIZONTAL, false);
-        adapterTags.setListTags(lisTag);
         holder.recycle_EditTags.setLayoutManager(lm);
         holder.recycle_EditTags.setAdapter(adapterTags);
         holder.recycle_EditTags.setHasFixedSize(true);
