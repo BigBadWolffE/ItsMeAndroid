@@ -355,9 +355,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
                             this,
                             Html.fromHtml(styledText),
                             R.drawable.icocheckapproved,
-                            dialog -> returnToHome(),
-                            310,
-                            320
+                            dialog -> returnToHome()
                     );
                 }
             });

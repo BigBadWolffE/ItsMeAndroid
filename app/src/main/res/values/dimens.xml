@@ -32,6 +32,13 @@
     <!--object size-->
     <dimen name="alert_dialog_width">280dp</dimen>
     <dimen name="alert_dialog_height">280dp</dimen>
+    <dimen name="alert_text_size">16sp</dimen>
+    <dimen name="credit_card_number_text_size">16dp</dimen>
+    <dimen name="card_holder_label_text_size">9dp</dimen>
+    <dimen name="expiry_label_text_size">9dp</dimen>
+    <dimen name="card_holder_text_size">14dp</dimen>
+    <dimen name="expiry_text_size">14dp</dimen>
+    <dimen name="alert_line_spacing_extra">4dp</dimen>
 
 
 </resources>
