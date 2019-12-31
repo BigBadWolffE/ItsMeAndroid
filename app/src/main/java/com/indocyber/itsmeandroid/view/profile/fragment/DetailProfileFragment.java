@@ -14,6 +14,7 @@ import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -91,25 +92,42 @@ public class DetailProfileFragment extends Fragment {
             setNotNull();
         }
 
+        View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean focus) {
+                if (focus) {
+                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                } else {
+                    view.setBackgroundColor(getResources().getColor(R.color.colorwhite));
+                    view.setEnabled(false);
+                }
+            }
+        };
+
         mNamaLengkap.setEnabled(false);
         mNamaLengkap.setTextColor(Color.BLACK);
         mAlamat.setEnabled(false);
         mAlamat.setTextColor(Color.BLACK);
         mAlamat.setHorizontalScrollBarEnabled(false);
         mAlamat.setSingleLine(false);
+        mAlamat.setOnFocusChangeListener(focusListener);
         mEmailAddress.setEnabled(false);
         mEmailAddress.setTextColor(Color.BLACK);
         mEmailAddress.setHorizontalScrollBarEnabled(false);
         mEmailAddress.setSingleLine(false);
+        mEmailAddress.setOnFocusChangeListener(focusListener);
         mNoTelp.setEnabled(false);
         mNoTelp.setTextColor(Color.BLACK);
+        mNoTelp.setOnFocusChangeListener(focusListener);
         mPass.setEnabled(false);
+        mPass.setOnFocusChangeListener(focusListener);
 //        mPass.setTextColor(Color.BLACK);
         mPin.setEnabled(false);
+        mPin.setOnFocusChangeListener(focusListener);
 //        mPin.setTextColor(Color.BLACK);
         mSecretQuestion.setEnabled(false);
         mSecretQuestion.setTextColor(Color.BLACK);
-
+        mSecretQuestion.setOnFocusChangeListener(focusListener);
         mEditAlamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,6 +135,8 @@ public class DetailProfileFragment extends Fragment {
                 mAlamat.setSingleLine(false);
                 mAlamat.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
                 mAlamat.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                mAlamat.requestFocus();
+                mAlamat.setSelection(mAlamat.getText().length());
             }
         });
 
@@ -127,6 +147,8 @@ public class DetailProfileFragment extends Fragment {
                 mEmailAddress.setSingleLine(false);
                 mEmailAddress.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
                 mEmailAddress.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                mEmailAddress.requestFocus();
+                mEmailAddress.setSelection(mEmailAddress.getText().length());
             }
         });
 
@@ -135,6 +157,30 @@ public class DetailProfileFragment extends Fragment {
             public void onClick(View view) {
                 mNoTelp.setEnabled(true);
                 mNoTelp.setInputType(InputType.TYPE_CLASS_PHONE);
+                mNoTelp.requestFocus();
+                mNoTelp.setSelection(mNoTelp.getText().length());
+            }
+        });
+
+        mEditPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPass.setEnabled(true);
+                mPass.requestFocus();
+                mPass.setInputType(InputType.TYPE_CLASS_TEXT
+                        | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mPass.setSelection(mPass.getText().length());
+            }
+        });
+
+        mEditPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mPin.setEnabled(true);
+                mPin.requestFocus();
+                mPin.setInputType(InputType.TYPE_CLASS_NUMBER
+                        | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                mPin.setSelection(mPin.getText().length());
             }
         });
     }
