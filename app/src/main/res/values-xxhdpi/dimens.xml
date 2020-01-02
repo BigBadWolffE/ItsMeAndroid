@@ -10,4 +10,6 @@
     <dimen name="card_holder_text_size">18dp</dimen>
     <dimen name="expiry_text_size">18dp</dimen>
     <dimen name="alert_line_spacing_extra">6dp</dimen>
+    <dimen name="home_button_layout_height">45dp</dimen>
+    <dimen name="spacing_xxxlarge">40dp</dimen>
 </resources>

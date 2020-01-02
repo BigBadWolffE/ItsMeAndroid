@@ -32,6 +32,8 @@ public class LoginOptionActivity extends AppCompatActivity {
         mbtnLogin = findViewById(R.id.btnLogin);
         mlinearRegister = findViewById(R.id.linearRegister);
         edtxUsername = findViewById(R.id.edtxUsername);
+        edtxUsername.setMaxLines(1);
+        edtxUsername.setSingleLine();
 
         mbtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

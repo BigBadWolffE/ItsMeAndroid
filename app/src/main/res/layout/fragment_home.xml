@@ -78,7 +78,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/home_button_layout_height"
                         android:layout_marginTop="@dimen/spacing_large"
                         android:orientation="horizontal">
 
@@ -87,21 +87,21 @@
                             android:id="@+id/btnContact"
                             style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/spacing_xxxlarge"
                             android:layout_weight="1">
 
                             <androidx.cardview.widget.CardView
 
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:background="?attr/selectableItemBackground"
                                 app:cardCornerRadius="@dimen/spacing_small">
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
-                                    android:scaleType="fitXY"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitCenter"
                                     android:src="@drawable/btncontact" />
 
                             </androidx.cardview.widget.CardView>
@@ -111,7 +111,7 @@
                             android:id="@+id/btnChat"
                             style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/spacing_medium"
                             android:layout_marginEnd="@dimen/spacing_xxxlarge"
                             android:layout_weight="1">
@@ -119,15 +119,15 @@
                             <androidx.cardview.widget.CardView
 
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
 
                                 android:background="?attr/selectableItemBackgroundBorderless"
                                 app:cardCornerRadius="@dimen/spacing_small">
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
-                                    android:scaleType="fitXY"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitCenter"
                                     android:src="@drawable/btnchat" />
 
                             </androidx.cardview.widget.CardView>
@@ -136,27 +136,27 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
+                        android:layout_height="@dimen/home_button_layout_height"
+                        android:layout_marginTop="@dimen/spacing_small"
                         android:orientation="horizontal">
 
                         <com.balysv.materialripple.MaterialRippleLayout
                             android:id="@+id/btnBlock"
                             style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/spacing_xxxlarge"
                             android:layout_weight="1">
 
                             <androidx.cardview.widget.CardView
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 app:cardCornerRadius="@dimen/spacing_small">
 
                                 <ImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="45dp"
-                                    android:scaleType="fitXY"
+                                    android:layout_height="match_parent"
+                                    android:scaleType="fitCenter"
                                     android:src="@drawable/btnblock" />
 
                             </androidx.cardview.widget.CardView>
@@ -166,20 +166,20 @@
                             android:id="@+id/btnCall"
                             style="@style/RippleStyleWhite"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/spacing_medium"
                             android:layout_marginEnd="@dimen/spacing_xxxlarge"
                             android:layout_weight="1">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             app:cardCornerRadius="@dimen/spacing_small">
 
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:layout_height="45dp"
-                                android:scaleType="fitXY"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitCenter"
                                 android:src="@drawable/btncall" />
 
                         </androidx.cardview.widget.CardView>
