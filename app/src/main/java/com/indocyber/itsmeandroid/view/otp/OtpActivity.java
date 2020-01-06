@@ -75,9 +75,10 @@ public class OtpActivity extends AppCompatActivity {
         String country = extras.getString("country");
         String city = extras.getString("city");
         String postalCode = extras.getString("postalCode");
+        int cardImageResource = extras.getInt("cardImageResource");
 
         cardData = new ImageCardModel(
-                randomizeCardImage(),
+                cardImageResource,
                 mCardNumber.replace("   ", " "),
                 cardHolder,
                 expiryDate,
@@ -95,17 +96,17 @@ public class OtpActivity extends AppCompatActivity {
         cardData.setAvailableCredit("Rp 5.000.000");
     }
 
-    // TODO: 23/12/2019 Delete after demo
-    private int randomizeCardImage() {
-        int[] images = {
-                R.drawable.img_blank_cc_anz,
-                R.drawable.img_blank_cc_bca,
-                R.drawable.img_blank_cc_mandiri
-        };
-        int randomValue = (int)(Math.random() * images.length);
-        if(randomValue == images.length) randomValue = images.length - 1;
-        return images[randomValue];
-    }
+//    // TODO: 23/12/2019 Delete after demo
+//    private int randomizeCardImage() {
+//        int[] images = {
+//                R.drawable.img_blank_cc_anz,
+//                R.drawable.img_blank_cc_bca,
+//                R.drawable.img_blank_cc_mandiri
+//        };
+//        int randomValue = (int)(Math.random() * images.length);
+//        if(randomValue == images.length) randomValue = images.length - 1;
+//        return images[randomValue];
+//    }
 
     private void initializeOtpInput(){
         mOtp1 = findViewById(R.id.txtOtp1);

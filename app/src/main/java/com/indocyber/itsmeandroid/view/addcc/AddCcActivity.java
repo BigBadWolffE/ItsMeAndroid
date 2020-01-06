@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.view.addcc;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -51,6 +52,8 @@ public final class AddCcActivity extends AppCompatActivity {
     private EditText mPostalCodeInput;
     private Button mIncreaseCreditLimitButton;
     private Button mAddCreditCardButton;
+    private ImageView mCardImage;
+    private int mCardImageResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,7 @@ public final class AddCcActivity extends AppCompatActivity {
     }
 
     private void initializeCardInput() {
+        mCardImage = findViewById(R.id.imgCreditCard);
         mCardNumberInput = findViewById(R.id.txtCardNumber);
         mCardNumberInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         mCardNumberInput.addTextChangedListener(new TextWatcher() {
@@ -101,6 +105,23 @@ public final class AddCcActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 mCardNumber.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
+            if (!onFocus && mCardNumberInput.getText().length() == 16) {
+                if (!mCardNumberInput.getText().toString().substring(0, 1).equals("5")
+                 && !mCardNumberInput.getText().toString().substring(0, 1).equals("4")) {
+                    UtilitiesCore.buildAlertDialog(
+                            this,
+                            "Kartu tidak dikenal!",
+                            R.drawable.ic_invalid,
+                            null
+                    );
+                    return;
+                }
+                mCardImageResource = randomizeCardImage();
+                mCardImage.setImageResource(mCardImageResource);
             }
         });
 
@@ -223,6 +244,7 @@ public final class AddCcActivity extends AppCompatActivity {
         intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
         intent.putExtra("holderName", mCardHolderInput.getText().toString());
         intent.putExtra("expiryDate", mCardExpiryInput.getText().toString());
+        intent.putExtra("cardImageResource", mCardImageResource);
         startActivity(intent);
     }
 
@@ -256,6 +278,7 @@ public final class AddCcActivity extends AppCompatActivity {
         intent.putExtra("country", mCountryInput.getSelectedItemPosition());
         intent.putExtra("city", mCityInput.getSelectedItemPosition());
         intent.putExtra("postalCode", mPostalCodeInput.getText().toString());
+        intent.putExtra("cardImageResource", mCardImageResource);
         startActivity(intent);
     }
 
@@ -307,5 +330,15 @@ public final class AddCcActivity extends AppCompatActivity {
         mCardNumber.setText(updatedText);
     }
 
+    private int randomizeCardImage() {
+        int[] images = {
+                R.drawable.img_blank_cc_anz,
+                R.drawable.img_blank_cc_bca,
+                R.drawable.img_blank_cc_mandiri
+        };
+        int randomValue = (int)(Math.random() * images.length);
+        if(randomValue == images.length) randomValue = images.length - 1;
+        return images[randomValue];
+    }
 }
 
