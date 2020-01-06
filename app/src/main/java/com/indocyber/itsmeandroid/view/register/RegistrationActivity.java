@@ -208,7 +208,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private void showCustomDialog() {
         final Dialog dialog = new Dialog(RegistrationActivity.this);
-        dialog.setContentView(R.layout.dialog_succes_block_card);
+        dialog.setContentView(R.layout.dialog_succes_registration);
         dialog.setCancelable(false);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
