@@ -128,15 +128,17 @@ public class EditCreditCardActivity extends AppCompatActivity {
         viewModel.getData().observe(this, data -> {
 
             if (data != null) {
-                edtxValidCard.setText(data.getNumberCard());
+
+                edtxValidCard.setText((data.getNumberCard()));
                 edtxDate.setText(data.getPrintDate());
                 edtxCardName.setText(data.getNameCard());
                 edtxBillingAddress.setText(data.getBillingAddress());
                 edtxDate.setText(data.getExpireCard());
                 edtxPostalCode.setText(data.getPostalCode());
 
-
-                txtNumberCard.setText(data.getNumberCard());
+                String number = data.getNumberCard().replace(" ","");
+                //txtNumberCard.setText(data.getNumberCard());
+                onCardNumberChange(number);
                 txtNameCard.setText(data.getNameCard());
                 txtExpireCard.setText(data.getExpireCard());
 
@@ -355,9 +357,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
                             this,
                             Html.fromHtml(styledText),
                             R.drawable.icocheckapproved,
-                            dialog -> returnToHome(),
-                            310,
-                            320
+                            dialog -> returnToHome()
                     );
                 }
             });
@@ -409,4 +409,16 @@ public class EditCreditCardActivity extends AppCompatActivity {
 
         txtNumberCard.setText(updatedText);
     }
+
+    /*private void onCardNumberSetText(final CharSequence text) {
+        String paddedText = text + "";
+        for (int i = paddedText.length(); i < 20; i++) {
+            paddedText += "X";
+        }
+
+        String updatedText = paddedText.substring(0, 4) + "   " + paddedText.substring(4, 8) + "   "
+                + paddedText.substring(8, 12) + "   " + paddedText.substring(12, 16);
+
+        txtNumberCard.setText(updatedText);
+    }*/
 }

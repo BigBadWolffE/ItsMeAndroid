@@ -92,8 +92,46 @@ public final class UtilitiesCore {
      * @param dismissListener
      */
     public static void buildAlertDialog(
-            Context context,
+            Activity context,
             String message,
+            int alertImage,
+            DialogInterface.OnDismissListener dismissListener
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        ViewGroup rootView = (ViewGroup)context.findViewById(android.R.id.content).getRootView();
+        View view = LayoutInflater.from(context).inflate(R.layout.alert_dialog, rootView, false);
+        TextView messageText = view.findViewById(R.id.txtAlertMessage);
+        messageText.setText(message);
+        ImageView image = view.findViewById(R.id.imgAlertIcon);
+        image.setImageResource(alertImage);
+
+        builder.setOnDismissListener(dismissListener);
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        Button positiveButton = view.findViewById(R.id.btnAlertPositive);
+        positiveButton.setOnClickListener(view1 -> dialog.dismiss());
+        dialog.show();
+//        int width = (int)context.getResources().getDimension(R.dimen.alert_dialog_width);
+//        int height = (int)context.getResources().getDimension(R.dimen.alert_dialog_height);
+//        dialog.getWindow().setLayout(width, height);
+//
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        lp.copyFrom(dialog.getWindow().getAttributes());
+//        lp.y = (int)context.getResources().getDimension(R.dimen.alert_y_offset);
+//        dialog.getWindow().setAttributes(lp);
+    }
+
+    /**
+     *
+     * @author Muhammad Faisal
+     * @param context
+     * @param message
+     * @param alertImage
+     * @param dismissListener
+     */
+    public static void buildAlertDialog(
+            Context context,
+            Spanned message,
             int alertImage,
             DialogInterface.OnDismissListener dismissListener
     ) {
@@ -110,55 +148,6 @@ public final class UtilitiesCore {
         Button positiveButton = view.findViewById(R.id.btnAlertPositive);
         positiveButton.setOnClickListener(view1 -> dialog.dismiss());
         dialog.show();
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = (int)context.getResources().getDimension(R.dimen.alert_dialog_width);
-        lp.height = (int)context.getResources().getDimension(R.dimen.alert_dialog_height);
-        lp.y = (int)context.getResources().getDimension(R.dimen.alert_y_offset);
-        dialog.getWindow().setAttributes(lp);
-    }
-
-    /**
-     *
-     * @author Muhammad Faisal
-     * @param context
-     * @param message
-     * @param alertImage
-     * @param dismissListener
-     * @param width
-     * @param height
-     */
-    public static void buildAlertDialog(
-            Context context,
-            Spanned message,
-            int alertImage,
-            DialogInterface.OnDismissListener dismissListener,
-            int width,
-            int height
-    ) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        View view = LayoutInflater.from(context).inflate(R.layout.alert_dialog, null);
-        TextView messageText = view.findViewById(R.id.txtAlertMessage);
-        messageText.setText(message);
-        ImageView image = view.findViewById(R.id.imgAlertIcon);
-        image.setImageResource(alertImage);
-
-        builder.setOnDismissListener(dismissListener);
-        builder.setView(view);
-        AlertDialog dialog = builder.create();
-        Button positiveButton = view.findViewById(R.id.btnAlertPositive);
-        positiveButton.setOnClickListener(view1 -> dialog.dismiss());
-        dialog.show();
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, width,
-                context.getResources().getDisplayMetrics());
-        lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height,
-                context.getResources().getDisplayMetrics());
-        lp.y = (int)context.getResources().getDimension(R.dimen.alert_y_offset);
-        dialog.getWindow().setAttributes(lp);
     }
 
     /**

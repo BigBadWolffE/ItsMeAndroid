@@ -5,13 +5,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/bgalertlayout"
-    android:layout_gravity="center"
+    android:gravity="center"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="@dimen/alert_dialog_width"
+        android:layout_height="@dimen/alert_dialog_height"
+        android:gravity="center"
         android:padding="16dp">
 
         <ImageView
@@ -29,10 +30,10 @@
             android:layout_weight="4"
             android:textAlignment="center"
             android:gravity="center"
-            android:lineSpacingExtra="4dp"
+            android:lineSpacingExtra="@dimen/alert_line_spacing_extra"
             style="@style/primaryFont"
             android:textColor="#5D5D5D"
-            android:textSize="16sp"
+            android:textSize="@dimen/alert_text_size"
             android:text="Your Card Number is Invalid!" />
 
         <LinearLayout

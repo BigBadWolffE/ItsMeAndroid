@@ -189,9 +189,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
                 this,
                 Html.fromHtml(styledText),
                 R.drawable.ic_approved,
-                dialogInterface -> finish(),
-                310,
-                320
+                dialogInterface -> finish()
         );
     }
 

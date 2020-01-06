@@ -99,8 +99,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/forgot_password"
-                android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -58,7 +58,7 @@
                     android:hint="Full Name"
                     android:inputType="text"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                     />
 
                 <!-- edittext_name-->
 
@@ -78,7 +78,7 @@
                     android:hint="@string/email_address"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                     />
 
                 <!-- edittext_email_address-->
 
@@ -98,7 +98,7 @@
                     android:hint="Phone Number"
                     android:inputType="number"
                     android:textColor="@color/black"
-                    android:textSize="18sp" />
+                    />
 
                 <!-- edittext_phone_number-->
 
@@ -107,6 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+
                     android:text="Pin (6 digit)"
                     android:textColor="#5D5D5D" />
 
@@ -120,10 +121,8 @@
                     android:cursorVisible="false"
                     android:gravity="center"
                     android:inputType="numberPassword"
-
                     android:textSize="18sp"
                     android:textStyle="bold"
-
                     app:cursorWidth="2dp"
                     app:hideLineWhenFilled="true"
                     app:itemCount="6"
@@ -142,9 +141,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:padding="@dimen/spacing_small"
                     android:text="@string/secret_question"
                     android:textColor="#5D5D5D" />
-
 
 
                 <Spinner
@@ -155,16 +154,16 @@
                     android:spinnerMode="dropdown" />
 
                 <EditText
-                    android:layout_marginTop="@dimen/spacing_medium"
                     android:id="@+id/edtxAnswer"
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_large"
                     android:hint="Answer"
                     android:inputType="text"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:layout_marginBottom="@dimen/spacing_large"/>
+                    />
 
                 <!-- spinner secret question-->
 
@@ -173,6 +172,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:padding="@dimen/spacing_small"
                     android:text="@string/i_agree_terms_and_condition" />
 
                 <Button

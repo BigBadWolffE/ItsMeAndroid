@@ -90,7 +90,7 @@ public class ImageCardAdapter extends PagerAdapter {
     private void showCustomDialog() {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_detail_home_card);
-        dialog.setCancelable(false);
+        dialog.setCancelable(true);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(dialog.getWindow().getAttributes());

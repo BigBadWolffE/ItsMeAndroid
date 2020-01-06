@@ -299,9 +299,7 @@ public class OtpActivity extends AppCompatActivity {
                         this,
                         Html.fromHtml(styledText),
                         R.drawable.ic_approved,
-                        dialogInterface -> returnToHome(),
-                        310,
-                        320
+                        dialogInterface -> returnToHome()
                 );
             }
         });

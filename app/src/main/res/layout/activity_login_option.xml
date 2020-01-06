@@ -69,7 +69,6 @@
                 android:lines="1"
                 android:scrollHorizontally="true"
                 android:ellipsize="end"
-                android:textSize="18sp"
                 tools:layout_editor_absoluteX="4dp"
                 tools:layout_editor_absoluteY="527dp" />
 
@@ -108,7 +107,7 @@
                     android:gravity="center"
                     android:text="@string/new_registration"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                     />
             </LinearLayout>
 
         </LinearLayout>

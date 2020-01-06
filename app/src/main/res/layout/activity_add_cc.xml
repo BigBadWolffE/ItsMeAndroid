@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:text="XXXX   XXXX   XXXX   XXXX"
                     style="@style/CreditCardTextStyle"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/credit_card_number_text_size"
                     android:textAlignment="center"
                     android:textColor="@color/colorwhite" />
 
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:text="Card holder"
                     style="@style/CreditCardTextStyle"
-                    android:textSize="9dp"
+                    android:textSize="@dimen/card_holder_label_text_size"
                     android:textAlignment="center"
                     android:textColor="@color/colorwhite" />
 
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="Expires"
                     style="@style/CreditCardTextStyle"
-                    android:textSize="9dp"
+                    android:textSize="@dimen/expiry_label_text_size"
                     android:textAlignment="center"
                     android:textColor="@color/colorwhite" />
 
@@ -73,7 +73,7 @@
                     android:id="@+id/lblCardHolder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="@dimen/card_holder_text_size"
                     style="@style/CreditCardTextStyle"
                     android:text="Jordan Setiawan" />
 
@@ -81,7 +81,7 @@
                     android:id="@+id/lblExpiry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="@dimen/expiry_text_size"
                     style="@style/CreditCardTextStyle"
                     android:text="09/19" />
 
@@ -115,7 +115,7 @@
                     android:inputType="text"
                     style="@style/primaryFontBold"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+
                     android:maxLength="30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                     android:id="@+id/txtCardNumber"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-                    android:textSize="18sp"
+
                     android:maxLength="16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,7 +152,7 @@
                     android:id="@+id/txtExpiryDate"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-                    android:textSize="18sp"
+
                     android:maxLength="5"
                     android:layout_width="match_parent"
                     android:textColor="@color/black"
@@ -171,7 +171,7 @@
                     android:id="@+id/txtBillingAddress"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-                    android:textSize="18sp"
+
                     android:maxLength="100"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
@@ -190,7 +190,7 @@
                     android:id="@+id/spnCountry"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-                    android:textSize="18sp"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -211,7 +211,7 @@
                 <Spinner
                     android:id="@+id/spnCity"
                     android:inputType="text"
-                    android:textSize="18sp"
+                    android:theme="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -233,7 +233,7 @@
                     android:id="@+id/txtPostalCode"
                     android:inputType="number"
                     style="@style/primaryFontBold"
-                    android:textSize="18sp"
+
                     android:maxLength="10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,7 +248,7 @@
                     android:text="Request Increase Limit"
                     android:textColor="@color/colorPrimary"
                     android:textAllCaps="false"
-                    android:textSize="16dp"
+
                     style="@style/primaryFontBold"
                     android:stateListAnimator="@null"
                     android:outlineAmbientShadowColor="@color/colorwhite"
