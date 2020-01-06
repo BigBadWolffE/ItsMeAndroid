@@ -131,56 +131,81 @@ public class DetailProfileFragment extends Fragment {
         mEditAlamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAlamat.setEnabled(true);
-                mAlamat.setSingleLine(false);
-                mAlamat.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
-                mAlamat.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-                mAlamat.requestFocus();
-                mAlamat.setSelection(mAlamat.getText().length());
+                if (!mAlamat.requestFocus()) {
+                    mAlamat.setEnabled(true);
+                    mAlamat.setSingleLine(false);
+                    mAlamat.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
+                    mAlamat.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+                    mAlamat.requestFocus();
+                    mAlamat.setSelection(mAlamat.getText().length());
+                } else {
+                    mAlamat.clearFocus();
+                    mAlamat.setEnabled(false);
+                }
             }
         });
 
         mEditEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mEmailAddress.setEnabled(true);
-                mEmailAddress.setSingleLine(false);
-                mEmailAddress.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
-                mEmailAddress.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                mEmailAddress.requestFocus();
-                mEmailAddress.setSelection(mEmailAddress.getText().length());
+                if (!mEmailAddress.requestFocus()) {
+                    mEmailAddress.setEnabled(true);
+                    mEmailAddress.setSingleLine(false);
+                    mEmailAddress.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
+                    mEmailAddress.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                    mEmailAddress.requestFocus();
+                    mEmailAddress.setSelection(mEmailAddress.getText().length());
+                } else {
+                    mEmailAddress.clearFocus();
+                    mEmailAddress.setEnabled(false);
+                }
             }
         });
 
         mEditNoTelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mNoTelp.setEnabled(true);
-                mNoTelp.setInputType(InputType.TYPE_CLASS_PHONE);
-                mNoTelp.requestFocus();
-                mNoTelp.setSelection(mNoTelp.getText().length());
+                if (!mNoTelp.requestFocus()) {
+                    mNoTelp.setEnabled(true);
+                    mNoTelp.setInputType(InputType.TYPE_CLASS_PHONE);
+                    mNoTelp.requestFocus();
+                    mNoTelp.setSelection(mNoTelp.getText().length());
+                } else {
+                    mNoTelp.clearFocus();
+                    mNoTelp.setEnabled(false);
+                }
             }
         });
 
         mEditPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPass.setEnabled(true);
-                mPass.requestFocus();
-                mPass.setInputType(InputType.TYPE_CLASS_TEXT
-                        | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                mPass.setSelection(mPass.getText().length());
+                if (!mPass.requestFocus()) {
+                    mPass.setEnabled(true);
+                    mPass.requestFocus();
+                    mPass.setInputType(InputType.TYPE_CLASS_TEXT
+                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    mPass.setSelection(mPass.getText().length());
+                } else {
+                    mPass.clearFocus();
+                    mPass.setEnabled(false);
+                }
             }
         });
 
         mEditPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mPin.setEnabled(true);
-                mPin.requestFocus();
-                mPin.setInputType(InputType.TYPE_CLASS_NUMBER
-                        | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                mPin.setSelection(mPin.getText().length());
+                if (!mPin.requestFocus()) {
+                    mPin.setEnabled(true);
+                    mPin.requestFocus();
+                    mPin.setInputType(InputType.TYPE_CLASS_NUMBER
+                            | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                    mPin.setSelection(mPin.getText().length());
+                } else {
+                    mPin.clearFocus();
+                    mPin.setEnabled(false);
+                }
             }
         });
     }
