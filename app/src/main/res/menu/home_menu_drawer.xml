@@ -3,6 +3,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navHome"
+            android:iconTint="@color/colorwhite"
             android:icon="@drawable/ic_home_white"
             android:title="Home" />
         <item

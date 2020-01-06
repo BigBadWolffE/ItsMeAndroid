@@ -173,7 +173,7 @@
                     android:inputType="text"
                     android:maxLength="25"
                     android:textColor="#2d2d2d"
-                    android:textSize="18sp"
+
                     />
 
                 <!-- edittext_name-->
@@ -194,7 +194,7 @@
                     android:layout_marginTop="5dp"
                     android:spinnerMode="dropdown"
                     android:textColor="#2d2d2d"
-                    android:textSize="16sp" />
+                   android:theme="@style/primaryFontBold" />
 
                 <!-- spinnerMerchant-->
                 <TextView
@@ -213,7 +213,7 @@
                     android:layout_marginTop="5dp"
                     android:spinnerMode="dropdown"
                     android:textColor="#2d2d2d"
-                    android:textSize="16sp" />
+                    android:theme="@style/primaryFontBold" />
 
                 <!-- spinnerMember-->
                 <TextView
@@ -233,9 +233,9 @@
                     android:focusable="false"
                     android:freezesText="true"
                     android:hint="Date"
+                    android:textColor="#5D5D5D"
                     android:inputType="date"
-                    android:textColor="#2d2d2d"
-                    android:textSize="18sp" />
+                    />
 
                 <!-- edittext_name-->
 

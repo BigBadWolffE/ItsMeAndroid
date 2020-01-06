@@ -25,7 +25,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".view.blockallconfirmation.BlockAllConfirmationActivity"></activity>
-        <activity android:name=".view.editcreditcard.EditCreditCardActivity" />
+        <activity android:name=".view.editcreditcard.EditCreditCardActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".view.addmembership.AddMembershipActivity"
             android:screenOrientation="portrait"

@@ -40,7 +40,7 @@ public class LoginOptionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (edtxUsername.getText().length()> 0 ) {
                     Intent intent = new Intent(LoginOptionActivity.this, LoginWithEmailActivity.class);
-                    intent.putExtra(INTENT_NAME, edtxUsername.getText().toString());
+                    intent.putExtra(INTENT_NAME, edtxUsername.getText().toString().trim());
                     startActivity(intent);
                 }else {
                     edtxUsername.setError("Field Empty");

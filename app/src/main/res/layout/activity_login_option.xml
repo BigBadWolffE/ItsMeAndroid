@@ -65,7 +65,10 @@
                 android:textColor="@color/black"
                 android:layout_marginRight="50dp"
                 android:hint="@string/email_or_mobile_phone"
-                android:textSize="18sp"
+                android:maxLines="1"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:ellipsize="end"
                 tools:layout_editor_absoluteX="4dp"
                 tools:layout_editor_absoluteY="527dp" />
 
@@ -104,7 +107,7 @@
                     android:gravity="center"
                     android:text="@string/new_registration"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                     />
             </LinearLayout>
 
         </LinearLayout>

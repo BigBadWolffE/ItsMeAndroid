@@ -154,6 +154,7 @@
             <TextView
                 android:id="@+id/txtPin"
                 android:layout_width="match_parent"
+                android:theme="@style/primaryFontLight"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_large"
