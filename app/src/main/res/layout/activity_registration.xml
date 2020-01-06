@@ -160,7 +160,7 @@
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Secret Question"
+                    android:hint="Answer"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textSize="18sp"
