@@ -115,7 +115,6 @@
                     android:inputType="text"
                     style="@style/primaryFontBold"
                     android:textColor="@color/black"
-
                     android:maxLength="30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -133,7 +132,6 @@
                     android:id="@+id/txtCardNumber"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-
                     android:maxLength="16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -152,7 +150,6 @@
                     android:id="@+id/txtExpiryDate"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-
                     android:maxLength="5"
                     android:layout_width="match_parent"
                     android:textColor="@color/black"
@@ -171,7 +168,6 @@
                     android:id="@+id/txtBillingAddress"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-
                     android:maxLength="100"
                     android:textColor="@color/black"
                     android:layout_width="match_parent"
@@ -190,7 +186,6 @@
                     android:id="@+id/spnCountry"
                     android:inputType="text"
                     style="@style/primaryFontBold"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -233,7 +228,6 @@
                     android:id="@+id/txtPostalCode"
                     android:inputType="number"
                     style="@style/primaryFontBold"
-
                     android:maxLength="10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -248,7 +242,6 @@
                     android:text="Request Increase Limit"
                     android:textColor="@color/colorPrimary"
                     android:textAllCaps="false"
-
                     style="@style/primaryFontBold"
                     android:stateListAnimator="@null"
                     android:outlineAmbientShadowColor="@color/colorwhite"
