@@ -171,6 +171,7 @@
                     android:id="@+id/checkboxRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:buttonTint="@color/colorPrimary"
                     android:layout_marginTop="5dp"
                     android:padding="@dimen/spacing_small"
                     android:text="@string/i_agree_terms_and_condition" />
