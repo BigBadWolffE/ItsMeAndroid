@@ -55,6 +55,9 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         mHolderName = extras.getString("holderName");
         mExpiryDate = extras.getString("expiryDate");
 
+        ImageView cardImage = findViewById(R.id.imgCreditCard);
+        cardImage.setImageResource(extras.getInt("cardImageResource"));
+
         createToolbar();
 
         mCurrentLimit = findViewById(R.id.txtCurrentLimit);

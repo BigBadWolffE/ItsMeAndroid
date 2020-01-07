@@ -39,6 +39,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -268,5 +269,10 @@ public final class UtilitiesCore {
             width = (int) (height * bitmapRatio);
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
+    /**
+     *
+     */
+    public static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
     }
 }

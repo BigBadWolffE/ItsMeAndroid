@@ -1,12 +1,14 @@
 package com.indocyber.itsmeandroid.view.addcc;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -51,6 +53,8 @@ public final class AddCcActivity extends AppCompatActivity {
     private EditText mPostalCodeInput;
     private Button mIncreaseCreditLimitButton;
     private Button mAddCreditCardButton;
+    private ImageView mCardImage;
+    private int mCardImageResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +89,7 @@ public final class AddCcActivity extends AppCompatActivity {
     }
 
     private void initializeCardInput() {
+        mCardImage = findViewById(R.id.imgCreditCard);
         mCardNumberInput = findViewById(R.id.txtCardNumber);
         mCardNumberInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         mCardNumberInput.addTextChangedListener(new TextWatcher() {
@@ -101,6 +106,23 @@ public final class AddCcActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 mCardNumber.setVisibility(View.VISIBLE);
+            }
+        });
+
+        mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
+            if (!onFocus && mCardNumberInput.getText().length() == 16) {
+                if (!mCardNumberInput.getText().toString().substring(0, 1).equals("5")
+                 && !mCardNumberInput.getText().toString().substring(0, 1).equals("4")) {
+                    UtilitiesCore.buildAlertDialog(
+                            this,
+                            "Kartu tidak dikenal!",
+                            R.drawable.ic_invalid,
+                            null
+                    );
+                    return;
+                }
+                mCardImageResource = randomizeCardImage();
+                mCardImage.setImageResource(mCardImageResource);
             }
         });
 
@@ -134,17 +156,32 @@ public final class AddCcActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
                 String expiryDate = charSequence.toString();
                 if (charSequence.length() == 3 && count > 0) {
-                    expiryDate = expiryDate.substring(0, 2) + "/" + expiryDate.substring(2,3);
+                    try {
+                        if(Integer.valueOf(expiryDate.substring(0, 2)) > 12) {
+                            expiryDate = "12/" + expiryDate.substring(2,3);
+                        } else {
+                            expiryDate = expiryDate.substring(0, 2) + "/" + expiryDate.substring(2,3);
+                        }
+                    } catch (Exception e){
+                        Log.e("Error converting value", "Value is not a number");
+                    }
                     mCardExpiryInput.setText(expiryDate);
                     mCardExpiryInput.setSelection(mCardExpiryInput.getText().length());
                 }
-                mCardExpiry.setText(expiryDate);
+//                String maxedYear = setMaxYear(expiryDate);
+//                if (!maxedYear.equals(charSequence.toString())) {
+//                    mCardExpiryInput.setText(maxedYear);
+//                    mCardExpiryInput.setSelection(mCardExpiryInput.getText().length());
+//                }
+                mCardExpiry.setText(mCardExpiryInput.getText().toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
             }
         });
+
+
 
         mBillingAddressInput = findViewById(R.id.txtBillingAddress);
         mBillingAddressInput.setInputType(InputType.TYPE_CLASS_TEXT
@@ -167,6 +204,24 @@ public final class AddCcActivity extends AppCompatActivity {
 
         mPostalCodeInput = findViewById(R.id.txtPostalCode);
     }
+
+    // TODO: 07/01/2020 uncomment if expiry year need to be limited
+//    private String setMaxYear(String expiryDate) {
+//        String returnedDate = expiryDate;
+//        if (returnedDate.length() == 5) {
+//            try {
+//                if(Integer.valueOf(returnedDate.substring(3, 5))
+//                        > (UtilitiesCore.getCurrentYear() - 2000) + 10) {
+//                    returnedDate = returnedDate.substring(0, 2) + "/"
+//                            + ((UtilitiesCore.getCurrentYear() - 2000) + 10);
+//                }
+//            } catch (Exception e){
+//                Log.e("Error converting value", "Value is not a number");
+//            }
+//            return returnedDate;
+//        }
+//        return expiryDate;
+//    }
 
     private void initializeButton() {
         mIncreaseCreditLimitButton = findViewById(R.id.btnCreditLimit);
@@ -223,6 +278,7 @@ public final class AddCcActivity extends AppCompatActivity {
         intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
         intent.putExtra("holderName", mCardHolderInput.getText().toString());
         intent.putExtra("expiryDate", mCardExpiryInput.getText().toString());
+        intent.putExtra("cardImageResource", mCardImageResource);
         startActivity(intent);
     }
 
@@ -256,6 +312,7 @@ public final class AddCcActivity extends AppCompatActivity {
         intent.putExtra("country", mCountryInput.getSelectedItemPosition());
         intent.putExtra("city", mCityInput.getSelectedItemPosition());
         intent.putExtra("postalCode", mPostalCodeInput.getText().toString());
+        intent.putExtra("cardImageResource", mCardImageResource);
         startActivity(intent);
     }
 
@@ -307,5 +364,15 @@ public final class AddCcActivity extends AppCompatActivity {
         mCardNumber.setText(updatedText);
     }
 
+    private int randomizeCardImage() {
+        int[] images = {
+                R.drawable.img_blank_cc_anz,
+                R.drawable.img_blank_cc_bca,
+                R.drawable.img_blank_cc_mandiri
+        };
+        int randomValue = (int)(Math.random() * images.length);
+        if(randomValue == images.length) randomValue = images.length - 1;
+        return images[randomValue];
+    }
 }
 

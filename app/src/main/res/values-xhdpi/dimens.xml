@@ -14,6 +14,7 @@
     <!--genaral spacing-->
     <dimen name="spacing_xsmall">2dp</dimen>
     <dimen name="spacing_small">3dp</dimen>
+    <dimen name="spacing_small_double">6dp</dimen>
     <dimen name="spacing_medium">5dp</dimen>
     <dimen name="spacing_xmedium">7dp</dimen>
     <dimen name="spacing_middle">10dp</dimen>
@@ -32,7 +33,7 @@
     <!--object size-->
     <dimen name="alert_dialog_width">260dp</dimen>
     <dimen name="alert_dialog_height">280dp</dimen>
-    <dimen name="alert_text_size">16sp</dimen>
+    <dimen name="alert_text_size">15sp</dimen>
     <dimen name="credit_card_number_text_size">16dp</dimen>
     <dimen name="card_holder_label_text_size">9dp</dimen>
     <dimen name="expiry_label_text_size">9dp</dimen>
