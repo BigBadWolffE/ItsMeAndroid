@@ -168,6 +168,7 @@
                 <!-- spinner secret question-->
 
                 <CheckBox
+                    android:buttonTint="@color/colorPrimary"
                     android:id="@+id/checkboxRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

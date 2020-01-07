@@ -10,8 +10,6 @@
         android:layout_marginTop="20dp"
         android:src="@drawable/icocheckapproved" />
 
-
-
     <TextView
         android:id="@+id/txtNameCard"
         android:layout_width="match_parent"
