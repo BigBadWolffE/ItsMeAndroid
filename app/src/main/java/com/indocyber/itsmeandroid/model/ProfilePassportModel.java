@@ -1,7 +1,5 @@
 package com.indocyber.itsmeandroid.model;
 
-import android.graphics.Bitmap;
-
 public class ProfilePassportModel {
 
     private String namaLengkap;
@@ -10,7 +8,7 @@ public class ProfilePassportModel {
     private String tempatLahir;
     private String tglLahir;
     private String berlaku;
-    private Bitmap fotoPassport;
+    private String fotoPassport;
 
     public String getNamaLengkap() {
         return namaLengkap;
@@ -60,11 +58,11 @@ public class ProfilePassportModel {
         this.berlaku = berlaku;
     }
 
-    public Bitmap getFotoPassport() {
+    public String getFotoPassport() {
         return fotoPassport;
     }
 
-    public void setFotoPassport(Bitmap fotoPassport) {
+    public void setFotoPassport(String fotoPassport) {
         this.fotoPassport = fotoPassport;
     }
 }

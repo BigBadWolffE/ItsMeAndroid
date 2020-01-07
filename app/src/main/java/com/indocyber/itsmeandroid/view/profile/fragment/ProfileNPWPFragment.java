@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,11 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import android.os.Environment;
-import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.text.InputType;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,17 +27,15 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
-import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -64,6 +58,7 @@ public class ProfileNPWPFragment extends Fragment {
     private EditText mNamaNPWP, mAlamatKPP, mNoNPWP, mNIK, mAlamatNPWP;
     private ProfileNPWPModel mNPWPModel;
     private View mViewOnCreate;
+    private String fotoBase64;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -99,6 +94,8 @@ public class ProfileNPWPFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         mViewOnCreate = view;
         pref = getContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -155,9 +152,8 @@ public class ProfileNPWPFragment extends Fragment {
     }
 
     private void setModelNotNull() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        mNPWPModel.getFotoNPWP().compress(Bitmap.CompressFormat.PNG, 100, out);
-        mFotoNPWP.setImageBitmap(mNPWPModel.getFotoNPWP());
+        Bitmap bitmap = UtilitiesCore.decodeImage(mNPWPModel.getFotoNPWP());
+        mFotoNPWP.setImageBitmap(bitmap);
         mNamaNPWP.setText(mNPWPModel.getNamaLengkap());
         mNoNPWP.setText(mNPWPModel.getNoNpwp());
         mNIK.setText(mNPWPModel.getNik());
@@ -179,7 +175,7 @@ public class ProfileNPWPFragment extends Fragment {
         mNPWPModelInside.setAlamat(mAlamatNPWP.getText().toString());
         mNPWPModelInside.setNik(mNIK.getText().toString());
         mNPWPModelInside.setAlamatKPP(mAlamatKPP.getText().toString());
-        mNPWPModelInside.setFotoNPWP(((BitmapDrawable)mFotoNPWP.getDrawable()).getBitmap());
+        mNPWPModelInside.setFotoNPWP(fotoBase64);
         return mNPWPModelInside;
     }
 
@@ -325,8 +321,9 @@ public class ProfileNPWPFragment extends Fragment {
                     Uri uri = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-                        // Log.d(TAG, String.valueOf(bitmap));
+                        bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
                         mFotoNPWP.setImageBitmap(bitmap);
+                        fotoBase64 = UtilitiesCore.encodeImage(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

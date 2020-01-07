@@ -9,23 +9,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
 import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -70,13 +68,14 @@ public class ProfileActivity extends AppCompatActivity {
         mTabAdapter.addFragment(new ProfileNPWPFragment(), "NPWP");
         mTabAdapter.addFragment(new ProfilePassportFragment(), "Passport");
         mViewPager.setAdapter(mTabAdapter);
+        mViewPager.setOffscreenPageLimit(3);
         mTabLayout.setupWithViewPager(mViewPager);
         if (fragmentId != 0) {
             mViewPager.setCurrentItem(fragmentId);
         }
 
         if (paramProfPic != null) {
-            Bitmap newProfpic = decodeImage(paramProfPic);
+            Bitmap newProfpic = UtilitiesCore.decodeImage(paramProfPic);
             mFotoProfile.setImageBitmap(newProfpic);
         }
 
@@ -135,16 +134,16 @@ public class ProfileActivity extends AppCompatActivity {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     mFotoProfile.setImageBitmap(imageBitmap);
-                    String encode = encodeImage(imageBitmap);
+                    String encode = UtilitiesCore.encodeImage(imageBitmap);
                     saveToSharedPreferences(encode);
                     break;
                 case GALLERY_PICTURE:
                     Uri uri = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        // Log.d(TAG, String.valueOf(bitmap));
+                        bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
                         mFotoProfile.setImageBitmap(bitmap);
-                        String end = encodeImage(bitmap);
+                        String end = UtilitiesCore.encodeImage(bitmap);
                         saveToSharedPreferences(end);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -157,21 +156,5 @@ public class ProfileActivity extends AppCompatActivity {
     private void saveToSharedPreferences(String encode) {
         editor.putString("ProfilePicture", encode);
         editor.commit();
-    }
-
-    public String encodeImage(Bitmap bm){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG,100,baos);
-        byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-
-        return "data:image/png;base64," +encImage;
-    }
-
-    public Bitmap decodeImage(String base64){
-        base64 = base64.replace("data:image/png;base64,", "");
-        byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedByte;
     }
 }

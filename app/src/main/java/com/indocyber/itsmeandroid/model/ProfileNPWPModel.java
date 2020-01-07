@@ -1,7 +1,5 @@
 package com.indocyber.itsmeandroid.model;
 
-import android.graphics.Bitmap;
-
 public class ProfileNPWPModel {
 
     private String namaLengkap;
@@ -10,7 +8,7 @@ public class ProfileNPWPModel {
     private String berlaku;
     private String alamat;
     private String alamatKPP;
-    private Bitmap fotoNPWP;
+    private String fotoNPWP;
 
     public String getNamaLengkap() {
         return namaLengkap;
@@ -60,11 +58,11 @@ public class ProfileNPWPModel {
         this.alamatKPP = alamatKPP;
     }
 
-    public Bitmap getFotoNPWP() {
+    public String getFotoNPWP() {
         return fotoNPWP;
     }
 
-    public void setFotoNPWP(Bitmap fotoNPWP) {
+    public void setFotoNPWP(String fotoNPWP) {
         this.fotoNPWP = fotoNPWP;
     }
 }

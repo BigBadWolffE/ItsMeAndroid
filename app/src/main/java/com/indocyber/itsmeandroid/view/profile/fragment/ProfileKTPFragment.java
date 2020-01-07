@@ -6,11 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,11 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 
 import android.provider.MediaStore;
 import android.text.InputType;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +40,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
-import com.indocyber.itsmeandroid.view.MainActivity;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -54,8 +51,8 @@ public class ProfileKTPFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    protected static final int CAMERA_REQUEST = 0;
-    protected static final int GALLERY_PICTURE = 1;
+    protected static final int CAMERA_REQUEST_KTP = 0;
+    protected static final int GALLERY_PICTURE_KTP = 1;
 
     private String mParam1;
     private String mParam2;
@@ -85,6 +82,7 @@ public class ProfileKTPFragment extends Fragment {
     private String[] mKecamatanValue = {"Pilih Kecamatan", "Kebon Jeruk"};
     private ProfileKTPModel mKTPModel = new ProfileKTPModel();
     private View mViewOnCreate;
+    private String fotoBase64;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -120,6 +118,8 @@ public class ProfileKTPFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         mViewOnCreate = view;
         pref = getContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
@@ -208,9 +208,8 @@ public class ProfileKTPFragment extends Fragment {
 
     private void setModelNotNull() {
         int spinnerPosition = 0;
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        mKTPModel.getFotoKTP().compress(Bitmap.CompressFormat.PNG, 100, out);
-        mFotoKTP.setImageBitmap(mKTPModel.getFotoKTP());
+        Bitmap bitmap = UtilitiesCore.decodeImage(mKTPModel.getFotoKTP());
+        mFotoKTP.setImageBitmap(bitmap);
         mNamaKTP.setText(mKTPModel.getNamaLengkap());
         mNoKTP.setText(mKTPModel.getNoKtp());
         mTglLahir.setText(mKTPModel.getTglLahir());
@@ -279,7 +278,7 @@ public class ProfileKTPFragment extends Fragment {
         mKTPModelInside.setRw(mRW.getText().toString());
         mKTPModelInside.setKecamatan(mKecamatanSpinner.getSelectedItem().toString());
         mKTPModelInside.setKelurahan(mKelurahanSpinner.getSelectedItem().toString());
-        mKTPModelInside.setFotoKTP(((BitmapDrawable)mFotoKTP.getDrawable()).getBitmap());
+        mKTPModelInside.setFotoKTP(fotoBase64);
         return mKTPModelInside;
     }
 
@@ -451,13 +450,13 @@ public class ProfileKTPFragment extends Fragment {
         intent.setType("image/*");
         String[] mimeTypes = {"image/jpeg", "image/png"};
         intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
-        startActivityForResult(intent,GALLERY_PICTURE);
+        startActivityForResult(intent, GALLERY_PICTURE_KTP);
     }
 
     private void takeFromCamera() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, CAMERA_REQUEST);
+            startActivityForResult(takePictureIntent, CAMERA_REQUEST_KTP);
         }
     }
 
@@ -466,17 +465,19 @@ public class ProfileKTPFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && data != null) {
             switch (requestCode) {
-                case CAMERA_REQUEST:
+                case CAMERA_REQUEST_KTP:
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     mFotoKTP.setImageBitmap(imageBitmap);
+                    fotoBase64 = UtilitiesCore.encodeImage(imageBitmap);
                     break;
-                case GALLERY_PICTURE:
+                case GALLERY_PICTURE_KTP:
                     Uri uri = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-                        // Log.d(TAG, String.valueOf(bitmap));
+                        bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
                         mFotoKTP.setImageBitmap(bitmap);
+                        fotoBase64 = UtilitiesCore.encodeImage(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

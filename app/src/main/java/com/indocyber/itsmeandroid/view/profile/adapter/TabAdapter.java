@@ -1,5 +1,7 @@
 package com.indocyber.itsmeandroid.view.profile.adapter;
 
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -18,6 +20,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
+        Log.d("CEK", "Fragment item position "+position);
         return mFragmentList.get(position);
     }
 

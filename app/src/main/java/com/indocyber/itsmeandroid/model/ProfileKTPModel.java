@@ -19,13 +19,13 @@ public class ProfileKTPModel {
     private String rw;
     private String kelurahan;
     private String kecamatan;
-    private Bitmap fotoKTP;
+    private String fotoKTP;
 
-    public Bitmap getFotoKTP() {
+    public String getFotoKTP() {
         return fotoKTP;
     }
 
-    public void setFotoKTP(Bitmap fotoKTP) {
+    public void setFotoKTP(String fotoKTP) {
         this.fotoKTP = fotoKTP;
     }
 

@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfilePassportModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -58,6 +61,7 @@ public class ProfilePassportFragment extends Fragment {
     private TextView errorText;
     private LinearLayout agreeLayout;
     private int mYear, mMonth, mDay;
+    private String fotoBase64;
     private String[] mMonthData = {"Januari", "Februari", "Maret", "April",
             "Mei", "Juni", "Juli", "Agustus", "September",
             "Oktober", "November", "Desember"};
@@ -97,6 +101,8 @@ public class ProfilePassportFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewOnCreated = view;
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         pref = getContext().getSharedPreferences("MyPref", 0);
         editor = pref.edit();
 //        editor.remove("ProfilePassport");
@@ -165,9 +171,8 @@ public class ProfilePassportFragment extends Fragment {
     }
 
     private void setModelNotNull() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        mPassportModel.getFotoPassport().compress(Bitmap.CompressFormat.PNG, 100, out);
-        mFotoPassport.setImageBitmap(mPassportModel.getFotoPassport());
+        Bitmap bitmap = UtilitiesCore.decodeImage(mPassportModel.getFotoPassport());
+        mFotoPassport.setImageBitmap(bitmap);
         mNamaPassport.setText(mPassportModel.getNamaLengkap());
         mNoPassport.setText(mPassportModel.getNoPassport());
         mKWNPassport.setText(mPassportModel.getKwn());
@@ -191,7 +196,7 @@ public class ProfilePassportFragment extends Fragment {
         mPassportModelInside.setTempatLahir(mTempatLahirPassport.getText().toString());
         mPassportModelInside.setTglLahir(mTglLahirPassport.getText().toString());
         mPassportModelInside.setBerlaku(mBerlakuPassport.getText().toString());
-        mPassportModelInside.setFotoPassport(((BitmapDrawable)mFotoPassport.getDrawable()).getBitmap());
+        mPassportModelInside.setFotoPassport(fotoBase64);
         return mPassportModelInside;
     }
 
@@ -358,8 +363,9 @@ public class ProfilePassportFragment extends Fragment {
                     Uri uri = data.getData();
                     try {
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-                        // Log.d(TAG, String.valueOf(bitmap));
+                        bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
                         mFotoPassport.setImageBitmap(bitmap);
+                        fotoBase64 = UtilitiesCore.encodeImage(bitmap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

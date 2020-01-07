@@ -3,6 +3,7 @@ package com.indocyber.itsmeandroid.view.splashscreen;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.indocyber.itsmeandroid.R;
@@ -15,6 +16,8 @@ public class SplashScreenActivity extends AppCompatActivity {
     private Preference preference;
     protected boolean _active = true;
     protected int _splashTime = 3000;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,8 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         preference = new Preference(this);
+        pref = getSharedPreferences("MyPref", 0);
+        editor = pref.edit();
 
         Thread splashTread = new Thread() {
             @Override
@@ -53,5 +58,12 @@ public class SplashScreenActivity extends AppCompatActivity {
             }
         };
         splashTread.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        editor.clear();
+        editor.commit();
     }
 }
