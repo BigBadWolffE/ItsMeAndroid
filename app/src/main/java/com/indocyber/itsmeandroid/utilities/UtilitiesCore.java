@@ -36,6 +36,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -234,5 +235,12 @@ public final class UtilitiesCore {
         (custom_view.findViewById(R.id.parent_view)).setBackgroundColor(activity.getResources().getColor(R.color.red_600));
         snackBarView.addView(custom_view, 0);
         snackbar.show();
+    }
+
+    /**
+     *
+     */
+    public static int getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
     }
 }

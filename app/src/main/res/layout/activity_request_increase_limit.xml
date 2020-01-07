@@ -222,6 +222,7 @@
 
                     <CheckBox
                         android:id="@+id/chkTermsAgreement"
+                        android:buttonTint="@color/colorPrimary"
                         android:layout_width="32dp"
                         android:layout_height="32dp" />
 

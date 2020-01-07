@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -155,17 +156,32 @@ public final class AddCcActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
                 String expiryDate = charSequence.toString();
                 if (charSequence.length() == 3 && count > 0) {
-                    expiryDate = expiryDate.substring(0, 2) + "/" + expiryDate.substring(2,3);
+                    try {
+                        if(Integer.valueOf(expiryDate.substring(0, 2)) > 12) {
+                            expiryDate = "12/" + expiryDate.substring(2,3);
+                        } else {
+                            expiryDate = expiryDate.substring(0, 2) + "/" + expiryDate.substring(2,3);
+                        }
+                    } catch (Exception e){
+                        Log.e("Error converting value", "Value is not a number");
+                    }
                     mCardExpiryInput.setText(expiryDate);
                     mCardExpiryInput.setSelection(mCardExpiryInput.getText().length());
                 }
-                mCardExpiry.setText(expiryDate);
+//                String maxedYear = setMaxYear(expiryDate);
+//                if (!maxedYear.equals(charSequence.toString())) {
+//                    mCardExpiryInput.setText(maxedYear);
+//                    mCardExpiryInput.setSelection(mCardExpiryInput.getText().length());
+//                }
+                mCardExpiry.setText(mCardExpiryInput.getText().toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
             }
         });
+
+
 
         mBillingAddressInput = findViewById(R.id.txtBillingAddress);
         mBillingAddressInput.setInputType(InputType.TYPE_CLASS_TEXT
@@ -188,6 +204,24 @@ public final class AddCcActivity extends AppCompatActivity {
 
         mPostalCodeInput = findViewById(R.id.txtPostalCode);
     }
+
+    // TODO: 07/01/2020 uncomment if expiry year need to be limited
+//    private String setMaxYear(String expiryDate) {
+//        String returnedDate = expiryDate;
+//        if (returnedDate.length() == 5) {
+//            try {
+//                if(Integer.valueOf(returnedDate.substring(3, 5))
+//                        > (UtilitiesCore.getCurrentYear() - 2000) + 10) {
+//                    returnedDate = returnedDate.substring(0, 2) + "/"
+//                            + ((UtilitiesCore.getCurrentYear() - 2000) + 10);
+//                }
+//            } catch (Exception e){
+//                Log.e("Error converting value", "Value is not a number");
+//            }
+//            return returnedDate;
+//        }
+//        return expiryDate;
+//    }
 
     private void initializeButton() {
         mIncreaseCreditLimitButton = findViewById(R.id.btnCreditLimit);
