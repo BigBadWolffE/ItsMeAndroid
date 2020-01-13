@@ -80,163 +80,11 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
         holder.cardNumber.setText(onCardNumberChange(mPromoColl.get(position).getNumberCard()));
         holder.cardExpiry.setText(mPromoColl.get(position).getExpireCard());
 
-        holder.btnTag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showAndHideTag(holder.layoutExpandTags);
-            }
-        });
-
-        holder.btnCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Call someone", Toast.LENGTH_SHORT).show();
-//                dialPhoneNumber("089695658002");
-            }
-        });
-
-        holder.btnChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Chat someone", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.btnPromo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "show promo here", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, "Edit Something", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        holder.btnShare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setRequestPermission(holder);
-            }
-        });
-
         if (card.isBlockedCard()) {
             holder.blockedLayout.setVisibility(View.VISIBLE);
             holder.blockedLayout.bringToFront();
-            holder.btnShare.setEnabled(false);
-            holder.btnEdit.setEnabled(false);
-            holder.btnPromo.setEnabled(false);
-            holder.btnChat.setEnabled(false);
-            holder.btnCall.setEnabled(false);
-            holder.btnTag.setEnabled(false);
         }
 
-        //recycleEditTags
-        EditTagsAdapter adapterTags = new EditTagsAdapter(mContext, card.getTagList());
-        LinearLayoutManager lm = new LinearLayoutManager(mContext,  LinearLayoutManager.HORIZONTAL, false);
-        holder.recycle_EditTags.setLayoutManager(lm);
-        holder.recycle_EditTags.setAdapter(adapterTags);
-        holder.recycle_EditTags.setHasFixedSize(true);
-
-    }
-
-    private void setRequestPermission(ItemViewHolder cardType) {
-        if (ContextCompat.checkSelfPermission(mContext,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(mContext,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(mContext,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-            } else {
-
-                ActivityCompat.requestPermissions(mContext,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
-            }
-        } else {
-            shareImage(cardType);
-        }
-    }
-
-    private void shareImage(ItemViewHolder cardType) {
-        if (cardType.cardType.getDrawable().getConstantState()
-                .equals(mContext.getResources().getDrawable(R.drawable.ic_profile_default_img)
-                        .getConstantState())) {
-            Toast.makeText(mContext, "Tidak ada Foto yang dapat di bagikan", Toast.LENGTH_SHORT)
-                    .show();
-        } else {
-            Bitmap cardBitmap = loadBitmapFromView(cardType.cardLayout);
-            Intent shareIntent = new Intent();
-            if (cardBitmap != null) {
-                Uri uri = getImageUri(mContext, cardBitmap);
-                shareIntent = new Intent(Intent.ACTION_SEND);
-//                    shareIntent.setType("text/plain");
-//                    shareIntent.putExtra(Intent.EXTRA_TEXT, "The text you wanted to share");
-                shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
-                shareIntent.setType("image/jpeg");
-                shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            }
-
-            try {
-                mContext.startActivity(shareIntent);
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(mContext, "Gagal membagikan foto", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
-    }
-
-    private Uri getImageUri(Activity context, Bitmap bitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                bitmap, UUID.randomUUID().toString() + ".png", "drawing");
-        return Uri.parse(path);
-    }
-
-    public static Bitmap loadBitmapFromView(View v) {
-        v.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT));
-        v.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        v.layout(0, 0, v.getMeasuredWidth(), v.getMeasuredHeight());
-        Bitmap bitmap = Bitmap.createBitmap(v.getMeasuredWidth(),
-                v.getMeasuredHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas c = new Canvas(bitmap);
-        v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-        v.draw(c);
-        return bitmap;
-    }
-
-    private void dialPhoneNumber(String phoneNumber) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        intent.setData(Uri.parse("tel:" + phoneNumber));
-        if (intent.resolveActivity(mContext.getPackageManager()) != null) {
-            mContext.startActivity(intent);
-        }
-    }
-
-    private void showAndHideTag(LinearLayout view) {
-        if (view.getVisibility() == View.GONE) {
-            Animations.expand(view, new Animations.AnimListener() {
-                @Override
-                public void onFinish() {
-                    //empty
-                }
-            });
-        } else {
-            Animations.collapse(view);
-        }
     }
 
     private String onCardNumberChange(String text){
@@ -262,8 +110,6 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
     public class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView cardType;
         TextView cardNumber, cardHolder, cardExpiry, cardHolderLabel, cardExpiryLabel;
-        private ImageView btnTag, btnEdit, btnPromo, btnShare, btnCall, btnChat;
-        private LinearLayout layoutExpandTags;
         private RecyclerView recycle_EditTags;
         private RelativeLayout cardLayout, blockedLayout;
 
@@ -275,13 +121,6 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
             cardExpiry = itemView.findViewById(R.id.lblPromoCollectionCardExpiry);
             cardExpiryLabel = itemView.findViewById(R.id.lblPromoCollectionCardExpiryLabel);
             cardHolderLabel = itemView.findViewById(R.id.lblPromoCollectionCardHolderLabel);
-            btnCall = itemView.findViewById(R.id.imgCallPromoCollection);
-            btnChat = itemView.findViewById(R.id.imgChatPromoCollection);
-            btnEdit =  itemView.findViewById(R.id.imgEditPromoCollection);
-            btnPromo = itemView.findViewById(R.id.imgPromoPromoCollection);
-            btnTag = itemView.findViewById(R.id.imgTagPromoCollection);
-            btnShare = itemView.findViewById(R.id.imgSharePromoCollection);
-            layoutExpandTags = itemView.findViewById(R.id.layoutExpandTagsPromoCollection);
             recycle_EditTags = itemView.findViewById(R.id.recycle_EditTags);
             cardLayout = itemView.findViewById(R.id.layoutPromoCollectionCardType);
             blockedLayout = itemView.findViewById(R.id.layoutPromoCollectionCardBlocked);

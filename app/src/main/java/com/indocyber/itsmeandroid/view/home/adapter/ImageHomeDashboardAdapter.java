@@ -20,10 +20,16 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
     private LayoutInflater mLayoutInflater;
     private  int[] mData;
     private RequestOptions options;
+    Listener mlistener;
+
+    public interface Listener {
+        void onClick(int position);
+    }
 
 
-    public ImageHomeDashboardAdapter(Context context, int[] mData) {
+    public ImageHomeDashboardAdapter(Context context, int[] mData, Listener mlistener) {
         mContext = context;
+        this.mlistener = mlistener;
         this.mData = mData;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         options = new RequestOptions().centerCrop().placeholder(R.drawable.bg_gradient_soft).error(R.drawable.bg_gradient_soft);
@@ -54,11 +60,10 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
                 .apply(options)
                 .into(imageView);
 
-        itemView.setOnClickListener(new View.OnClickListener() {
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                mlistener.onClick(position);
             }
         });
         container.addView(itemView);

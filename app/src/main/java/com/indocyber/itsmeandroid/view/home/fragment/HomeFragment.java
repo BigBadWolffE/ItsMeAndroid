@@ -37,6 +37,7 @@ import com.indocyber.itsmeandroid.view.inbox.InboxActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
+import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ import static com.indocyber.itsmeandroid.utilities.core.Animations.showOut;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.Listener {
     //private FloatingActionButton mFabMembership, mFabPersonal, mFabCreditCard;
     private int[] mResources = {
             R.drawable.imgsliderbannerstarbuck,
@@ -218,7 +219,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setImageHomeSlider() {
-        mImageHomeDashboardAdapter = new ImageHomeDashboardAdapter(getActivity(), mResources);
+        mImageHomeDashboardAdapter = new ImageHomeDashboardAdapter(getActivity(), mResources, this);
         mViewPager.setAdapter(mImageHomeDashboardAdapter);
         mTabLayout.setupWithViewPager(mViewPager, true);
     }
@@ -283,6 +284,12 @@ public class HomeFragment extends Fragment {
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(getActivity(), PromoActivity.class);
+        startActivity(intent);
     }
 }
 
