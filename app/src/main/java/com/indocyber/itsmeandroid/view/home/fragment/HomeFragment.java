@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.view.home.fragment;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -176,6 +177,10 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private void dimBackground(int visibility) {
+        getActivity().findViewById(R.id.llTransparentLayer).setVisibility(visibility);
+    }
+
     private void fabAnimations() {
         initShowOut(btnMemberhip);
         initShowOut(btnPersonal);
@@ -187,10 +192,12 @@ public class HomeFragment extends Fragment {
                 showIn(btnMemberhip);
                 showIn(btnPersonal);
                 showIn(btnCreditCard);
+                dimBackground(View.VISIBLE);
             } else {
                 showOut(btnMemberhip);
                 showOut(btnPersonal);
                 showOut(btnCreditCard);
+                dimBackground(View.GONE);
             }
         });
     }
@@ -216,7 +223,7 @@ public class HomeFragment extends Fragment {
         mTabLayout.setupWithViewPager(mViewPager, true);
     }
 
-    // TODO: 13/01/2020 delete when confirmed safe 
+    // TODO: 13/01/2020 delete when confirmed safe
 //    private void setImageCardSlider() {
 //        dataImageCard().observe(Objects.requireNonNull(getActivity()), list -> {
 //            ImageCardAdapter adapter = new ImageCardAdapter(getActivity(), list);

@@ -154,6 +154,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="15dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:background="@drawable/btn_rounded_primary"
         android:text="Refresh"
         android:layout_marginRight="@dimen/spacing_mxlarge"
