@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorwhite"
     tools:context=".view.contactcc.activity.ContactCCActivity">
     <LinearLayout
         android:layout_marginTop="@dimen/spacing_medium"
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_large"
         android:layout_marginRight="@dimen/spacing_large"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
@@ -21,6 +23,7 @@
             android:src="@drawable/icobookmarktaggreen" />
 
         <Spinner
+            android:layout_margin="@dimen/spacing_medium"
             android:background="@drawable/edit_text_round_bg_outline"
             android:padding="@dimen/spacing_medium"
             android:layout_gravity="center"
