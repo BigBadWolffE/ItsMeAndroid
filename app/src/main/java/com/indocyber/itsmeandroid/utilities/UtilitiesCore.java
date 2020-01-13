@@ -9,24 +9,18 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfRenderer;
-import android.media.Image;
 import android.os.ParcelFileDescriptor;
 import android.text.Spanned;
-import android.text.SpannedString;
 import android.util.Base64;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.RawRes;
 import androidx.appcompat.app.AlertDialog;
-import androidx.cardview.widget.CardView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.indocyber.itsmeandroid.R;
@@ -36,7 +30,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -63,10 +56,9 @@ public final class UtilitiesCore {
     public static Drawable resizeDrawable(final Drawable drawable, final Context context,
                                           final int dstwidth, final int dstheight) {
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-        Drawable newdrawable = new BitmapDrawable(
+        return new BitmapDrawable(
                 context.getResources(),
                 Bitmap.createScaledBitmap(bitmap, dstwidth, dstheight, true));
-        return newdrawable;
     }
 
     /**
@@ -90,10 +82,10 @@ public final class UtilitiesCore {
     /**
      *
      * @author Muhammad Faisal
-     * @param context
-     * @param message
-     * @param alertImage
-     * @param dismissListener
+     * @param context Invoker activity
+     * @param message Alert message to show
+     * @param alertImage Alert icon
+     * @param dismissListener Action on alert dismissal
      */
     public static void buildAlertDialog(
             Activity context,
@@ -115,23 +107,15 @@ public final class UtilitiesCore {
         Button positiveButton = view.findViewById(R.id.btnAlertPositive);
         positiveButton.setOnClickListener(view1 -> dialog.dismiss());
         dialog.show();
-//        int width = (int)context.getResources().getDimension(R.dimen.alert_dialog_width);
-//        int height = (int)context.getResources().getDimension(R.dimen.alert_dialog_height);
-//        dialog.getWindow().setLayout(width, height);
-//
-//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//        lp.copyFrom(dialog.getWindow().getAttributes());
-//        lp.y = (int)context.getResources().getDimension(R.dimen.alert_y_offset);
-//        dialog.getWindow().setAttributes(lp);
     }
 
     /**
      *
      * @author Muhammad Faisal
-     * @param context
-     * @param message
-     * @param alertImage
-     * @param dismissListener
+     * @param context Invoker activity
+     * @param message Alert message to show
+     * @param alertImage Alert icon
+     * @param dismissListener Action on alert dismissal
      */
     public static void buildAlertDialog(
             Context context,
@@ -156,8 +140,8 @@ public final class UtilitiesCore {
 
     /**
      * @author Muhammad Faisal
-     * @param amount
-     * @return
+     * @param amount A value of integer
+     * @return A string of formatted currency
      */
     public static String formatCurrency(int amount) {
         final Locale indonesia = new Locale("in", "ID");
@@ -271,7 +255,8 @@ public final class UtilitiesCore {
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
     /**
-     *
+     * @author Muhammad Faisal
+     * @return current year in integer
      */
     public static int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);

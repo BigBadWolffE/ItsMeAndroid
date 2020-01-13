@@ -134,7 +134,9 @@ public class ContactCcViewModel extends AndroidViewModel {
                 .map(strings -> {
                     List<String> tagList = new ArrayList<>();
                     for (String tag: strings) {
-                        tagList.addAll(ListStringTypeConverter.fromString(tag));
+                        if (!tag.equals("null")) {
+                            tagList.addAll(ListStringTypeConverter.fromString(tag));
+                        }
                     }
                     return tagList;
                 })
