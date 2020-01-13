@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.view.home.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -98,13 +100,14 @@ public class ImageCardAdapter extends PagerAdapter {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         final ImageButton imgButtonClose = (ImageButton) dialog.findViewById(R.id.imgButtonClose);
-        //final TextView txtNumberCard = (TextView) dialog.findViewById(R.id.txtNumberCard);
-
-
+        LinearLayout cardDetailTextContainer = dialog.findViewById(R.id.llCardDetailContainer);
+        int buttonWidth = cardDetailTextContainer.getLayoutParams().width;
+        ViewGroup.LayoutParams buttonLayoutParam = imgButtonClose.getLayoutParams();
+        buttonLayoutParam.width = buttonWidth;
+        imgButtonClose.setLayoutParams(buttonLayoutParam);
         imgButtonClose.setOnClickListener(v -> {
             dialog.dismiss();
         });
-
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
