@@ -32,7 +32,6 @@ import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-import static com.indocyber.itsmeandroid.view.home.fragment.HomeFragment.dataImageCard;
 
 public class ContactCCActivity extends AppCompatActivity {
 

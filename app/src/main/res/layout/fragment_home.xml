@@ -204,12 +204,19 @@
     </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/llTransparentLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:visibility="gone"
+        android:background="@color/black" />
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
-
 
         <Button
             android:id="@+id/btnMemberhip"
@@ -261,6 +268,7 @@
 
 
     </LinearLayout>
+
     <!--<com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fabMaster"
         android:layout_width="wrap_content"
