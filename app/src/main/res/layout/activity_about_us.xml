@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.profile.activity.ProfileActivity"
+    android:background="@color/colorPrimary"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginBottom="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="150dp"
+                    android:layout_height="120dp"
+                    android:id="@+id/imageFotoProfile"
+                    android:src="@drawable/logoitsmewhite"/>
+
+            </RelativeLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_mlarge"
+            android:background="@drawable/white_radius_background">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About its me app"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                style="@style/textReg20BoldPrimary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblDeskripsi"
+                android:text="Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet\n\nLorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet"
+                android:layout_marginTop="@dimen/spacing_middle"
+                style="@style/textReg14Black"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_30"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Send us Message"
+                    style="@style/textReg20BoldPrimary"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutNamaLengkap"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:paddingBottom="@dimen/spacing_medium"
+                    android:background="@drawable/bottom_border_background">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/textReg14Grey"
+                        android:text="Your Name"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtAboutUsName"
+                        style="@style/textReg16BoldBlack"
+                        android:text="Jordan Setiawan"
+                        android:paddingTop="@dimen/spacing_middle"
+                        android:background="@null"
+                        android:inputType="textMultiLine"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutEmailAddress"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:paddingBottom="@dimen/spacing_medium"
+                    android:background="@drawable/bottom_border_background">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/textReg14Grey"
+                        android:text="Your Email"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtAboutUsEmail"
+                        style="@style/textReg16BoldBlack"
+                        android:text="jordansetiawan@gmail.com"
+                        android:paddingTop="@dimen/spacing_middle"
+                        android:background="@null"
+                        android:inputType="textMultiLine"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutSubhect"
+                    android:paddingBottom="@dimen/spacing_medium"
+                    android:background="@drawable/bottom_border_background"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutJenisKelamin">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Subject"
+                        style="@style/textReg14Grey"
+                        android:layout_marginBottom="@dimen/spacing_medium"/>
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinnerAboutUsSubject"
+                        android:background="@drawable/spinner_background_without_stroke"
+                        style="@style/textReg16BoldBlack"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/layoutMessage"
+                    android:layout_marginTop="@dimen/spacing_middle"
+                    android:paddingBottom="@dimen/spacing_medium"
+                    android:background="@drawable/bottom_border_background">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/textReg14Grey"
+                        android:text="Your Message"/>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtAboutUsMessage"
+                        style="@style/textReg16BoldBlack"
+                        android:text="Its me is a nice app. Great Work !!"
+                        android:paddingTop="@dimen/spacing_middle"
+                        android:background="@null"
+                        android:inputType="textMultiLine"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Send Message"
+                style="@style/textReg14BoldWhite"
+                android:id="@+id/btnSendAboutUs"
+                android:paddingBottom="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_30"
+                android:background="@drawable/button_primary"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/errorText"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:gravity="center_horizontal"
+                style="@style/textReg14BoldRed"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

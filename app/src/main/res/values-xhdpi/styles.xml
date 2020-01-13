@@ -105,6 +105,12 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
+    <style name="textReg20BoldPrimary">
+        <item name="android:fontFamily">@font/interstate_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
     <style name="textReg14BoldBlack">
         <item name="android:fontFamily">@font/interstate_bold</item>
         <item name="android:textSize">14sp</item>

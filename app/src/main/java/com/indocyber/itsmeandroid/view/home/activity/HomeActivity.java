@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.view.aboutus.activity.AboutUsActivity;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
@@ -135,7 +136,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(this, PromoActivity.class);
             startActivity(intent);
         } else if (id == R.id.navAboutUs) {
-
+            Intent intent = new Intent(this, AboutUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.navSettings) {
 
         } else if (id == R.id.navLogout) {
