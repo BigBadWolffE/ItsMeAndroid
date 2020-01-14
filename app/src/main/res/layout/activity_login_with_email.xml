@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context=".view.login.LoginWithEmailActivity">
 
     <LinearLayout
@@ -22,18 +23,18 @@
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-15dp"
-        app:cardCornerRadius="20dp">
+        android:gravity="center"
+        android:paddingLeft="@dimen/spacing_xxlarge"
+        android:paddingRight="@dimen/spacing_xxlarge"
+        android:background="@drawable/bgcardlayout">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginBottom="@dimen/spacing_xxlarge"
             android:orientation="vertical">
 
             <TextView
@@ -84,22 +85,21 @@
                 android:id="@+id/buttonLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="50dp"
                 android:background="@drawable/btn_rounded_primary"
                 android:text="@string/login"
                 android:textColor="#FFFFFF" />
 
             <TextView
-                style="@style/primaryFontBold"
+                style="@style/primaryFontLight"
+                android:textSize="16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/spacing_mlarge"
                 android:gravity="center"
-                android:text="@string/forgot_password"
-                android:textColor="@color/colorPrimary" />
+                android:text= "@string/forgot_password"
+                android:textColor="@color/black" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 </LinearLayout>

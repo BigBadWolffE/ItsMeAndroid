@@ -1,8 +1,14 @@
 package com.indocyber.itsmeandroid.model;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-public class ProfileDetailModel {
+@Entity
+public class User {
 
     private String namaLengkap;
+    @PrimaryKey
+    @NonNull
     private String email;
     private String noTelp;
     private String password;

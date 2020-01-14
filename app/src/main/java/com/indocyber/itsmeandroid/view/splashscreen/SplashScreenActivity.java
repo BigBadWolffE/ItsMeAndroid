@@ -36,7 +36,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                     while (_active && (waited < _splashTime)) {
                         sleep(100);
                         if (_active) {
-
                             waited += 100;
                         }
                     }
@@ -52,8 +51,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                         Intent newIntent = new Intent(SplashScreenActivity.this, LoginOptionActivity.class);
                         startActivityForResult(newIntent, 0);
                     }
-
-
                 }
             }
         };

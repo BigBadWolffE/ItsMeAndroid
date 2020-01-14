@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.view.register;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
@@ -32,6 +35,7 @@ import com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPin
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
+import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,14 +55,17 @@ public class RegistrationActivity extends AppCompatActivity {
     //private Spinner mSpnrAnswer;
     private Button buttonRegister;
 
-    private EditText edtxFullname;
-    private EditText edtxEmail;
-    private EditText edtxPhonenumber;
-    private EditText edtxAnswer;
+    private EditText txtFullname;
+    private EditText txtEmail;
+    private EditText txtPhonenumber;
+    private EditText txtPassword;
+    private EditText txtRetypePassword;
+    private EditText txtAnswer;
     private PinView pinView;
     private CheckBox checkboxRegister;
     private AlertDialog loader;
     private Preference preference;
+    private RegisterViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,65 +79,110 @@ public class RegistrationActivity extends AppCompatActivity {
 
         preference = new Preference(this);
         mSpnrQuestion = findViewById(R.id.spnrQuestion);
-
-
-        edtxFullname = findViewById(R.id.edtxFullname);
-        edtxEmail = findViewById(R.id.edtxEmail);
-        edtxPhonenumber = findViewById(R.id.edtxPhonenumber);
-        edtxPhonenumber = findViewById(R.id.edtxPhonenumber);
-        edtxAnswer = findViewById(R.id.edtxAnswer);
-
+        txtFullname = findViewById(R.id.txtFullname);
+        txtEmail = findViewById(R.id.txtEmail);
+        txtPhonenumber = findViewById(R.id.txtPhonenumber);
+        txtPassword = findViewById(R.id.txtPassword);
+        txtRetypePassword = findViewById(R.id.txtRetypePassword);
+        txtAnswer = findViewById(R.id.txtAnswer);
         checkboxRegister = findViewById(R.id.checkboxRegister);
-
+        viewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
         pinView = findViewById(R.id.firstPinView);
-
         buttonRegister = findViewById(R.id.buttonRegister);
-
         loader = new SpotsDialog.Builder()
                 .setCancelable(false)
                 .setContext(RegistrationActivity.this)
                 .build();
-
-
         setSpinnerQuestion();
         setPinView();
         checkRegister();
+        observeViewModel();
     }
 
     private void checkRegister() {
-
         buttonRegister.setOnClickListener(v -> {
+            if (!validateForm()) {
+                return;
+            }
+            User newUser = new User();
+            newUser.setNamaLengkap(txtFullname.getText().toString());
+            newUser.setEmail(txtEmail.getText().toString());
+            newUser.setNoTelp(txtPhonenumber.getText().toString());
+            newUser.setPassword(txtPassword.getText().toString());
+            newUser.setPin(pinView.getText().toString());
+            viewModel.register(newUser);
+        });
+    }
 
+    private boolean validateForm() {
+        if (txtFullname.getText().toString().isEmpty()) {
+            txtFullname.setError("field empty");
+            txtFullname.requestFocus();
+            return false;
+        }
 
-            if (edtxFullname.getText().toString().isEmpty()) {
-                edtxFullname.setError("field empty");
-                edtxFullname.requestFocus();
-            } else if (edtxEmail.getText().toString().isEmpty()) {
-                edtxEmail.setError("field empty");
-                edtxEmail.requestFocus();
-            } else if (edtxPhonenumber.getText().toString().isEmpty()) {
-                edtxPhonenumber.setError("field empty");
-                edtxPhonenumber.requestFocus();
-            } else if (edtxAnswer.getText().toString().isEmpty()){
-                edtxAnswer.setError("field empty");
-                edtxAnswer.requestFocus();
-            }else if (pinView.getText().toString().isEmpty()) {
-                snackBarIconError(RegistrationActivity.this, "Pin empty");
-            } else if (!checkboxRegister.isChecked()) {
+        if (txtEmail.getText().toString().isEmpty()) {
+            txtEmail.setError("field empty");
+            txtEmail.requestFocus();
+            return false;
+        }
 
-                UtilitiesCore.buildAlertDialog(
-                        RegistrationActivity.this,
-                        "Please read and indicate your acceptance of the site's Terms of Service",
-                        R.drawable.ic_invalid,
-                        null
-                );
-            } else {
+        if (txtPhonenumber.getText().toString().isEmpty()) {
+            txtPhonenumber.setError("field empty");
+            txtPhonenumber.requestFocus();
+            return false;
+        }
+
+        if (txtAnswer.getText().toString().isEmpty()){
+            txtAnswer.setError("field empty");
+            txtAnswer.requestFocus();
+            return false;
+        }
+
+        if(txtPassword.getText().toString().isEmpty()) {
+            txtPassword.setError("field empty");
+            txtPassword.requestFocus();
+            return false;
+        }
+
+        if(!txtRetypePassword.getText().toString().equals(txtPassword.getText().toString())) {
+            txtRetypePassword.setError("Password doesn't match!");
+            txtRetypePassword.requestFocus();
+            return false;
+        }
+
+        if (pinView.getText().toString().isEmpty()) {
+            snackBarIconError(RegistrationActivity.this, "Pin empty");
+            return false;
+        }
+
+        if (!checkboxRegister.isChecked()) {
+            UtilitiesCore.buildAlertDialog(
+                    RegistrationActivity.this,
+                    "Please read and indicate your acceptance of the site's Terms of Service",
+                    R.drawable.ic_invalid,
+                    null
+            );
+            return false;
+        }
+
+        return true;
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
                 loader.show();
-
-                showCustomDialog();
-
+            } else {
+                loader.dismiss();
             }
         });
+
+        viewModel.getIsSaved().observe(this, saveSuccess -> {
+            if (saveSuccess) showCustomDialog();
+        });
+
+        viewModel.getError().observe(this, error -> Log.e("Its me android", error));
     }
 
     @Override
@@ -204,8 +256,6 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-
-
     private void showCustomDialog() {
         final Dialog dialog = new Dialog(RegistrationActivity.this);
         dialog.setContentView(R.layout.dialog_succes_registration);
@@ -218,15 +268,15 @@ public class RegistrationActivity extends AppCompatActivity {
 
         final Button btnClose = (Button) dialog.findViewById(R.id.btnClose);
 
-
         btnClose.setOnClickListener(v -> {
             loader.dismiss();
             finish();
             preference.setLoginFirstTime(true);
+            preference.setLoggedUser(txtFullname.getText().toString(),
+                    txtEmail.getText().toString());
             Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
             startActivity(i);
         });
-
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
