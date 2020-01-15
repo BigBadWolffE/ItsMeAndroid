@@ -206,7 +206,7 @@
 
                 <EditText
                     android:id="@+id/txtNominalRequest"
-                    android:inputType="text"
+                    android:inputType="number"
                     style="@style/primaryFontBold"
                     android:maxLength="30"
                     android:textColor="@color/black"

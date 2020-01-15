@@ -58,6 +58,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Full Name"
                     android:inputType="text"
+                    android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     android:textColor="@color/black"
                      />
 
@@ -77,6 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email_address"
+                    android:digits="0123456789_-.@qwertzuiopasdfghjklyxcvbnmQWERTZUIOPASDFGHJKLYXCVBNM"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
                      />
@@ -151,7 +153,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:cursorVisible="false"
                     android:gravity="center"
                     android:inputType="numberPassword"
@@ -195,6 +196,7 @@
                     android:layout_marginTop="@dimen/spacing_medium"
                     android:layout_marginBottom="@dimen/spacing_large"
                     android:hint="Answer"
+                    android:digits="0123456789*,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     android:inputType="text"
                     android:textColor="@color/black"
                     />

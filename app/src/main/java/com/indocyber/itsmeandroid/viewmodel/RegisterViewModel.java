@@ -10,6 +10,7 @@ import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.repositories.database.AppDatabase;
 import com.indocyber.itsmeandroid.repositories.database.dao.UserDao;
 
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -49,7 +50,14 @@ public class RegisterViewModel extends AndroidViewModel {
     public void register(User user) {
         isLoading.setValue(true);
         disposable.add(
-                dao.insert(user)
+                dao.checkIfEmailIsUsed(user.getEmail())
+                .flatMap(count -> {
+                    if (count > 0) {
+                        return Single.error(new Throwable("Email already used"));
+                    }
+                    return Single.just(0);
+                })
+                .flatMapCompletable(o -> dao.insert(user))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableCompletableObserver() {

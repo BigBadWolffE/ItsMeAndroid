@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import dmax.dialog.SpotsDialog;
 
@@ -110,49 +112,56 @@ public class RegistrationActivity extends AppCompatActivity {
             newUser.setNoTelp(txtPhonenumber.getText().toString());
             newUser.setPassword(txtPassword.getText().toString());
             newUser.setPin(pinView.getText().toString());
+            newUser.setHobby(txtAnswer.getText().toString());
             viewModel.register(newUser);
         });
     }
 
     private boolean validateForm() {
         if (txtFullname.getText().toString().isEmpty()) {
-            txtFullname.setError("field empty");
+            txtFullname.setError("Field cannot be empty");
             txtFullname.requestFocus();
             return false;
         }
 
         if (txtEmail.getText().toString().isEmpty()) {
-            txtEmail.setError("field empty");
+            txtEmail.setError("Field cannot be empty");
+            txtEmail.requestFocus();
+            return false;
+        }
+
+        if (!UtilitiesCore.checkEmailFormat(txtEmail.getText().toString())) {
+            txtEmail.setError("Invalid email format");
             txtEmail.requestFocus();
             return false;
         }
 
         if (txtPhonenumber.getText().toString().isEmpty()) {
-            txtPhonenumber.setError("field empty");
+            txtPhonenumber.setError("Field cannot be empty");
             txtPhonenumber.requestFocus();
             return false;
         }
 
         if (txtAnswer.getText().toString().isEmpty()){
-            txtAnswer.setError("field empty");
+            txtAnswer.setError("Field cannot be empty");
             txtAnswer.requestFocus();
             return false;
         }
 
         if(txtPassword.getText().toString().isEmpty()) {
-            txtPassword.setError("field empty");
+            txtPassword.setError("Field cannot be empty");
             txtPassword.requestFocus();
             return false;
         }
 
         if(!txtRetypePassword.getText().toString().equals(txtPassword.getText().toString())) {
-            txtRetypePassword.setError("Password doesn't match!");
+            txtRetypePassword.setError("Password does not match!");
             txtRetypePassword.requestFocus();
             return false;
         }
 
-        if (pinView.getText().toString().isEmpty()) {
-            snackBarIconError(RegistrationActivity.this, "Pin empty");
+        if (pinView.getText().toString().length() < 6) {
+            snackBarIconError(RegistrationActivity.this, "Pin must contain 6 digits.");
             return false;
         }
 
@@ -182,7 +191,8 @@ public class RegistrationActivity extends AppCompatActivity {
             if (saveSuccess) showCustomDialog();
         });
 
-        viewModel.getError().observe(this, error -> Log.e("Its me android", error));
+        viewModel.getError().observe(this,
+                error -> snackBarIconError(RegistrationActivity.this, error));
     }
 
     @Override

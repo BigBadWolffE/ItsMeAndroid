@@ -184,8 +184,8 @@ public final class AddCcActivity extends AppCompatActivity {
 
 
         mBillingAddressInput = findViewById(R.id.txtBillingAddress);
-        mBillingAddressInput.setInputType(InputType.TYPE_CLASS_TEXT
-                | InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
+//        mBillingAddressInput.setInputType(InputType.TYPE_CLASS_TEXT
+//                | InputType.TYPE_TEXT_FLAG_IME_MULTI_LINE);
         mBillingAddressInput.setMaxLines(5);
         mBillingAddressInput.setSingleLine(false);
         mBillingAddressInput.setVerticalScrollBarEnabled(true);

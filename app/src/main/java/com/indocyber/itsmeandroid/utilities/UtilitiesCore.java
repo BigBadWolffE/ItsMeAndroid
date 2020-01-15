@@ -35,6 +35,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -254,11 +256,22 @@ public final class UtilitiesCore {
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
+
     /**
      * @author Muhammad Faisal
      * @return current year in integer
      */
     public static int getCurrentYear() {
         return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+    /**
+     * @author Muhammad Faisal
+     * @return true if email format is valid
+     */
+    public static boolean checkEmailFormat(String email) {
+        Pattern regexPattern = Pattern.compile("^(.+)@(.+)$");
+        Matcher matcher = regexPattern.matcher(email);
+        return matcher.matches();
     }
 }
