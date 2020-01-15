@@ -25,6 +25,9 @@
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".view.promo.activity.PromoDetailActivity"
+            android:parentActivityName=".view.promo.activity.PromoActivity"/>
+        <activity
             android:name=".view.aboutus.activity.AboutUsActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />
         <activity android:name=".view.blockallconfirmation.BlockAllConfirmationActivity" />

@@ -92,6 +92,7 @@
                         <Button
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
+                            android:id="@+id/btnMauDong"
                             android:background="@drawable/button_white_border_primary"
                             style="@style/textReg14BoldPrimary"
                             android:text="Mau Dong"/>

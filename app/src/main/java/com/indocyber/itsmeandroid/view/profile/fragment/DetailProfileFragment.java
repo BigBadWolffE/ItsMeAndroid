@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +20,15 @@ import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfileDetailModel;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
+
+import org.w3c.dom.Text;
 
 public class DetailProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +38,8 @@ public class DetailProfileFragment extends Fragment {
     private String mParam2;
 
     private EditText mNamaLengkap, mAlamat, mEmailAddress, mNoTelp, mPass, mPin, mSecretQuestion;
-    private ImageView mEditAlamat, mEditEmail, mEditNoTelp, mEditPass, mEditPin;
+    private TextView mErrorValidation;
+    private ImageView mEditAlamat, mEditNoTelp, mEditPass, mEditPin;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     private ProfileDetailModel mDetailModel = new ProfileDetailModel();
@@ -79,7 +86,6 @@ public class DetailProfileFragment extends Fragment {
         mAlamat = view.findViewById(R.id.txtProfileAlamat);
         mEditAlamat = view.findViewById(R.id.imgEditAlamat);
         mEmailAddress = view.findViewById(R.id.txtProfileEmail);
-        mEditEmail = view.findViewById(R.id.imgEditEmail);
         mNoTelp = view.findViewById(R.id.txtProfileNoTelp);
         mEditNoTelp = view.findViewById(R.id.imgEditNoTelp);
         mPass = view.findViewById(R.id.txtProfilePassword);
@@ -87,6 +93,7 @@ public class DetailProfileFragment extends Fragment {
         mPin = view.findViewById(R.id.txtProfilePin);
         mEditPin = view.findViewById(R.id.imgEditPin);
         mSecretQuestion = view.findViewById(R.id.txtProfileSecretQuestion);
+        mErrorValidation = view.findViewById(R.id.layoutError);
 
         if (mDetailModel != null) {
             setNotNull();
@@ -145,23 +152,6 @@ public class DetailProfileFragment extends Fragment {
             }
         });
 
-        mEditEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mEmailAddress.requestFocus()) {
-                    mEmailAddress.setEnabled(true);
-                    mEmailAddress.setSingleLine(false);
-                    mEmailAddress.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
-                    mEmailAddress.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-                    mEmailAddress.requestFocus();
-                    mEmailAddress.setSelection(mEmailAddress.getText().length());
-                } else {
-                    mEmailAddress.clearFocus();
-                    mEmailAddress.setEnabled(false);
-                }
-            }
-        });
-
         mEditNoTelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -202,12 +192,51 @@ public class DetailProfileFragment extends Fragment {
                     mPin.setInputType(InputType.TYPE_CLASS_NUMBER
                             | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                     mPin.setSelection(mPin.getText().length());
+                    mPin.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            if (mPin.getText().length() < 6) {
+                                Toast.makeText(getContext(), "Pin harus berisi 6 angka.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+
+                        }
+                    });
                 } else {
+                    validationPin();
                     mPin.clearFocus();
                     mPin.setEnabled(false);
                 }
             }
         });
+        mPin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (b) {
+                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                } else {
+                    validationPin();
+                    view.setBackgroundColor(getResources().getColor(R.color.colorwhite));
+                    view.setEnabled(false);
+                }
+            }
+        });
+    }
+
+    private void validationPin() {
+        if (mPin.getText().length() < 6) {
+            mErrorValidation.setVisibility(View.VISIBLE);
+        } else {
+            mErrorValidation.setVisibility(View.GONE);
+        }
     }
 
     private void setNotNull() {
