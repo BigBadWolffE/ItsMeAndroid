@@ -48,6 +48,7 @@ import com.indocyber.itsmeandroid.utilities.core.Animations;
 import com.indocyber.itsmeandroid.view.blockcc.adapter.BlockCCCallback;
 import com.indocyber.itsmeandroid.view.editcardsecuritycode.EditCardSecurityCodeActivity;
 
+import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -185,6 +186,10 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             });
             btnShare.setOnClickListener(v -> {
                 setRequestPermission(model);
+            });
+            btnPromo.setOnClickListener(v -> {
+                Intent intent = new Intent(activity, PromoActivity.class);
+                activity.startActivity(intent);
             });
 
             //logic block card

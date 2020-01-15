@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +50,7 @@ public class PromoItemAdapter extends RecyclerView.Adapter<PromoItemAdapter.Item
         holder.title.setText(mPromoItem.get(position).getTitle());
         holder.desc.setText(mPromoItem.get(position).getDesc());
         holder.periode.setText(mPromoItem.get(position).getPeriode());
-        holder.promoItem.setOnClickListener(new View.OnClickListener() {
+        holder.mauDong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mlistener.onClick(position);
@@ -65,6 +67,7 @@ public class PromoItemAdapter extends RecyclerView.Adapter<PromoItemAdapter.Item
         CardView promoItem;
         TextView title, desc, periode;
         ImageView banner;
+        Button mauDong;
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             promoItem = itemView.findViewById(R.id.cardviewPromoItem);
@@ -72,6 +75,7 @@ public class PromoItemAdapter extends RecyclerView.Adapter<PromoItemAdapter.Item
             title = itemView.findViewById(R.id.lblAllPromoTitle);
             desc = itemView.findViewById(R.id.lblAllPromoDesc);
             periode = itemView.findViewById(R.id.lblAllPromoTglPeriode);
+            mauDong = itemView.findViewById(R.id.btnMauDong);
         }
     }
 }
