@@ -42,7 +42,6 @@ public class DetailProfileFragment extends Fragment {
     private AlertDialog mLoader;
     private EditText mNamaLengkap, mAlamat, mEmailAddress, mNoTelp, mPass, mPin, mSecretQuestion;
     private TextView mErrorValidation;
-    private ProfileDetailModel mDetailModel = new ProfileDetailModel();
     private ImageView mEditAlamat, mEditNoTelp, mEditPass, mEditPin;
 //    SharedPreferences pref;
 //    SharedPreferences.Editor editor;
