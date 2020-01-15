@@ -26,7 +26,6 @@ import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.fragment.HomeFragment;
 import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
-import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
 import com.indocyber.itsmeandroid.view.splashscreen.SplashScreenActivity;
 
 import dmax.dialog.SpotsDialog;
@@ -37,34 +36,31 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar mToolbar;
     private ActionBarDrawerToggle mToggle;
     private TextView mToolbarText;
-
-    private Preference preference;
-    private AlertDialog alertDialog;
+    private Preference mPreference;
+    private AlertDialog mAlertDialog;
+    private String mFullName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         mToolbar = findViewById(R.id.toolbar);
-
-        preference = new Preference(this);
+        mPreference = new Preference(this);
         setSupportActionBar(mToolbar);
         mToolbarText = (TextView) findViewById(R.id.txtToolbar);
-
-        alertDialog = new SpotsDialog.Builder()
+        mFullName = mPreference.getLoggedUserFullname();
+        mAlertDialog = new SpotsDialog.Builder()
                 .setCancelable(false)
                 .setContext(HomeActivity.this)
                 .build();
         if (getSupportActionBar() != null) {
 
             if (mToolbarText != null) {
-                mToolbarText.setText("Welcome back, Jordan");
+                mToolbarText.setText("Welcome back, " + mFullName);
             }
         }
 
         mDrawer = findViewById(R.id.drawerLayout);
-
 
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
@@ -78,10 +74,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-
     public void setmToolbarHomeFragment() {
         if (mToolbarText != null) {
-            mToolbarText.setText("Welcome back, Jordan");
+            mToolbarText.setText("Welcome back, " + mFullName);
         }
     }
 
@@ -94,7 +89,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mDrawer.addDrawerListener(mToggle);
         mToggle.syncState();
     }
-
 
     @Override
     protected void onPause() {
@@ -121,7 +115,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         String title = "";
 
         if (id == R.id.navHome) {
-            title = "Welcome back, Jordan";
+            title = "Welcome back, " + mFullName;
             fragment = new HomeFragment();
             mToolbarText.setText(title);
         } else if (id == R.id.navContact) {
@@ -141,12 +135,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.navSettings) {
 
         } else if (id == R.id.navLogout) {
-            alertDialog.show();
-            preference.setLoginFirstTime(false);
+            mAlertDialog.show();
+            mPreference.setLoginFirstTime(false);
             Intent intent = new Intent(this, SplashScreenActivity.class);
             startActivity(intent);
             finish();
-            alertDialog.dismiss();
+            mAlertDialog.dismiss();
             Toast.makeText(this, "Logout Successful", Toast.LENGTH_SHORT).show();
         }
 

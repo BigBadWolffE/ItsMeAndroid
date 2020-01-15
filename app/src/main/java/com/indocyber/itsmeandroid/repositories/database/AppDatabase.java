@@ -8,7 +8,9 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.repositories.database.dao.ImageCardDao;
+import com.indocyber.itsmeandroid.repositories.database.dao.UserDao;
 import com.indocyber.itsmeandroid.repositories.database.typeconverter.ListStringTypeConverter;
 
 import java.util.ArrayList;
@@ -20,12 +22,13 @@ import java.util.ArrayList;
  *@version 1.0
  */
 
-@Database(entities = {ImageCardModel.class}, version = 2, exportSchema = false)
+@Database(entities = {ImageCardModel.class, User.class}, version = 3, exportSchema = false)
 @TypeConverters({ListStringTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
 
     public abstract ImageCardDao imageCardDao();
+    public abstract UserDao userDao();
 
     public static AppDatabase getInstance(Application application) {
         if(instance == null) {

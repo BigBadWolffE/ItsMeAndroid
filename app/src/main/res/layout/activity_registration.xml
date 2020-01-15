@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffff"
+        android:background="@color/colorPrimary"
         android:orientation="vertical"
         tools:context=".view.ResgitrationFragment">
 
@@ -28,12 +28,13 @@
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="-15dp"
-            app:cardBackgroundColor="#ffffff"
-            app:cardCornerRadius="20dp">
+            android:background="@drawable/bgcardlayout"
+            android:paddingTop="@dimen/spacing_medium"
+            android:paddingLeft="@dimen/spacing_xmedium"
+            android:paddingRight="@dimen/spacing_xmedium">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                     android:textColor="#5D5D5D" />
 
                 <EditText
-                    android:id="@+id/edtxFullname"
+                    android:id="@+id/txtFullname"
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +72,7 @@
                     android:textColor="#5D5D5D" />
 
                 <EditText
-                    android:id="@+id/edtxEmail"
+                    android:id="@+id/txtEmail"
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -91,7 +92,7 @@
                     android:textColor="#5D5D5D" />
 
                 <EditText
-                    android:id="@+id/edtxPhonenumber"
+                    android:id="@+id/txtPhonenumber"
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,7 +108,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:text="@string/password"
+                    android:textColor="#5D5D5D" />
 
+                <EditText
+                    android:id="@+id/txtPassword"
+                    style="@style/primaryFontBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    style="@style/primaryFontLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/retype_password"
+                    android:textColor="#5D5D5D"/>
+
+                <EditText
+                    android:id="@+id/txtRetypePassword"
+                    style="@style/primaryFontBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Retype Password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    style="@style/primaryFontLight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Pin (6 digit)"
                     android:textColor="#5D5D5D" />
 
@@ -154,7 +188,7 @@
                     android:spinnerMode="dropdown" />
 
                 <EditText
-                    android:id="@+id/edtxAnswer"
+                    android:id="@+id/txtAnswer"
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -180,15 +214,16 @@
                     android:id="@+id/buttonRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginRight="50dp"
                     android:layout_marginBottom="15dp"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:textAppearance="@style/primaryFont"
+                    android:textSize="16dp"
                     android:background="@drawable/btn_rounded_primary"
                     android:text="@string/register"
                     android:textColor="#FFFFFF" />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

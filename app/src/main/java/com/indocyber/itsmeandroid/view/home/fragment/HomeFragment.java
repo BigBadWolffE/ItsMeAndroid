@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -68,7 +70,7 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
     private TabLayout mTabLayout;
     private MaterialRippleLayout btnBlock,btnCall,btnChat,btnContact;
     private AlertDialog loader;
-
+    private RelativeLayout mPlaceHolder;
     private Button btnMemberhip, btnPersonal, btnCreditCard;
     private FloatingActionButton fab_add;
 
@@ -99,7 +101,7 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
         btnPersonal = view.findViewById(R.id.btnPersonal);
         btnCreditCard = view.findViewById(R.id.btnCreditCard);
         fab_add = view.findViewById(R.id.fab_add);
-
+        mPlaceHolder = view.findViewById(R.id.rlPlaceHolder);
         mViewPager = view.findViewById(R.id.imagePage);
         mTabLayout = view.findViewById(R.id.tabDots);
         mViewPagerCard = view.findViewById(R.id.viewPagerCard);
@@ -270,11 +272,18 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
         });
 
         viewModel.getCardList().observe(getActivity(), list -> {
-            ImageCardAdapter adapter = new ImageCardAdapter(getActivity(), list);
-            mViewPagerCard.setAdapter(adapter);
-            mViewPagerCard.setPageMargin(getResources()
-                    .getDimensionPixelOffset(R.dimen.viewpager_margin_overlap));
-            mViewPagerCard.setOffscreenPageLimit(list.size());
+            if (list.size() > 0) {
+                ImageCardAdapter adapter = new ImageCardAdapter(getActivity(), list);
+                mPlaceHolder.setVisibility(View.GONE);
+                mViewPagerCard.setVisibility(View.VISIBLE);
+                mViewPagerCard.setAdapter(adapter);
+                mViewPagerCard.setPageMargin(getResources()
+                        .getDimensionPixelOffset(R.dimen.viewpager_margin_overlap));
+                mViewPagerCard.setOffscreenPageLimit(list.size());
+            } else {
+                mViewPagerCard.setVisibility(View.GONE);
+                mPlaceHolder.setVisibility(View.VISIBLE);
+            }
         });
     }
 

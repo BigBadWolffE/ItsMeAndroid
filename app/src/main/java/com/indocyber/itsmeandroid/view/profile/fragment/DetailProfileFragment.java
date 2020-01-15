@@ -1,14 +1,14 @@
 package com.indocyber.itsmeandroid.view.profile.fragment;
 
-import android.content.Context;
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.InputType;
@@ -16,7 +16,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,8 +24,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.ProfileDetailModel;
-import com.indocyber.itsmeandroid.model.ProfileKTPModel;
+import com.indocyber.itsmeandroid.model.User;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
+import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
+
+import dmax.dialog.SpotsDialog;
 
 import org.w3c.dom.Text;
 
@@ -36,13 +39,15 @@ public class DetailProfileFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
-
+    private AlertDialog mLoader;
     private EditText mNamaLengkap, mAlamat, mEmailAddress, mNoTelp, mPass, mPin, mSecretQuestion;
     private TextView mErrorValidation;
-    private ImageView mEditAlamat, mEditNoTelp, mEditPass, mEditPin;
-    SharedPreferences pref;
-    SharedPreferences.Editor editor;
     private ProfileDetailModel mDetailModel = new ProfileDetailModel();
+    private ImageView mEditAlamat, mEditNoTelp, mEditPass, mEditPin;
+//    SharedPreferences pref;
+//    SharedPreferences.Editor editor;
+    private Preference mPreference;
+    private ProfileDetailViewModel viewModel;
 
     public DetailProfileFragment() {
         // Required empty public constructor
@@ -76,12 +81,19 @@ public class DetailProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        pref = getContext().getSharedPreferences("MyPref", 0);
-        editor = pref.edit();
-        Gson gson = new Gson();
-        String paramUserData = pref.getString("ProfileDetail", null);
-        mDetailModel = gson.fromJson(paramUserData, ProfileDetailModel.class);
-
+//        pref = getContext().getSharedPreferences("MyPref", 0);
+//        editor = pref.edit();
+//        Gson gson = new Gson();
+//        String paramUserData = pref.getString("ProfileDetail", null);
+//        mDetailModel = gson.fromJson(paramUserData, User.class);
+        mLoader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(getActivity())
+                .build();
+        mPreference = new Preference(getActivity());
+        String userEmail = mPreference.getLoggedUserEmail();
+        viewModel = ViewModelProviders.of(this).get(ProfileDetailViewModel.class);
+        viewModel.getUserData(userEmail);
         mNamaLengkap = view.findViewById(R.id.txtProfileNamaLengkap);
         mAlamat = view.findViewById(R.id.txtProfileAlamat);
         mEditAlamat = view.findViewById(R.id.imgEditAlamat);
@@ -94,10 +106,6 @@ public class DetailProfileFragment extends Fragment {
         mEditPin = view.findViewById(R.id.imgEditPin);
         mSecretQuestion = view.findViewById(R.id.txtProfileSecretQuestion);
         mErrorValidation = view.findViewById(R.id.layoutError);
-
-        if (mDetailModel != null) {
-            setNotNull();
-        }
 
         View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
             @Override
@@ -138,7 +146,7 @@ public class DetailProfileFragment extends Fragment {
         mEditAlamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mAlamat.requestFocus()) {
+                if (!mAlamat.hasFocus()) {
                     mAlamat.setEnabled(true);
                     mAlamat.setSingleLine(false);
                     mAlamat.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
@@ -155,7 +163,7 @@ public class DetailProfileFragment extends Fragment {
         mEditNoTelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mNoTelp.requestFocus()) {
+                if (!mNoTelp.hasFocus()) {
                     mNoTelp.setEnabled(true);
                     mNoTelp.setInputType(InputType.TYPE_CLASS_PHONE);
                     mNoTelp.requestFocus();
@@ -170,7 +178,7 @@ public class DetailProfileFragment extends Fragment {
         mEditPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mPass.requestFocus()) {
+                if (!mPass.hasFocus()) {
                     mPass.setEnabled(true);
                     mPass.requestFocus();
                     mPass.setInputType(InputType.TYPE_CLASS_TEXT
@@ -186,7 +194,7 @@ public class DetailProfileFragment extends Fragment {
         mEditPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!mPin.requestFocus()) {
+                if (!mPin.hasFocus()) {
                     mPin.setEnabled(true);
                     mPin.requestFocus();
                     mPin.setInputType(InputType.TYPE_CLASS_NUMBER
@@ -229,6 +237,8 @@ public class DetailProfileFragment extends Fragment {
                 }
             }
         });
+        
+        observeViewModel();
     }
 
     private void validationPin() {
@@ -239,7 +249,7 @@ public class DetailProfileFragment extends Fragment {
         }
     }
 
-    private void setNotNull() {
+    private void setNotNull(User mDetailModel) {
         mNamaLengkap.setText(mDetailModel.getNamaLengkap());
         mAlamat.setText(mDetailModel.getAlamat());
         mEmailAddress.setText(mDetailModel.getEmail());
@@ -252,20 +262,19 @@ public class DetailProfileFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ProfileDetailModel mDetailModelInside = new ProfileDetailModel();
-        mDetailModelInside = setToModel();
-        saveToSharedPreferences(mDetailModelInside);
+        User mDetailModelInside = setToModel();
+        viewModel.updateUserProfile(mDetailModelInside);
     }
 
-    private void saveToSharedPreferences(ProfileDetailModel mDetailModelInside) {
-        Gson gson = new Gson();
-        String json = gson.toJson(mDetailModelInside);
-        editor.putString("ProfileDetail", json);
-        editor.commit();
-    }
+//    private void saveToSharedPreferences(User mDetailModelInside) {
+//        Gson gson = new Gson();
+//        String json = gson.toJson(mDetailModelInside);
+//        editor.putString("ProfileDetail", json);
+//        editor.commit();
+//    }
 
-    private ProfileDetailModel setToModel() {
-        ProfileDetailModel mDetailModelInside = new ProfileDetailModel();
+    private User setToModel() {
+        User mDetailModelInside = new User();
         mDetailModelInside.setNamaLengkap(mNamaLengkap.getText().toString());
         mDetailModelInside.setAlamat(mAlamat.getText().toString());
         mDetailModelInside.setEmail(mEmailAddress.getText().toString());
@@ -274,5 +283,21 @@ public class DetailProfileFragment extends Fragment {
         mDetailModelInside.setPin(mPin.getText().toString());
         mDetailModelInside.setHobby(mSecretQuestion.getText().toString());
         return mDetailModelInside;
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                mLoader.show();
+            } else {
+                mLoader.dismiss();
+            }
+        });
+
+        viewModel.getUser().observe(this, user -> {
+            if (user != null) {
+                setNotNull(user);
+            }
+        });
     }
 }
