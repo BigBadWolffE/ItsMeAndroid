@@ -55,7 +55,7 @@
                 android:scrollHorizontally="true"
                 android:ellipsize="end"
                 android:inputType="text"
-                android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                android:digits="0123456789._-@qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                 android:textColor="@color/black" />
 
             <!--editext username-->
