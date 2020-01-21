@@ -82,7 +82,8 @@
                 style="@style/textReg16BoldBlack"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine"/>
+                android:inputType="text|textMultiLine"
+                android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"/>
         </LinearLayout>
 
         <LinearLayout
@@ -190,7 +191,8 @@
                 style="@style/textReg16BoldBlack"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine" />
+                android:inputType="text|textMultiLine"
+                android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM" />
         </LinearLayout>
 
         <LinearLayout
@@ -217,7 +219,8 @@
                 style="@style/textReg16BoldBlack"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
-                android:inputType="textMultiLine" />
+                android:inputType="text|textMultiLine"
+                android:digits="0123456789.,@qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM" />
         </LinearLayout>
 
         <LinearLayout

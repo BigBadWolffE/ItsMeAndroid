@@ -149,7 +149,6 @@ public class DetailProfileFragment extends Fragment {
                     mAlamat.setEnabled(true);
                     mAlamat.setSingleLine(false);
                     mAlamat.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
-                    mAlamat.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                     mAlamat.requestFocus();
                     mAlamat.setSelection(mAlamat.getText().length());
                 } else {

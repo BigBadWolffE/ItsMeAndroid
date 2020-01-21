@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.repositories.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -21,7 +22,7 @@ import io.reactivex.Single;
 @Dao
 public interface UserDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insert(User user);
 
     @Update
@@ -32,4 +33,7 @@ public interface UserDao {
 
     @Query("Select * from User where email = :email")
     Single<User> getUserData(String email);
+
+    @Query("Select Count(0) from User where email = :email")
+    Single<Integer> checkIfEmailIsUsed(String email);
 }
