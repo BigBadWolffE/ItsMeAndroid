@@ -25,8 +25,11 @@
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
+            android:parentActivityName=".view.login.LoginOptionActivity"/>
+        <activity
             android:name=".view.promo.activity.PromoDetailActivity"
-            android:parentActivityName=".view.promo.activity.PromoActivity"/>
+            android:parentActivityName=".view.promo.activity.PromoActivity" />
         <activity
             android:name=".view.aboutus.activity.AboutUsActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />

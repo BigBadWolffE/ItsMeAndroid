@@ -10,10 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.view.forgotpassword.activity.ForgotPasswordActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
@@ -31,6 +33,7 @@ public class LoginWithEmailActivity extends AppCompatActivity {
     private EditText edtxUsername;
     private EditText edtxPassword;
     private Preference preference;
+    private TextView mForgotPasswordBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class LoginWithEmailActivity extends AppCompatActivity {
                 .setContext(LoginWithEmailActivity.this)
                 .build();
 
+        mForgotPasswordBtn = findViewById(R.id.labelForgotPassword);
         mbuttonLogin = findViewById(R.id.buttonLogin);
         edtxUsername = findViewById(R.id.edtxUsername);
         edtxPassword = findViewById(R.id.edtxPassword);
@@ -68,6 +72,13 @@ public class LoginWithEmailActivity extends AppCompatActivity {
                 } else {
                     viewModel.login(edtxUsername.getText().toString(), edtxPassword.getText().toString());
                 }
+            }
+        });
+        mForgotPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginWithEmailActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
         observeViewModel();
