@@ -60,7 +60,7 @@
                 android:id="@+id/edtxUsername"
                 style="@style/primaryFontBold"
                 android:inputType="text"
-                android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                android:digits="0123456789.@-_qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
