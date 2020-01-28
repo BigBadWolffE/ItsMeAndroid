@@ -45,6 +45,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         mToolbar = findViewById(R.id.toolbar);
+        mToolbar.setElevation(0f);
         mPreference = new Preference(this);
         setSupportActionBar(mToolbar);
         mToolbarText = (TextView) findViewById(R.id.txtToolbar);
