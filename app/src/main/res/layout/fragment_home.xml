@@ -24,15 +24,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            android:background="@drawable/default_slider_nocard"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </LinearLayout>
+
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/imagePage"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="250dp"
                         android:background="@drawable/bg_gradient_soft"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"
@@ -209,19 +225,19 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentBottom="true"
             android:alpha="0.5"
-            android:src="@drawable/imgbglogin" />
+            android:src="@drawable/default_addnewcard" />
 
-        <TextView
-            style="@style/primaryFont"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:text="You don't have any card."
-            android:textColor="@color/primary_font_color" />
+<!--        <TextView-->
+<!--            style="@style/primaryFont"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_alignParentTop="true"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:gravity="center"-->
+<!--            android:text="You don't have any card."-->
+<!--            android:textColor="@color/primary_font_color" />-->
 
     </RelativeLayout>
 
