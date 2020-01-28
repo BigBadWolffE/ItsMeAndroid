@@ -25,14 +25,19 @@
                     android:orientation="vertical">
 
                     <LinearLayout
+                        android:id="@+id/view"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/colorPrimary">
+                        android:layout_height="200dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <ImageView
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/imagePage"
                             android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            android:background="@drawable/default_slider_nocard"
+                            android:layout_height="200dp"
+                            android:background="@drawable/bg_gradient_soft"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -40,15 +45,23 @@
 
                     </LinearLayout>
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/imagePage"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
-                        android:background="@drawable/bg_gradient_soft"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimary">
+
+                        <ImageView
+                            android:id="@+id/imgDefault"
+                            android:layout_width="match_parent"
+                            android:layout_height="230dp"
+                            android:scaleType="centerCrop"
+                            android:background="@drawable/default_slider_nocard"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/linearLayout2"
@@ -58,7 +71,7 @@
                         android:layout_centerInParent="false"
                         android:layout_marginBottom="@dimen/spacing_large"
                         android:gravity="start"
-                        app:layout_constraintBottom_toBottomOf="@+id/imagePage"
+                        app:layout_constraintBottom_toBottomOf="@+id/view"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
@@ -207,7 +220,6 @@
                         android:visibility="gone"
                         android:layout_marginTop="@dimen/spacing_large" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>
     </ScrollView>
@@ -249,6 +261,7 @@
         android:alpha="0.5"
         android:visibility="gone"
         android:background="@color/black" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

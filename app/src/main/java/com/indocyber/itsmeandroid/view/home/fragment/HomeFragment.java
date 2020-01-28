@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.balysv.materialripple.MaterialRippleLayout;
@@ -73,6 +75,9 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
     private RelativeLayout mPlaceHolder;
     private Button btnMemberhip, btnPersonal, btnCreditCard;
     private FloatingActionButton fab_add;
+    private ImageView imgDefault;
+    private LinearLayout linearLayoutViewPager;
+    private LinearLayout linearLayoutTab;
 
     private boolean rotate = false;
     private HomeViewModel viewModel;
@@ -110,6 +115,10 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
         btnContact = view.findViewById(R.id.btnContact);
         btnCall = view.findViewById(R.id.btnCall);
         btnChat = view.findViewById(R.id.btnChat);
+
+        imgDefault = view.findViewById(R.id.imgDefault);
+        linearLayoutViewPager = view.findViewById(R.id.view);
+        linearLayoutTab = view.findViewById(R.id.linearLayout2);
     }
 
     @Override
@@ -280,9 +289,13 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
                 mViewPagerCard.setPageMargin(getResources()
                         .getDimensionPixelOffset(R.dimen.viewpager_margin_overlap));
                 mViewPagerCard.setOffscreenPageLimit(list.size());
+                imgDefault.setVisibility(View.GONE);
             } else {
                 mViewPagerCard.setVisibility(View.GONE);
                 mPlaceHolder.setVisibility(View.VISIBLE);
+                imgDefault.setVisibility(View.VISIBLE);
+                linearLayoutTab.setVisibility(View.GONE);
+                linearLayoutViewPager.setVisibility(View.GONE);
             }
         });
     }
