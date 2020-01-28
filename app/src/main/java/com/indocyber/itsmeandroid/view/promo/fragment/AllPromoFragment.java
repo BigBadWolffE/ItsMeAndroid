@@ -114,6 +114,10 @@ public class AllPromoFragment extends Fragment implements PromoItemAdapter.Liste
     @Override
     public void onClick(int position) {
         Intent intent = new Intent(getActivity(), PromoDetailActivity.class);
+        intent.putExtra("titlePromo", titleList[position]);
+        intent.putExtra("imgPromo", imgList[position]);
+        intent.putExtra("descPromo", descList[position]);
+        intent.putExtra("periodePromo", periodeList[position]);
         startActivity(intent);
     }
 }
