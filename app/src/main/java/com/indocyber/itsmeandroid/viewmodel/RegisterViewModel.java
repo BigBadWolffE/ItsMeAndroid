@@ -24,11 +24,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class RegisterViewModel extends AndroidViewModel {
 
-    UserDao dao;
-    CompositeDisposable disposable = new CompositeDisposable();
-    MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
-    MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
-    MutableLiveData<String> error = new MutableLiveData<>();
+    private UserDao dao;
+    private CompositeDisposable disposable = new CompositeDisposable();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
+    private MutableLiveData<String> error = new MutableLiveData<>();
 
     public MutableLiveData<Boolean> getIsLoading() {
         return isLoading;

@@ -1,15 +1,12 @@
 package com.indocyber.itsmeandroid.view.requestincreaselimit;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -30,12 +27,7 @@ import org.apache.commons.text.WordUtils;
  */
 public class RequestIncreaseLimitActivity extends AppCompatActivity {
 
-    private TextView mCardNumber;
-    private TextView mCardHolder;
-    private TextView mCardExpiry;
-    private EditText mCurrentLimit;
     private EditText mNominalRequestInput;
-    private Button mSubmitButton;
     private String mNumber;
     private String mHolderName;
     private String mExpiryDate;
@@ -60,7 +52,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
 
         createToolbar();
 
-        mCurrentLimit = findViewById(R.id.txtCurrentLimit);
+        EditText mCurrentLimit = findViewById(R.id.txtCurrentLimit);
         mCurrentLimit.setEnabled(false);
         mNominalRequestInput = findViewById(R.id.txtNominalRequest);
         mNominalRequestInput.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -98,7 +90,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
             }
         });
 
-        mSubmitButton = findViewById(R.id.btnSubmit);
+        Button mSubmitButton = findViewById(R.id.btnSubmit);
         mSubmitButton.setOnClickListener(view -> submit());
 
         mRequestLimitSpinner = findViewById(R.id.spnRequestLimit);
@@ -131,7 +123,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         int paddingLeft = (creditCard.getWidth() * 8 / 100);
         int startYAxis = (creditCard.getHeight() / 2);
 
-        mCardNumber = findViewById(R.id.lblCcNumber);
+        TextView mCardNumber = findViewById(R.id.lblCcNumber);
         mCardNumber.setText(padCardNumber(cardNumber, 3));
         mCardNumber.setX(position[0] + paddingLeft);
         mCardNumber.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
@@ -148,13 +140,13 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         expiryLabel.setY(mCardNumber.getY() + mCardNumber.getHeight()
                 + getResources().getDimension(R.dimen.spacing_large));
 
-        mCardHolder = findViewById(R.id.lblCardHolder);
+        TextView mCardHolder = findViewById(R.id.lblCardHolder);
         mCardHolder.setText(WordUtils.capitalizeFully(holderName));
         mCardHolder.setX(position[0] + paddingLeft);
         mCardHolder.setY(holderLabel.getY() + holderLabel.getHeight()
                 + getResources().getDimension(R.dimen.spacing_xsmall));
 
-        mCardExpiry = findViewById(R.id.lblExpiry);
+        TextView mCardExpiry = findViewById(R.id.lblExpiry);
         mCardExpiry.setText(expiryDate);
         mCardExpiry.setX(expiryLabel.getX());
         mCardExpiry.setY(expiryLabel.getY() + expiryLabel.getHeight() +
@@ -197,9 +189,9 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     }
 
     private String padCardNumber(String number, int pad) {
-        String padding = "";
+        StringBuilder padding = new StringBuilder();
         for(int i = 0; i < pad; i++){
-            padding += " ";
+            padding.append(" ");
         }
 
         String paddedText = number + "";

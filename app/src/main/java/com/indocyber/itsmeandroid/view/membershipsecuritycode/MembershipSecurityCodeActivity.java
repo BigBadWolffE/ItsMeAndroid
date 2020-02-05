@@ -48,7 +48,7 @@ public class MembershipSecurityCodeActivity extends AppCompatActivity implements
         setPinView();
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(MembershipSecurityCodeActivity.this).build();
 
-        NumberKeyboard numberKeyboard = (NumberKeyboard) findViewById(R.id.numberKeyboard);
+        NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboard);
         numberKeyboard.setListener(this);
 
 
@@ -76,18 +76,15 @@ public class MembershipSecurityCodeActivity extends AppCompatActivity implements
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (before == 6) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            alertDialog.show();
-                            new Handler().postDelayed(() -> {
-                                alertDialog.dismiss();
-                                finish();
-                                Intent intent = new Intent(MembershipSecurityCodeActivity.this, AddMembershipActivity.class);
-                                startActivity(intent);
+                    new Handler().postDelayed(() -> {
+                        alertDialog.show();
+                        new Handler().postDelayed(() -> {
+                            alertDialog.dismiss();
+                            finish();
+                            Intent intent = new Intent(MembershipSecurityCodeActivity.this, AddMembershipActivity.class);
+                            startActivity(intent);
 
-                            }, 800);
-                        }
+                        }, 800);
                     }, 200);
                 }
 

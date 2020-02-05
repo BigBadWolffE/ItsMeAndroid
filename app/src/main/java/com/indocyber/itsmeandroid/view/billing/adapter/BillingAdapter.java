@@ -65,7 +65,7 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
         private TextView billingDate;
         private TextView billingAttachment;
 
-        public BillingViewHolder(@NonNull View itemView) {
+        private BillingViewHolder(@NonNull View itemView) {
             super(itemView);
             billingTitle = itemView.findViewById(R.id.txtBillingTitle);
             billingBody = itemView.findViewById(R.id.txtBillingMessage);
@@ -73,7 +73,7 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
             billingAttachment = itemView.findViewById(R.id.txtBillingAttachment);
         }
 
-        public void bind(Billing billing){
+        private void bind(Billing billing){
             billingTitle.setText(billing.getTitle());
             if (billing.getBody().length() > 70) {
                 String cutText = billing.getBody().substring(0, 67) + "...";

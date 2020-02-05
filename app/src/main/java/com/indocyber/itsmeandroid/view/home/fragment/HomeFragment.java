@@ -1,7 +1,5 @@
 package com.indocyber.itsmeandroid.view.home.fragment;
 
-
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,8 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
@@ -30,7 +26,6 @@ import com.balysv.materialripple.MaterialRippleLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
@@ -44,8 +39,6 @@ import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
@@ -59,7 +52,6 @@ import static com.indocyber.itsmeandroid.utilities.core.Animations.showOut;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.Listener {
-    //private FloatingActionButton mFabMembership, mFabPersonal, mFabCreditCard;
     private int[] mResources = {
             R.drawable.imgsliderbannerstarbuck,
             R.drawable.imgsliderbannerstarbuck,
@@ -68,7 +60,6 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
     };
     private ViewPager mViewPager;
     private ViewPager mViewPagerCard;
-    private ImageHomeDashboardAdapter mImageHomeDashboardAdapter;
     private TabLayout mTabLayout;
     private MaterialRippleLayout btnBlock,btnCall,btnChat,btnContact;
     private AlertDialog loader;
@@ -78,6 +69,8 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
     private ImageView imgDefault;
     private LinearLayout linearLayoutViewPager;
     private LinearLayout linearLayoutTab;
+    //// TODO: 05/02/2020 delete when real number provided
+    private String customerServicePhone = "123456789";
 
     private boolean rotate = false;
     private HomeViewModel viewModel;
@@ -94,7 +87,6 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -183,9 +175,7 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
               startActivity(i);
             });
 
-            btnCall.setOnClickListener(v -> {
-                dialPhoneNumber("123456789");
-            });
+            btnCall.setOnClickListener(v -> dialPhoneNumber(customerServicePhone));
         }
     }
 
@@ -230,7 +220,8 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
     }
 
     private void setImageHomeSlider() {
-        mImageHomeDashboardAdapter = new ImageHomeDashboardAdapter(getActivity(), mResources, this);
+        ImageHomeDashboardAdapter mImageHomeDashboardAdapter =
+                new ImageHomeDashboardAdapter(getActivity(), mResources, this);
         mViewPager.setAdapter(mImageHomeDashboardAdapter);
         mTabLayout.setupWithViewPager(mViewPager, true);
     }

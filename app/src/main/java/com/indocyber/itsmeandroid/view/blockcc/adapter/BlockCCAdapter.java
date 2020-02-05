@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 
@@ -29,6 +27,7 @@ import com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPin
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPinActivity.INTENT_BLOCK_CONFIRMATION;
 
@@ -79,10 +78,7 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
                 .apply(options)
                 .into(holder.imageBlock);
 
-        holder.fabBLock.setOnClickListener(v -> {
-            showCustomDialog(model);
-        });
-
+        holder.fabBLock.setOnClickListener(v -> showCustomDialog(model));
     }
 
     @Override
@@ -115,14 +111,14 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
         dialog.setCancelable(false);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        final Button btnBlockNow = (Button) dialog.findViewById(R.id.btnBlockNow);
-        final EditText edtxMessage = (EditText) dialog.findViewById(R.id.edtxMessage);
+        final Button btnBlockNow = dialog.findViewById(R.id.btnBlockNow);
+        final EditText edtxMessage = dialog.findViewById(R.id.edtxMessage);
 
-        final TextView txtNumberCard = (TextView) dialog.findViewById(R.id.txtNumberCard);
+        final TextView txtNumberCard = dialog.findViewById(R.id.txtNumberCard);
         txtNumberCard.setText(model.getNumberCard());
 
 
@@ -137,7 +133,7 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
             }
         });
 
-        ((ImageButton) dialog.findViewById(R.id.imgButtonClose)).setOnClickListener(v -> dialog.dismiss());
+        (dialog.findViewById(R.id.imgButtonClose)).setOnClickListener(v -> dialog.dismiss());
 
 
         dialog.show();

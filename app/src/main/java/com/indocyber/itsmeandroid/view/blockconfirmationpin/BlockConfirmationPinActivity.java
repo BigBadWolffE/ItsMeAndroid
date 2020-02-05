@@ -9,7 +9,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.WindowManager;
@@ -23,27 +22,20 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 import com.indocyber.itsmeandroid.viewmodel.BlockConfirmationPinViewModel;
+
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
 public class BlockConfirmationPinActivity extends AppCompatActivity {
 
-    private TextView mTxtNumberCard;
-    private TextView mTxtNameCard;
-    private TextView mTxtExpireCard;
-    private Button mBtnConfirmation;
-    private ImageView mImageBlock;
     private ImageCardModel model;
 
-    private AlertDialog alertDialog;
     private PinView firstPinView;
     private BlockConfirmationPinViewModel viewModel;
 
     public static String INTENT_BLOCK_CONFIRMATION = "INTENT_BLOCK_CONFIRMATION";
-    public static String INTENT_BLOCK_POSITION = "INTENT_BLOCK_POSITION";
-    public static int REQUEST_BLOCK_DELETE = 101;
     private AlertDialog loader;
 
     @Override
@@ -58,17 +50,13 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         firstPinView = findViewById(R.id.firstPinView);
-        mTxtNameCard = findViewById(R.id.txtNameCard);
-        mTxtNumberCard = findViewById(R.id.txtNumberCard);
-        mTxtExpireCard = findViewById(R.id.txtExpireCard);
-
+        TextView mTxtNameCard = findViewById(R.id.txtNameCard);
+        TextView mTxtNumberCard = findViewById(R.id.txtNumberCard);
+        TextView mTxtExpireCard = findViewById(R.id.txtExpireCard);
         viewModel = ViewModelProviders.of(this).get(BlockConfirmationPinViewModel.class);
-        mBtnConfirmation = findViewById(R.id.btnConfirmation);
-        mBtnConfirmation.setOnClickListener(v -> {
-            viewModel.blockCard(model.getId());
-        });
-
-        mImageBlock = findViewById(R.id.imageBlock);
+        Button mBtnConfirmation = findViewById(R.id.btnConfirmation);
+        mBtnConfirmation.setOnClickListener(v -> viewModel.blockCard(model.getId()));
+        ImageView mImageBlock = findViewById(R.id.imageBlock);
 
         if (model != null) {
             mTxtNameCard.setText(model.getNameCard());
@@ -76,7 +64,6 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
             mTxtExpireCard.setText(model.getExpireCard());
             imageGlide(this, mImageBlock, model.getImage());
         }
-
         setPinView();
         observeViewModel();
     }
@@ -84,7 +71,6 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
     private void setPinView() {
         firstPinView.setTextColor(
                 ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
-
         firstPinView.setItemCount(6);
         firstPinView.setItemHeight(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
         firstPinView.setItemWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
@@ -110,9 +96,7 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
             }
         });
         firstPinView.setCursorWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_cursor_width));
-
         firstPinView.setItemBackgroundColor(Color.WHITE);
-
         firstPinView.setHideLineWhenFilled(false);
     }
 
@@ -134,21 +118,15 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
         dialog.setCancelable(false);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        final Button btnClose = (Button) dialog.findViewById(R.id.btnClose);
-        final TextView txtNumberCard = (TextView) dialog.findViewById(R.id.txtNumberCard);
+        final Button btnClose = dialog.findViewById(R.id.btnClose);
+        final TextView txtNumberCard = dialog.findViewById(R.id.txtNumberCard);
 
         txtNumberCard.setText(model.getNumberCard());
-
-
-        btnClose.setOnClickListener(v -> {
-            finish();
-        });
-
-
+        btnClose.setOnClickListener(v -> finish());
         dialog.show();
         dialog.getWindow().setAttributes(lp);
     }

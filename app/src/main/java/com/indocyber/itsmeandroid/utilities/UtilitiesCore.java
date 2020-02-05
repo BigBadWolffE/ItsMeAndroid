@@ -156,8 +156,8 @@ public final class UtilitiesCore {
     /**
      *
      * @author Muhammad Faisal
-     * @param imageView
-     * @param page
+     * @param imageView target imageview to apply pdf
+     * @param page the pdf page to show
      */
     public static void openPdfFromAsset(ImageView imageView, int page, String fileName)
             throws IOException {

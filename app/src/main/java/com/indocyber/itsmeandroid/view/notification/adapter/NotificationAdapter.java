@@ -76,18 +76,18 @@ public class NotificationAdapter extends
         void onItemClick(Notification notification);
     }
 
-    public class NotificationViewHolder extends RecyclerView.ViewHolder {
+    class NotificationViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mNotificationTitle;
         private TextView mNotificationBody;
         private TextView mNotificationDate;
         private LinearLayout mNotificationStatus;
 
-        public TextView getBody() {
+        TextView getBody() {
             return mNotificationBody;
         }
 
-        public NotificationViewHolder(@NonNull View itemView) {
+        NotificationViewHolder(@NonNull View itemView) {
             super(itemView);
             mNotificationTitle = itemView.findViewById(R.id.txtNotificationTitle);
             mNotificationBody = itemView.findViewById(R.id.txtNotificationMessage);
@@ -95,7 +95,7 @@ public class NotificationAdapter extends
             mNotificationStatus = itemView.findViewById(R.id.llMessageFlag);
         }
 
-        public void bind(Notification notification) {
+        void bind(Notification notification) {
             mNotificationTitle.setText(notification.getTitle());
             mNotificationBody.setText(notification.getBody());
             mNotificationDate.setText(notification.getDate());

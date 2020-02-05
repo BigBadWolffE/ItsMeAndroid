@@ -21,7 +21,6 @@ import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
 import com.indocyber.itsmeandroid.view.editcreditcard.EditCreditCardActivity;
 
 import java.util.Objects;
@@ -31,7 +30,6 @@ import dmax.dialog.SpotsDialog;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class EditCardSecurityCodeActivity extends AppCompatActivity implements NumberKeyboardListener {
-
 
     private AlertDialog alertDialog;
     private PinView firstPinView;
@@ -46,14 +44,14 @@ public class EditCardSecurityCodeActivity extends AppCompatActivity implements N
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setElevation(0f);
         }
-
-        intent_id = getIntent().getExtras().getInt(INTENT_ID);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) intent_id = extras.getInt(INTENT_ID);
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(EditCardSecurityCodeActivity.this).build();
 
-        NumberKeyboard numberKeyboard = (NumberKeyboard) findViewById(R.id.numberKeyboard);
+        NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboard);
         numberKeyboard.setListener(this);
 
 
@@ -80,21 +78,18 @@ public class EditCardSecurityCodeActivity extends AppCompatActivity implements N
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 if (before == 6) {
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            alertDialog.show();
-                            new Handler().postDelayed(() -> {
-                                alertDialog.dismiss();
-                                finish();
-                                Intent intent = new Intent(EditCardSecurityCodeActivity.this, EditCreditCardActivity.class);
-                                intent.putExtra(INTENT_ID,intent_id);
-                                startActivity(intent);
+                    new Handler().postDelayed(() -> {
+                        alertDialog.show();
+                        new Handler().postDelayed(() -> {
+                            alertDialog.dismiss();
+                            finish();
+                            Intent intent = new Intent(EditCardSecurityCodeActivity.this,
+                                    EditCreditCardActivity.class);
+                            intent.putExtra(INTENT_ID,intent_id);
+                            startActivity(intent);
 
-                            }, 800);
-                        }
+                        }, 800);
                     }, 200);
                 }
 

@@ -10,9 +10,6 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.repositories.database.AppDatabase;
 import com.indocyber.itsmeandroid.repositories.database.dao.ImageCardDao;
 
-import java.util.List;
-
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -26,7 +23,7 @@ public class EditCardViewModel extends AndroidViewModel {
     }
 
     private ImageCardDao dao;
-    private MutableLiveData<Boolean> isLoading = new MutableLiveData();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private MutableLiveData<ImageCardModel> data = new MutableLiveData<>();

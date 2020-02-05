@@ -6,13 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,35 +25,25 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.DiffUtil;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.indocyber.itsmeandroid.BuildConfig;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.EditTag;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.core.Animations;
-import com.indocyber.itsmeandroid.view.blockcc.adapter.BlockCCCallback;
 import com.indocyber.itsmeandroid.view.editcardsecuritycode.EditCardSecurityCodeActivity;
 
 import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,10 +57,12 @@ import static com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivi
 
 
 public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.ContactViewHolder> {
-    private List<ImageCardModel> listCard = new ArrayList<>();
+    private List<ImageCardModel> listCard;
     private final Activity activity;
-//    private List<String> lisTag = new ArrayList<>();
     private SaveTagClickListener listener;
+
+    //// TODO: 05/02/2020 delete when real number provided
+    private String customerServicePhone = "021595929";
 
     public ContactCCAdapter(Activity activity, SaveTagClickListener listener, List<ImageCardModel> cardList) {
         this.activity = activity;
@@ -111,7 +99,6 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         final TextView txtExpireCard;
         final ImageView imageBlock;
         private LinearLayout linear_expands_tags;
-        private LinearLayout linear_contact;
         private RelativeLayout rltvBlocked;
         private Button btnTag;
         private Button btnEdit;
@@ -134,7 +121,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             linear_expands_tags = itemView.findViewById(R.id.linear_expands_tags);
             btnSave = itemView.findViewById(R.id.btnSave);
             rltvBlocked = itemView.findViewById(R.id.rltvBlocked);
-            linear_contact = itemView.findViewById(R.id.linear_contact);
+//            LinearLayout linear_contact = itemView.findViewById(R.id.linear_contact);
             btnTag = itemView.findViewById(R.id.btnTag);
             btnEdit = itemView.findViewById(R.id.btnEdit);
             btnPromo = itemView.findViewById(R.id.btnPromo);
@@ -147,7 +134,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
 
         }
 
-        public void bind(ImageCardModel model) {
+        private void bind(ImageCardModel model) {
             //setText
             txtNameCard.setText(model.getNameCard());
             txtNumberCard.setText(model.getNumberCard());
@@ -167,26 +154,19 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
 
 
             //onClick
-            btnTag.setOnClickListener(v -> {
-                showAndHideTag(linear_expands_tags);
-            });
+            btnTag.setOnClickListener(v -> showAndHideTag(linear_expands_tags));
             btnSave.setOnClickListener(v -> {
-                ImageCardModel newCard = model;
-                newCard.setTagList(adapterTags.getListTag());
+                model.setTagList(adapterTags.getListTag());
                 listener.save(model);
                 showAndHideTag(linear_expands_tags);
             });
             btnEdit.setOnClickListener(v -> {
                 Intent intent = new Intent(activity, EditCardSecurityCodeActivity.class);
-                intent.putExtra(INTENT_ID,model.getId());
+                intent.putExtra(INTENT_ID, model.getId());
                 activity.startActivity(intent);
             });
-            btnCall.setOnClickListener(v -> {
-                dialPhoneNumber("021595929");
-            });
-            btnShare.setOnClickListener(v -> {
-                setRequestPermission(model);
-            });
+            btnCall.setOnClickListener(v -> dialPhoneNumber(customerServicePhone));
+            btnShare.setOnClickListener(v -> setRequestPermission(model));
             btnPromo.setOnClickListener(v -> {
                 Intent intent = new Intent(activity, PromoActivity.class);
                 activity.startActivity(intent);
@@ -218,12 +198,8 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
             recycle_EditTags.setAdapter(adapterTags);
             recycle_EditTags.setHasFixedSize(true);
 
-            adapterTags.setOnBlockListener(new EditTagsAdapter.blockItemClickListener() {
-                @Override
-                public void itemClick(int tagPosition) {
-                    adapterTags.tagAction(edtxAddTag.getText().toString(), TAG_REMOVE);
-                }
-            });
+            adapterTags.setOnBlockListener(tagPosition ->
+                    adapterTags.tagAction(edtxAddTag.getText().toString(), TAG_REMOVE));
 
             //Add Tag Button
             imgSend.setOnClickListener(v ->{
@@ -245,14 +221,10 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         }
     }
 
-    public void showAndHideTag(LinearLayout view) {
-
+    private void showAndHideTag(LinearLayout view) {
         if (view.getVisibility() == View.GONE) {
-            Animations.expand(view, new Animations.AnimListener() {
-                @Override
-                public void onFinish() {
-                    //empty
-                }
+            Animations.expand(view, () -> {
+                //empty
             });
         } else {
             Animations.collapse(view);

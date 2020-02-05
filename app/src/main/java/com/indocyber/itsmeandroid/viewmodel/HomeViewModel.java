@@ -18,7 +18,8 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author
+ * @author Muhammad Faisal
+ * @version 1.0
  */
 
 public class HomeViewModel extends AndroidViewModel {

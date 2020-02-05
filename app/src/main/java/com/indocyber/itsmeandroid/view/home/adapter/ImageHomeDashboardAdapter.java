@@ -19,7 +19,6 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private  int[] mData;
-    private RequestOptions options;
     Listener mlistener;
 
     public interface Listener {
@@ -32,7 +31,10 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
         this.mlistener = mlistener;
         this.mData = mData;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        options = new RequestOptions().centerCrop().placeholder(R.drawable.bg_gradient_soft).error(R.drawable.bg_gradient_soft);
+//        RequestOptions options = new RequestOptions()
+//                .centerCrop()
+//                .placeholder(R.drawable.bg_gradient_soft)
+//                .error(R.drawable.bg_gradient_soft);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
-        return view == ((RelativeLayout) object);
+        return view == object;
     }
 
     @NonNull
@@ -50,7 +52,7 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
         View itemView = mLayoutInflater.inflate(R.layout.item_image_home, container, false);
 
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imgPager);
+        ImageView imageView = itemView.findViewById(R.id.imgPager);
         RequestOptions options = new RequestOptions()
                 .placeholder(R.drawable.bg_gradient_soft)
                 .error(R.drawable.bg_gradient_soft)
@@ -60,12 +62,7 @@ public class ImageHomeDashboardAdapter extends PagerAdapter {
                 .apply(options)
                 .into(imageView);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mlistener.onClick(position);
-            }
-        });
+        imageView.setOnClickListener(v -> mlistener.onClick(position));
         container.addView(itemView);
         return itemView;
     }

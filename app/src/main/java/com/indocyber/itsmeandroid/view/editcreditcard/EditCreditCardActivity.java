@@ -7,9 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
@@ -27,7 +25,6 @@ import android.widget.Toast;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.EditCardViewModel;
 
 import org.apache.commons.text.WordUtils;
@@ -61,9 +58,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
     private EditText edtxPostalCode;
     private Spinner mSpnrCountry;
     private Spinner mSpnrCity;
-    private Button mBtnSave;
     private AlertDialog alertDialog;
-    private int intent_id;
     private EditCardViewModel viewModel;
     private ImageCardModel modelEdit;
     private CheckBox checkboxRegister;
@@ -100,10 +95,11 @@ public class EditCreditCardActivity extends AppCompatActivity {
 
         mSpnrCountry = findViewById(R.id.spnrCountry);
         mSpnrCity = findViewById(R.id.spnrCity);
-        mBtnSave = findViewById(R.id.btnSave);
+        Button mBtnSave = findViewById(R.id.btnSave);
 
-
-        intent_id = getIntent().getExtras().getInt(INTENT_ID);
+        Bundle extras = getIntent().getExtras();
+        int intent_id = 0;
+        if (extras != null)  intent_id = extras.getInt(INTENT_ID);
 
         viewModel = ViewModelProviders.of(this).get(EditCardViewModel.class);
 
@@ -120,9 +116,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
         });
 
         edtxDate.setFocusable(false);
-        edtxDate.setOnClickListener(v -> {
-            showDialogCalendar();
-        });
+        edtxDate.setOnClickListener(v -> showDialogCalendar());
 
         viewModel.getEditCard(intent_id);
         viewModel.getData().observe(this, data -> {
@@ -197,14 +191,14 @@ public class EditCreditCardActivity extends AppCompatActivity {
 
     private void setSpinnerCountry(ImageCardModel model) {
         try {
-            List<HashMap<String, String>> listSpinner = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> listSpinner = new ArrayList<>();
 
-            String[] idSpinner = {"1", "2"};
-            String[] nameSpinner = {"Select country", "Indonesia"};
+//            String[] idSpinner = {"1", "2"};
+//            String[] nameSpinner = {"Select country", "Indonesia"};
 
 
             for (int i = 0; i < idCountries.length; i++) {
-                HashMap<String, String> hm = new HashMap<String, String>();
+                HashMap<String, String> hm = new HashMap<>();
                 hm.put("id", idCountries[i]);
                 hm.put("level_name", countries[i]);
                 listSpinner.add(hm);
@@ -220,10 +214,9 @@ public class EditCreditCardActivity extends AppCompatActivity {
             mSpnrCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long idLong) {
-                    HashMap<String, String> hm = (HashMap<String, String>) parent.getAdapter().getItem(position);
-                    String id = hm.get("id");
-                    String level_name = hm.get("level_name");
-
+//                    HashMap<String, String> hm = (HashMap<String, String>) parent.getAdapter().getItem(position);
+//                    String id = hm.get("id");
+//                    String level_name = hm.get("level_name");
 
 
 
@@ -243,14 +236,14 @@ public class EditCreditCardActivity extends AppCompatActivity {
 
     private void setSpinnerCity(ImageCardModel model) {
         try {
-            List<HashMap<String, String>> listSpinner = new ArrayList<HashMap<String, String>>();
+            List<HashMap<String, String>> listSpinner = new ArrayList<>();
 
-            String[] idSpinner = {"1", "2"};
-            String[] nameSpinner = {"Select country", "DKI Jakarta"};
+//            String[] idSpinner = {"1", "2"};
+//            String[] nameSpinner = {"Select country", "DKI Jakarta"};
 
 
             for (int i = 0; i < idCities.length; i++) {
-                HashMap<String, String> hm = new HashMap<String, String>();
+                HashMap<String, String> hm = new HashMap<>();
                 hm.put("id", idCities[i]);
                 hm.put("level_name", cities[i]);
                 listSpinner.add(hm);
@@ -265,9 +258,9 @@ public class EditCreditCardActivity extends AppCompatActivity {
             mSpnrCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long idLong) {
-                    HashMap<String, String> hm = (HashMap<String, String>) parent.getAdapter().getItem(position);
-                    String id = hm.get("id");
-                    String level_name = hm.get("level_name");
+//                    HashMap<String, String> hm = (HashMap<String, String>) parent.getAdapter().getItem(position);
+//                    String id = hm.get("id");
+//                    String level_name = hm.get("level_name");
                    /* typeId = id;
                     typeName = level_name;*/
                 }
@@ -399,9 +392,9 @@ public class EditCreditCardActivity extends AppCompatActivity {
     }
 
     private void onCardNumberChange(final CharSequence text) {
-        String paddedText = text + "";
+        StringBuilder paddedText = new StringBuilder(text + "");
         for (int i = paddedText.length(); i < 20; i++) {
-            paddedText += "X";
+            paddedText.append("X");
         }
 
         String updatedText = paddedText.substring(0, 4) + "   " + paddedText.substring(4, 8) + "   "

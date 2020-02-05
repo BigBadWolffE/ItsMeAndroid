@@ -32,29 +32,32 @@ public class BillingDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_billing_detail);
         Bundle extras = getIntent().getExtras();
 
-        String title = extras.getString("billingTitle");
-        createToolbar(title);
-        TextView billingTitle = findViewById(R.id.txtBillingTitle);
-        billingTitle.setText(title);
+        if (extras != null) {
+            String title = extras.getString("billingTitle");
+            createToolbar(title);
+            TextView billingTitle = findViewById(R.id.txtBillingTitle);
+            billingTitle.setText(title);
 
-        String body = extras.getString("billingBody");
-        TextView billingBody = findViewById(R.id.txtBillingMessage);
-        billingBody.setText(body);
+            String body = extras.getString("billingBody");
+            TextView billingBody = findViewById(R.id.txtBillingMessage);
+            billingBody.setText(body);
 
-        String date = extras.getString("billingDate");
-        TextView billingDate = findViewById(R.id.txtBillingDate);
-        billingDate.setText(date);
+            String date = extras.getString("billingDate");
+            TextView billingDate = findViewById(R.id.txtBillingDate);
+            billingDate.setText(date);
 
-        String attachmentName = extras.getString("billingAttachmentName");
-        TextView billingAttachmentName = findViewById(R.id.txtBillingAttachment);
-        billingAttachmentName.setText(attachmentName);
+            String attachmentName = extras.getString("billingAttachmentName");
+            TextView billingAttachmentName = findViewById(R.id.txtBillingAttachment);
+            billingAttachmentName.setText(attachmentName);
 
-        String attachmentPassword = extras.getString("billingAttachmentPassword");
-        if(!attachmentPassword.equals("") && !attachmentPassword.isEmpty()){
-            passwordPrompt(attachmentPassword);
+            String attachmentPassword = extras.getString("billingAttachmentPassword");
+            if(attachmentPassword != null) {
+                if(!attachmentPassword.equals("") && !attachmentPassword.isEmpty()){
+                    passwordPrompt(attachmentPassword);
+                }
+            }
+            renderPdf(attachmentName);
         }
-
-        renderPdf(attachmentName);
     }
 
     private  void createToolbar(String title) {
@@ -80,7 +83,7 @@ public class BillingDetailActivity extends AppCompatActivity {
     }
 
     private boolean openPdfIntent(File file) {
-        Intent intent = null;
+        Intent intent;
         if (Build.VERSION.SDK_INT < 24) {
             intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.fromFile(file), "application/pdf");
@@ -137,6 +140,5 @@ public class BillingDetailActivity extends AppCompatActivity {
             );
         }
         dialog.dismiss();
-        return;
     }
 }
