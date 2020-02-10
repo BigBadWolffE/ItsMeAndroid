@@ -65,21 +65,6 @@ public class BlockCCActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void setDataBlockCard(){
-//        dataImageCard().observe(this, list -> {
-//            mAdapter = new BlockCCAdapter(this);
-//            mAdapter.setListNotes(list);
-//            mRlvBlock.setAdapter(mAdapter);
-//            mRlvBlock.setLayoutManager(new LinearLayoutManager(this));
-//            mRlvBlock.setHasFixedSize(true);
-//               /* mBtnBlock.setOnClickListener(v -> {
-//                    list.remove(0);
-//                    mAdapter.setListNotes(list);
-//
-//                });*/
-//        });
-//    }
-
     private void observeViewModel() {
         viewModel.getIsLoading().observe(this, isLoading -> {
             if (isLoading) {

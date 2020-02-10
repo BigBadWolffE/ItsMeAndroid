@@ -36,14 +36,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium"
-                android:fontFamily="monospace"
-                android:text="**** **** **** 9867"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                android:textColor="@android:color/white" />
+                style="@style/CreditCardTextStyle"
+                android:textSize="@dimen/credit_card_number_text_size"
+                android:textColor="@color/colorwhite"
+                android:text="**** **** **** 9867" />
 
             <View
                 android:layout_width="0dp"
-                android:layout_height="@dimen/spacing_middle" />
+                android:layout_height="@dimen/spacing_large" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,19 +60,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Card Holder"
-                        android:fontFamily="monospace"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_10" />
+                        style="@style/CreditCardTextStyle"
+                        android:textSize="@dimen/card_holder_label_text_size"
+                        android:textColor="@color/colorwhite"/>
 
                     <TextView
                         android:id="@+id/txtNameCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
+                        style="@style/CreditCardTextStyle"
+                        android:textSize="@dimen/card_holder_text_size"
+                        android:textColor="@color/colorwhite"
                         android:maxLines="1"
-                        android:text="Anderson Thomas"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/white" />
+                        android:text="Anderson Thomas"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -85,18 +85,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Expires"
-                        android:fontFamily="monospace"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/grey_10" />
+                        style="@style/CreditCardTextStyle"
+                        android:textSize="@dimen/card_holder_label_text_size"
+                        android:textColor="@color/colorwhite" />
 
                     <TextView
                         android:id="@+id/txtExpireCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:text="05 / 24"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                        android:textColor="@android:color/white" />
+                        style="@style/CreditCardTextStyle"
+                        android:textSize="@dimen/card_holder_text_size"
+                        android:textColor="@color/colorwhite"
+                        android:text="05 / 24" />
 
                 </LinearLayout>
 

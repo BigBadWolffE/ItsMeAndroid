@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorwhite"
     tools:context=".view.blockcc.activity.BlockCCActivity">
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,13 +15,15 @@
         android:layout_marginBottom="50dp"/>
 
     <Button
-
         android:layout_alignParentBottom="true"
         android:id="@+id/btnBlock"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_rounded_red"
+        android:fontFamily="@font/interstate_regular"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:text="Block All"
+        android:textAllCaps="false"
         android:textColor="@color/colorwhite"
         android:textSize="16sp" />
 </RelativeLayout>

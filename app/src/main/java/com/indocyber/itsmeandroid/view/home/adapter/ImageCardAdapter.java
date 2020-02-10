@@ -44,7 +44,7 @@ public class ImageCardAdapter extends PagerAdapter {
             ImageView imageView = view.findViewById(R.id.imageHome);
             ((TextView) view.findViewById(R.id.txtCost)).setText(model.getCost());
             ((TextView) view.findViewById(R.id.txtNumberCard))
-                    .setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard()));
+                    .setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 3));
             ((TextView) view.findViewById(R.id.txtNameCard)).setText(model.getNameCard());
             ((TextView) view.findViewById(R.id.txtExpireCard)).setText(model.getExpireCard());
             ((TextView) view.findViewById(R.id.txtPrintDate)).setText(model.getPrintDate());

@@ -291,7 +291,9 @@ public class OtpActivity extends AppCompatActivity {
         viewModel.getIsSaved().observe(this, isSaved -> {
             if (isSaved) {
                 String styledText = "Penambahan Credit Card Anda<br>"
-                        + "<big><b>" + mCardNumber + "</b></big><br>"
+                        + "<big><b>"
+                        + UtilitiesCore.cardNumberSpacing(mCardNumber, 1)
+                        + "</b></big><br>"
                         + "Berhasil";
 
                 UtilitiesCore.buildAlertDialog(

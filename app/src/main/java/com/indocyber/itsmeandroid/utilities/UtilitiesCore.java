@@ -278,14 +278,14 @@ public final class UtilitiesCore {
     /**
      *
      */
-    public static String cardNumberSpacing(String cardNumber) {
-        StringBuilder paddedNumber = new StringBuilder();
-        for (int i = 0; i < cardNumber.length(); i++) {
-            paddedNumber.append(cardNumber.charAt(i));
-            if (cardNumber.charAt(i) == ' ') {
-                paddedNumber.append("  ");
-            }
+    public static String cardNumberSpacing(String cardNumber, int spacing) {
+        StringBuilder paddedText = new StringBuilder(cardNumber);
+        StringBuilder spacings = new StringBuilder();
+        for (int i = 0; i < spacing; i ++) {
+            spacings.append(" ");
         }
-        return paddedNumber.toString();
+
+        return paddedText.substring(0, 4) + spacings + paddedText.substring(4, 8) + spacings
+                + paddedText.substring(8, 12) + spacings + paddedText.substring(12, 16);
     }
 }

@@ -63,7 +63,6 @@ public class EditCardViewModel extends AndroidViewModel {
 
     }
 
-
     public void setIsSaved(ImageCardModel model) {
         isSaved.setValue(false);
         isLoading.setValue(true);

@@ -290,7 +290,7 @@ public final class AddCcActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, OtpActivity.class);
-        intent.putExtra("cardNumber", mCardNumber.getText().toString());
+        intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
         intent.putExtra("cardHolder", mCardHolderInput.getText().toString());
         intent.putExtra("expiryDate", mCardExpiryInput.getText().toString());
         intent.putExtra("billingAddress", mBillingAddressInput.getText().toString());

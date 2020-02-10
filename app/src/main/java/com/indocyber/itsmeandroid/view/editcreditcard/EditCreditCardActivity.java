@@ -63,6 +63,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
     private EditCardViewModel viewModel;
     private ImageCardModel modelEdit;
     private CheckBox checkboxRegister;
+    private List<String> tagList;
 
 
     @Override
@@ -130,6 +131,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
                 edtxBillingAddress.setText(data.getBillingAddress());
                 edtxDate.setText(data.getExpireCard());
                 edtxPostalCode.setText(data.getPostalCode());
+                tagList = data.getTagList();
 
                 String number = data.getNumberCard().replace(" ","");
                 //txtNumberCard.setText(data.getNumberCard());
@@ -352,7 +354,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
             ImageCardModel model = new ImageCardModel(
                     modelEdit.getId(),
                     modelEdit.getImage(),
-                    txtNumberCard.getText().toString(),
+                    edtxValidCard.getText().toString(),
                     edtxCardName.getText().toString(),
                     edtxDate.getText().toString(),
                     modelEdit.getCost(),
@@ -367,6 +369,7 @@ public class EditCreditCardActivity extends AppCompatActivity {
             model.setBillingAddress(edtxBillingAddress.getText().toString());
             model.setMinPayment(model.getMinPayment());
             model.setAvailableCredit(modelEdit.getAvailableCredit());
+            model.setTagList(tagList);
 
             viewModel.setIsSaved(model);
             viewModel.getError().observe(this, e -> {

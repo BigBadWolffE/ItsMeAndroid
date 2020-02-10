@@ -138,7 +138,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         private void bind(ImageCardModel model) {
             //setText
             txtNameCard.setText(model.getNameCard());
-            txtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard()));
+            txtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 3));
             txtExpireCard.setText(model.getExpireCard());
             linear_expands_tags.setVisibility(View.GONE);
             rltvBlocked.bringToFront();

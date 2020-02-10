@@ -23,6 +23,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPinActivity;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
     public void onBindViewHolder(@NonNull BlockViewHolder holder, int position) {
         ImageCardModel model = listCard.get(position);
         holder.txtNameCard.setText(model.getNameCard());
-        holder.txtNumberCard.setText(model.getNumberCard());
+        holder.txtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 3));
         holder.txtExpireCard.setText(model.getExpireCard());
 
         RequestOptions options = new RequestOptions()
@@ -119,7 +120,7 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
         final EditText edtxMessage = dialog.findViewById(R.id.edtxMessage);
 
         final TextView txtNumberCard = dialog.findViewById(R.id.txtNumberCard);
-        txtNumberCard.setText(model.getNumberCard());
+        txtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 1));
 
 
         btnBlockNow.setOnClickListener(v -> {
