@@ -226,36 +226,6 @@ public class HomeFragment extends Fragment implements ImageHomeDashboardAdapter.
         mTabLayout.setupWithViewPager(mViewPager, true);
     }
 
-    // TODO: 13/01/2020 delete when confirmed safe
-//    private void setImageCardSlider() {
-//        dataImageCard().observe(Objects.requireNonNull(getActivity()), list -> {
-//            ImageCardAdapter adapter = new ImageCardAdapter(getActivity(), list);
-//            mViewPagerCard.setAdapter(adapter);
-//            mViewPagerCard.setPageMargin(getResources().getDimensionPixelOffset(R.dimen.viewpager_margin_overlap));
-//            mViewPagerCard.setOffscreenPageLimit(list.size());
-//        });
-//
-//    }
-
-//    public static LiveData<List<ImageCardModel>> dataImageCard() {
-//        MutableLiveData<List<ImageCardModel>> list = new MutableLiveData<>();
-//        List<ImageCardModel> listModel = new ArrayList<>();
-//
-//        listModel.add(new ImageCardModel(1, R.drawable.imgblankccanz, "9383 XXXX XXXX 6196",
-//                "Jordan Setiawan", "08/21", "Rp 20.000.000",
-//                "28 November 2019", "1 November 2019", true));
-//        listModel.add(new ImageCardModel(2, R.drawable.imgblankccbca, "5158 XXXX XXXX 6929",
-//                "Jordan Setiawan", "08/21", "Rp 35.000.000",
-//                "15 November 2019", "1 November 2019", false));
-//        listModel.add(new ImageCardModel(3, R.drawable.imgblankccmandiri, "5152 XXXX XXXX 1252",
-//                "Jordan Setiawan", "08/21", "Rp 10.000.000",
-//                "10 November 2019", "16 Desember 2019", false));
-//
-//        list.setValue(listModel);
-//
-//        return list;
-//    }
-
     private void observeViewModel() {
         viewModel.getIsLoading().observe(getActivity(), isLoading -> {
             if (isLoading) {

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -188,7 +189,12 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
         viewModel.getIsSaved().observe(this, saveSuccess -> {
-            if (saveSuccess) showCustomDialog();
+            if (saveSuccess) UtilitiesCore.buildAlertDialog(
+                    RegistrationActivity.this,
+                    "Registration Success.",
+                    R.drawable.ic_approved,
+                    dialogInterface -> onLoginSuccess(dialogInterface)
+            );
         });
 
         viewModel.getError().observe(this,
@@ -266,29 +272,39 @@ public class RegistrationActivity extends AppCompatActivity {
         }
     }
 
-    private void showCustomDialog() {
-        final Dialog dialog = new Dialog(RegistrationActivity.this);
-        dialog.setContentView(R.layout.dialog_succes_registration);
-        dialog.setCancelable(false);
+//    private void showCustomDialog() {
+//        final Dialog dialog = new Dialog(RegistrationActivity.this);
+//        dialog.setContentView(R.layout.dialog_succes_registration);
+//        dialog.setCancelable(false);
+//
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        lp.copyFrom(dialog.getWindow().getAttributes());
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//
+//        final Button btnClose = dialog.findViewById(R.id.btnClose);
+//
+//        btnClose.setOnClickListener(v -> {
+//            loader.dismiss();
+//            finish();
+//            preference.setLoginFirstTime(true);
+//            preference.setLoggedUser(txtFullname.getText().toString(),
+//                    txtEmail.getText().toString());
+//            Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
+//            startActivity(i);
+//        });
+//
+//        dialog.show();
+//        dialog.getWindow().setAttributes(lp);
+//    }
 
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-        final Button btnClose = (Button) dialog.findViewById(R.id.btnClose);
-
-        btnClose.setOnClickListener(v -> {
-            loader.dismiss();
-            finish();
-            preference.setLoginFirstTime(true);
-            preference.setLoggedUser(txtFullname.getText().toString(),
-                    txtEmail.getText().toString());
-            Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
-            startActivity(i);
-        });
-
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
+    private void onLoginSuccess(DialogInterface dialog) {
+        dialog.dismiss();
+        finish();
+        preference.setLoginFirstTime(true);
+        preference.setLoggedUser(txtFullname.getText().toString(),
+                txtEmail.getText().toString());
+        Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
+        startActivity(i);
     }
 }
