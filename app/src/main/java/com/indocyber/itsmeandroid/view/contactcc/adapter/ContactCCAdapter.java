@@ -34,6 +34,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.indocyber.itsmeandroid.BuildConfig;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.utilities.core.Animations;
 import com.indocyber.itsmeandroid.view.editcardsecuritycode.EditCardSecurityCodeActivity;
 
@@ -137,7 +138,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
         private void bind(ImageCardModel model) {
             //setText
             txtNameCard.setText(model.getNameCard());
-            txtNumberCard.setText(model.getNumberCard());
+            txtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard()));
             txtExpireCard.setText(model.getExpireCard());
             linear_expands_tags.setVisibility(View.GONE);
             rltvBlocked.bringToFront();
@@ -211,6 +212,7 @@ public class ContactCCAdapter extends RecyclerView.Adapter<ContactCCAdapter.Cont
                 }
             });
         }
+
     }
 
     private void dialPhoneNumber(String phoneNumber) {

@@ -274,4 +274,18 @@ public final class UtilitiesCore {
         Matcher matcher = regexPattern.matcher(email);
         return matcher.matches();
     }
+
+    /**
+     *
+     */
+    public static String cardNumberSpacing(String cardNumber) {
+        StringBuilder paddedNumber = new StringBuilder();
+        for (int i = 0; i < cardNumber.length(); i++) {
+            paddedNumber.append(cardNumber.charAt(i));
+            if (cardNumber.charAt(i) == ' ') {
+                paddedNumber.append("  ");
+            }
+        }
+        return paddedNumber.toString();
+    }
 }

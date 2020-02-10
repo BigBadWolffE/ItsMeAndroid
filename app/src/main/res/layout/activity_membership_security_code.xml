@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_xlarge"
             android:gravity="center"
+            style="@style/primaryFont"
             android:text="Masukan Security Code Anda"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp" />
@@ -36,7 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-           android:padding="@dimen/spacing_large"
+            style="@style/primaryFontLight"
+            android:textColor="@color/primary_font_color"
+            android:padding="@dimen/spacing_large"
             android:gravity="center"
             android:text="Pin 6(digit)" />
 
@@ -46,14 +49,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-
             android:cursorVisible="false"
             android:gravity="center"
             android:inputType="numberPassword"
-
             android:textSize="18sp"
             android:textStyle="bold"
-
             app:cursorWidth="2dp"
             app:hideLineWhenFilled="true"
             app:itemCount="6"
@@ -73,6 +73,8 @@
             android:layout_marginBottom="@dimen/spacing_xlarge"
             android:gravity="center"
             android:text="Lupa Security Code?"
+            style="@style/primaryFontLight"
+            android:textColor="@color/primary_font_color"
             android:textSize="18sp" />
 
         <!-- <View

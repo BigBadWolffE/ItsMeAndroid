@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/spacing_mlarge"
     android:layout_marginTop="@dimen/spacing_middle"
+    android:gravity="center_horizontal"
     android:layout_marginRight="@dimen/spacing_mlarge"
     android:orientation="vertical"
     app:cardBackgroundColor="@color/colorwhite"
@@ -74,7 +75,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <ImageView
                 android:id="@+id/imageBlock"
                 android:layout_width="match_parent"
@@ -91,16 +91,14 @@
                 android:paddingTop="@dimen/spacing_mlarge"
                 android:paddingRight="@dimen/spacing_mlarge">
 
-
                 <TextView
                     android:id="@+id/txtNumberCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_medium"
-                    android:fontFamily="monospace"
                     android:text="**** **** **** 9867"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="@dimen/credit_card_number_text_size"/>
 
                 <View
                     android:layout_width="0dp"
@@ -121,24 +119,21 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Card Holder"
-                            android:fontFamily="monospace"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/grey_10" />
+                            style="@style/CreditCardTextStyle"
+                            android:textSize="@dimen/card_holder_label_text_size"/>
 
                         <TextView
                             android:id="@+id/txtNameCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="monospace"
-                            android:text="Anderson Thomas"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                            android:textColor="@android:color/white" />
+                            style="@style/CreditCardTextStyle"
+                            android:textSize="@dimen/card_holder_text_size"
+                            android:text="Anderson Thomas" />
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginRight="-15dp"
                         android:layout_gravity="end"
-                        android:gravity="end"
+                        android:gravity="start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -147,18 +142,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Expires"
-                            android:fontFamily="monospace"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                            android:textColor="@color/grey_10" />
+                            style="@style/CreditCardTextStyle"
+                            android:textSize="@dimen/card_holder_label_text_size"/>
 
                         <TextView
                             android:id="@+id/txtExpireCard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="monospace"
-                            android:text="05 / 24"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@android:color/white" />
+                            style="@style/CreditCardTextStyle"
+                            android:textSize="@dimen/card_holder_text_size"
+                            android:text="05 / 24" />
 
                     </LinearLayout>
 
@@ -223,8 +216,6 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/icochatgreen" />
-
-
         </LinearLayout>
 
         <LinearLayout
@@ -238,9 +229,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Edit Tags"
-                android:textColor="#2d2d2d"
-                android:textSize="18sp" />
+                android:text="Edit Hashtag"
+                style="@style/primaryFontBold"
+                android:textColor="@color/primary_font_color"
+                android:textSize="16sp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -253,7 +245,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycle_EditTags"
@@ -271,7 +262,6 @@
                         android:padding="@dimen/spacing_large">
 
                         <EditText
-
                             android:id="@+id/edtxAddTag"
                             style="@style/primaryFontBold"
                             android:layout_width="0dp"
@@ -302,7 +292,11 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_large"
                 android:background="@drawable/btn_rounded_primary"
+                android:fontFamily="@font/interstate_regular"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:text="Save"
+                android:textSize="16dp"
+                android:textAllCaps="false"
                 android:textColor="@color/colorwhite" />
         </LinearLayout>
     </LinearLayout>

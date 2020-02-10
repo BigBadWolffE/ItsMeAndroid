@@ -19,6 +19,7 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import java.util.List;
 import java.util.Objects;
@@ -42,7 +43,8 @@ public class ImageCardAdapter extends PagerAdapter {
             ImageCardModel model = list.get(position);
             ImageView imageView = view.findViewById(R.id.imageHome);
             ((TextView) view.findViewById(R.id.txtCost)).setText(model.getCost());
-            ((TextView) view.findViewById(R.id.txtNumberCard)).setText(cardNumberSpacing(model.getNumberCard()));
+            ((TextView) view.findViewById(R.id.txtNumberCard))
+                    .setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard()));
             ((TextView) view.findViewById(R.id.txtNameCard)).setText(model.getNameCard());
             ((TextView) view.findViewById(R.id.txtExpireCard)).setText(model.getExpireCard());
             ((TextView) view.findViewById(R.id.txtPrintDate)).setText(model.getPrintDate());
@@ -100,16 +102,5 @@ public class ImageCardAdapter extends PagerAdapter {
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);
-    }
-
-    private String cardNumberSpacing(String cardNumber) {
-        StringBuilder paddedNumber = new StringBuilder();
-        for (int i = 0; i < cardNumber.length(); i++) {
-            paddedNumber.append(cardNumber.charAt(i));
-            if (cardNumber.charAt(i) == ' ') {
-                paddedNumber.append("  ");
-            }
-        }
-        return paddedNumber.toString();
     }
 }

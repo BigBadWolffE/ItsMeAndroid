@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -189,6 +190,12 @@ public class EditCreditCardActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        formatCreditCard();
+    }
+
     private void setSpinnerCountry(ImageCardModel model) {
         try {
             List<HashMap<String, String>> listSpinner = new ArrayList<>();
@@ -232,6 +239,38 @@ public class EditCreditCardActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void formatCreditCard(){
+        ImageView creditCard = findViewById(R.id.imgCreditCard);
+        int[] position = {0, 0};
+        creditCard.getLocationOnScreen(position);
+
+        int paddingLeft = (creditCard.getWidth() * 8 / 100);
+        int startYAxis = (creditCard.getHeight() / 2);
+
+        txtNumberCard.setX(position[0] + paddingLeft);
+        txtNumberCard.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
+        txtNumberCard.bringToFront();
+
+        TextView holderLabel = findViewById(R.id.lblHolderLabel);
+        holderLabel.setX(position[0] + paddingLeft);
+        holderLabel.setY(txtNumberCard.getY() + txtNumberCard.getHeight()
+                + getResources().getDimension(R.dimen.spacing_large));
+
+        TextView expiryLabel = findViewById(R.id.lblExpiryLabel);
+        expiryLabel.setX(position[0] + paddingLeft
+                + txtNumberCard.getWidth() - expiryLabel.getWidth());
+        expiryLabel.setY(txtNumberCard.getY() + txtNumberCard.getHeight()
+                + getResources().getDimension(R.dimen.spacing_large));
+
+        txtNameCard.setX(position[0] + paddingLeft);
+        txtNameCard.setY(holderLabel.getY() + holderLabel.getHeight()
+                + getResources().getDimension(R.dimen.spacing_xsmall));
+
+        txtExpireCard.setX(expiryLabel.getX());
+        txtExpireCard.setY(expiryLabel.getY() + expiryLabel.getHeight() +
+                getResources().getDimension(R.dimen.spacing_xsmall));
     }
 
     private void setSpinnerCity(ImageCardModel model) {
