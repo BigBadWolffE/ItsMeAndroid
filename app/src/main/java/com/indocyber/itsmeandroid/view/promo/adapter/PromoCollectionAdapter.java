@@ -30,6 +30,7 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.EditTag;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoCollectionModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.utilities.core.Animations;
 import com.indocyber.itsmeandroid.view.contactcc.adapter.EditTagsAdapter;
 
@@ -77,7 +78,8 @@ public class PromoCollectionAdapter extends RecyclerView.Adapter<PromoCollection
                 .into(holder.cardType);
 
         holder.cardHolder.setText(mPromoColl.get(position).getNameCard());
-        holder.cardNumber.setText(onCardNumberChange(mPromoColl.get(position).getNumberCard()));
+        holder.cardNumber.setText(
+                UtilitiesCore.cardNumberSpacing(mPromoColl.get(position).getNumberCard(), 3));
         holder.cardExpiry.setText(mPromoColl.get(position).getExpireCard());
 
         if (card.isBlockedCard()) {

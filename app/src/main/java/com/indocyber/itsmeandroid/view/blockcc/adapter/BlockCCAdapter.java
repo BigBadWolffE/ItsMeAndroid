@@ -122,7 +122,6 @@ public class BlockCCAdapter extends RecyclerView.Adapter<BlockCCAdapter.BlockVie
         final TextView txtNumberCard = dialog.findViewById(R.id.txtNumberCard);
         txtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 1));
 
-
         btnBlockNow.setOnClickListener(v -> {
             if (edtxMessage.getText().toString().isEmpty()) {
                 edtxMessage.setError("field empty");

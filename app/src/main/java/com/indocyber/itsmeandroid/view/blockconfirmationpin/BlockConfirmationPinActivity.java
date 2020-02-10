@@ -7,12 +7,15 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +25,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 import com.indocyber.itsmeandroid.viewmodel.BlockConfirmationPinViewModel;
 
 import java.util.Objects;
@@ -34,6 +39,10 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
 
     private PinView firstPinView;
     private BlockConfirmationPinViewModel viewModel;
+    private TextView mTxtNameCard;
+    private TextView mTxtNumberCard;
+    private TextView mTxtExpireCard;
+    private ImageView mImageBlock;
 
     public static String INTENT_BLOCK_CONFIRMATION = "INTENT_BLOCK_CONFIRMATION";
     private AlertDialog loader;
@@ -50,22 +59,28 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         firstPinView = findViewById(R.id.firstPinView);
-        TextView mTxtNameCard = findViewById(R.id.txtNameCard);
-        TextView mTxtNumberCard = findViewById(R.id.txtNumberCard);
-        TextView mTxtExpireCard = findViewById(R.id.txtExpireCard);
+        mTxtNameCard = findViewById(R.id.txtNameCard);
+        mTxtNumberCard = findViewById(R.id.txtNumberCard);
+        mTxtExpireCard = findViewById(R.id.txtExpireCard);
         viewModel = ViewModelProviders.of(this).get(BlockConfirmationPinViewModel.class);
         Button mBtnConfirmation = findViewById(R.id.btnConfirmation);
         mBtnConfirmation.setOnClickListener(v -> viewModel.blockCard(model.getId()));
-        ImageView mImageBlock = findViewById(R.id.imageBlock);
+        mImageBlock = findViewById(R.id.imageBlock);
 
         if (model != null) {
             mTxtNameCard.setText(model.getNameCard());
-            mTxtNumberCard.setText(model.getNumberCard());
+            mTxtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 3));
             mTxtExpireCard.setText(model.getExpireCard());
-            imageGlide(this, mImageBlock, model.getImage());
+            mImageBlock.setImageResource(model.getImage());
         }
         setPinView();
         observeViewModel();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        formatCreditCard();
     }
 
     private void setPinView() {
@@ -100,35 +115,41 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
         firstPinView.setHideLineWhenFilled(false);
     }
 
-    private void imageGlide(Context context, ImageView imageView, int data) {
-        RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.bg_gradient_soft)
-                .error(R.drawable.bg_gradient_soft)
-                .priority(Priority.HIGH);
+    private void formatCreditCard(){
+        int[] position = {0, 0};
+        mImageBlock.getLocationOnScreen(position);
 
-        Glide.with(context)
-                .load(data)
-                .apply(options)
-                .into(imageView);
+        int paddingLeft = (mImageBlock.getWidth() * 8 / 100);
+        int startYAxis = (mImageBlock.getHeight() / 2);
+
+        mTxtNumberCard.setX(position[0] + paddingLeft);
+        mTxtNumberCard.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
+        mTxtNumberCard.bringToFront();
+
+        TextView holderLabel = findViewById(R.id.lblHolderLabel);
+        holderLabel.setX(position[0] + paddingLeft);
+        holderLabel.setY(mTxtNumberCard.getY() + mTxtNumberCard.getHeight()
+                + getResources().getDimension(R.dimen.spacing_large));
+
+        TextView expiryLabel = findViewById(R.id.lblExpiryLabel);
+        expiryLabel.setX(position[0] + paddingLeft
+                + mTxtNumberCard.getWidth() - expiryLabel.getWidth());
+        expiryLabel.setY(mTxtNumberCard.getY() + mTxtNumberCard.getHeight()
+                + getResources().getDimension(R.dimen.spacing_large));
+
+        mTxtNameCard.setX(position[0] + paddingLeft);
+        mTxtNameCard.setY(holderLabel.getY() + holderLabel.getHeight()
+                + getResources().getDimension(R.dimen.spacing_xsmall));
+
+        mTxtExpireCard.setX(expiryLabel.getX());
+        mTxtExpireCard.setY(expiryLabel.getY() + expiryLabel.getHeight() +
+                getResources().getDimension(R.dimen.spacing_xsmall));
     }
 
-    private void showCustomDialog() {
-        final Dialog dialog = new Dialog(BlockConfirmationPinActivity.this);
-        dialog.setContentView(R.layout.dialog_succes_block_card);
-        dialog.setCancelable(false);
-
-        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-
-        final Button btnClose = dialog.findViewById(R.id.btnClose);
-        final TextView txtNumberCard = dialog.findViewById(R.id.txtNumberCard);
-
-        txtNumberCard.setText(model.getNumberCard());
-        btnClose.setOnClickListener(v -> finish());
-        dialog.show();
-        dialog.getWindow().setAttributes(lp);
+    private void returnToCardList() {
+        Intent intent = new Intent(this, BlockCCActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void observeViewModel() {
@@ -146,7 +167,14 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
 
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             if (isSuccess) {
-                showCustomDialog();
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        "Card block success!",
+                        R.drawable.ic_approved,
+                        dialogInterface -> {
+                            dialogInterface.dismiss();
+                            returnToCardList();
+                        });
             }
         });
     }
