@@ -13,8 +13,6 @@ public class AboutUsActivity extends AppCompatActivity {
 
     private ArrayAdapter<String> subjectAdapter;
     private String[] mSubjectValue = {"Pilih Subject", "Customer Service", "Back Office", "Developer"};
-    private Spinner mSubjectSpinner;
-    private EditText mYourName, mEmail, mMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +24,14 @@ public class AboutUsActivity extends AppCompatActivity {
             getSupportActionBar().setElevation(0f);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-        mYourName = findViewById(R.id.txtAboutUsName);
-        mEmail = findViewById(R.id.txtAboutUsEmail);
+        EditText mYourName = findViewById(R.id.txtAboutUsName);
+        EditText mEmail = findViewById(R.id.txtAboutUsEmail);
+        Spinner mSubjectSpinner;
         mSubjectSpinner = findViewById(R.id.spinnerAboutUsSubject);
-        mMessage = findViewById(R.id.txtAboutUsMessage);
+        EditText mMessage = findViewById(R.id.txtAboutUsMessage);
 
         subjectAdapter
-                = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mSubjectValue);
+                = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mSubjectValue);
         subjectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSubjectSpinner.setAdapter(subjectAdapter);
 

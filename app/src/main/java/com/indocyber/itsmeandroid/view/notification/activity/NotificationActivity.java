@@ -1,21 +1,14 @@
 package com.indocyber.itsmeandroid.view.notification.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.Billing;
 import com.indocyber.itsmeandroid.model.Notification;
-import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.billingdetail.BillingDetailActivity;
 import com.indocyber.itsmeandroid.view.notification.adapter.NotificationAdapter;
 import com.indocyber.itsmeandroid.view.notificationdetail.NotificationDetail;
 

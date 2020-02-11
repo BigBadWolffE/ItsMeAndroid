@@ -13,11 +13,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPinActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.BlockAllConfirmationViewModel;
 
@@ -41,9 +39,7 @@ public class BlockAllConfirmationActivity extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(BlockAllConfirmationViewModel.class);
         Button mBtnConfirmation = findViewById(R.id.btnConfirmation);
-        mBtnConfirmation.setOnClickListener(v -> {
-            viewModel.blockAllCard();
-        });
+        mBtnConfirmation.setOnClickListener(v -> viewModel.blockAllCard());
         setPinView();
         observeViewModel();
     }
@@ -94,7 +90,7 @@ public class BlockAllConfirmationActivity extends AppCompatActivity {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        final Button btnClose = (Button) dialog.findViewById(R.id.btnClose);
+        final Button btnClose = dialog.findViewById(R.id.btnClose);
 
         btnClose.setOnClickListener(v -> {
             Intent intent = new Intent(this, HomeActivity.class);

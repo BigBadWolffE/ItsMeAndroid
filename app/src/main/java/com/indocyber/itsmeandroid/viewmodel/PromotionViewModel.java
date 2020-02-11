@@ -23,8 +23,8 @@ import io.reactivex.schedulers.Schedulers;
 /**
  *
  *
- *@author
- *@version
+ *@author Muhammad Faisal
+ *@version 1.0
  */
 
 public class PromotionViewModel extends AndroidViewModel {

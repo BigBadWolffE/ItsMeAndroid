@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mToolbar.setElevation(0f);
         mPreference = new Preference(this);
         setSupportActionBar(mToolbar);
-        mToolbarText = (TextView) findViewById(R.id.txtToolbar);
+        mToolbarText = findViewById(R.id.txtToolbar);
         mFullName = mPreference.getLoggedUserFullname();
         mAlertDialog = new SpotsDialog.Builder()
                 .setCancelable(false)
@@ -133,8 +133,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.navAboutUs) {
             Intent intent = new Intent(this, AboutUsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.navSettings) {
-
+//        } else if (id == R.id.navSettings) {
         } else if (id == R.id.navLogout) {
             mAlertDialog.show();
             mPreference.setLoginFirstTime(false);

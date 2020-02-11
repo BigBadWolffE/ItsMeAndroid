@@ -2,12 +2,10 @@ package com.indocyber.itsmeandroid.view.home.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,13 +19,13 @@ import com.bumptech.glide.Priority;
 import com.bumptech.glide.request.RequestOptions;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class ImageCardAdapter extends PagerAdapter {
-    private List<ImageCardModel> list = new ArrayList<>();
-    private LayoutInflater layoutInflater;
+    private List<ImageCardModel> list;
     private Context context;
 
     public ImageCardAdapter(Context context, List<ImageCardModel> list) {
@@ -37,39 +35,34 @@ public class ImageCardAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.item_image_card, container, false);
-        ImageCardModel model = list.get(position);
+        LayoutInflater layoutInflater =
+                (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = null;
+        if (layoutInflater != null) {
+            view = layoutInflater.inflate(R.layout.item_image_card, container, false);
+            ImageCardModel model = list.get(position);
+            ImageView imageView = view.findViewById(R.id.imageHome);
+            ((TextView) view.findViewById(R.id.txtCost)).setText(model.getCost());
+            ((TextView) view.findViewById(R.id.txtNumberCard))
+                    .setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 3));
+            ((TextView) view.findViewById(R.id.txtNameCard)).setText(model.getNameCard());
+            ((TextView) view.findViewById(R.id.txtExpireCard)).setText(model.getExpireCard());
+            ((TextView) view.findViewById(R.id.txtPrintDate)).setText(model.getPrintDate());
+            ((TextView) view.findViewById(R.id.txtPrintDueDate)).setText(model.getPrintDueDate());
+            (view.findViewById(R.id.btnMore)).setOnClickListener(v -> showCustomDialog());
 
-        ImageView imageView = view.findViewById(R.id.imageHome);
+            RequestOptions options = new RequestOptions()
+                    .placeholder(R.drawable.bg_gradient_soft)
+                    .error(R.drawable.bg_gradient_soft)
+                    .priority(Priority.HIGH);
 
-        ((TextView) view.findViewById(R.id.txtCost)).setText(model.getCost());
-        ((TextView) view.findViewById(R.id.txtNumberCard)).setText(model.getNumberCard());
-        ((TextView) view.findViewById(R.id.txtNameCard)).setText(model.getNameCard());
-        ((TextView) view.findViewById(R.id.txtExpireCard)).setText(model.getExpireCard());
-        ((TextView) view.findViewById(R.id.txtPrintDate)).setText(model.getPrintDate());
-        ((TextView) view.findViewById(R.id.txtPrintDueDate)).setText(model.getPrintDueDate());
-
-        ((Button) view.findViewById(R.id.btnMore)).setOnClickListener(v -> {
-            showCustomDialog();
-        });
-
-
-        RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.bg_gradient_soft)
-                .error(R.drawable.bg_gradient_soft)
-                .priority(Priority.HIGH);
-
-        Glide.with(context)
-                .load(model.getImage())
-                .apply(options)
-                .into(imageView);
-
-
-
-
-
-        container.addView(view);
+            Glide.with(context)
+                    .load(model.getImage())
+                    .apply(options)
+                    .into(imageView);
+            container.addView(view);
+            return view;
+        }
         return view;
     }
 
@@ -95,19 +88,17 @@ public class ImageCardAdapter extends PagerAdapter {
         dialog.setCancelable(true);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
         lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
-        final ImageButton imgButtonClose = (ImageButton) dialog.findViewById(R.id.imgButtonClose);
+        final ImageButton imgButtonClose = dialog.findViewById(R.id.imgButtonClose);
         LinearLayout cardDetailTextContainer = dialog.findViewById(R.id.llCardDetailContainer);
         int buttonWidth = cardDetailTextContainer.getLayoutParams().width;
         ViewGroup.LayoutParams buttonLayoutParam = imgButtonClose.getLayoutParams();
         buttonLayoutParam.width = buttonWidth;
         imgButtonClose.setLayoutParams(buttonLayoutParam);
-        imgButtonClose.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
+        imgButtonClose.setOnClickListener(v -> dialog.dismiss());
 
         dialog.show();
         dialog.getWindow().setAttributes(lp);

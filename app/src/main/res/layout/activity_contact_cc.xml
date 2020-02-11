@@ -24,12 +24,11 @@
 
         <Spinner
             android:layout_margin="@dimen/spacing_medium"
-            android:background="@drawable/edit_text_round_bg_outline"
-            android:padding="@dimen/spacing_medium"
-            android:layout_gravity="center"
+            android:background="@drawable/bgroundinput"
             android:id="@+id/spnrTag"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:spinnerMode="dropdown" />
     </LinearLayout>

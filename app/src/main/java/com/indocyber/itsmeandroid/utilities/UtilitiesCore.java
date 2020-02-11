@@ -156,8 +156,8 @@ public final class UtilitiesCore {
     /**
      *
      * @author Muhammad Faisal
-     * @param imageView
-     * @param page
+     * @param imageView target imageview to apply pdf
+     * @param page the pdf page to show
      */
     public static void openPdfFromAsset(ImageView imageView, int page, String fileName)
             throws IOException {
@@ -273,5 +273,19 @@ public final class UtilitiesCore {
         Pattern regexPattern = Pattern.compile("^(.+)@(.+)$");
         Matcher matcher = regexPattern.matcher(email);
         return matcher.matches();
+    }
+
+    /**
+     *
+     */
+    public static String cardNumberSpacing(String cardNumber, int spacing) {
+        StringBuilder paddedText = new StringBuilder(cardNumber);
+        StringBuilder spacings = new StringBuilder();
+        for (int i = 0; i < spacing; i ++) {
+            spacings.append(" ");
+        }
+
+        return paddedText.substring(0, 4) + spacings + paddedText.substring(4, 8) + spacings
+                + paddedText.substring(8, 12) + spacings + paddedText.substring(12, 16);
     }
 }

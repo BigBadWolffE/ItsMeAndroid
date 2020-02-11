@@ -9,11 +9,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.EditTag;
 import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ package com.indocyber.itsmeandroid.model;
  *@Author
  *@Version
  */
-public class Billing extends Notification{
+public class Billing extends Notification {
 
     private String attachmentName;
     private String attachmentPassword;

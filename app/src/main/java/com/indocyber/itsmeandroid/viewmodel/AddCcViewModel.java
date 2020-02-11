@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 public class AddCcViewModel extends AndroidViewModel {
 
     private ImageCardDao dao;
-    private MutableLiveData<Boolean> isLoading = new MutableLiveData();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();

@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.indocyber.itsmeandroid.model.EditTag;
-import com.indocyber.itsmeandroid.model.ImageCardModel;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class EdittTagsCallback extends DiffUtil.Callback {
 
     @Override
     public boolean areItemsTheSame(int oldItemPosition, int newItemPosition) {
-        return mOldNoteList.get(oldItemPosition).getId() == mNewNoteList.get(newItemPosition).getId();
+        return mOldNoteList.get(oldItemPosition).getId().equals(mNewNoteList.get(newItemPosition).getId());
     }
 
     @Override

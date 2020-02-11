@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
@@ -38,13 +39,13 @@ public class AdapterChat extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ctx = context;
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView text_content;
-        public TextView text_time;
-        public View lyt_parent;
+        private TextView text_content;
+        private TextView text_time;
+        private View lyt_parent;
 
-        public ItemViewHolder(View v) {
+        private ItemViewHolder(View v) {
             super(v);
             text_content = v.findViewById(R.id.text_content);
             text_time = v.findViewById(R.id.text_time);
@@ -52,8 +53,9 @@ public class AdapterChat extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         if (viewType == CHAT_ME) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_me, parent, false);
@@ -67,18 +69,15 @@ public class AdapterChat extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ItemViewHolder) {
             final Message m = items.get(position);
             ItemViewHolder vItem = (ItemViewHolder) holder;
             vItem.text_content.setText(m.getContent());
             vItem.text_time.setText(m.getDate());
-            vItem.lyt_parent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick(view, m, position);
-                    }
+            vItem.lyt_parent.setOnClickListener(view -> {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(view, m, position);
                 }
             });
         }

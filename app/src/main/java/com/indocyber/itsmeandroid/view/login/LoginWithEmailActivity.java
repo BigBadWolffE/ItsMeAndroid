@@ -17,7 +17,6 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.view.forgotpassword.activity.ForgotPasswordActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
-import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
 
 import dmax.dialog.SpotsDialog;
@@ -26,21 +25,20 @@ import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconErr
 import static com.indocyber.itsmeandroid.view.login.LoginOptionActivity.INTENT_NAME;
 
 public class LoginWithEmailActivity extends AppCompatActivity {
-    private Button mbuttonLogin;
-    private String username;
     private LoginViewModel viewModel;
     private AlertDialog loader;
     private EditText edtxUsername;
     private EditText edtxPassword;
     private Preference preference;
-    private TextView mForgotPasswordBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_with_email);
 
-        username = getIntent().getExtras().getString(INTENT_NAME);
+        Bundle extras = getIntent().getExtras();
+        String username = "";
+        if (extras != null)  username = extras.getString(INTENT_NAME);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Login");
@@ -53,33 +51,27 @@ public class LoginWithEmailActivity extends AppCompatActivity {
                 .setContext(LoginWithEmailActivity.this)
                 .build();
 
-        mForgotPasswordBtn = findViewById(R.id.labelForgotPassword);
-        mbuttonLogin = findViewById(R.id.buttonLogin);
+        TextView mForgotPasswordBtn = findViewById(R.id.labelForgotPassword);
+        Button mbuttonLogin = findViewById(R.id.buttonLogin);
         edtxUsername = findViewById(R.id.edtxUsername);
         edtxPassword = findViewById(R.id.edtxPassword);
         viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         preference = new Preference(this);
         edtxUsername.setText(username);
-        mbuttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (edtxUsername.getText().length() == 0) {
-                    edtxUsername.setError("field empty");
-                    edtxUsername.requestFocus();
-                } else if (edtxPassword.getText().length() == 0) {
-                    edtxPassword.setError("field empty");
-                    edtxPassword.requestFocus();
-                } else {
-                    viewModel.login(edtxUsername.getText().toString(), edtxPassword.getText().toString());
-                }
+        mbuttonLogin.setOnClickListener(v -> {
+            if (edtxUsername.getText().length() == 0) {
+                edtxUsername.setError("field empty");
+                edtxUsername.requestFocus();
+            } else if (edtxPassword.getText().length() == 0) {
+                edtxPassword.setError("field empty");
+                edtxPassword.requestFocus();
+            } else {
+                viewModel.login(edtxUsername.getText().toString(), edtxPassword.getText().toString());
             }
         });
-        mForgotPasswordBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginWithEmailActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
+        mForgotPasswordBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginWithEmailActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
         });
         observeViewModel();
 }

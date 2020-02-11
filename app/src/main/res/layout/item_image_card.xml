@@ -41,24 +41,22 @@
                     android:layout_marginTop="80dp"
                     android:orientation="vertical"
                     android:paddingRight="@dimen/spacing_mlarge"
-                    android:paddingLeft="@dimen/spacing_mlarge"
+                    android:paddingLeft="@dimen/spacing_mxlarge"
                     android:paddingTop="@dimen/spacing_mlarge"
                     >
-
 
                     <TextView
                         android:id="@+id/txtNumberCard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:fontFamily="monospace"
-                        android:text="**** **** **** 9867"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                        android:textColor="@android:color/white" />
+                        style="@style/CreditCardTextStyle"
+                        android:textSize="@dimen/credit_card_number_text_size"
+                        android:text="****   ****   ****   9867"/>
 
                     <View
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/spacing_middle" />
+                        android:layout_height="@dimen/spacing_large" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -74,24 +72,20 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Card Holder"
-                                android:fontFamily="monospace"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                                android:textColor="@color/grey_10" />
+                                android:textSize="@dimen/card_holder_label_text_size"
+                                style="@style/CreditCardTextStyle"
+                                android:text="Card Holder" />
 
                             <TextView
                                 android:id="@+id/txtNameCard"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="monospace"
+                                style="@style/CreditCardTextStyle"
                                 android:maxLines="1"
-                                android:text="Anderson Thomas"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                                android:textColor="@android:color/white" />
+                                android:text="Anderson Thomas" />
                         </LinearLayout>
 
                         <LinearLayout
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
@@ -100,18 +94,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Expires"
-                                android:fontFamily="monospace"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                                android:textColor="@color/grey_10" />
+                                android:textSize="@dimen/card_holder_label_text_size"
+                                style="@style/CreditCardTextStyle"/>
 
                             <TextView
                                 android:id="@+id/txtExpireCard"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="monospace"
-                                android:text="05 / 24"
-                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                                android:textColor="@android:color/white" />
+                                style="@style/CreditCardTextStyle"
+                                android:text="05 / 24" />
 
                         </LinearLayout>
 
@@ -139,8 +130,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rltv"
-                android:layout_marginLeft="@dimen/spacing_mlarge"
-                android:layout_marginRight="@dimen/spacing_mlarge"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:orientation="vertical">
 
@@ -154,10 +145,11 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:layout_width="25dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:scaleType="fitXY"
+                        android:scaleType="fitCenter"
+                        android:layout_marginRight="@dimen/spacing_small"
                         android:src="@drawable/icocctagihan" />
 
                     <TextView
@@ -168,7 +160,8 @@
                         android:layout_marginStart="@dimen/spacing_small"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="Rp 15000.000.00"
+                        style="@style/primaryFont"
+                        android:text="Rp 15.000.000.00"
                         android:textColor="#2d2d2d"
                         android:textSize="12sp" />
 
@@ -180,6 +173,8 @@
                         android:layout_marginEnd="@dimen/spacing_small"
                         android:background="@drawable/btn_rounded_red"
                         android:gravity="center"
+                        android:fontFamily="@font/interstate_regular"
+                        style="@style/Widget.AppCompat.Button.Borderless"
                         android:text="More..."
                         android:textColor="@color/colorwhite" />
                 </LinearLayout>
@@ -193,10 +188,11 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:layout_width="25dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:scaleType="fitXY"
+                        android:scaleType="fitCenter"
+                        android:layout_marginRight="@dimen/spacing_small"
                         android:src="@drawable/icocalendartanggalcetak" />
 
                     <TextView
@@ -207,6 +203,7 @@
                         android:layout_marginStart="@dimen/spacing_small"
                         android:layout_weight="1"
                         android:gravity="start"
+                        style="@style/primaryFont"
                         android:text="28 November 2019"
                         android:textColor="#2d2d2d"
                         android:textSize="12sp" />
@@ -224,10 +221,11 @@
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:layout_width="25dp"
-                        android:layout_height="20dp"
+                        android:layout_height="25dp"
                         android:layout_gravity="center"
                         android:background="@null"
-                        android:scaleType="fitXY"
+                        android:scaleType="fitCenter"
+                        android:layout_marginRight="@dimen/spacing_small"
                         android:src="@drawable/icoprintingjatuhtempo" />
 
                     <TextView
@@ -238,9 +236,9 @@
                         android:layout_marginStart="@dimen/spacing_small"
                         android:layout_weight="1"
                         android:gravity="start"
-                        android:text="1 November 2019"
+                        style="@style/primaryFont"
+                        android:text="1 November 2025"
                         android:textColor="#2d2d2d"
-
                         android:textSize="12sp" />
 
                 </LinearLayout>

@@ -2,7 +2,6 @@ package com.indocyber.itsmeandroid.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,25 +11,19 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.repositories.database.AppDatabase;
 import com.indocyber.itsmeandroid.repositories.database.dao.ImageCardDao;
 import com.indocyber.itsmeandroid.repositories.database.typeconverter.ListStringTypeConverter;
-import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import io.reactivex.Completable;
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class ContactCcViewModel extends AndroidViewModel {
 
     private ImageCardDao dao;
-    private MutableLiveData<Boolean> isLoading = new MutableLiveData();
+    private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private MutableLiveData<List<ImageCardModel>> data = new MutableLiveData<>();

@@ -11,8 +11,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PersistableBundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -28,13 +26,10 @@ import com.indocyber.itsmeandroid.view.chat.adapter.AdapterChat;
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.getFormattedTimeEvent;
 
 public class ChatActivity extends AppCompatActivity {
-    private FloatingActionButton btnSend;
     private EditText edtxtContent;
     private AdapterChat adapter;
     private RecyclerView recycleChat;
-    private ImageButton imgBtnBack;
 
-    private ActionBar actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +43,17 @@ public class ChatActivity extends AppCompatActivity {
     public void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setHomeButtonEnabled(false);
-        actionBar.setTitle(null);
-
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setHomeButtonEnabled(false);
+            actionBar.setTitle(null);
+        }
     }
 
     public void iniComponent() {
         recycleChat = findViewById(R.id.recycleChat);
-        imgBtnBack = findViewById(R.id.lyt_back);
+        ImageButton imgBtnBack = findViewById(R.id.lyt_back);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recycleChat.setLayoutManager(layoutManager);
@@ -68,22 +64,11 @@ public class ChatActivity extends AppCompatActivity {
         adapter.insertItem(new Message(adapter.getItemCount(), "Hai..", false, adapter.getItemCount() % 5 == 0, getFormattedTimeEvent(System.currentTimeMillis())));
         adapter.insertItem(new Message(adapter.getItemCount(), "Hello!", true, adapter.getItemCount() % 5 == 0, getFormattedTimeEvent(System.currentTimeMillis())));
 
-        btnSend = findViewById(R.id.btn_send);
+        FloatingActionButton btnSend = findViewById(R.id.btn_send);
         edtxtContent = findViewById(R.id.textContent);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendChat();
-            }
-        });
-        edtxtContent.addTextChangedListener(contentWatcher);
+        btnSend.setOnClickListener(view -> sendChat());
 
-        imgBtnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        imgBtnBack.setOnClickListener(v -> finish());
         //(findViewById(R.id.imgBtnBack)).bringToFront();
         //(findViewById(R.id.imgBtnBack)).setOnClickListener(v -> finish());
     }
@@ -94,12 +79,9 @@ public class ChatActivity extends AppCompatActivity {
         adapter.insertItem(new Message(adapter.getItemCount(), msg, true, adapter.getItemCount() % 5 == 0, getFormattedTimeEvent(System.currentTimeMillis())));
         edtxtContent.setText("");
         recycleChat.scrollToPosition(adapter.getItemCount() - 1);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter.insertItem(new Message(adapter.getItemCount(), msg, false, adapter.getItemCount() % 5 == 0, getFormattedTimeEvent(System.currentTimeMillis())));
-                recycleChat.scrollToPosition(adapter.getItemCount() - 1);
-            }
+        new Handler().postDelayed(() -> {
+            adapter.insertItem(new Message(adapter.getItemCount(), msg, false, adapter.getItemCount() % 5 == 0, getFormattedTimeEvent(System.currentTimeMillis())));
+            recycleChat.scrollToPosition(adapter.getItemCount() - 1);
         }, 1000);
     }
 
@@ -113,30 +95,11 @@ public class ChatActivity extends AppCompatActivity {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
         }
     }
-
-    private TextWatcher contentWatcher = new TextWatcher() {
-        @Override
-        public void afterTextChanged(Editable etd) {
-           /* if (etd.toString().trim().length() == 0) {
-                btnSend.setImageResource(R.drawable.ic_mic);
-            } else {
-                btnSend.setImageResource(R.drawable.ic_send);
-            }*/
-        }
-
-        @Override
-        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-
-        @Override
-        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        }
-    };
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

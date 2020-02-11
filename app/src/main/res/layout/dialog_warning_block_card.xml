@@ -29,6 +29,7 @@
         android:layout_marginRight="@dimen/spacing_medium"
         android:gravity="center"
         android:text="Are you sure to block your Credit Card"
+        style="@style/primaryFontLight"
         android:textColor="#2d2d2d"
         android:textSize="16sp" />
 
@@ -41,9 +42,10 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="@dimen/spacing_medium"
         android:gravity="center"
+        style="@style/primaryFontBold"
         android:text="5432 xxx xxx 8900"
-        android:textColor="#2d2d2d"
-        android:textSize="14dp"
+        android:textColor="#5D5D5D"
+        android:textSize="18dp"
         android:textStyle="bold" />
 
     <TextView
@@ -52,7 +54,8 @@
         android:layout_marginLeft="@dimen/spacing_large"
         android:layout_marginTop="@dimen/spacing_xlarge"
         android:layout_marginRight="@dimen/spacing_large"
-
+        style="@style/primaryFontLight"
+        android:textColor="#5D5D5D"
         android:text="Reason Message" />
 
     <EditText
@@ -61,6 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_large"
         android:layout_marginRight="@dimen/spacing_large"
+        style="@style/primaryFontBold"
+        android:textSize="16sp"
+        android:textColor="@color/primary_font_color"
         android:hint="type here....."
         android:inputType="text" />
 
@@ -83,7 +89,10 @@
         android:background="@drawable/btn_rounded_red"
         android:gravity="center"
         android:padding="@dimen/spacing_small"
+        android:textAllCaps="false"
         android:text="Block Now"
+        android:fontFamily="@font/interstate_regular"
+        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_marginBottom="@dimen/spacing_large"
         android:textColor="@color/colorwhite" />
 </LinearLayout>

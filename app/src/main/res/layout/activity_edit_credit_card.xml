@@ -1,317 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".view.editcreditcard.EditCreditCardActivity">
+    tools:context=".view.addcc.AddCcActivity">
 
     <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary" >
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_large"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="35"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:isScrollContainer="false"
+            android:paddingTop="0dp"
+            android:paddingBottom="16dp">
 
-            <androidx.cardview.widget.CardView
+            <RelativeLayout
+                android:id="@+id/rLayoutCard"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginRight="@dimen/spacing_large"
-                android:layout_marginBottom="@dimen/spacing_xxlarge"
-                app:cardBackgroundColor="@color/colorPrimary"
-                app:cardCornerRadius="@dimen/spacing_xlarge">
+                android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:id="@+id/rltv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgCreditCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="false"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:src="@drawable/img_blank_cc_anz" />
 
+                <TextView
+                    android:id="@+id/txtNumberCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXXX   XXXX   XXXX   XXXX"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="@dimen/credit_card_number_text_size"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
 
-                    <ImageView
-                        android:id="@+id/imageBlock"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/imgblankccanz" />
+                <TextView
+                    android:id="@+id/lblHolderLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Card holder"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="@dimen/card_holder_label_text_size"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="80dp"
-                        android:orientation="vertical"
-                        android:paddingLeft="@dimen/spacing_mlarge"
-                        android:paddingTop="@dimen/spacing_mlarge"
-                        android:paddingRight="@dimen/spacing_mlarge">
+                <TextView
+                    android:id="@+id/lblExpiryLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expires"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="@dimen/expiry_label_text_size"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
 
+                <TextView
+                    android:id="@+id/txtNameCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/card_holder_text_size"
+                    style="@style/CreditCardTextStyle"
+                    android:text="Jordan Setiawan" />
 
-                        <TextView
-                            android:id="@+id/txtNumberCard"
-                            style="@style/CreditCardTextStyle"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/spacing_medium"
-                            android:text="XXXX XXXX XXXX XXXX"
+                <TextView
+                    android:id="@+id/txtExpireCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/expiry_text_size"
+                    style="@style/CreditCardTextStyle"
+                    android:text="09/19" />
 
-                            android:textColor="@android:color/white"
-                            android:textSize="16sp" />
-
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="@dimen/spacing_middle" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    style="@style/CreditCardTextStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/card_holder_name"
-                                    android:textColor="@color/colorwhite"
-                                    android:textSize="9dp" />
-
-                                <TextView
-                                    android:id="@+id/txtNameCard"
-                                    style="@style/CreditCardTextStyle"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:maxLines="1"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Expires"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
-                                    android:textColor="@color/colorwhite"
-                                    android:textSize="9dp" />
-
-                                <TextView
-                                    android:id="@+id/txtExpireCard"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="monospace"
-                                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                                    android:textColor="@android:color/white"
-                                    android:textSize="14sp" />
-
-                            </LinearLayout>
-
-
-                            <View
-                                android:layout_width="@dimen/spacing_xlarge"
-                                android:layout_height="0dp" />
-
-
-                        </LinearLayout>
-
-                        <!-- <View
-                             android:layout_width="0dp"
-                             android:layout_height="@dimen/spacing_middle" />
-
-
-                         <View
-                             android:layout_width="0dp"
-                             android:layout_height="@dimen/spacing_medium" />-->
-                    </LinearLayout>
-                </RelativeLayout>
-            </androidx.cardview.widget.CardView>
+            </RelativeLayout>
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="-25dp"
+            android:layout_height="0dp"
+            android:layout_weight="60"
+            android:isScrollContainer="false"
             android:background="@drawable/bgcardlayout">
 
             <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:orientation="vertical">
+                android:paddingTop="20dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_height="match_parent" >
 
                 <TextView
-                    style="@style/primaryFontLight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Card Holder's Name"
-                    android:textColor="#5D5D5D" />
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="@string/card_holder_name" />
 
                 <EditText
                     android:id="@+id/edtxCardName"
+                    android:inputType="text"
+                    android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     style="@style/primaryFontBold"
+                    android:textColor="@color/black"
+                    android:maxLength="30"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Card Holder's Name"
-                    android:inputType="text"
-                    android:maxLength="15"
-                    android:textColor="@android:color/background_dark"
-                     />
-
-                <!-- edtxCardName-->
+                    android:hint="Ex. Jordan Setiawan" />
 
                 <TextView
-                    style="@style/primaryFontLight"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="Valid Card Number"
-                    android:textColor="#5D5D5D" />
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Valid Card Number" />
 
                 <EditText
                     android:id="@+id/edtxValidCard"
+                    android:inputType="number"
+                    android:digits="0123456789"
                     style="@style/primaryFontBold"
+                    android:maxLength="16"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Valid Card Number"
-                    android:inputType="number"
                     android:textColor="@color/black"
-                    />
-
-                <!-- edtxValidCard-->
+                    android:hint="Enter your card number" />
 
                 <TextView
-                    style="@style/primaryFontLight"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="Expiry Date (MM/YY)"
-                    android:textColor="#5D5D5D" />
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Expiry Date" />
 
                 <EditText
                     android:id="@+id/edtxDate"
+                    android:inputType="number"
                     style="@style/primaryFontBold"
+                    android:maxLength="5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:hint="Date"
-                    android:inputType="date"
                     android:textColor="@color/black"
-                     />
-
-                <!-- edtxDate-->
+                    android:layout_height="wrap_content"
+                    android:hint="MM/YY" />
 
                 <TextView
-                    android:theme="@style/primaryFontLight"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
                     android:text="Billing Address" />
 
                 <EditText
                     android:id="@+id/edtxBillingAddress"
+                    android:inputType="text|textMultiLine"
+                    android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     style="@style/primaryFontBold"
+                    android:maxLength="100"
+                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Billing Address"
-                    android:inputType="textMultiLine"
-                    android:lines="4"
-                    android:maxLines="10"
-                    android:minLines="4"
-                    android:textColor="@color/black"
-                    />
+                    android:hint="Enter your billing address" />
 
-                <!-- edtxBillingAddress-->
                 <TextView
-                    style="@style/primaryFontLight"
+                    android:layout_marginTop="8dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Country"
-                    android:textColor="#5D5D5D" />
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Country" />
 
                 <Spinner
                     android:id="@+id/spnrCountry"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:spinnerMode="dropdown" />
-
-                <!-- spnrCountry-->
-
-                <TextView
-                    style="@style/primaryFontLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="City"
-                    android:textColor="#5D5D5D" />
-
-                <Spinner
-                    android:id="@+id/spnrCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:spinnerMode="dropdown" />
-
-                <!-- spnrCity-->
-
-                <TextView
-                    style="@style/primaryFontLight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:text="Postal Code"
-                    android:textColor="#5D5D5D" />
-
-                <EditText
-                    android:id="@+id/edtxPostalCode"
+                    android:inputType="text"
                     style="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="true"
-                    android:hint="Postal Code"
-                    android:inputType="text"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:padding="0dp"
                     android:textColor="@color/black"
-                     />
+                    android:background="@drawable/bgspinner"
+                    android:hint="@string/username" />
 
-                <!-- edtxDate-->
+                <TextView
+                    android:layout_marginTop="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="City" />
 
-                <CheckBox
-                    android:id="@+id/checkboxRegister"
+                <Spinner
+                    android:id="@+id/spnrCity"
+                    android:inputType="text"
+                    android:theme="@style/primaryFontBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/spacing_xlarge"
-                    android:layout_marginBottom="@dimen/spacing_xlarge"
-                    android:text="@string/i_agree_terms_and_condition" />
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/black"
+                    android:layout_marginRight="4dp"
+                    android:padding="0dp"
+                    android:background="@drawable/bgspinner"
+                    android:hint="@string/username" />
+
+                <TextView
+                    android:layout_marginTop="14dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/primaryFontLight"
+                    android:textColor="#5D5D5D"
+                    android:text="Postal Code" />
+
+                <EditText
+                    android:id="@+id/edtxPostalCode"
+                    android:inputType="number"
+                    style="@style/primaryFontBold"
+                    android:maxLength="10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:hint="Enter your postal code" />
+
+                <LinearLayout
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <CheckBox
+                        android:id="@+id/checkboxRegister"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/i_agree_terms_and_condition" />
+
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/btnSave"
+                    android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    android:background="@drawable/btn_rounded_primary"
                     android:text="Save"
-                    android:textColor="@color/colorwhite" />
-
+                    android:textAllCaps="false"
+                    android:textSize="16dp"
+                    style="@style/primaryFontBold"
+                    android:stateListAnimator="@null"
+                    android:textColor="@color/colorwhite"
+                    android:background="@drawable/btn_rounded_primary"
+                    android:layout_marginBottom="32dp" />
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
     </LinearLayout>
-</LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

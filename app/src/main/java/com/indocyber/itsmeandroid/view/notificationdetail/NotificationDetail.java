@@ -15,16 +15,16 @@ public class NotificationDetail extends AppCompatActivity {
         setContentView(R.layout.activity_notification_detail);
         Bundle extras = getIntent().getExtras();
 
-        String title = extras.getString("notificationTitle");
+        String title = extras != null ? extras.getString("notificationTitle") : "";
         createToolbar(title);
         TextView billingTitle = findViewById(R.id.txtNotificationTitle);
         billingTitle.setText(title);
 
-        String body = extras.getString("notificationBody");
+        String body = extras != null ? extras.getString("notificationBody") : "";
         TextView billingBody = findViewById(R.id.txtNotificationMessage);
         billingBody.setText(body);
 
-        String date = extras.getString("notificationDate");
+        String date = extras != null ? extras.getString("notificationDate") : "";
         TextView billingDate = findViewById(R.id.txtNotificationDate);
         billingDate.setText(date);
     }

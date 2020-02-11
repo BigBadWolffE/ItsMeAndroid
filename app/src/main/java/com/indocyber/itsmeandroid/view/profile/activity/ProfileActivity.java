@@ -32,10 +32,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
-    private TabAdapter mTabAdapter;
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
-    private ImageView mTakePhotoBtn;
     private CircleImageView mFotoProfile;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -57,12 +53,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         int fragmentId = getIntent().getIntExtra("GO_TO_KTP", 0);
 
-        mViewPager = findViewById(R.id.viewPagerProfile);
-        mTabLayout = findViewById(R.id.tabLayoutProfile);
+        ViewPager mViewPager = findViewById(R.id.viewPagerProfile);
+        TabLayout mTabLayout = findViewById(R.id.tabLayoutProfile);
         mFotoProfile = findViewById(R.id.imageFotoProfile);
-        mTakePhotoBtn = findViewById(R.id.imageTakeFotoProfile);
+        ImageView mTakePhotoBtn = findViewById(R.id.imageTakeFotoProfile);
 
-        mTabAdapter = new TabAdapter(getSupportFragmentManager());
+        TabAdapter mTabAdapter = new TabAdapter(getSupportFragmentManager());
         mTabAdapter.addFragment(new DetailProfileFragment(), "Detail Profile");
         mTabAdapter.addFragment(new ProfileKTPFragment(), "KTP");
         mTabAdapter.addFragment(new ProfileNPWPFragment(), "NPWP");
@@ -79,12 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
             mFotoProfile.setImageBitmap(newProfpic);
         }
 
-        mTakePhotoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startTakePhotoDialog();
-            }
-        });
+        mTakePhotoBtn.setOnClickListener(view -> startTakePhotoDialog());
     }
 
     private void startTakePhotoDialog() {
@@ -94,18 +85,10 @@ public class ProfileActivity extends AppCompatActivity {
         myAlertDialog.setMessage("How do you want to set your picture?");
 
         myAlertDialog.setPositiveButton("Gallery",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        pickFromGallery();
-                    }
-                });
+                (arg0, arg1) -> pickFromGallery());
 
         myAlertDialog.setNegativeButton("Camera",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        takeFromCamera();
-                    }
-                });
+                (arg0, arg1) -> takeFromCamera());
 
         myAlertDialog.show();
     }

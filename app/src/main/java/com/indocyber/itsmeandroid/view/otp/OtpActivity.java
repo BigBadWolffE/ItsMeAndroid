@@ -51,8 +51,10 @@ public class OtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
         Bundle extras = getIntent().getExtras();
-        mCardNumber = extras.getString("cardNumber");
-        createCardFromExtras(extras);
+        mCardNumber = extras != null ? extras.getString("cardNumber") : "";
+        if (extras != null) {
+            createCardFromExtras(extras);
+        }
         createToolbar();
         initializeOtpInput();
         timer = findViewById(R.id.lblOtpTimer);
@@ -250,12 +252,8 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private boolean otpIsValid() {
-        if(mOtp1.getText().length() < 1 || mOtp2.getText().length() < 1 ||
-                mOtp3.getText().length() < 1 || mOtp4.getText().length() < 1){
-            return false;
-        }
-
-        return true;
+        return mOtp1.getText().length() >= 1 && mOtp2.getText().length() >= 1 &&
+                mOtp3.getText().length() >= 1 && mOtp4.getText().length() >= 1;
     }
 
     private void confirm(){
@@ -293,7 +291,9 @@ public class OtpActivity extends AppCompatActivity {
         viewModel.getIsSaved().observe(this, isSaved -> {
             if (isSaved) {
                 String styledText = "Penambahan Credit Card Anda<br>"
-                        + "<big><b>" + mCardNumber + "</b></big><br>"
+                        + "<big><b>"
+                        + UtilitiesCore.cardNumberSpacing(mCardNumber, 1)
+                        + "</b></big><br>"
                         + "Berhasil";
 
                 UtilitiesCore.buildAlertDialog(

@@ -11,6 +11,7 @@
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/primaryFont"
         android:padding="@dimen/spacing_large"
         android:text="Family"
         android:textColor="@color/colorPrimary" />

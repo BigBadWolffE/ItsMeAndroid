@@ -1,7 +1,6 @@
 package com.indocyber.itsmeandroid.view.profile.fragment;
 
 import android.app.AlertDialog;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -22,16 +21,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
-import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 
 import dmax.dialog.SpotsDialog;
 
-import org.w3c.dom.Text;
 
 public class DetailProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";

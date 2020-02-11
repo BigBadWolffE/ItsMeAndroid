@@ -15,18 +15,14 @@ import android.widget.Button;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.blockallconfirmation.BlockAllConfirmationActivity;
 import com.indocyber.itsmeandroid.view.blockcc.adapter.BlockCCAdapter;
-import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.viewmodel.BlockCcViewModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
 public class BlockCCActivity extends AppCompatActivity {
 
-    private RecyclerView mRlvBlock;
-    private Button mBtnBlock;
     private BlockCCAdapter mAdapter = new BlockCCAdapter(this);
 
     private BlockCcViewModel viewModel;
@@ -42,9 +38,8 @@ public class BlockCCActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setElevation(0f);
         }
-
-        mRlvBlock = findViewById(R.id.rlvBlock);
-        mBtnBlock = findViewById(R.id.btnBlock);
+        RecyclerView mRlvBlock = findViewById(R.id.rlvBlock);
+        Button mBtnBlock = findViewById(R.id.btnBlock);
         mBtnBlock.setOnClickListener(view -> {
             Intent intent = new Intent(this, BlockAllConfirmationActivity.class);
             startActivity(intent);
@@ -70,21 +65,6 @@ public class BlockCCActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void setDataBlockCard(){
-//        dataImageCard().observe(this, list -> {
-//            mAdapter = new BlockCCAdapter(this);
-//            mAdapter.setListNotes(list);
-//            mRlvBlock.setAdapter(mAdapter);
-//            mRlvBlock.setLayoutManager(new LinearLayoutManager(this));
-//            mRlvBlock.setHasFixedSize(true);
-//               /* mBtnBlock.setOnClickListener(v -> {
-//                    list.remove(0);
-//                    mAdapter.setListNotes(list);
-//
-//                });*/
-//        });
-//    }
-
     private void observeViewModel() {
         viewModel.getIsLoading().observe(this, isLoading -> {
             if (isLoading) {
@@ -100,9 +80,7 @@ public class BlockCCActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getCardList().observe(this, list -> {
-            mAdapter.refreshAdapter(list);
-        });
+        viewModel.getCardList().observe(this, list -> mAdapter.refreshAdapter(list));
     }
 
     @Override
