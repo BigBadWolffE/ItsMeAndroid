@@ -245,6 +245,8 @@ public final class AddCcActivity extends AppCompatActivity {
 
         if (mPostalCodeInput.getText().length() < 3) return false;
 
+        if (mCardImageResource == 0) mCardImageResource = randomizeCardImage();
+
         return true;
     }
 

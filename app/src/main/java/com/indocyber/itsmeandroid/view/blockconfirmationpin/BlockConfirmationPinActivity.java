@@ -5,31 +5,22 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.Priority;
-import com.bumptech.glide.request.RequestOptions;
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 import com.indocyber.itsmeandroid.viewmodel.BlockConfirmationPinViewModel;
-
-import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
@@ -43,6 +34,7 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
     private TextView mTxtNumberCard;
     private TextView mTxtExpireCard;
     private ImageView mImageBlock;
+    private String mCardNumber;
 
     public static String INTENT_BLOCK_CONFIRMATION = "INTENT_BLOCK_CONFIRMATION";
     private AlertDialog loader;
@@ -68,10 +60,12 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
         mImageBlock = findViewById(R.id.imageBlock);
 
         if (model != null) {
+            mCardNumber = model.getNumberCard();
             mTxtNameCard.setText(model.getNameCard());
-            mTxtNumberCard.setText(UtilitiesCore.cardNumberSpacing(model.getNumberCard(), 3));
+            mTxtNumberCard.setText(UtilitiesCore.cardNumberSpacing(mCardNumber, 3));
             mTxtExpireCard.setText(model.getExpireCard());
             mImageBlock.setImageResource(model.getImage());
+
         }
         setPinView();
         observeViewModel();
@@ -167,9 +161,15 @@ public class BlockConfirmationPinActivity extends AppCompatActivity {
 
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             if (isSuccess) {
+                String styledText = "Blokir Credit Card Anda<br>"
+                        + "<big><b>"
+                        + UtilitiesCore.cardNumberSpacing(mCardNumber, 1)
+                        + "</b></big><br>"
+                        + "Berhasil";
+
                 UtilitiesCore.buildAlertDialog(
                         this,
-                        "Card block success!",
+                        Html.fromHtml(styledText),
                         R.drawable.ic_approved,
                         dialogInterface -> {
                             dialogInterface.dismiss();
