@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.view.profile.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
@@ -17,22 +18,27 @@ import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
 import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
+import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 
 import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
 public class ProfileActivity extends AppCompatActivity {
 
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
     private CircleImageView mFotoProfile;
+    private ProfileDetailViewModel viewModel;
+    private android.app.AlertDialog mLoader;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -50,13 +56,17 @@ public class ProfileActivity extends AppCompatActivity {
         pref = getSharedPreferences("MyPref", 0);
         editor = pref.edit();
         String paramProfPic = pref.getString("ProfilePicture", null);
-
+        mLoader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(this)
+                .build();
         int fragmentId = getIntent().getIntExtra("GO_TO_KTP", 0);
 
         ViewPager mViewPager = findViewById(R.id.viewPagerProfile);
         TabLayout mTabLayout = findViewById(R.id.tabLayoutProfile);
         mFotoProfile = findViewById(R.id.imageFotoProfile);
         ImageView mTakePhotoBtn = findViewById(R.id.imageTakeFotoProfile);
+        viewModel = ViewModelProviders.of(this).get(ProfileDetailViewModel.class);
 
         TabAdapter mTabAdapter = new TabAdapter(getSupportFragmentManager());
         mTabAdapter.addFragment(new DetailProfileFragment(), "Detail Profile");
@@ -76,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         mTakePhotoBtn.setOnClickListener(view -> startTakePhotoDialog());
+        observeViewModel();
     }
 
     private void startTakePhotoDialog() {
@@ -112,13 +123,17 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && data != null) {
+            Preference preference = new Preference(this);
+            String authKey = preference.getUserAuth();
             switch (requestCode) {
                 case CAMERA_REQUEST:
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     mFotoProfile.setImageBitmap(imageBitmap);
                     String encode = UtilitiesCore.encodeImage(imageBitmap);
-                    saveToSharedPreferences(encode);
+                    viewModel.updateProfilePicture(authKey, encode);
+//                    saveToSharedPreferences(encode);
+
                     break;
                 case GALLERY_PICTURE:
                     Uri uri = data.getData();
@@ -127,13 +142,45 @@ public class ProfileActivity extends AppCompatActivity {
                         bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
                         mFotoProfile.setImageBitmap(bitmap);
                         String end = UtilitiesCore.encodeImage(bitmap);
-                        saveToSharedPreferences(end);
+                        viewModel.updateProfilePicture(authKey, end);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                     break;
             }
         }
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                mLoader.show();
+            } else {
+                mLoader.dismiss();
+            }
+        });
+
+        viewModel.getProfileUpdated().observe(this, isUpdated -> {
+            if (isUpdated) {
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        "Picture Updated",
+                        R.drawable.ic_approved,
+                        dialogInterface -> dialogInterface.dismiss()
+                );
+            }
+        });
+
+        viewModel.getError().observe(this, error -> {
+            if (error != null) {
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        error,
+                        R.drawable.ic_invalid,
+                        dialogInterface -> dialogInterface.dismiss()
+                );
+            }
+        });
     }
 
     private void saveToSharedPreferences(String encode) {

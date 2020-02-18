@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.repositories.database.dao;
+package com.indocyber.itsmeandroid.services.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -9,7 +9,6 @@ import androidx.room.Update;
 import com.indocyber.itsmeandroid.model.User;
 
 import io.reactivex.Completable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**

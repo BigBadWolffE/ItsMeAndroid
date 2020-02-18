@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.repositories.database.AppDatabase;
-import com.indocyber.itsmeandroid.repositories.database.dao.ImageCardDao;
+import com.indocyber.itsmeandroid.services.database.AppDatabase;
+import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

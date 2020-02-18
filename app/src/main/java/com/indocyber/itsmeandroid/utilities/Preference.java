@@ -9,6 +9,7 @@ public class Preference {
     private static final String LOGIN_PREFS_NAME = "LOGIN_PREFS_NAME";
     public static final String LOGGED_USER_FULLNAME = "loggedUserFullName";
     public static final String LOGGED_USER_EMAIL = "loggedUserEmail";
+    public static final String USER_AUTH = "userAuth";
     private SharedPreferences prefs;
 
     public Preference(Context context) {
@@ -25,6 +26,12 @@ public class Preference {
         return prefs.getBoolean(LOGIN_PREFS_NAME, false);
     }
 
+    public void saveUserAuth(String key) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(USER_AUTH, key);
+        editor.apply();
+    }
+
     public void setLoggedUser(String userFullName, String email) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(LOGGED_USER_FULLNAME, userFullName);
@@ -38,4 +45,5 @@ public class Preference {
     public String getLoggedUserEmail() {
         return prefs.getString(LOGGED_USER_EMAIL, "");
     }
+    public String getUserAuth() { return prefs.getString(USER_AUTH, ""); }
 }

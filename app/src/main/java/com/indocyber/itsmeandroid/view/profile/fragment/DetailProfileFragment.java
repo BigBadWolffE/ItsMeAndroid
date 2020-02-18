@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 
 import dmax.dialog.SpotsDialog;
@@ -86,9 +87,9 @@ public class DetailProfileFragment extends Fragment {
                 .setContext(getActivity())
                 .build();
         mPreference = new Preference(getActivity());
-        String userEmail = mPreference.getLoggedUserEmail();
-        viewModel = ViewModelProviders.of(this).get(ProfileDetailViewModel.class);
-        viewModel.getUserData(userEmail);
+        String authKey = mPreference.getUserAuth();
+        viewModel = ViewModelProviders.of(getActivity()).get(ProfileDetailViewModel.class);
+        viewModel.getUserData(authKey);
         mNamaLengkap = view.findViewById(R.id.txtProfileNamaLengkap);
         mAlamat = view.findViewById(R.id.txtProfileAlamat);
         mEditAlamat = view.findViewById(R.id.imgEditAlamat);
@@ -249,8 +250,8 @@ public class DetailProfileFragment extends Fragment {
         mEmailAddress.setText(mDetailModel.getEmail());
         mNoTelp.setText(mDetailModel.getNoTelp());
         mPass.setText(mDetailModel.getPassword());
-        mPin.setText(mDetailModel.getPin());
-        mSecretQuestion.setText(mDetailModel.getHobby());
+        mPin.setText("000000");
+        mSecretQuestion.setText(mDetailModel.getSecretAnswer());
     }
 
     @Override
@@ -274,8 +275,7 @@ public class DetailProfileFragment extends Fragment {
         mDetailModelInside.setEmail(mEmailAddress.getText().toString());
         mDetailModelInside.setNoTelp(mNoTelp.getText().toString());
         mDetailModelInside.setPassword(mPass.getText().toString());
-        mDetailModelInside.setPin(mPin.getText().toString());
-        mDetailModelInside.setHobby(mSecretQuestion.getText().toString());
+        mDetailModelInside.setSecretAnswer(mSecretQuestion.getText().toString());
         return mDetailModelInside;
     }
 
@@ -291,6 +291,17 @@ public class DetailProfileFragment extends Fragment {
         viewModel.getUser().observe(this, user -> {
             if (user != null) {
                 setNotNull(user);
+            }
+        });
+
+        viewModel.getError().observe(this, error -> {
+            if (error != null) {
+                UtilitiesCore.buildAlertDialog(
+                        getActivity(),
+                        error,
+                        R.drawable.ic_invalid,
+                        dialogInterface -> dialogInterface.dismiss()
+                );
             }
         });
     }

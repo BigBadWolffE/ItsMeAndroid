@@ -3,18 +3,31 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 @Entity
 public class User {
 
+    @SerializedName("fullname")
     private String namaLengkap;
     @PrimaryKey
     @NonNull
+    @SerializedName("email")
     private String email;
+    @SerializedName("phone")
     private String noTelp;
+    @SerializedName("password")
     private String password;
-    private String pin;
+    @SerializedName("pin")
+    private UserPin pin;
+    @SerializedName("alamat")
+    @Expose(serialize = false)
     private String alamat;
-    private String hobby;
+    @SerializedName("secretQuestionID")
+    private int secretQuestionId;
+    @SerializedName("answerQuestion")
+    private String secretAnswer;
 
     public String getNamaLengkap() {
         return namaLengkap;
@@ -48,11 +61,19 @@ public class User {
         this.password = password;
     }
 
-    public String getPin() {
+    public UserPin getPin() {
         return pin;
     }
 
-    public void setPin(String pin) {
+    public int getSecretQuestionId() {
+        return secretQuestionId;
+    }
+
+    public void setSecretQuestionId(int secretQuestionId) {
+        this.secretQuestionId = secretQuestionId;
+    }
+
+    public void setPin(UserPin pin) {
         this.pin = pin;
     }
 
@@ -64,11 +85,39 @@ public class User {
         this.alamat = alamat;
     }
 
-    public String getHobby() {
-        return hobby;
+    public String getSecretAnswer() {
+        return secretAnswer;
     }
 
-    public void setHobby(String hobby) {
-        this.hobby = hobby;
+    public void setSecretAnswer(String secretAnswer) {
+        this.secretAnswer = secretAnswer;
+    }
+
+    public class UserPin {
+        @SerializedName("algorithm")
+        String algorithm;
+        @SerializedName("pinValue")
+        String pinValue;
+
+        public UserPin(String algorithm, String pinValue) {
+            this.algorithm = algorithm;
+            this.pinValue = pinValue;
+        }
+
+        public String getAlgorithm() {
+            return algorithm;
+        }
+
+        public void setAlgorithm(String algorithm) {
+            this.algorithm = algorithm;
+        }
+
+        public String getPinValue() {
+            return pinValue;
+        }
+
+        public void setPinValue(String pinValue) {
+            this.pinValue = pinValue;
+        }
     }
 }

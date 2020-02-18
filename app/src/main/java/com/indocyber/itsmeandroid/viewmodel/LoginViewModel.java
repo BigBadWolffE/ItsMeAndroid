@@ -6,9 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
+import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.User;
-import com.indocyber.itsmeandroid.repositories.database.AppDatabase;
-import com.indocyber.itsmeandroid.repositories.database.dao.UserDao;
+import com.indocyber.itsmeandroid.repositories.UserRepository;
+import com.indocyber.itsmeandroid.services.database.AppDatabase;
+import com.indocyber.itsmeandroid.services.database.dao.UserDao;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -23,7 +26,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class LoginViewModel extends AndroidViewModel {
 
-    private UserDao dao;
+    private UserRepository userRepository;
     private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
@@ -43,30 +46,32 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application) {
         super(application);
-        dao = AppDatabase.getInstance(application).userDao();
+        userRepository = new UserRepository(application);
     }
 
-    public void login(String email, String password) {
+    public void login(String authKey) {
         isLoading.setValue(true);
         disposable.add(
-                dao.login(email, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<User>() {
+            userRepository.getProfile(authKey)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<ApiResponse<User>>() {
+                        @Override
+                        public void onSuccess(ApiResponse<User> response) {
+                            isLoading.setValue(false);
+                            if (response.getCode() != 200) {
+                                error.setValue(response.getMessage());
+                                return;
+                            }
+                            user.setValue(response.getContent());
+                        }
 
-                    @Override
-                    public void onSuccess(User retrievedUser) {
-                        isLoading.setValue(false);
-                        user.setValue(retrievedUser);
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        isLoading.setValue(false);
-                        error.setValue(e.getMessage());
-                    }
-
-                })
+                        @Override
+                        public void onError(Throwable e) {
+                            isLoading.setValue(false);
+                            error.setValue(e.getMessage());
+                        }
+                    })
         );
     }
 

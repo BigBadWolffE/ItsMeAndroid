@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.repositories.database.dao;
+package com.indocyber.itsmeandroid.services.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

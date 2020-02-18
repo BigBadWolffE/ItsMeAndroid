@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +31,7 @@ public class LoginWithEmailActivity extends AppCompatActivity {
     private EditText edtxUsername;
     private EditText edtxPassword;
     private Preference preference;
+    private String base64key;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +68,9 @@ public class LoginWithEmailActivity extends AppCompatActivity {
                 edtxPassword.setError("field empty");
                 edtxPassword.requestFocus();
             } else {
-                viewModel.login(edtxUsername.getText().toString(), edtxPassword.getText().toString());
+                String key = edtxUsername.getText().toString() + ":" + edtxPassword.getText().toString();
+                base64key = Base64.encodeToString(key.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
+                viewModel.login(base64key);
             }
         });
         mForgotPasswordBtn.setOnClickListener(view -> {
@@ -99,6 +103,7 @@ public class LoginWithEmailActivity extends AppCompatActivity {
             if (user != null) {
                 preference.setLoginFirstTime(true);
                 preference.setLoggedUser(user.getNamaLengkap(), user.getEmail());
+                preference.saveUserAuth(base64key);
                 Intent intent = new Intent(LoginWithEmailActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();

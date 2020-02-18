@@ -5,59 +5,43 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.util.Base64;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
-import com.indocyber.itsmeandroid.view.blockconfirmationpin.BlockConfirmationPinActivity;
+import com.indocyber.itsmeandroid.utilities.commonclass.CustomSpinnerAdapter;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
-import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
+import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private String idQuestion;
-    private String idAnswer;
-    private String nameQuestion;
-    private String nameAnswer;
     private Spinner mSpnrQuestion;
-    //private Spinner mSpnrAnswer;
     private Button buttonRegister;
-
     private EditText txtFullname;
     private EditText txtEmail;
     private EditText txtPhonenumber;
@@ -69,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private AlertDialog loader;
     private Preference preference;
     private RegisterViewModel viewModel;
+    String base64Auth = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,13 +75,13 @@ public class RegistrationActivity extends AppCompatActivity {
         txtAnswer = findViewById(R.id.txtAnswer);
         checkboxRegister = findViewById(R.id.checkboxRegister);
         viewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
+        viewModel.fetchQuestionList();
         pinView = findViewById(R.id.firstPinView);
         buttonRegister = findViewById(R.id.buttonRegister);
         loader = new SpotsDialog.Builder()
                 .setCancelable(false)
                 .setContext(RegistrationActivity.this)
                 .build();
-        setSpinnerQuestion();
         setPinView();
         checkRegister();
         observeViewModel();
@@ -112,9 +97,13 @@ public class RegistrationActivity extends AppCompatActivity {
             newUser.setEmail(txtEmail.getText().toString());
             newUser.setNoTelp(txtPhonenumber.getText().toString());
             newUser.setPassword(txtPassword.getText().toString());
-            newUser.setPin(pinView.getText().toString());
-            newUser.setHobby(txtAnswer.getText().toString());
-            viewModel.register(newUser);
+            Integer newPin = Integer.parseInt(pinView.getText().toString());
+            SecretQuestion selectedQuestion = (SecretQuestion) mSpnrQuestion.getSelectedItem();
+            newUser.setSecretQuestionId(selectedQuestion.getSecretQuestionId());
+            newUser.setSecretAnswer(txtAnswer.getText().toString());
+            String key = newUser.getEmail() + ":" + newUser.getPassword();
+            base64Auth = Base64.encodeToString(key.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
+            viewModel.register(newUser, newPin);
         });
     }
 
@@ -193,12 +182,43 @@ public class RegistrationActivity extends AppCompatActivity {
                     RegistrationActivity.this,
                     "Registration Success.",
                     R.drawable.ic_approved,
-                    dialogInterface -> onLoginSuccess(dialogInterface)
+                    dialogInterface -> onRegistrationSuccess(dialogInterface)
             );
         });
 
         viewModel.getError().observe(this,
                 error -> snackBarIconError(RegistrationActivity.this, error));
+
+        viewModel.getQuestionList().observe(this, secretQuestions -> setSpinnerQuestion(secretQuestions));
+
+        viewModel.getDataError().observe(this,
+                message -> UtilitiesCore.buildAlertDialog(
+                        this,
+                        message,
+                        R.drawable.ic_invalid,
+                        dialogInterface -> {
+                            dialogInterface.dismiss();
+                            finish();
+                        }));
+
+        viewModel.getLoginError().observe(this,
+                message -> UtilitiesCore.buildAlertDialog(
+                        this,
+                        message,
+                        R.drawable.ic_invalid,
+                        dialogInterface -> {
+                            dialogInterface.dismiss();
+                            Intent intent = new Intent(this, LoginWithEmailActivity.class);
+                            finish();
+                            startActivity(intent);
+                        }
+                ));
+
+        viewModel.getUserData().observe(this, user -> {
+            preference.setLoggedUser(user.getNamaLengkap(), user.getEmail());
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -231,80 +251,16 @@ public class RegistrationActivity extends AppCompatActivity {
         pinView.setHideLineWhenFilled(false);
     }
 
-    private void setSpinnerQuestion() {
-        try {
-            List<HashMap<String, String>> listSpinner = new ArrayList<HashMap<String, String>>();
-
-            /*String[] idSpinner = {"1", "2", "3"};
-            String[] nameSpinner = {"Donasi Kemanusiaan", "Donasi Pendidikan", "Donasi Kesehatan"};*/
-
-            HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("id", "1");
-            hm.put("level_name", "What are your hobby?");
-            listSpinner.add(hm);
-            /*for (int i = 0; i < 3; i++) {
-                HashMap<String, String> hm = new HashMap<String, String>();
-                hm.put("id", idSpinner[i]);
-                hm.put("level_name", nameSpinner[i]);
-                listSpinner.add(hm);
-            }*/
-            String[] from = {"id", "level_name"};
-            int[] to = {R.id.id_spinner, R.id.nama_spinner};
-            SimpleAdapter adapter = new SimpleAdapter(this, listSpinner, R.layout.layout_spinner, from, to);
-            mSpnrQuestion.setAdapter(adapter);
-            mSpnrQuestion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long idLong) {
-                    HashMap<String, String> hm = (HashMap<String, String>) parent.getAdapter().getItem(position);
-                    String id = hm.get("id");
-                    String level_name = hm.get("level_name");
-                   /* typeId = id;
-                    typeName = level_name;*/
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void setSpinnerQuestion(List<SecretQuestion> questionList) {
+        CustomSpinnerAdapter<SecretQuestion> spinnerAdapter =
+                new CustomSpinnerAdapter<>(this, R.layout.spinner_item_text, questionList);
+        mSpnrQuestion.setAdapter(spinnerAdapter);
+        mSpnrQuestion.setSelection(0);
     }
 
-//    private void showCustomDialog() {
-//        final Dialog dialog = new Dialog(RegistrationActivity.this);
-//        dialog.setContentView(R.layout.dialog_succes_registration);
-//        dialog.setCancelable(false);
-//
-//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//        lp.copyFrom(dialog.getWindow().getAttributes());
-//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-//        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//
-//        final Button btnClose = dialog.findViewById(R.id.btnClose);
-//
-//        btnClose.setOnClickListener(v -> {
-//            loader.dismiss();
-//            finish();
-//            preference.setLoginFirstTime(true);
-//            preference.setLoggedUser(txtFullname.getText().toString(),
-//                    txtEmail.getText().toString());
-//            Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
-//            startActivity(i);
-//        });
-//
-//        dialog.show();
-//        dialog.getWindow().setAttributes(lp);
-//    }
-
-    private void onLoginSuccess(DialogInterface dialog) {
+    private void onRegistrationSuccess(DialogInterface dialog) {
         dialog.dismiss();
-        finish();
-        preference.setLoginFirstTime(true);
-        preference.setLoggedUser(txtFullname.getText().toString(),
-                txtEmail.getText().toString());
-        Intent i = new Intent(RegistrationActivity.this, HomeActivity.class);
-        startActivity(i);
+        preference.saveUserAuth(base64Auth);
+        viewModel.login(base64Auth);
     }
 }
