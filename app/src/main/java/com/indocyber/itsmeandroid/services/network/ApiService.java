@@ -59,4 +59,8 @@ public class ApiService {
         body.put("photo", base64);
         return api.updateProfilePicture(generateAuthenticationHeader(authKey), body);
     }
+
+    public Single<ApiResponse<String>> updateProfile(String authKey, HashMap<String, String> body) {
+        return api.updateProfile(generateAuthenticationHeader(authKey), body);
+    }
 }

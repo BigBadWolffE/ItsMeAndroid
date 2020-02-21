@@ -21,13 +21,15 @@ public class User {
     private String password;
     @SerializedName("pin")
     private UserPin pin;
-    @SerializedName("alamat")
+    @SerializedName("address")
     @Expose(serialize = false)
     private String alamat;
     @SerializedName("secretQuestionID")
     private int secretQuestionId;
     @SerializedName("answerQuestion")
     private String secretAnswer;
+    @SerializedName("profilePictureMetadata")
+    private String pictureMetaData;
 
     public String getNamaLengkap() {
         return namaLengkap;
@@ -93,6 +95,14 @@ public class User {
         this.secretAnswer = secretAnswer;
     }
 
+    public String getPictureMetaData() {
+        return pictureMetaData;
+    }
+
+    public void setPictureMetaData(String pictureMetaData) {
+        this.pictureMetaData = pictureMetaData;
+    }
+
     public class UserPin {
         @SerializedName("algorithm")
         String algorithm;
@@ -120,4 +130,6 @@ public class User {
             this.pinValue = pinValue;
         }
     }
+
+
 }

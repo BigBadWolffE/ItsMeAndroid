@@ -253,15 +253,6 @@
                     android:inputType="numberPassword"
                     android:maxLength="6"/>
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_weight=".1"
-                    android:id="@+id/imgEditPin"
-                    android:src="@drawable/ic_profile_pencil_edit"
-                    android:scaleType="fitCenter"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/spacing_medium"/>
             </LinearLayout>
         </LinearLayout>
 

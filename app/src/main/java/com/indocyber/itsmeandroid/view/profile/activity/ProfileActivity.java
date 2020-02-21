@@ -16,8 +16,13 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
@@ -28,9 +33,11 @@ import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 
 import java.io.IOException;
+import java.net.URI;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
+import okhttp3.internal.Util;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -164,7 +171,7 @@ public class ProfileActivity extends AppCompatActivity {
             if (isUpdated) {
                 UtilitiesCore.buildAlertDialog(
                         this,
-                        "Picture Updated",
+                        "Profile Updated",
                         R.drawable.ic_approved,
                         dialogInterface -> dialogInterface.dismiss()
                 );
@@ -179,6 +186,15 @@ public class ProfileActivity extends AppCompatActivity {
                         R.drawable.ic_invalid,
                         dialogInterface -> dialogInterface.dismiss()
                 );
+            }
+        });
+
+        viewModel.getUser().observe(this, user -> {
+            if (user.getPictureMetaData() != null) {
+                UtilitiesCore.loadImageFromUri(
+                        mFotoProfile,
+                        this,
+                        Api.BASE_URL + user.getPictureMetaData());
             }
         });
     }

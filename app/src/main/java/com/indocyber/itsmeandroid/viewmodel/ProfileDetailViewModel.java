@@ -12,6 +12,8 @@ import com.indocyber.itsmeandroid.repositories.UserRepository;
 import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.UserDao;
 
+import java.util.HashMap;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -102,9 +104,37 @@ public class ProfileDetailViewModel extends AndroidViewModel {
     }
 
     public void updateProfilePicture(String authKey, String base64) {
+        profileUpdated.setValue(false);
         isLoading.setValue(true);
         disposable.add(
                 userRepository.updateProfilePicture(authKey, base64)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<ApiResponse<String>>() {
+                    @Override
+                    public void onSuccess(ApiResponse<String> response) {
+                        isLoading.setValue(false);
+                        if (response.getCode() != 200) {
+                            error.setValue(response.getMessage());
+                            return;
+                        }
+                        profileUpdated.setValue(true);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        isLoading.setValue(false);
+                        error.setValue(e.getMessage());
+                    }
+                })
+        );
+    }
+
+    public void updateProfile(String authKey, HashMap<String, String> body) {
+        profileUpdated.setValue(false);
+        isLoading.setValue(true);
+        disposable.add(
+                userRepository.updateProfile(authKey, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<ApiResponse<String>>() {

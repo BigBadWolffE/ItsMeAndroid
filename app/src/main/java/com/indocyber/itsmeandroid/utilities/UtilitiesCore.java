@@ -21,9 +21,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.services.network.Api;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -287,5 +293,26 @@ public final class UtilitiesCore {
 
         return paddedText.substring(0, 4) + spacings + paddedText.substring(4, 8) + spacings
                 + paddedText.substring(8, 12) + spacings + paddedText.substring(12, 16);
+    }
+
+    public static CircularProgressDrawable getProgressDrawable(Context context) {
+        CircularProgressDrawable loader = new CircularProgressDrawable(context);
+        loader.setStrokeWidth(10f);
+        loader.setCenterRadius(50f);
+        return loader;
+    }
+
+    public static void loadImageFromUri(ImageView imageView, Context context, String url) {
+        GlideUrl uri = new GlideUrl(
+                url, new LazyHeaders.Builder()
+                .addHeader("Accept", Api.ACCEPT)
+                .addHeader("x-api-key", Api.XAPIKEY)
+                .build()
+        );
+        RequestOptions option = new RequestOptions().placeholder(getProgressDrawable(context));
+        Glide.with(context)
+                .setDefaultRequestOptions(option)
+                .load(uri)
+                .into(imageView);
     }
 }

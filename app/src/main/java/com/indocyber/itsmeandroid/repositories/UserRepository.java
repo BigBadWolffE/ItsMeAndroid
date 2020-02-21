@@ -8,6 +8,8 @@ import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.services.network.ApiService;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import io.reactivex.Single;
@@ -40,5 +42,9 @@ public class UserRepository {
 
     public Single<ApiResponse<String>> updateProfilePicture(String authKey, String base64) {
         return service.updateProfilePicture(authKey, base64);
+    }
+
+    public Single<ApiResponse<String>> updateProfile(String authKey, HashMap<String, String> body) {
+        return service.updateProfile(authKey, body);
     }
 }

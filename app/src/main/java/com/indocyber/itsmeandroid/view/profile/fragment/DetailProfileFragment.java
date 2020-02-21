@@ -27,12 +27,17 @@ import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 
+import java.util.HashMap;
+
 import dmax.dialog.SpotsDialog;
 
 
 public class DetailProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static final String FIELD_ADDRESS = "address";
+    public static final String FIELD_PHONE = "phone";
+    public static final String FIELD_PASSWORD = "password";
 
     private String mParam1;
     private String mParam2;
@@ -44,6 +49,7 @@ public class DetailProfileFragment extends Fragment {
 //    SharedPreferences.Editor editor;
     private Preference mPreference;
     private ProfileDetailViewModel viewModel;
+    private String currentText;
 
     public DetailProfileFragment() {
         // Required empty public constructor
@@ -99,21 +105,8 @@ public class DetailProfileFragment extends Fragment {
         mPass = view.findViewById(R.id.txtProfilePassword);
         mEditPass = view.findViewById(R.id.imgEditPassword);
         mPin = view.findViewById(R.id.txtProfilePin);
-        mEditPin = view.findViewById(R.id.imgEditPin);
         mSecretQuestion = view.findViewById(R.id.txtProfileSecretQuestion);
         mErrorValidation = view.findViewById(R.id.layoutError);
-
-        View.OnFocusChangeListener focusListener = new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean focus) {
-                if (focus) {
-                    view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                } else {
-                    view.setBackgroundColor(getResources().getColor(R.color.colorwhite));
-                    view.setEnabled(false);
-                }
-            }
-        };
 
         mNamaLengkap.setEnabled(false);
         mNamaLengkap.setTextColor(Color.BLACK);
@@ -121,24 +114,21 @@ public class DetailProfileFragment extends Fragment {
         mAlamat.setTextColor(Color.BLACK);
         mAlamat.setHorizontalScrollBarEnabled(false);
         mAlamat.setSingleLine(false);
-        mAlamat.setOnFocusChangeListener(focusListener);
+        mAlamat.setOnFocusChangeListener(createFocusListener(FIELD_ADDRESS));
         mEmailAddress.setEnabled(false);
         mEmailAddress.setTextColor(Color.BLACK);
         mEmailAddress.setHorizontalScrollBarEnabled(false);
         mEmailAddress.setSingleLine(false);
-        mEmailAddress.setOnFocusChangeListener(focusListener);
         mNoTelp.setEnabled(false);
         mNoTelp.setTextColor(Color.BLACK);
-        mNoTelp.setOnFocusChangeListener(focusListener);
+        mNoTelp.setOnFocusChangeListener(createFocusListener(FIELD_PHONE));
         mPass.setEnabled(false);
-        mPass.setOnFocusChangeListener(focusListener);
+        mPass.setOnFocusChangeListener(createFocusListener(FIELD_PASSWORD));
 //        mPass.setTextColor(Color.BLACK);
         mPin.setEnabled(false);
-        mPin.setOnFocusChangeListener(focusListener);
 //        mPin.setTextColor(Color.BLACK);
         mSecretQuestion.setEnabled(false);
         mSecretQuestion.setTextColor(Color.BLACK);
-        mSecretQuestion.setOnFocusChangeListener(focusListener);
         mEditAlamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,40 +176,6 @@ public class DetailProfileFragment extends Fragment {
             }
         });
 
-        mEditPin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!mPin.hasFocus()) {
-                    mPin.setEnabled(true);
-                    mPin.requestFocus();
-                    mPin.setInputType(InputType.TYPE_CLASS_NUMBER
-                            | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
-                    mPin.setSelection(mPin.getText().length());
-                    mPin.addTextChangedListener(new TextWatcher() {
-                        @Override
-                        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                        }
-
-                        @Override
-                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                            if (mPin.getText().length() < 6) {
-                                Toast.makeText(getContext(), "Pin harus berisi 6 angka.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void afterTextChanged(Editable editable) {
-
-                        }
-                    });
-                } else {
-                    validationPin();
-                    mPin.clearFocus();
-                    mPin.setEnabled(false);
-                }
-            }
-        });
         mPin.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
@@ -257,8 +213,8 @@ public class DetailProfileFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        User mDetailModelInside = setToModel();
-        viewModel.updateUserProfile(mDetailModelInside);
+//        User mDetailModelInside = setToModel();
+//        viewModel.updateUserProfile(mDetailModelInside);
     }
 
 //    private void saveToSharedPreferences(User mDetailModelInside) {
@@ -280,13 +236,13 @@ public class DetailProfileFragment extends Fragment {
     }
 
     private void observeViewModel() {
-        viewModel.getIsLoading().observe(this, isLoading -> {
-            if (isLoading) {
-                mLoader.show();
-            } else {
-                mLoader.dismiss();
-            }
-        });
+//        viewModel.getIsLoading().observe(this, isLoading -> {
+//            if (isLoading) {
+//                mLoader.show();
+//            } else {
+//                mLoader.dismiss();
+//            }
+//        });
 
         viewModel.getUser().observe(this, user -> {
             if (user != null) {
@@ -294,15 +250,40 @@ public class DetailProfileFragment extends Fragment {
             }
         });
 
-        viewModel.getError().observe(this, error -> {
-            if (error != null) {
-                UtilitiesCore.buildAlertDialog(
-                        getActivity(),
-                        error,
-                        R.drawable.ic_invalid,
-                        dialogInterface -> dialogInterface.dismiss()
-                );
+//        viewModel.getError().observe(this, error -> {
+//            if (error != null) {
+//                UtilitiesCore.buildAlertDialog(
+//                        getActivity(),
+//                        error,
+//                        R.drawable.ic_invalid,
+//                        dialogInterface -> dialogInterface.dismiss()
+//                );
+//            }
+//        });
+    }
+
+    private View.OnFocusChangeListener createFocusListener(String field) {
+
+        return (view, focus) -> {
+            if (focus) {
+                view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                if (view instanceof TextView) currentText = ((TextView) view).getText().toString();
+            } else {
+                view.setBackgroundColor(getResources().getColor(R.color.colorwhite));
+                view.setEnabled(false);
+                if (view instanceof TextView) {
+                    String newText = ((TextView) view).getText().toString();
+                    if (!currentText.equals(newText)) updateField(field, newText);
+                }
             }
-        });
+        };
+    }
+
+    private void updateField(String field, String value) {
+        Preference preference = new Preference(getActivity());
+        String authKey = preference.getUserAuth();
+        HashMap<String, String> fieldUpdate = new HashMap<>();
+        fieldUpdate.put(field, value);
+        viewModel.updateProfile(authKey, fieldUpdate);
     }
 }

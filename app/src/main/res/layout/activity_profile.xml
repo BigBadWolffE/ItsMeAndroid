@@ -30,7 +30,7 @@
                     android:layout_width="120dp"
                     android:layout_height="120dp"
                     android:id="@+id/imageFotoProfile"
-                    android:src="@drawable/ic_profile_photo_dummy"/>
+                    android:src="@drawable/img_nofotoprofile"/>
 
                 <ImageView
                     android:layout_width="60dp"
