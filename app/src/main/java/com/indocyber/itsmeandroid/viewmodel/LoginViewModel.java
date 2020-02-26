@@ -1,17 +1,13 @@
 package com.indocyber.itsmeandroid.viewmodel;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
 import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.repositories.UserRepository;
-import com.indocyber.itsmeandroid.services.database.AppDatabase;
-import com.indocyber.itsmeandroid.services.database.dao.UserDao;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -24,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
  *@author Muhammad Faisal
  *@version 1.0
  */
-public class LoginViewModel extends AndroidViewModel {
+public class LoginViewModel extends ViewModel {
 
     private UserRepository userRepository;
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -44,9 +40,9 @@ public class LoginViewModel extends AndroidViewModel {
         return user;
     }
 
-    public LoginViewModel(@NonNull Application application) {
-        super(application);
-        userRepository = new UserRepository(application);
+    @Inject
+    public LoginViewModel(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public void login(String authKey) {

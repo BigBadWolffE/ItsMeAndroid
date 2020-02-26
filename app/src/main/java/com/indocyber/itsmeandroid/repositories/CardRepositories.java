@@ -20,8 +20,8 @@ public class CardRepositories {
     ImageCardDao cardDao;
 
     @Inject
-    public CardRepositories() {
-        this.cardDao = DaggerApplicationComponent.builder().build().imageCardDao();
+    public CardRepositories(ImageCardDao dao) {
+        this.cardDao = dao;
     }
 
     public Completable addCreditCard(ImageCardModel card) {

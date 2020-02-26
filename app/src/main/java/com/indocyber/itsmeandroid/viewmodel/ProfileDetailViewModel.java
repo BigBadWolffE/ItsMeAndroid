@@ -1,18 +1,16 @@
 package com.indocyber.itsmeandroid.viewmodel;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.repositories.UserRepository;
-import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.UserDao;
 
 import java.util.HashMap;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
  *@author Muhammad Faisal
  *@version 1.0
  */
-public class ProfileDetailViewModel extends AndroidViewModel {
+public class ProfileDetailViewModel extends ViewModel {
 
     private UserDao dao;
     private UserRepository userRepository;
@@ -50,10 +48,9 @@ public class ProfileDetailViewModel extends AndroidViewModel {
         return profileUpdated;
     }
 
-    public ProfileDetailViewModel(@NonNull Application application) {
-        super(application);
-//        dao = AppDatabase.getInstance(application).userDao();
-        userRepository = new UserRepository(application);
+    @Inject
+    public ProfileDetailViewModel(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public void getUserData(String authKey) {

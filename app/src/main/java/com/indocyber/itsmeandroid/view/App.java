@@ -7,6 +7,7 @@ import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasAndroidInjector;
 
@@ -16,14 +17,16 @@ import dagger.android.HasAndroidInjector;
  *@Author
  *@Version
  */
-public class App extends Application implements HasAndroidInjector {
-
-    @Inject
-    DispatchingAndroidInjector<Object> dispatchingAndroidInjector;
+public class App extends DaggerApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    @Override
+    protected AndroidInjector<? extends DaggerApplication> applicationInjector() {
+        return DaggerApplicationComponent.builder().application(this).build();
     }
 //
 //    @Override
@@ -31,9 +34,4 @@ public class App extends Application implements HasAndroidInjector {
 //        super.attachBaseContext(base);
 //        MultiDex.install(this);
 //    }
-
-    @Override
-    public AndroidInjector<Object> androidInjector() {
-        return dispatchingAndroidInjector;
-    }
 }

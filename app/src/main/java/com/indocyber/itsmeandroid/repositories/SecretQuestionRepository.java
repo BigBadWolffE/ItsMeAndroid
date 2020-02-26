@@ -31,12 +31,9 @@ public class SecretQuestionRepository {
     private final static String logTag = "QUESTION_REPOSITORY";
 
     @Inject
-    public SecretQuestionRepository(Application application) {
-        ApplicationComponent component = DaggerApplicationComponent.builder()
-                .databaseModule(new DatabaseModule(application))
-                .build();
-        this.service = component.apiService();
-        this.dao = component.secretQuestionDao();
+    public SecretQuestionRepository(SecretQuestionDao dao, ApiService service) {
+        this.dao = dao;
+        this.service = service;
     }
 
     public Single<List<SecretQuestion>> fetchQuestionList(){

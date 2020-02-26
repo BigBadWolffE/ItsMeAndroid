@@ -3,6 +3,7 @@ package com.indocyber.itsmeandroid.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import android.app.Application;
 
@@ -13,6 +14,8 @@ import com.indocyber.itsmeandroid.repositories.SecretQuestionRepository;
 import com.indocyber.itsmeandroid.repositories.UserRepository;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,7 +28,7 @@ import io.reactivex.schedulers.Schedulers;
  *@author Muhammad Faisal
  *@version 1.0
  */
-public class RegisterViewModel extends AndroidViewModel {
+public class RegisterViewModel extends ViewModel {
 
     SecretQuestionRepository secretQuestionRepository;
     UserRepository userRepository;
@@ -40,10 +43,10 @@ public class RegisterViewModel extends AndroidViewModel {
     private MutableLiveData<User> userData = new MutableLiveData<>();
     private MutableLiveData<List<SecretQuestion>> questionList = new MutableLiveData<>();
 
-    public RegisterViewModel(@NonNull Application application) {
-        super(application);
-        secretQuestionRepository = new SecretQuestionRepository(application);
-        userRepository = new UserRepository(application);
+    @Inject
+    public RegisterViewModel(SecretQuestionRepository questionRepository, UserRepository userRepository) {
+        this.secretQuestionRepository = questionRepository;
+        this.userRepository = userRepository;
     }
 
     public MutableLiveData<String> getDataError() {

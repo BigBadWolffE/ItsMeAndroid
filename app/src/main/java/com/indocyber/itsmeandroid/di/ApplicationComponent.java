@@ -18,6 +18,8 @@ import dagger.Component;
 import dagger.Subcomponent;
 import dagger.android.AndroidInjectionModule;
 import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
  *
@@ -27,13 +29,21 @@ import dagger.android.AndroidInjector;
  */
 
 @Singleton
-@Component(modules = {DatabaseModule.class, ApiModule.class})
-public interface ApplicationComponent {
+@Component(modules = {ApplicationModule.class, AndroidSupportInjectionModule.class, ActivityBuilder.class})
+public interface ApplicationComponent extends AndroidInjector<DaggerApplication> {
 
-    ApiService apiService();
-    Api api();
-    ImageCardDao imageCardDao();
-    UserDao userDao();
-    SecretQuestionDao secretQuestionDao();
-    void inject(RegisterViewModel registerViewModel);
+//    ApiService apiService();
+//    Api api();
+//    ImageCardDao imageCardDao();
+//    UserDao userDao();
+//    SecretQuestionDao secretQuestionDao();
+
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder application(Application application);
+        ApplicationComponent build();
+    }
+
+    void inject(App app);
 }

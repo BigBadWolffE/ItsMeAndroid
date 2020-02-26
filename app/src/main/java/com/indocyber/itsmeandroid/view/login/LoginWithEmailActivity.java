@@ -16,27 +16,39 @@ import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.view.MainActivity;
 import com.indocyber.itsmeandroid.view.forgotpassword.activity.ForgotPasswordActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
+
+import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 import static com.indocyber.itsmeandroid.view.login.LoginOptionActivity.INTENT_NAME;
 
-public class LoginWithEmailActivity extends AppCompatActivity {
+public class LoginWithEmailActivity extends MainActivity {
+
     private LoginViewModel viewModel;
     private AlertDialog loader;
     private EditText edtxUsername;
     private EditText edtxPassword;
     private Preference preference;
     private String base64key;
+    @Inject
+    ViewModelFactory factory;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_login_with_email;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_with_email);
+        setContentView(layoutRes());
 
         Bundle extras = getIntent().getExtras();
         String username = "";
@@ -57,7 +69,7 @@ public class LoginWithEmailActivity extends AppCompatActivity {
         Button mbuttonLogin = findViewById(R.id.buttonLogin);
         edtxUsername = findViewById(R.id.edtxUsername);
         edtxPassword = findViewById(R.id.edtxPassword);
-        viewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(LoginViewModel.class);
         preference = new Preference(this);
         edtxUsername.setText(username);
         mbuttonLogin.setOnClickListener(v -> {

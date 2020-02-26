@@ -14,6 +14,7 @@
         tools:node="replace" />
 
     <application
+        android:name=".view.App"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:hardwareAccelerated="true"

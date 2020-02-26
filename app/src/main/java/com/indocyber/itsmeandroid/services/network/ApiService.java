@@ -24,8 +24,8 @@ public class ApiService {
     Api api;
 
     @Inject
-    public ApiService() {
-        api = DaggerApplicationComponent.builder().build().api();
+    public ApiService(Api api) {
+        this.api = api;
     }
 
     private HashMap<String, String> generateAuthenticationHeader(String authKey) {

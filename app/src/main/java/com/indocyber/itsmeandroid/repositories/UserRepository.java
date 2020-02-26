@@ -25,11 +25,8 @@ public class UserRepository {
     ApiService service;
 
     @Inject
-    public UserRepository(Application application) {
-        this.service = DaggerApplicationComponent.builder()
-                .databaseModule(new DatabaseModule(application))
-                .build()
-                .apiService();
+    public UserRepository(ApiService service) {
+        this.service = service;
     }
 
     public Single<ApiResponse<String>> registerUser(User user, Integer newPin) {

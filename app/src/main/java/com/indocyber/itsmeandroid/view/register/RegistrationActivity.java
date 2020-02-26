@@ -27,19 +27,21 @@ import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.utilities.commonclass.CustomSpinnerAdapter;
+import com.indocyber.itsmeandroid.view.MainActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 
-public class RegistrationActivity extends AppCompatActivity {
+public class RegistrationActivity extends MainActivity {
     private Spinner mSpnrQuestion;
     private Button buttonRegister;
     private EditText txtFullname;
@@ -52,13 +54,20 @@ public class RegistrationActivity extends AppCompatActivity {
     private CheckBox checkboxRegister;
     private AlertDialog loader;
     private Preference preference;
+    @Inject
+    ViewModelFactory factory;
     private RegisterViewModel viewModel;
     String base64Auth = "";
 
     @Override
+    protected int layoutRes() {
+        return R.layout.activity_registration;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
+        setContentView(layoutRes());
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("New Registration");
             getSupportActionBar().setElevation(0f);
@@ -74,7 +83,7 @@ public class RegistrationActivity extends AppCompatActivity {
         txtRetypePassword = findViewById(R.id.txtRetypePassword);
         txtAnswer = findViewById(R.id.txtAnswer);
         checkboxRegister = findViewById(R.id.checkboxRegister);
-        viewModel = ViewModelProviders.of(this).get(RegisterViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(RegisterViewModel.class);
         viewModel.fetchQuestionList();
         pinView = findViewById(R.id.firstPinView);
         buttonRegister = findViewById(R.id.buttonRegister);
