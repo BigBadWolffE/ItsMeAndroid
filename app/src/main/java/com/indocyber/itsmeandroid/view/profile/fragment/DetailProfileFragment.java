@@ -25,14 +25,18 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
 import java.util.HashMap;
+
+import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
 
 
-public class DetailProfileFragment extends Fragment {
+public class DetailProfileFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public static final String FIELD_ADDRESS = "address";
@@ -45,11 +49,11 @@ public class DetailProfileFragment extends Fragment {
     private EditText mNamaLengkap, mAlamat, mEmailAddress, mNoTelp, mPass, mPin, mSecretQuestion;
     private TextView mErrorValidation;
     private ImageView mEditAlamat, mEditNoTelp, mEditPass, mEditPin;
-//    SharedPreferences pref;
-//    SharedPreferences.Editor editor;
     private Preference mPreference;
     private ProfileDetailViewModel viewModel;
     private String currentText;
+    @Inject
+    ViewModelFactory factory;
 
     public DetailProfileFragment() {
         // Required empty public constructor
@@ -74,9 +78,8 @@ public class DetailProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_detail_profile, container, false);
+    protected int layoutRes() {
+        return R.layout.fragment_detail_profile;
     }
 
     @Override
@@ -94,7 +97,7 @@ public class DetailProfileFragment extends Fragment {
                 .build();
         mPreference = new Preference(getActivity());
         String authKey = mPreference.getUserAuth();
-        viewModel = ViewModelProviders.of(getActivity()).get(ProfileDetailViewModel.class);
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(ProfileDetailViewModel.class);
         viewModel.getUserData(authKey);
         mNamaLengkap = view.findViewById(R.id.txtProfileNamaLengkap);
         mAlamat = view.findViewById(R.id.txtProfileAlamat);
@@ -209,20 +212,6 @@ public class DetailProfileFragment extends Fragment {
         mPin.setText("000000");
         mSecretQuestion.setText(mDetailModel.getSecretAnswer());
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        User mDetailModelInside = setToModel();
-//        viewModel.updateUserProfile(mDetailModelInside);
-    }
-
-//    private void saveToSharedPreferences(User mDetailModelInside) {
-//        Gson gson = new Gson();
-//        String json = gson.toJson(mDetailModelInside);
-//        editor.putString("ProfileDetail", json);
-//        editor.commit();
-//    }
 
     private User setToModel() {
         User mDetailModelInside = new User();

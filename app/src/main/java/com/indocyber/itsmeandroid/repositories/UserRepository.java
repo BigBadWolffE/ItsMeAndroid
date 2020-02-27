@@ -1,9 +1,5 @@
 package com.indocyber.itsmeandroid.repositories;
 
-import android.app.Application;
-
-import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
-import com.indocyber.itsmeandroid.di.DatabaseModule;
 import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.services.network.ApiService;

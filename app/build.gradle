@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -35,6 +35,10 @@ def daggerAndroidVersion = "2.26"
 def multidex_version = "2.0.1"
 
 dependencies {
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+
     implementation "androidx.multidex:multidex:$multidex_version"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -93,5 +97,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.1'
 
     implementation 'com.mikhaellopez:circularimageview:3.2.0'
+    implementation 'androidx.work:work-runtime:2.3.2'
 
 }

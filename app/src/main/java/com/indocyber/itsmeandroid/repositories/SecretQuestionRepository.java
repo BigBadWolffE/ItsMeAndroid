@@ -1,11 +1,7 @@
 package com.indocyber.itsmeandroid.repositories;
 
-import android.app.Application;
 import android.util.Log;
 
-import com.indocyber.itsmeandroid.di.ApplicationComponent;
-import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
-import com.indocyber.itsmeandroid.di.DatabaseModule;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.services.database.dao.SecretQuestionDao;
 import com.indocyber.itsmeandroid.services.network.ApiService;

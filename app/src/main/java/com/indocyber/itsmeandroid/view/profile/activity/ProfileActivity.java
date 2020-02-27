@@ -1,45 +1,40 @@
 package com.indocyber.itsmeandroid.view.profile.activity;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
 import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
 import java.io.IOException;
-import java.net.URI;
+
+import javax.inject.Inject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import dmax.dialog.SpotsDialog;
-import okhttp3.internal.Util;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
@@ -48,11 +43,18 @@ public class ProfileActivity extends AppCompatActivity {
     private android.app.AlertDialog mLoader;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
+    @Inject
+    ViewModelFactory factory;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_profile;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(layoutRes());
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle("Profile");
@@ -73,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         TabLayout mTabLayout = findViewById(R.id.tabLayoutProfile);
         mFotoProfile = findViewById(R.id.imageFotoProfile);
         ImageView mTakePhotoBtn = findViewById(R.id.imageTakeFotoProfile);
-        viewModel = ViewModelProviders.of(this).get(ProfileDetailViewModel.class);
+        viewModel = ViewModelProviders.of(this, factory).get(ProfileDetailViewModel.class);
 
         TabAdapter mTabAdapter = new TabAdapter(getSupportFragmentManager());
         mTabAdapter.addFragment(new DetailProfileFragment(), "Detail Profile");

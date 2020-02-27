@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.di;
 
+import com.indocyber.itsmeandroid.di.FragmentBindingModules.ProfileFragmentModule;
 import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
@@ -25,6 +26,6 @@ public abstract class ActivityBuilder {
     abstract LoginWithEmailActivity loginActivity();
 
     @SuppressWarnings("unused")
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = ProfileFragmentModule.class)
     abstract ProfileActivity profileActivity();
 }

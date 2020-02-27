@@ -1,6 +1,5 @@
 package com.indocyber.itsmeandroid.view.register;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -11,12 +10,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,7 +23,7 @@ import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.utilities.commonclass.CustomSpinnerAdapter;
-import com.indocyber.itsmeandroid.view.MainActivity;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
@@ -41,7 +37,7 @@ import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 
-public class RegistrationActivity extends MainActivity {
+public class RegistrationActivity extends BaseActivity {
     private Spinner mSpnrQuestion;
     private Button buttonRegister;
     private EditText txtFullname;

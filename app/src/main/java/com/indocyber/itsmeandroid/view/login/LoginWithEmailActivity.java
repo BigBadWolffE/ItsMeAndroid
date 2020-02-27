@@ -1,6 +1,5 @@
 package com.indocyber.itsmeandroid.view.login;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,7 +14,7 @@ import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
-import com.indocyber.itsmeandroid.view.MainActivity;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.forgotpassword.activity.ForgotPasswordActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
@@ -29,7 +27,7 @@ import dmax.dialog.SpotsDialog;
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 import static com.indocyber.itsmeandroid.view.login.LoginOptionActivity.INTENT_NAME;
 
-public class LoginWithEmailActivity extends MainActivity {
+public class LoginWithEmailActivity extends BaseActivity {
 
     private LoginViewModel viewModel;
     private AlertDialog loader;

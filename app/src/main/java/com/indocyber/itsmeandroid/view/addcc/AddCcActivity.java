@@ -237,13 +237,13 @@ public final class AddCcActivity extends AppCompatActivity {
 
         if (mCardHolderInput.getText().length() < 1) return false;
 
-        if (mBillingAddressInput.getText().length() < 0) return false;
+        if (mBillingAddressInput.getText().toString().trim().length() < 1) return false;
 
         if (mCountryInput.getSelectedItemPosition() == 0) return false;
 
         if (mCityInput.getSelectedItemPosition() == 0) return false;
 
-        if (mPostalCodeInput.getText().length() < 3) return false;
+        if (mPostalCodeInput.getText().toString().trim().length() < 3) return false;
 
         if (mCardImageResource == 0) mCardImageResource = randomizeCardImage();
 

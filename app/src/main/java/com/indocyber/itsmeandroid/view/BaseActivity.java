@@ -9,7 +9,7 @@ import com.indocyber.itsmeandroid.R;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
-public abstract class MainActivity extends DaggerAppCompatActivity {
+public abstract class BaseActivity extends DaggerAppCompatActivity {
 
     @LayoutRes
     protected abstract int layoutRes();
