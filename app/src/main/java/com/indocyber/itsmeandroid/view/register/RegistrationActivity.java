@@ -102,13 +102,13 @@ public class RegistrationActivity extends BaseActivity {
             newUser.setEmail(txtEmail.getText().toString());
             newUser.setNoTelp(txtPhonenumber.getText().toString());
             newUser.setPassword(txtPassword.getText().toString());
-            Integer newPin = Integer.parseInt(pinView.getText().toString());
+            newUser.setPin(pinView.getText().toString());
             SecretQuestion selectedQuestion = (SecretQuestion) mSpnrQuestion.getSelectedItem();
             newUser.setSecretQuestionId(selectedQuestion.getSecretQuestionId());
             newUser.setSecretAnswer(txtAnswer.getText().toString());
             String key = newUser.getEmail() + ":" + newUser.getPassword();
             base64Auth = Base64.encodeToString(key.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
-            viewModel.register(newUser, newPin);
+            viewModel.register(newUser);
         });
     }
 
@@ -182,14 +182,9 @@ public class RegistrationActivity extends BaseActivity {
             }
         });
 
-        viewModel.getIsSaved().observe(this, saveSuccess -> {
-            if (saveSuccess) UtilitiesCore.buildAlertDialog(
-                    RegistrationActivity.this,
-                    "Registration Success.",
-                    R.drawable.ic_approved,
-                    dialogInterface -> onRegistrationSuccess(dialogInterface)
-            );
-        });
+//        viewModel.getIsSaved().observe(this, saveSuccess -> {
+//            if (saveSuccess)
+//        });
 
         viewModel.getError().observe(this,
                 error -> snackBarIconError(RegistrationActivity.this, error));
@@ -220,9 +215,14 @@ public class RegistrationActivity extends BaseActivity {
                 ));
 
         viewModel.getUserData().observe(this, user -> {
-            preference.setLoggedUser(user.getNamaLengkap(), user.getEmail());
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            if (user != null) {
+                UtilitiesCore.buildAlertDialog(
+                        RegistrationActivity.this,
+                        "Registration Success.",
+                        R.drawable.ic_approved,
+                        dialogInterface -> onRegistrationSuccess(dialogInterface, user)
+                );
+            }
         });
     }
 
@@ -263,9 +263,11 @@ public class RegistrationActivity extends BaseActivity {
         mSpnrQuestion.setSelection(0);
     }
 
-    private void onRegistrationSuccess(DialogInterface dialog) {
+    private void onRegistrationSuccess(DialogInterface dialog, User user) {
         dialog.dismiss();
         preference.saveUserAuth(base64Auth);
-        viewModel.login(base64Auth);
+        preference.setLoggedUser(user.getNamaLengkap(), user.getEmail());
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }

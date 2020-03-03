@@ -82,6 +82,9 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/btn_rounded_primary"
+                android:textAllCaps="false"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/interstate_regular"
                 android:text="@string/next"
                 android:textColor="#FFFFFF" />
 

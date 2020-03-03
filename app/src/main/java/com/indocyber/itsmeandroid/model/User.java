@@ -9,26 +9,26 @@ import com.google.gson.annotations.SerializedName;
 @Entity
 public class User {
 
-    @SerializedName("fullname")
+    @SerializedName("userFullName")
     private String namaLengkap;
     @PrimaryKey
     @NonNull
-    @SerializedName("email")
+    @SerializedName("userEmail")
     private String email;
-    @SerializedName("phone")
+    @SerializedName("userPhone")
     private String noTelp;
-    @SerializedName("password")
+    @SerializedName("userPassword")
     private String password;
-    @SerializedName("pin")
-    private UserPin pin;
-    @SerializedName("address")
+    @SerializedName("userPin")
+    private String pin;
+    @SerializedName("userAddress")
     @Expose(serialize = false)
     private String alamat;
-    @SerializedName("secretQuestionID")
-    private int secretQuestionId;
-    @SerializedName("answerQuestion")
+    @SerializedName("secretQuestionId")
+    private String secretQuestionId;
+    @SerializedName("secretAnswer")
     private String secretAnswer;
-    @SerializedName("profilePictureMetadata")
+    @SerializedName("userImage")
     private String pictureMetaData;
 
     public String getNamaLengkap() {
@@ -63,19 +63,19 @@ public class User {
         this.password = password;
     }
 
-    public UserPin getPin() {
+    public String getPin() {
         return pin;
     }
 
-    public int getSecretQuestionId() {
+    public String getSecretQuestionId() {
         return secretQuestionId;
     }
 
-    public void setSecretQuestionId(int secretQuestionId) {
+    public void setSecretQuestionId(String secretQuestionId) {
         this.secretQuestionId = secretQuestionId;
     }
 
-    public void setPin(UserPin pin) {
+    public void setPin(String pin) {
         this.pin = pin;
     }
 
@@ -103,33 +103,33 @@ public class User {
         this.pictureMetaData = pictureMetaData;
     }
 
-    public class UserPin {
-        @SerializedName("algorithm")
-        String algorithm;
-        @SerializedName("pinValue")
-        String pinValue;
-
-        public UserPin(String algorithm, String pinValue) {
-            this.algorithm = algorithm;
-            this.pinValue = pinValue;
-        }
-
-        public String getAlgorithm() {
-            return algorithm;
-        }
-
-        public void setAlgorithm(String algorithm) {
-            this.algorithm = algorithm;
-        }
-
-        public String getPinValue() {
-            return pinValue;
-        }
-
-        public void setPinValue(String pinValue) {
-            this.pinValue = pinValue;
-        }
-    }
+//    public class UserPin {
+//        @SerializedName("algorithm")
+//        String algorithm;
+//        @SerializedName("pinValue")
+//        String pinValue;
+//
+//        public UserPin(String algorithm, String pinValue) {
+//            this.algorithm = algorithm;
+//            this.pinValue = pinValue;
+//        }
+//
+//        public String getAlgorithm() {
+//            return algorithm;
+//        }
+//
+//        public void setAlgorithm(String algorithm) {
+//            this.algorithm = algorithm;
+//        }
+//
+//        public String getPinValue() {
+//            return pinValue;
+//        }
+//
+//        public void setPinValue(String pinValue) {
+//            this.pinValue = pinValue;
+//        }
+//    }
 
 
 }

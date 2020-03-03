@@ -25,8 +25,8 @@ public class UserRepository {
         this.service = service;
     }
 
-    public Single<ApiResponse<String>> registerUser(User user, Integer newPin) {
-        return service.register(user, newPin);
+    public Single<ApiResponse<User>> registerUser(User user) {
+        return service.register(user);
     }
 
     public Single<ApiResponse<User>> getProfile(String authKey) {
@@ -39,5 +39,9 @@ public class UserRepository {
 
     public Single<ApiResponse<String>> updateProfile(String authKey, HashMap<String, String> body) {
         return service.updateProfile(authKey, body);
+    }
+
+    public Single<ApiResponse<User>> login(String authKey) {
+        return service.login(authKey);
     }
 }

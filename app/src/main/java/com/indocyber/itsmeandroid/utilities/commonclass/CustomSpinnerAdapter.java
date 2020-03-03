@@ -53,7 +53,7 @@ public class CustomSpinnerAdapter<T extends SpinnerItem> extends ArrayAdapter<T>
      * @param id Spinner option id
      * @return position of an option which has exact value as param
      */
-    public int getItemPosition(long id) {
+    public int getItemPosition(String id) {
         int position = -1;
         for (T object : data) {
             if (object.getId() == (id)) {

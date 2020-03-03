@@ -11,11 +11,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class ApiResponse<T> {
 
-    @SerializedName("code")
     private int code;
 
     @SerializedName("status")
-    private String status;
+    private int status;
 
     @SerializedName("message")
     private String message;
@@ -23,10 +22,10 @@ public class ApiResponse<T> {
     @SerializedName("trace")
     private String trace;
 
-    @SerializedName("content")
+    @SerializedName("datas")
     private T content;
 
-    public ApiResponse(int code, String status, String message, String trace, T content) {
+    public ApiResponse(int code, int status, String message, String trace, T content) {
         this.code = code;
         this.status = status;
         this.message = message;
@@ -42,11 +41,11 @@ public class ApiResponse<T> {
         this.code = code;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

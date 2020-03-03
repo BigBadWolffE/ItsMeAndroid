@@ -43,7 +43,7 @@ public class SecretQuestionRepository {
                 .onErrorResumeNext(     //if error occured or no data found
                         service.getSecretQuestions()    //get question from API
                         .flatMap(response -> {
-                            if (response.getCode() == 200) {
+                            if (response.getStatus() == 200) {
                                 return Single.just(response.getContent());
                             }
                             return Single.error(

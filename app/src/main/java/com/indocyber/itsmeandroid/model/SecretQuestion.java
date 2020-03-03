@@ -18,21 +18,22 @@ import com.indocyber.itsmeandroid.utilities.commonclass.SpinnerItem;
 public class SecretQuestion implements SpinnerItem {
 
     @PrimaryKey
-    @SerializedName("secretquestionID")
-    private int secretQuestionId;
-    @SerializedName("question")
+    @SerializedName("secretQuestionId")
+    @NonNull
+    private String secretQuestionId;
+    @SerializedName("secretQuestionValue")
     private String question;
 
-    public SecretQuestion(int secretQuestionId, String question) {
+    public SecretQuestion(String secretQuestionId, String question) {
         this.secretQuestionId = secretQuestionId;
         this.question = question;
     }
 
-    public int getSecretQuestionId() {
+    public String getSecretQuestionId() {
         return secretQuestionId;
     }
 
-    public void setSecretQuestionId(int secretQuestionId) {
+    public void setSecretQuestionId(String secretQuestionId) {
         this.secretQuestionId = secretQuestionId;
     }
 
@@ -45,7 +46,7 @@ public class SecretQuestion implements SpinnerItem {
     }
 
     @Override
-    public long getId() {
+    public String getId() {
         return secretQuestionId;
     }
 

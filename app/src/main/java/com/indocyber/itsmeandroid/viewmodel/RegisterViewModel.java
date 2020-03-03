@@ -78,22 +78,22 @@ public class RegisterViewModel extends ViewModel {
     }
 
 
-    public void register(User user, Integer newPin) {
+    public void register(User user) {
         isLoading.setValue(true);
         disposable.add(
-                userRepository.registerUser(user, newPin)
+                userRepository.registerUser(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<ApiResponse<String>>() {
+                .subscribeWith(new DisposableSingleObserver<ApiResponse<User>>() {
                     @Override
-                    public void onSuccess(ApiResponse<String> response) {
-                        if (response.getCode() != 200) {
+                    public void onSuccess(ApiResponse<User> response) {
+                        if (response.getStatus() != 200) {
                             isLoading.setValue(false);
                             error.setValue(response.getMessage());
                             return;
                         }
                         isLoading.setValue(false);
-                        isSaved.setValue(true);
+                        userData.setValue(response.getContent());
                     }
 
                     @Override
@@ -137,7 +137,7 @@ public class RegisterViewModel extends ViewModel {
                     @Override
                     public void onSuccess(ApiResponse<User> response) {
                         isLoading.setValue(false);
-                        if (response.getCode() != 200) {
+                        if (response.getStatus() != 200) {
                             loginError.setValue(response.getMessage());
                             return;
                         }

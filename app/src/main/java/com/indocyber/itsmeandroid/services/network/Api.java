@@ -28,23 +28,34 @@ public interface Api {
     String XAPIKEY = "yk0j1r7knnyl4e18ip6azbi10jyypc6k-hvmrv96d5487g1v4qpiippicopuw2f7x-ia1hl5fcjdrdif98tfsnunvnwfj4uf7q";
     String ACCEPT = "application/json";
 
-    @POST(value = "user/register")
-    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
-    Single<ApiResponse<String>> register(@Body HashMap <String, Object> body);
-
-    @GET(value = "user/question")
-    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
+//    @POST(value = "user/register")
+//    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
+//    Single<ApiResponse<String>> register(@Body HashMap <String, Object> body);
+//
+    @GET(value = "master/getallsecretquestion/mobile")
+    @Headers({"Accept: " + ACCEPT})
     Single<ApiResponse<List<SecretQuestion>>> getQuestionList();
-
-    @GET(value = "user/profile")
-    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
-    Single<ApiResponse<User>> getUserProfile(@HeaderMap Map<String, String> authHeader);
-
-    @POST(value = "user/photo/base-64")
-    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
+//    @GET(value = "user/profile")
+//    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
+//    Single<ApiResponse<User>> getUserProfile(@HeaderMap Map<String, String> authHeader);
+//
+    @POST(value = "profile/updateprofileimage/mobile")
+    @Headers({"Accept: " + ACCEPT})
     Single<ApiResponse<String>> updateProfilePicture(@HeaderMap Map<String, String> authHeader, @Body Map<String, String> body);
 
     @PATCH(value = "user/profile")
     @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
     Single<ApiResponse<String>> updateProfile(@HeaderMap Map<String, String> authHeader, @Body Map<String, String> body);
+
+    @POST(value = "authentication/registration/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<User>> register(@Body HashMap <String, Object> body);
+
+    @GET(value = "profile/getprofile/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<User>> getUserProfile(@HeaderMap Map<String, String> authHeader);
+
+    @POST(value = "authentication/login/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<User>> login(@HeaderMap Map<String, String> authHeader);
 }

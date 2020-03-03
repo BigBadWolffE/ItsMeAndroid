@@ -34,26 +34,26 @@ public class ApiService {
         return authHeader;
     }
 
-    public Single<ApiResponse<String>> register(User user, Integer newPin) {
+    public Single<ApiResponse<User>> register(User user) {
         HashMap<String, Object> body = new HashMap<>();
-        body.put("email", user.getEmail());
-        body.put("phone", user.getNoTelp());
-        body.put("password", user.getPassword());
-        body.put("fullname", user.getNamaLengkap());
-        body.put("pin", newPin);
-        body.put("secretQuestionID", user.getSecretQuestionId());
-        body.put("answerQuestion", user.getSecretAnswer());
+        body.put("userEmail", user.getEmail());
+        body.put("userPhone", user.getNoTelp());
+        body.put("userPassword", user.getPassword());
+        body.put("userFullName", user.getNamaLengkap());
+        body.put("userPin", user.getPin());
+        body.put("secretQuestionId", user.getSecretQuestionId());
+        body.put("secretAnswer", user.getSecretAnswer());
         return api.register(body);
     }
 
     public Single<ApiResponse<List<SecretQuestion>>> getSecretQuestions() {
         return api.getQuestionList();
     }
-
+//
     public Single<ApiResponse<User>> getProfile(String authKey) {
         return api.getUserProfile(generateAuthenticationHeader(authKey));
     }
-
+//
     public Single<ApiResponse<String>> updateProfilePicture(String authKey, String base64) {
         HashMap<String, String> body = new HashMap<>();
         body.put("photo", base64);
@@ -62,5 +62,9 @@ public class ApiService {
 
     public Single<ApiResponse<String>> updateProfile(String authKey, HashMap<String, String> body) {
         return api.updateProfile(generateAuthenticationHeader(authKey), body);
+    }
+
+    public Single<ApiResponse<User>> login(String authKey) {
+        return api.login(generateAuthenticationHeader(authKey));
     }
 }

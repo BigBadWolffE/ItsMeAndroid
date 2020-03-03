@@ -88,6 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn_rounded_primary"
+                android:textAllCaps="false"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:fontFamily="@font/interstate_regular"
                 android:text="@string/login"
                 android:textColor="#FFFFFF" />
 

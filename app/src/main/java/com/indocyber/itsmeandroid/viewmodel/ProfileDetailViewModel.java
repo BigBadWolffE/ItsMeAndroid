@@ -26,7 +26,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ProfileDetailViewModel extends ViewModel {
 
-    private UserDao dao;
     private UserRepository userRepository;
     private CompositeDisposable disposable = new CompositeDisposable();
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
@@ -78,27 +77,27 @@ public class ProfileDetailViewModel extends ViewModel {
         );
     }
 
-    public void updateUserProfile(User user) {
-        isLoading.setValue(true);
-        disposable.add(
-                dao.update(user)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeWith(new DisposableCompletableObserver() {
-
-                            @Override
-                            public void onComplete() {
-                                isLoading.setValue(false);
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                                isLoading.setValue(false);
-                                error.setValue(e.getMessage());
-                            }
-                        })
-        );
-    }
+//    public void updateUserProfile(User user) {
+//        isLoading.setValue(true);
+//        disposable.add(
+//                dao.update(user)
+//                        .subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribeWith(new DisposableCompletableObserver() {
+//
+//                            @Override
+//                            public void onComplete() {
+//                                isLoading.setValue(false);
+//                            }
+//
+//                            @Override
+//                            public void onError(Throwable e) {
+//                                isLoading.setValue(false);
+//                                error.setValue(e.getMessage());
+//                            }
+//                        })
+//        );
+//    }
 
     public void updateProfilePicture(String authKey, String base64) {
         profileUpdated.setValue(false);

@@ -48,14 +48,14 @@ public class LoginViewModel extends ViewModel {
     public void login(String authKey) {
         isLoading.setValue(true);
         disposable.add(
-            userRepository.getProfile(authKey)
+            userRepository.login(authKey)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(new DisposableSingleObserver<ApiResponse<User>>() {
                         @Override
                         public void onSuccess(ApiResponse<User> response) {
                             isLoading.setValue(false);
-                            if (response.getCode() != 200) {
+                            if (response.getStatus() != 200) {
                                 error.setValue(response.getMessage());
                                 return;
                             }

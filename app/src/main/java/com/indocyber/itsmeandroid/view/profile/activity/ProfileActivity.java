@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
@@ -41,6 +42,7 @@ public class ProfileActivity extends BaseActivity {
     private CircleImageView mFotoProfile;
     private ProfileDetailViewModel viewModel;
     private android.app.AlertDialog mLoader;
+    private User userData;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     @Inject
@@ -192,6 +194,7 @@ public class ProfileActivity extends BaseActivity {
         });
 
         viewModel.getUser().observe(this, user -> {
+
             if (user.getPictureMetaData() != null) {
                 UtilitiesCore.loadImageFromUri(
                         mFotoProfile,

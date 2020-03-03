@@ -8,6 +8,6 @@ package com.indocyber.itsmeandroid.utilities.commonclass;
  */
 
 public interface SpinnerItem {
-    long getId();
+    String getId();
     String getName();
 }
