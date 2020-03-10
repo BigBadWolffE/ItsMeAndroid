@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
 import android.util.Log;
@@ -33,14 +34,21 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
+import javax.inject.Inject;
 
-public class ProfileNPWPFragment extends Fragment {
+
+public class ProfileNPWPFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -59,6 +67,11 @@ public class ProfileNPWPFragment extends Fragment {
     private ProfileNPWPModel mNPWPModel;
     private View mViewOnCreate;
     private String fotoBase64;
+    private ProfileDetailViewModel viewModel;
+    private Preference preference;
+    @Inject
+    ViewModelFactory factory;
+
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -85,10 +98,15 @@ public class ProfileNPWPFragment extends Fragment {
     }
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_profile_npwp;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_npwp, container, false);
+        return inflater.inflate(layoutRes(), container, false);
     }
 
     @Override
@@ -97,23 +115,25 @@ public class ProfileNPWPFragment extends Fragment {
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         mViewOnCreate = view;
-        pref = getContext().getSharedPreferences("MyPref", 0);
-        editor = pref.edit();
+        preference = new Preference(getContext());
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(ProfileDetailViewModel.class);
+//        pref = getContext().getSharedPreferences("MyPref", 0);
+//        editor = pref.edit();
 //        editor.remove("ProfileNPWP");
 //        editor.apply();
-        Gson gson = new Gson();
-        String paramUserData = pref.getString("ProfileNPWP", null);
-        mNPWPModel = gson.fromJson(paramUserData, ProfileNPWPModel.class);
+//        Gson gson = new Gson();
+//        String paramUserData = pref.getString("ProfileNPWP", null);
+//        mNPWPModel = gson.fromJson(paramUserData, ProfileNPWPModel.class);
         Log.d("Cek", "Profile NPWP "+mNPWPModel);
-
         initializeView();
+        observeViewModel();
 
-        if (mNPWPModel != null) {
-            setModelNotNull();
-            agreeLayout.setVisibility(View.GONE);
-            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
-            saveBtn.setEnabled(true);
-        }
+//        if (mNPWPModel != null) {
+//            setModelNotNull();
+//            agreeLayout.setVisibility(View.GONE);
+//            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+//            saveBtn.setEnabled(true);
+//        }
 
         agreeCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,14 +171,21 @@ public class ProfileNPWPFragment extends Fragment {
 
     }
 
-    private void setModelNotNull() {
-        Bitmap bitmap = UtilitiesCore.decodeImage(mNPWPModel.getFotoNPWP());
-        mFotoNPWP.setImageBitmap(bitmap);
-        mNamaNPWP.setText(mNPWPModel.getNamaLengkap());
-        mNoNPWP.setText(mNPWPModel.getNoNpwp());
-        mNIK.setText(mNPWPModel.getNik());
-        mAlamatNPWP.setText(mNPWPModel.getAlamat());
-        mAlamatKPP.setText(mNPWPModel.getAlamatKPP());
+    @Override
+    public void onResume() {
+        super.onResume();
+//        viewModel.getProfileNpwp(preference.getUserAuth());
+    }
+
+    private void setModelNotNull(ProfileNPWPModel model) {
+//        Bitmap bitmap = UtilitiesCore.decodeImage(model.getFotoNPWP());
+//        mFotoNPWP.setImageBitmap(bitmap);
+        UtilitiesCore.loadImageFromUri(mFotoNPWP, getContext(), Api.NPWP_IMAGE, preference.getUserAuth());
+        mNamaNPWP.setText(model.getNamaLengkap());
+        mNoNPWP.setText(model.getNoNpwp());
+        mNIK.setText(model.getNik());
+        mAlamatNPWP.setText(model.getAlamat());
+        mAlamatKPP.setText(model.getAlamatKPP());
     }
 
     private void saveToSharedPreferences(ProfileNPWPModel model) {
@@ -304,6 +331,15 @@ public class ProfileNPWPFragment extends Fragment {
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST);
         }
+    }
+
+    private void observeViewModel() {
+        viewModel.getUserNpwp().observe(getActivity(), profileNPWPModel -> {
+            setModelNotNull(profileNPWPModel);
+            agreeLayout.setVisibility(View.GONE);
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
+        });
     }
 
     @Override

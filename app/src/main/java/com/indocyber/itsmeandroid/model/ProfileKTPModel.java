@@ -3,22 +3,38 @@ package com.indocyber.itsmeandroid.model;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProfileKTPModel {
 
+    @SerializedName("ktpName")
     private String namaLengkap;
+    @SerializedName("ktpNo")
     private String noKtp;
     private String berlaku;
+    @SerializedName("ktpBirthDate")
     private String tglLahir;
+    @SerializedName("ktpGender")
     private String jenisKelamin;
+    @SerializedName("ktpReligion")
     private String agama;
+    @SerializedName("ktpMaritalStatus")
     private String status;
+    @SerializedName("ktpJob")
     private String pekerjaan;
+    @SerializedName("ktpCitizenship")
     private String kwn;
+    @SerializedName("ktpAddress")
     private String alamat;
+    @SerializedName("ktpRt")
     private String rt;
+    @SerializedName("ktpRw")
     private String rw;
+    @SerializedName("ktpKelurahanId")
     private String kelurahan;
+    @SerializedName("ktpKecamatanId")
     private String kecamatan;
+    @SerializedName("ktpImage")
     private String fotoKTP;
 
     public String getFotoKTP() {

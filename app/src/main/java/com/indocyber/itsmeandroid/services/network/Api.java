@@ -1,6 +1,9 @@
 package com.indocyber.itsmeandroid.services.network;
 
 import com.indocyber.itsmeandroid.model.ApiResponse;
+import com.indocyber.itsmeandroid.model.ProfileKTPModel;
+import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
+import com.indocyber.itsmeandroid.model.ProfilePassportModel;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.model.User;
 
@@ -24,7 +27,10 @@ import retrofit2.http.POST;
  */
 public interface Api {
 
-    String BASE_URL = "http://10.100.10.251:5000/stream/file/";
+    String PROFILE_IMAGE = "http://10.100.10.251:7771/profile/getprofileimage/mobile";
+    String KTP_IMAGE = "http://10.100.10.251:7771/profile/getktpimage/mobile";
+    String NPWP_IMAGE = "http://10.100.10.251:7771/profile/getnpwpimage/mobile";
+    String PASSPORT_IMAGE = "http://10.100.10.251:7771/profile/getpassportimage/mobile";
     String XAPIKEY = "yk0j1r7knnyl4e18ip6azbi10jyypc6k-hvmrv96d5487g1v4qpiippicopuw2f7x-ia1hl5fcjdrdif98tfsnunvnwfj4uf7q";
     String ACCEPT = "application/json";
 
@@ -39,13 +45,12 @@ public interface Api {
 //    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
 //    Single<ApiResponse<User>> getUserProfile(@HeaderMap Map<String, String> authHeader);
 //
-    @POST(value = "profile/updateprofileimage/mobile")
-    @Headers({"Accept: " + ACCEPT})
+    @PATCH(value = "profile/updateprofileimage/mobile")
     Single<ApiResponse<String>> updateProfilePicture(@HeaderMap Map<String, String> authHeader, @Body Map<String, String> body);
 
-    @PATCH(value = "user/profile")
-    @Headers({"Accept: " + ACCEPT, "x-api-key: " + XAPIKEY})
-    Single<ApiResponse<String>> updateProfile(@HeaderMap Map<String, String> authHeader, @Body Map<String, String> body);
+    @PATCH(value = "profile/updateprofile/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<String>> updateProfile(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
 
     @POST(value = "authentication/registration/mobile")
     @Headers({"Accept: " + ACCEPT})
@@ -54,6 +59,30 @@ public interface Api {
     @GET(value = "profile/getprofile/mobile")
     @Headers({"Accept: " + ACCEPT})
     Single<ApiResponse<User>> getUserProfile(@HeaderMap Map<String, String> authHeader);
+
+    @GET(value = "profile/getpassport/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<ProfilePassportModel>> getUserPassport(@HeaderMap Map<String, String> authHeader);
+
+    @PATCH(value = "profile/updatepassport/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<String>> updatePassport(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
+
+    @GET(value = "profile/getktp/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<ProfileKTPModel>> getUserKtp(@HeaderMap Map<String, String> authHeader);
+
+    @PATCH(value = "profile/updatektp/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<String>> updateKtp(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
+
+    @GET(value = "profile/getnpwp/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<ProfileNPWPModel>> getUserNPWP(@HeaderMap Map<String, String> authHeader);
+
+    @PATCH(value = "profile/updatenpwp/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<String>> updateNpwp(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
 
     @POST(value = "authentication/login/mobile")
     @Headers({"Accept: " + ACCEPT})

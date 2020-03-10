@@ -143,8 +143,9 @@ public class RegistrationActivity extends BaseActivity {
             return false;
         }
 
-        if(txtPassword.getText().toString().isEmpty()) {
-            txtPassword.setError("Field cannot be empty");
+        String passwordRegex = "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?])(?=.{8,}))";
+        if(!UtilitiesCore.stringRegexMatcher(txtPassword.getText().toString(), passwordRegex)) {
+            txtPassword.setError("Field must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 digit, and 1 special char.");
             txtPassword.requestFocus();
             return false;
         }
@@ -210,6 +211,7 @@ public class RegistrationActivity extends BaseActivity {
                             dialogInterface.dismiss();
                             Intent intent = new Intent(this, LoginWithEmailActivity.class);
                             finish();
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                 ));

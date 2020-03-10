@@ -9,10 +9,15 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.work.OneTimeWorkRequest;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.indocyber.itsmeandroid.R;
@@ -109,6 +114,26 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 //        // [END dispatch_job]
 //    }
 
+    public static void getToken(Context context) {
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        String msg = "Token : " + token;
+                        Log.d(TAG, msg);
+                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
     /**
      * Handle time allotted to BroadcastReceivers.
      */

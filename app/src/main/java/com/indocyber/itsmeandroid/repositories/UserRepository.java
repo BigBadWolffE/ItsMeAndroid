@@ -1,6 +1,9 @@
 package com.indocyber.itsmeandroid.repositories;
 
 import com.indocyber.itsmeandroid.model.ApiResponse;
+import com.indocyber.itsmeandroid.model.ProfileKTPModel;
+import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
+import com.indocyber.itsmeandroid.model.ProfilePassportModel;
 import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.services.network.ApiService;
 
@@ -33,12 +36,36 @@ public class UserRepository {
         return service.getProfile(authKey);
     }
 
-    public Single<ApiResponse<String>> updateProfilePicture(String authKey, String base64) {
-        return service.updateProfilePicture(authKey, base64);
+    public Single<ApiResponse<ProfileKTPModel>> getKtp(String authKey) {
+        return service.getKtp(authKey);
     }
 
-    public Single<ApiResponse<String>> updateProfile(String authKey, HashMap<String, String> body) {
-        return service.updateProfile(authKey, body);
+    public Single<ApiResponse<ProfileNPWPModel>> getNpwp(String authKey) {
+        return service.getNpwp(authKey);
+    }
+
+    public Single<ApiResponse<ProfilePassportModel>> getPassport(String authKey) {
+        return service.getPassport(authKey);
+    }
+
+    public Single<ApiResponse<String>> updateProfilePicture(String authKey, String base64, String extension) {
+        return service.updateProfilePicture(authKey, base64, extension);
+    }
+
+    public Single<ApiResponse<String>> updateProfile(String authKey, User user) {
+        return service.updateProfile(authKey, user);
+    }
+
+    public Single<ApiResponse<String>> updateKtp(String authKey, ProfileKTPModel model, String extension) {
+        return service.updateKtp(authKey, model, extension);
+    }
+
+    public Single<ApiResponse<String>> updateNpwp(String authKey, ProfileNPWPModel model, String extension) {
+        return service.updateNpwp(authKey, model, extension);
+    }
+
+    public Single<ApiResponse<String>> updatePassport(String authKey, ProfilePassportModel model, String extension) {
+        return service.updatePassport(authKey, model, extension);
     }
 
     public Single<ApiResponse<User>> login(String authKey) {

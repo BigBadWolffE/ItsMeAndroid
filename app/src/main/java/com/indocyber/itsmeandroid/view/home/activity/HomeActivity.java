@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.aboutus.activity.AboutUsActivity;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 
@@ -103,7 +104,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            UtilitiesCore.buildAlertConfirmation(this,
+                    "Close application?",
+                    view -> {
+                        int pid = android.os.Process.myPid();
+                        android.os.Process.killProcess(pid);
+                    },
+                    dialogInterface -> dialogInterface.dismiss());
         }
     }
 

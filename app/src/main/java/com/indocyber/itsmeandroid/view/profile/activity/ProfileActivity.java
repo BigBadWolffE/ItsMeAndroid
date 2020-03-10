@@ -11,11 +11,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
@@ -42,7 +42,8 @@ public class ProfileActivity extends BaseActivity {
     private CircleImageView mFotoProfile;
     private ProfileDetailViewModel viewModel;
     private android.app.AlertDialog mLoader;
-    private User userData;
+    private Preference preference;
+    private String extension = ".jpg";
     SharedPreferences pref;
     SharedPreferences.Editor editor;
     @Inject
@@ -64,15 +65,13 @@ public class ProfileActivity extends BaseActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        pref = getSharedPreferences("MyPref", 0);
-        editor = pref.edit();
-        String paramProfPic = pref.getString("ProfilePicture", null);
         mLoader = new SpotsDialog.Builder()
                 .setCancelable(false)
                 .setContext(this)
                 .build();
-        int fragmentId = getIntent().getIntExtra("GO_TO_KTP", 0);
 
+        int fragmentId = getIntent().getIntExtra("GO_TO_KTP", 0);
+        preference = new Preference(this);
         ViewPager mViewPager = findViewById(R.id.viewPagerProfile);
         TabLayout mTabLayout = findViewById(R.id.tabLayoutProfile);
         mFotoProfile = findViewById(R.id.imageFotoProfile);
@@ -91,11 +90,11 @@ public class ProfileActivity extends BaseActivity {
             mViewPager.setCurrentItem(fragmentId);
         }
 
-        if (paramProfPic != null) {
-            Bitmap newProfpic = UtilitiesCore.decodeImage(paramProfPic);
-            mFotoProfile.setImageBitmap(newProfpic);
-        }
-
+        UtilitiesCore.loadImageFromUri(
+                mFotoProfile,
+                this,
+                Api.PROFILE_IMAGE,
+                preference.getUserAuth());
         mTakePhotoBtn.setOnClickListener(view -> startTakePhotoDialog());
         observeViewModel();
     }
@@ -134,26 +133,29 @@ public class ProfileActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && data != null) {
-            Preference preference = new Preference(this);
             String authKey = preference.getUserAuth();
             switch (requestCode) {
                 case CAMERA_REQUEST:
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
-                    mFotoProfile.setImageBitmap(imageBitmap);
-                    String encode = UtilitiesCore.encodeImage(imageBitmap);
-                    viewModel.updateProfilePicture(authKey, encode);
+                    UtilitiesCore.loadImage(mFotoProfile, imageBitmap, this);
+                    String encode = UtilitiesCore.encodeToBase64Only(imageBitmap, extension);
+                    viewModel.updateProfilePicture(authKey, encode, ".jpg");
 //                    saveToSharedPreferences(encode);
 
                     break;
                 case GALLERY_PICTURE:
                     Uri uri = data.getData();
+                    String filePath = uri.getPath();
                     try {
+                        if (filePath != null) {
+                            extension = filePath.substring(filePath.lastIndexOf("."));
+                        }
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
-                        mFotoProfile.setImageBitmap(bitmap);
-                        String end = UtilitiesCore.encodeImage(bitmap);
-                        viewModel.updateProfilePicture(authKey, end);
+                        UtilitiesCore.loadImage(mFotoProfile, bitmap, this);
+                        String end = UtilitiesCore.encodeBase64UsingStream(this, uri);
+                        Log.d("Base64", end);
+                        viewModel.updateProfilePicture(authKey, end, extension);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -193,15 +195,6 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
-        viewModel.getUser().observe(this, user -> {
-
-            if (user.getPictureMetaData() != null) {
-                UtilitiesCore.loadImageFromUri(
-                        mFotoProfile,
-                        this,
-                        Api.BASE_URL + user.getPictureMetaData());
-            }
-        });
     }
 
     private void saveToSharedPreferences(String encode) {

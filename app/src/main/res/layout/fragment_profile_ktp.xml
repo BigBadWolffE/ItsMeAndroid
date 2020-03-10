@@ -108,6 +108,7 @@
                 android:layout_height="wrap_content"
                 style="@style/textReg16BoldBlack"
                 android:id="@+id/txtProfileNoKTP"
+                android:maxLength="16"
                 android:paddingTop="@dimen/spacing_middle"
                 android:background="@null"
                 android:inputType="number"/>

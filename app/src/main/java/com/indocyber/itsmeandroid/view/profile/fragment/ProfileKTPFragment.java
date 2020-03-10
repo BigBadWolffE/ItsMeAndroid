@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -40,14 +41,21 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class ProfileKTPFragment extends Fragment {
+import javax.inject.Inject;
+
+public class ProfileKTPFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -64,6 +72,7 @@ public class ProfileKTPFragment extends Fragment {
     private RadioButton radioSelected, male, female;
     private CheckBox agreeCheck;
     private Button saveBtn;
+    private String extension = ".jpg";
     private TextView mErrorText;
     private ImageView mFotoKTP, mTakeFotoKTP, mShareKTP;
     private EditText mNamaKTP, mAlamat, mNoKTP,
@@ -83,6 +92,11 @@ public class ProfileKTPFragment extends Fragment {
     private ProfileKTPModel mKTPModel = new ProfileKTPModel();
     private View mViewOnCreate;
     private String fotoBase64;
+    private ProfileDetailViewModel viewModel;
+    private Preference preference;
+
+    @Inject
+    ViewModelFactory factory;
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
@@ -109,10 +123,15 @@ public class ProfileKTPFragment extends Fragment {
     }
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_profile_ktp;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_ktp, container, false);
+        return inflater.inflate(layoutRes(), container, false);
     }
 
     @Override
@@ -121,34 +140,35 @@ public class ProfileKTPFragment extends Fragment {
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         mViewOnCreate = view;
-        pref = getContext().getSharedPreferences("MyPref", 0);
-        editor = pref.edit();
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(ProfileDetailViewModel.class);
+        preference = new Preference(getActivity());
+//        pref = getContext().getSharedPreferences("MyPref", 0);
+//        editor = pref.edit();
 //        editor.remove("ProfileKTP");
 //        editor.apply();
-        Gson gson = new Gson();
-        String paramUserData = pref.getString("ProfileKTP", null);
-        mKTPModel = gson.fromJson(paramUserData, ProfileKTPModel.class);
+//        Gson gson = new Gson();
+//        String paramUserData = pref.getString("ProfileKTP", null);
+//        mKTPModel = gson.fromJson(paramUserData, ProfileKTPModel.class);
         Log.d("Cek", "Profile KTP "+mKTPModel);
-
         initializeView();
         initializeSpinner();
+        observeViewModel();
 
-        if (mKTPModel != null) {
-            setModelNotNull();
-            agreeLayout.setVisibility(View.GONE);
-            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
-            saveBtn.setEnabled(true);
-        }
+//        if (mKTPModel != null) {
+//            setModelNotNull();
+//            agreeLayout.setVisibility(View.GONE);
+//            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+//            saveBtn.setEnabled(true);
+//        }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (formValidation()) {
-                    ProfileKTPModel mKTPModelInside = new ProfileKTPModel();
-                    mKTPModelInside = setToModel();
-                    saveToSharedPreferences(mKTPModelInside);
-                    Toast.makeText(getContext(), "Saved Sukses", Toast.LENGTH_SHORT).show();
-                    mErrorText.setVisibility(View.GONE);
+                    viewModel.updateKtp(preference.getUserAuth(), setToModel(), extension);
+//                    saveToSharedPreferences(mKTPModelInside);
+//                    Toast.makeText(getContext(), "Saved Sukses", Toast.LENGTH_SHORT).show();
+//                    mErrorText.setVisibility(View.GONE);
                 }
             }
         });
@@ -200,38 +220,48 @@ public class ProfileKTPFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+//        viewModel.getProfileKtp(preference.getUserAuth());
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
 //        editor.remove("ProfileKTP");
 //        editor.apply();
     }
 
-    private void setModelNotNull() {
+    private void setModelNotNull(ProfileKTPModel model) {
         int spinnerPosition = 0;
-        Bitmap bitmap = UtilitiesCore.decodeImage(mKTPModel.getFotoKTP());
-        mFotoKTP.setImageBitmap(bitmap);
-        mNamaKTP.setText(mKTPModel.getNamaLengkap());
-        mNoKTP.setText(mKTPModel.getNoKtp());
-        mTglLahir.setText(mKTPModel.getTglLahir());
-        spinnerPosition = agamaAdapter.getPosition(mKTPModel.getAgama());
+//        Bitmap bitmap = UtilitiesCore.decodeImage(mKTPModel.getFotoKTP());
+//        mFotoKTP.setImageBitmap(bitmap);
+        if (model.getFotoKTP() != null )
+        UtilitiesCore.loadImageFromUri(mFotoKTP, getContext(), Api.KTP_IMAGE, preference.getUserAuth());
+        mNamaKTP.setText(model.getNamaLengkap());
+        mNoKTP.setText(model.getNoKtp());
+        mTglLahir.setText(model.getTglLahir());
+        spinnerPosition = agamaAdapter.getPosition(model.getAgama());
         mAgamaSpinner.setSelection(spinnerPosition);
-        spinnerPosition = statusAdapter.getPosition(mKTPModel.getStatus());
+        spinnerPosition = statusAdapter.getPosition(model.getStatus());
         mStatusSpinner.setSelection(spinnerPosition);
-        spinnerPosition = kwnAdapter.getPosition(mKTPModel.getKwn());
+        spinnerPosition = kwnAdapter.getPosition(model.getKwn());
         mKWNSpinner.setSelection(spinnerPosition);
-        spinnerPosition = pekerjaanAdapter.getPosition(mKTPModel.getPekerjaan());
+        spinnerPosition = pekerjaanAdapter.getPosition(model.getPekerjaan());
         mPekerjaanSpinner.setSelection(spinnerPosition);
-        spinnerPosition = kecamatanAdapter.getPosition(mKTPModel.getKecamatan());
+        spinnerPosition = kecamatanAdapter.getPosition(model.getKecamatan());
         mKecamatanSpinner.setSelection(spinnerPosition);
-        spinnerPosition = kelurahanAdapter.getPosition(mKTPModel.getKelurahan());
+        spinnerPosition = kelurahanAdapter.getPosition(model.getKelurahan());
         mKelurahanSpinner.setSelection(spinnerPosition);
-        mAlamat.setText(mKTPModel.getAlamat());
-        mRT.setText(mKTPModel.getRt());
-        mRW.setText(mKTPModel.getRw());
-        if (mKTPModel.getJenisKelamin().equalsIgnoreCase("Perempuan")) {
-            female.setChecked(true);
-        } else {
-            male.setChecked(true);
+        mAlamat.setText(model.getAlamat());
+        mRT.setText(model.getRt());
+        mRW.setText(model.getRw());
+        if (model.getJenisKelamin() != null){
+            if (model.getJenisKelamin().equalsIgnoreCase("Perempuan")) {
+                female.setChecked(true);
+            } else {
+                male.setChecked(true);
+            }
         }
     }
 
@@ -328,11 +358,6 @@ public class ProfileKTPFragment extends Fragment {
             return false;
         } else if (mKecamatanSpinner.getSelectedItemId() == 0) {
             setErrorText("Silahkan pilih kecamatan terlebih dahulu.");
-            return false;
-        } else if (mFotoKTP.getDrawable().getConstantState()
-                .equals(getContext().getResources().getDrawable(R.drawable.ic_profile_default_img)
-                        .getConstantState())) {
-            setErrorText("Silahkan ambil foto terlebih dahulu.");
             return false;
         } else {
             return true;
@@ -469,15 +494,19 @@ public class ProfileKTPFragment extends Fragment {
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     mFotoKTP.setImageBitmap(imageBitmap);
-                    fotoBase64 = UtilitiesCore.encodeImage(imageBitmap);
+                    fotoBase64 = UtilitiesCore.encodeToBase64Only(imageBitmap, extension);
                     break;
                 case GALLERY_PICTURE_KTP:
                     Uri uri = data.getData();
+                    String filePath = uri.getPath();
                     try {
+                        if (filePath != null) {
+                            extension = filePath.substring(filePath.lastIndexOf("."));
+                        }
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
-                        bitmap = UtilitiesCore.getResizedBitmap(bitmap, 800);
+                        UtilitiesCore.loadImage(mFotoKTP, bitmap, getContext());
                         mFotoKTP.setImageBitmap(bitmap);
-                        fotoBase64 = UtilitiesCore.encodeImage(bitmap);
+                        fotoBase64  = UtilitiesCore.encodeToBase64Only(bitmap, extension);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -486,4 +515,12 @@ public class ProfileKTPFragment extends Fragment {
         }
     }
 
+    private void observeViewModel() {
+        viewModel.getUserKtp().observe(this, profileKTPModel -> {
+            setModelNotNull(profileKTPModel);
+            agreeLayout.setVisibility(View.GONE);
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
+        });
+    }
 }

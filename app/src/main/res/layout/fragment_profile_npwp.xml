@@ -109,6 +109,7 @@
                 android:id="@+id/txtProfileNoNPWP"
                 style="@style/textReg16BoldBlack"
                 android:paddingTop="@dimen/spacing_middle"
+                android:maxLength="20"
                 android:background="@null"
                 android:inputType="number" />
         </LinearLayout>

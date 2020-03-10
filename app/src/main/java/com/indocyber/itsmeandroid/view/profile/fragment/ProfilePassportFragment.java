@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -36,14 +37,23 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ProfilePassportModel;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.UUID;
 
-public class ProfilePassportFragment extends Fragment {
+import javax.inject.Inject;
+
+import okhttp3.internal.Util;
+
+public class ProfilePassportFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -59,12 +69,16 @@ public class ProfilePassportFragment extends Fragment {
     private EditText mNamaPassport, mKWNPassport, mNoPassport, mTglLahirPassport, mTempatLahirPassport, mBerlakuPassport;
     private View mViewOnCreated;
     private TextView errorText;
+    private Preference preference;
     private LinearLayout agreeLayout;
     private int mYear, mMonth, mDay;
     private String fotoBase64;
     private String[] mMonthData = {"Januari", "Februari", "Maret", "April",
             "Mei", "Juni", "Juli", "Agustus", "September",
             "Oktober", "November", "Desember"};
+    private ProfileDetailViewModel viewModel;
+    @Inject
+    ViewModelFactory factory;
     private ProfilePassportModel mPassportModel = new ProfilePassportModel();
     SharedPreferences pref;
     SharedPreferences.Editor editor;
@@ -91,10 +105,15 @@ public class ProfilePassportFragment extends Fragment {
     }
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_profile_passport;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_passport, container, false);
+        return inflater.inflate(layoutRes(), container, false);
     }
 
     @Override
@@ -103,23 +122,10 @@ public class ProfilePassportFragment extends Fragment {
         mViewOnCreated = view;
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        pref = getContext().getSharedPreferences("MyPref", 0);
-        editor = pref.edit();
-//        editor.remove("ProfilePassport");
-//        editor.apply();
-        Gson gson = new Gson();
-        String paramUserData = pref.getString("ProfilePassport", null);
-        mPassportModel = gson.fromJson(paramUserData, ProfilePassportModel.class);
-        Log.d("Cek", "Profile Passport "+mPassportModel);
-
+        preference = new Preference(getContext());
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(ProfileDetailViewModel.class);
         initializeView();
-
-        if (mPassportModel != null) {
-            setModelNotNull();
-            agreeLayout.setVisibility(View.GONE);
-            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
-            saveBtn.setEnabled(true);
-        }
+        observeViewModel();
 
         agreeCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,15 +176,20 @@ public class ProfilePassportFragment extends Fragment {
         });
     }
 
-    private void setModelNotNull() {
-        Bitmap bitmap = UtilitiesCore.decodeImage(mPassportModel.getFotoPassport());
-        mFotoPassport.setImageBitmap(bitmap);
-        mNamaPassport.setText(mPassportModel.getNamaLengkap());
-        mNoPassport.setText(mPassportModel.getNoPassport());
-        mKWNPassport.setText(mPassportModel.getKwn());
-        mTempatLahirPassport.setText(mPassportModel.getTempatLahir());
-        mTglLahirPassport.setText(mPassportModel.getTglLahir());
-        mBerlakuPassport.setText(mPassportModel.getBerlaku());
+    @Override
+    public void onResume() {
+        super.onResume();
+//        viewModel.getProfileNpwp(preference.getUserAuth());
+    }
+
+    private void setModelNotNull(ProfilePassportModel model) {
+        UtilitiesCore.loadImageFromUri(mFotoPassport, getContext(), Api.PASSPORT_IMAGE, preference.getUserAuth());
+        mNamaPassport.setText(model.getNamaLengkap());
+        mNoPassport.setText(model.getNoPassport());
+        mKWNPassport.setText(model.getKwn());
+        mTempatLahirPassport.setText(model.getTempatLahir());
+        mTglLahirPassport.setText(model.getTglLahir());
+        mBerlakuPassport.setText(model.getBerlaku());
     }
 
     private void saveToSharedPreferences(ProfilePassportModel mPassportModelInside) {
@@ -346,6 +357,15 @@ public class ProfilePassportFragment extends Fragment {
         if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, CAMERA_REQUEST);
         }
+    }
+
+    private void observeViewModel() {
+        viewModel.getUserPassport().observe(getActivity(), profilePassportModel -> {
+            setModelNotNull(profilePassportModel);
+            agreeLayout.setVisibility(View.GONE);
+            saveBtn.setBackground(getContext().getDrawable(R.drawable.button_primary));
+            saveBtn.setEnabled(true);
+        });
     }
 
     @Override

@@ -22,11 +22,10 @@ public class User {
     @SerializedName("userPin")
     private String pin;
     @SerializedName("userAddress")
-    @Expose(serialize = false)
     private String alamat;
-    @SerializedName("secretQuestionId")
+    @SerializedName("userSecretQuestion")
     private String secretQuestionId;
-    @SerializedName("secretAnswer")
+    @SerializedName("userSecretAnswer")
     private String secretAnswer;
     @SerializedName("userImage")
     private String pictureMetaData;

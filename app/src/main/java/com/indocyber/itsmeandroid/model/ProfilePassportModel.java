@@ -1,12 +1,20 @@
 package com.indocyber.itsmeandroid.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProfilePassportModel {
 
+    @SerializedName("passportName")
     private String namaLengkap;
+    @SerializedName("passportNo")
     private String noPassport;
+    @SerializedName("passportCitizenship")
     private String kwn;
+    @SerializedName("passportBirthPlace")
     private String tempatLahir;
+    @SerializedName("passportBirthDate")
     private String tglLahir;
+    @SerializedName("passportExpired")
     private String berlaku;
     private String fotoPassport;
 

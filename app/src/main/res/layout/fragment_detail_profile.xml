@@ -253,6 +253,16 @@
                     android:inputType="numberPassword"
                     android:maxLength="6"/>
 
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/spacing_mlarge"
+                    android:layout_weight=".1"
+                    android:id="@+id/imgEditPin"
+                    android:src="@drawable/ic_profile_pencil_edit"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="@dimen/spacing_medium"/>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -286,6 +296,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:id="@+id/txtSecretQuestion"
                 android:text="What is your secretAnswer ?"
                 style="@style/textReg14Grey"
                 android:layout_marginBottom="@dimen/spacing_medium" />
@@ -302,5 +313,20 @@
                 android:inputType="text|textMultiLine"
                 android:digits="0123456789,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"/>
         </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            style="@style/textReg14BoldWhite"
+            android:id="@+id/btnSaveProfile"
+            android:paddingBottom="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_middle"
+            android:background="@drawable/button_primary"
+            android:enabled="false"
+            app:layout_constraintTop_toBottomOf="@+id/layoutSecretQuestion"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

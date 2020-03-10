@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.utilities;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -9,9 +10,11 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.pdf.PdfRenderer;
+import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.text.Spanned;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +36,12 @@ import com.indocyber.itsmeandroid.services.network.Api;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -238,7 +244,23 @@ public final class UtilitiesCore {
         byte[] b = baos.toByteArray();
         String encImage = Base64.encodeToString(b, Base64.DEFAULT);
 
-        return "data:image/png;base64," +encImage;
+        return "data:image/png;base64," + encImage;
+    }
+
+    public static String encodeToBase64Only(Bitmap bm, String extension){
+        Bitmap.CompressFormat compress;
+        if (extension.equals(".jpg")) {
+            compress = Bitmap.CompressFormat.JPEG;
+        } else {
+            compress = Bitmap.CompressFormat.PNG;
+        }
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(compress,50,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.NO_WRAP | Base64.URL_SAFE);
+
+        return encImage;
     }
 
     public static Bitmap decodeImage(String base64){
@@ -246,6 +268,39 @@ public final class UtilitiesCore {
         byte[] decodedString = Base64.decode(base64, Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return decodedByte;
+    }
+
+    public static String decodeBase64toString(String base64) {
+        byte[] data = Base64.decode(base64, Base64.NO_WRAP | Base64.URL_SAFE);
+        try {
+            String text = new String(data, "UTF-8");
+            return text;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String encodeBase64UsingStream(Context context, Uri uri) {
+        InputStream inputStream = null; //You can get an inputStream using any IO API
+        try {
+            inputStream = context.getContentResolver().openInputStream(uri);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        byte[] bytes;
+        byte[] buffer = new byte[8192];
+        int bytesRead;
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        try {
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                output.write(buffer, 0, bytesRead);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bytes = output.toByteArray();
+        return Base64.encodeToString(bytes, Base64.NO_WRAP | Base64.URL_SAFE);
     }
 
     public static Bitmap getResizedBitmap(Bitmap image, int maxSize) {
@@ -281,6 +336,12 @@ public final class UtilitiesCore {
         return matcher.matches();
     }
 
+    public static boolean stringRegexMatcher(String string, String regex){
+        Pattern regexPattern = Pattern.compile(regex);
+        Matcher matcher = regexPattern.matcher(string);
+        return matcher.find();
+    }
+
     /**
      *
      */
@@ -302,11 +363,11 @@ public final class UtilitiesCore {
         return loader;
     }
 
-    public static void loadImageFromUri(ImageView imageView, Context context, String url) {
+    public static void loadImageFromUri(ImageView imageView, Context context, String url, String auth) {
+        Log.d("Authorization", auth);
         GlideUrl uri = new GlideUrl(
                 url, new LazyHeaders.Builder()
-                .addHeader("Accept", Api.ACCEPT)
-                .addHeader("x-api-key", Api.XAPIKEY)
+                .addHeader("Authorization", "Basic " + auth)
                 .build()
         );
         RequestOptions option = new RequestOptions().placeholder(getProgressDrawable(context));
@@ -314,5 +375,33 @@ public final class UtilitiesCore {
                 .setDefaultRequestOptions(option)
                 .load(uri)
                 .into(imageView);
+    }
+
+    public static void loadImage(ImageView imageView, Bitmap bitmap, Context context) {
+        Glide.with(context)
+                .load(bitmap)
+                .into(imageView);
+    }
+
+    public static void buildAlertConfirmation(
+            Context context,
+            String message,
+            View.OnClickListener positiveAction,
+            DialogInterface.OnDismissListener onDismissListener
+    ) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.alert_confirmation, null);
+        TextView messageText = view.findViewById(R.id.txtAlertMessage);
+        messageText.setText(message);
+        builder.setOnDismissListener(onDismissListener);
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        Button positiveButton = view.findViewById(R.id.btnAlertPositive);
+
+        Button negativeButton = view.findViewById(R.id.btnAlertNegative);
+        positiveButton.setOnClickListener(positiveAction);
+        negativeButton.setOnClickListener(view1 -> dialog.dismiss());
+        negativeButton.setVisibility(View.VISIBLE);
+        dialog.show();
     }
 }

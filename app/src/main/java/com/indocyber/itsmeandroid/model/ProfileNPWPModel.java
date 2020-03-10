@@ -1,13 +1,21 @@
 package com.indocyber.itsmeandroid.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class ProfileNPWPModel {
 
+    @SerializedName("npwpName")
     private String namaLengkap;
+    @SerializedName("npwpNo")
     private String noNpwp;
+    @SerializedName("npwpNik")
     private String nik;
     private String berlaku;
+    @SerializedName("npwpAddress")
     private String alamat;
+    @SerializedName("npwpKantorPajak")
     private String alamatKPP;
+    @SerializedName("npwpImage")
     private String fotoNPWP;
 
     public String getNamaLengkap() {

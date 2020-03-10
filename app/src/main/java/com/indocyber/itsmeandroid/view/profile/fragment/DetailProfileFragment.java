@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +49,7 @@ public class DetailProfileFragment extends BaseFragment {
     private AlertDialog mLoader;
     private EditText mNamaLengkap, mAlamat, mEmailAddress, mNoTelp, mPass, mPin, mSecretQuestion;
     private TextView mErrorValidation;
+    private TextView mSecretQuestionTxt;
     private ImageView mEditAlamat, mEditNoTelp, mEditPass, mEditPin;
     private Preference mPreference;
     private ProfileDetailViewModel viewModel;
@@ -110,7 +112,7 @@ public class DetailProfileFragment extends BaseFragment {
         mPin = view.findViewById(R.id.txtProfilePin);
         mSecretQuestion = view.findViewById(R.id.txtProfileSecretQuestion);
         mErrorValidation = view.findViewById(R.id.layoutError);
-
+        mSecretQuestionTxt = view.findViewById(R.id.txtSecretQuestion);
         mNamaLengkap.setEnabled(false);
         mNamaLengkap.setTextColor(Color.BLACK);
         mAlamat.setEnabled(false);
@@ -132,6 +134,14 @@ public class DetailProfileFragment extends BaseFragment {
 //        mPin.setTextColor(Color.BLACK);
         mSecretQuestion.setEnabled(false);
         mSecretQuestion.setTextColor(Color.BLACK);
+        Button saveButton = view.findViewById(R.id.btnSaveProfile);
+        saveButton.setEnabled(true);
+        saveButton.setOnClickListener(view1 -> {
+            if (!validateField()) {
+                return;
+            }
+            updateField();
+        });
         mEditAlamat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -203,13 +213,27 @@ public class DetailProfileFragment extends BaseFragment {
         }
     }
 
+    private boolean validateField() {
+        String passwordRegex = "((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?])(?=.{8,}))";
+        if(!UtilitiesCore.stringRegexMatcher(mPass.getText().toString(), passwordRegex)) {
+            mPass.setError("Field must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 digit, and 1 special char.");
+            mPass.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
     private void setNotNull(User mDetailModel) {
         mNamaLengkap.setText(mDetailModel.getNamaLengkap());
         mAlamat.setText(mDetailModel.getAlamat());
         mEmailAddress.setText(mDetailModel.getEmail());
         mNoTelp.setText(mDetailModel.getNoTelp());
-        mPass.setText(mDetailModel.getPassword());
-        mPin.setText("000000");
+        String decodedPass1 = UtilitiesCore.decodeBase64toString(mDetailModel.getPassword());
+        String decodedPass2 = UtilitiesCore.decodeBase64toString(decodedPass1);
+        String decodedPass = UtilitiesCore.decodeBase64toString(decodedPass2);
+        mPass.setText(decodedPass);
+        mPin.setText(mDetailModel.getPin());
+        mSecretQuestionTxt.setText(mDetailModel.getSecretQuestionId());
         mSecretQuestion.setText(mDetailModel.getSecretAnswer());
     }
 
@@ -220,7 +244,9 @@ public class DetailProfileFragment extends BaseFragment {
         mDetailModelInside.setEmail(mEmailAddress.getText().toString());
         mDetailModelInside.setNoTelp(mNoTelp.getText().toString());
         mDetailModelInside.setPassword(mPass.getText().toString());
+        mDetailModelInside.setSecretQuestionId(mSecretQuestionTxt.getText().toString());
         mDetailModelInside.setSecretAnswer(mSecretQuestion.getText().toString());
+        mDetailModelInside.setPin(mPin.getText().toString());
         return mDetailModelInside;
     }
 
@@ -260,19 +286,17 @@ public class DetailProfileFragment extends BaseFragment {
             } else {
                 view.setBackgroundColor(getResources().getColor(R.color.colorwhite));
                 view.setEnabled(false);
-                if (view instanceof TextView) {
-                    String newText = ((TextView) view).getText().toString();
-                    if (!currentText.equals(newText)) updateField(field, newText);
-                }
+//                if (view instanceof TextView) {
+//                    String newText = ((TextView) view).getText().toString();
+//                    if (!currentText.equals(newText)) updateField(field, newText);
+//                }
             }
         };
     }
 
-    private void updateField(String field, String value) {
+    private void updateField() {
         Preference preference = new Preference(getActivity());
         String authKey = preference.getUserAuth();
-        HashMap<String, String> fieldUpdate = new HashMap<>();
-        fieldUpdate.put(field, value);
-        viewModel.updateProfile(authKey, fieldUpdate);
+        viewModel.updateProfile(authKey, setToModel());
     }
 }
