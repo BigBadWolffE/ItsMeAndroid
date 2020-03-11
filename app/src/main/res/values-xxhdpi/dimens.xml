@@ -14,4 +14,9 @@
     <dimen name="spacing_xxxlarge">40dp</dimen>
     <dimen name="spacing_small">3dp</dimen>
     <dimen name="spacing_small_double">6dp</dimen>
+
+    <dimen name="card_pager_item">200dp</dimen>
+    <dimen name="banner_button">150dp</dimen>
+    <dimen name="banner_button_icon_height">90dp</dimen>
+    <dimen name="banner_button_icon_width">60dp</dimen>
 </resources>

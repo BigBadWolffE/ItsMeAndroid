@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.home.activity.HomeRemastered" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/backgroundTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/img_bg_top"
+            android:orientation="horizontal" >
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xxlarge"
+            android:padding="@dimen/spacing_medium"
+            android:layout_marginTop="-15dp"
+            android:layout_marginLeft="@dimen/spacing_mlarge"
+            android:layout_marginRight="@dimen/spacing_mlarge"
+            android:orientation="horizontal" >
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/ic_profile_photo_dummy">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="7"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:text="Johan Sundstein"
+                android:gravity="center_vertical"
+                style="@style/quicksandRegular"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ico_notif" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/spacing_mlarge"
+                android:paddingRight="@dimen/spacing_mlarge"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_pager_item"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recPromoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/card_pager_item"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+                <LinearLayout
+                    android:id="@+id/otherMenuContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/banner_button"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/spacing_medium">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingTop="@dimen/spacing_xmedium"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:id="@+id/buttonBlockCard"
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/banner_button_icon_height"
+                            android:orientation="vertical"
+                            android:background="@drawable/bgblockcardbutton">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/blockCardIcon"
+                            android:layout_width="@dimen/banner_button_icon_width"
+                            android:layout_height="@dimen/banner_button_icon_height"
+                            android:src="@drawable/ico_block_all_card"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            />
+                        <TextView
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:layout_marginBottom="@dimen/spacing_xmedium"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@+id/blockCardIcon"
+                            android:textSize="14dp"
+                            android:textColor="@color/colorwhite"
+                            android:textAlignment="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Block Semua Kartu"
+                            style="@style/quicksandSemiBold"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:paddingRight="@dimen/spacing_large"
+                        android:paddingLeft="@dimen/spacing_large"
+                        android:paddingTop="@dimen/spacing_xmedium"
+                        android:layout_weight="1">
+
+                        <LinearLayout
+                            android:id="@+id/buttonBeliPulsa"
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/banner_button_icon_height"
+                            android:orientation="vertical"
+                            android:background="@drawable/bgbelipulsabutton">
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/beliPulsaIcon"
+                            android:layout_width="@dimen/banner_button_icon_width"
+                            android:layout_height="@dimen/banner_button_icon_height"
+                            android:src="@drawable/ico_banner_beli_pulsa"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentTop="true"
+                            />
+                        <TextView
+                            android:layout_marginLeft="@dimen/spacing_large"
+                            android:layout_marginRight="@dimen/spacing_large"
+                            android:layout_marginBottom="@dimen/spacing_xmedium"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_below="@id/beliPulsaIcon"
+                            android:textSize="14dp"
+                            android:textColor="@color/colorwhite"
+                            android:textAlignment="center"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Beli Pulsa"
+                            style="@style/quicksandSemiBold"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorwhite"
+        android:elevation="10dp"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu" />
+</FrameLayout>

@@ -4,4 +4,7 @@
     <string name="default_notification_channel_id">1</string>
     <string name="fcm_message">It\'s Me</string>
     <string name="menu_home">Home</string>
+    <string name="menu_promo">Promo</string>
+    <string name="menu_kartuku">Kartuku</string>
+    <string name="menu_akun">Akun</string>
 </resources>

@@ -15,7 +15,9 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.home.activity.HomeRemastered"></activity>
+        <activity
+            android:name=".view.home.activity.HomeRemastered"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
             android:parentActivityName=".view.login.LoginOptionActivity" />

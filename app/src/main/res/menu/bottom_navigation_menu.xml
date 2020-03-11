@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_home"
+        android:title="@string/menu_home"
+        android:icon="@drawable/ico_home" />
+    <item android:id="@+id/action_promo"
+        android:title="@string/menu_promo"
+        android:icon="@drawable/ico_promo_active" />
+    <item android:id="@+id/action_kartuku"
+        android:title="@string/menu_kartuku"
+        android:icon="@drawable/ico_kartuku" />
+    <item android:id="@+id/action_akun"
+        android:title="@string/menu_akun"
+        android:icon="@drawable/ico_akun" />
+
+
+</menu>

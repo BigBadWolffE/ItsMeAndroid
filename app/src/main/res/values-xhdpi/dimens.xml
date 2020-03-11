@@ -41,5 +41,9 @@
     <dimen name="expiry_text_size">14dp</dimen>
     <dimen name="alert_line_spacing_extra">4dp</dimen>
     <dimen name="home_button_layout_height">40dp</dimen>
+    <dimen name="card_pager_item">150dp</dimen>
+    <dimen name="banner_button">120dp</dimen>
+    <dimen name="banner_button_icon_height">70dp</dimen>
+    <dimen name="banner_button_icon_width">40dp</dimen>
 
 </resources>
