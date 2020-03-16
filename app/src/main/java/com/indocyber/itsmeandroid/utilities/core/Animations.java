@@ -2,6 +2,8 @@ package com.indocyber.itsmeandroid.utilities.core;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -122,6 +124,15 @@ public class Animations {
         return rotate;
     }
 
+    public static void fadeOutIn(View view) {
+        view.setAlpha(0.f);
+        AnimatorSet animatorSet = new AnimatorSet();
+        ObjectAnimator animatorAlpha = ObjectAnimator.ofFloat(view, "alpha", 0.f, 0.5f, 1.f);
+        ObjectAnimator.ofFloat(view, "alpha", 0.f).start();
+        animatorAlpha.setDuration(500);
+        animatorSet.play(animatorAlpha);
+        animatorSet.start();
+    }
     public static void showOut(final View v) {
         v.setVisibility(View.VISIBLE);
         v.setAlpha(1f);

@@ -13,8 +13,7 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.services.firebase.MyFireBaseMessagingService;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
-import com.indocyber.itsmeandroid.view.home.activity.HomeRemastered;
-import com.indocyber.itsmeandroid.view.login.LoginOptionActivity;
+import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

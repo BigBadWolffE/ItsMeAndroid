@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:padding="@dimen/spacing_medium">
 
     <ImageView
         android:id="@+id/promoListImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
         android:padding="0dp"
+        android:scaleType="fitXY"
         android:src="@drawable/img_banner_starbuck" />
 
     <ImageView
@@ -21,6 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@id/promoListImage"
-        android:src="@drawable/ic_btn_more_promo"/>
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_btn_more_promo" />
 
 </RelativeLayout>

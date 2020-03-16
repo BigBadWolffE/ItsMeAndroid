@@ -14,9 +14,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
         <activity
-            android:name=".view.home.activity.HomeRemastered"
+            android:name=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
