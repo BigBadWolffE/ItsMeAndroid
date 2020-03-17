@@ -39,8 +39,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recyclerMenuPromoHorizontal">
 
-
     </FrameLayout>
+
+    <include layout="@layout/no_promo"
+        android:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

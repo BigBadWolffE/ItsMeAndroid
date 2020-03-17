@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
@@ -30,8 +32,16 @@ import butterknife.ButterKnife;
 public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapter.Listener {
     @BindView(R.id.recyclerMenuPromoHorizontal)
     RecyclerView mPromoMenuRecycler;
+    @BindView(R.id.layoutNoPromo)
+    ConstraintLayout mLayoutNoPromo;
+    @BindView(R.id.frameLayoutPromo)
+    FrameLayout mLayoutPromo;
     private MenuPromoAdapter mPromoMenuAdapter, mNearbyMenuAdapter, mDinigMenuAdapter, mCollectionMenuAdapter;
     private Fragment mFragmentIndicator = null;
+
+    private String[] titleList = {
+
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,8 +59,16 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         mPromoMenuRecycler.setAdapter(mPromoMenuAdapter);
 
         loadFragment(mFragmentIndicator);
-
+        getPromo();
         return promoRemasteredView;
+    }
+
+    private void getPromo() {
+        if (titleList.length != 0) {
+            mPromoMenuRecycler.setVisibility(View.GONE);
+            mLayoutPromo.setVisibility(View.GONE);
+            mLayoutNoPromo.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -79,8 +97,8 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         dinningActiveList.clear();
         dinningActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         dinningActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
-        dinningActiveList.add(new PromoMenuModel("Collection",R.color.grey2, R.drawable.button_border_grey ));
-        dinningActiveList.add(new PromoMenuModel("Dinning",  R.color.colorPrimary, R.drawable.button_coloraccent));
+        dinningActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
+        dinningActiveList.add(new PromoMenuModel("Dinning", R.color.colorPrimary, R.drawable.button_coloraccent));
         return dinningActiveList;
     }
 
@@ -90,7 +108,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         collectionActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         collectionActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         collectionActiveList.add(new PromoMenuModel("Collection", R.color.colorPrimary, R.drawable.button_coloraccent));
-        collectionActiveList.add(new PromoMenuModel("Dinning",  R.color.grey2, R.drawable.button_border_grey));
+        collectionActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
         return collectionActiveList;
     }
 
