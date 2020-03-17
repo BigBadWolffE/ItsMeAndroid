@@ -86,12 +86,9 @@ public class LoginActivityRemastered extends AppCompatActivity {
                 } else {
                     inputUserName.setError(null);
                 }
-            else if(!phoneCustom.matcher(inputUserName.getText().toString()).matches()){
-                inputUserName.setError("Email atau nomor telpon");
-                }else {
-                    inputUserName.setError(null);
-            }
 
         }
     };
+
+
 }
