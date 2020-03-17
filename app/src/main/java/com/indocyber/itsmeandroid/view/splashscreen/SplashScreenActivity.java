@@ -64,7 +64,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         startActivityForResult(newIntent, 0);
                     }else {
                         finish();
-                        Intent newIntent = new Intent(SplashScreenActivity.this, LoginActivityRemastered.class);
+                        Intent newIntent = new Intent(SplashScreenActivity.this, HomeRemastered.class);
                         startActivityForResult(newIntent, 0);
                     }
                 }
