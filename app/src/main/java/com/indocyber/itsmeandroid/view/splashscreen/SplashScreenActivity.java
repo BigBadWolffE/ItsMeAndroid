@@ -14,6 +14,7 @@ import com.indocyber.itsmeandroid.services.firebase.MyFireBaseMessagingService;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -63,7 +64,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                         startActivityForResult(newIntent, 0);
                     }else {
                         finish();
-                        Intent newIntent = new Intent(SplashScreenActivity.this, HomeRemastered.class);
+                        Intent newIntent = new Intent(SplashScreenActivity.this, LoginActivityRemastered.class);
                         startActivityForResult(newIntent, 0);
                     }
                 }

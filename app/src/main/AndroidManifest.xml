@@ -3,16 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.indocyber.itsmeandroid">
 
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        android:protectionLevel="signature|privileged" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="replace" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <application
         android:name=".view.App"
         android:allowBackup="true"
@@ -25,9 +15,10 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity
-            android:name=".viewremastered.promo.Activity.DetailPromoActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar" ></activity>
+        <activity android:name=".viewremastered.loginandregister.LoginActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -159,5 +150,15 @@
             </intent-filter>
         </service>
     </application>
+
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
 
 </manifest>
