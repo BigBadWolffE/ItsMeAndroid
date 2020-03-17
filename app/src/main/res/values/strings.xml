@@ -7,12 +7,14 @@
     <string name="menu_promo">Promo</string>
     <string name="menu_kartuku">Kartuku</string>
     <string name="menu_akun">Akun</string>
-
+    <string name="no_promo">Saat ini belum ada promo, Tambahkan kartu Anda untuk mendapatkan promo</string>
+    <!--    <String name="semua_promo">Semua Promo</String>-->
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragments">Hello blank fragment</string>
     <string name="tambah_limit">Tambah Limit</string>
     <string name="request_limit">Pengajuan Limit</string>
     <string name="current_limit">Limit Sekarang</string>
     <string name="request_for">Pengajuan Untuk</string>
     <string name="request">Ajukan</string>
+    <string name="hello_blank_fragment">Semua promo</string>
 </resources>

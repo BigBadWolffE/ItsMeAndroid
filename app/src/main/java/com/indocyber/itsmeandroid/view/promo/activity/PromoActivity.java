@@ -41,8 +41,7 @@ public class PromoActivity extends AppCompatActivity implements PromoMenuAdapter
         mNearbyMenuAdapter = new PromoMenuAdapter(nearbyActive(), getApplicationContext(), PromoActivity.this);
         mDinningMenuAdapter = new PromoMenuAdapter(dinningActive(), getApplicationContext(), PromoActivity.this);
         mCollectionMenuAdapter = new PromoMenuAdapter(collectionActive(), getApplicationContext(), PromoActivity.this);
-        LinearLayoutManager horizontalLayoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager horizontalLayoutManager =new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         mPromoMenuRecycler.setLayoutManager(horizontalLayoutManager);
         mPromoMenuRecycler.setAdapter(mPromoMenuAdapter);
 

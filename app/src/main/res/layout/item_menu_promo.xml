@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btnPromoMenu"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_30sdp"
+    style="@style/quicksandBold"
+    android:text="semua promo"
+    android:textColor="@color/colorPrimary"
+    android:paddingHorizontal="@dimen/_10sdp"
+    android:layout_marginRight="@dimen/_10sdp"
+    android:background="@drawable/button_border_grey">
+
+</Button>
