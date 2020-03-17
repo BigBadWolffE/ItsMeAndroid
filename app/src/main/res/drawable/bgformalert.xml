@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid
-        android:color="@color/colorPrimaryLight" />
-
-    <padding android:bottom="0dp" android:left="0dp" android:right="0dp" android:top="0dp" />
-
     <corners android:radius="5dp" />
-
+    <solid android:color="@color/support_red_light" />
 </shape>

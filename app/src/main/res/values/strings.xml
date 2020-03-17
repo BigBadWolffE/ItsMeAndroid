@@ -10,4 +10,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tambah_limit">Tambah Limit</string>
+    <string name="request_limit">Pengajuan Limit</string>
+    <string name="current_limit">Limit Sekarang</string>
+    <string name="request_for">Pengajuan Untuk</string>
+    <string name="request">Ajukan</string>
 </resources>

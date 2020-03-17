@@ -152,4 +152,34 @@
         <item name="android:textColor">#333333</item>
     </style>
 
+    <style name="title">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">35pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="headline">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">16pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="label">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">13pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="field">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">15pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="paragraph">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">14pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
 </resources>
