@@ -11,18 +11,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 
 import java.util.regex.Pattern;
 
 public class LoginActivityRemastered extends AppCompatActivity {
 
-    public static TextView btnNext,registerText;
+    public static TextView btnNext, registerText;
     public static EditText inputUserName;
     public static Pattern emailCustom;
     public static Pattern phoneCustom;
-
-
-
 
 
     @Override
@@ -46,7 +44,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
         );
 
         phoneCustom
-                = Pattern.compile("08"+"[0-9]{9,13}");
+                = Pattern.compile("08" + "[0-9]{9,13}");
 
         inputUserName.addTextChangedListener(inputUsernameWatcher);
         inputUserName.requestFocus();
@@ -55,13 +53,22 @@ public class LoginActivityRemastered extends AppCompatActivity {
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent register = new Intent(LoginActivityRemastered.this,RegisterActivityRemastered.class);
-                startActivityForResult(register,1);
+                Intent register = new Intent(LoginActivityRemastered.this, RegisterActivityRemastered.class);
+                startActivityForResult(register, 1);
             }
         });
 
-
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivityRemastered.this, HomeRemastered.class);
+                startActivity(i);
+            }
+        });
     }
+
+
+
     public TextWatcher inputUsernameWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -80,16 +87,16 @@ public class LoginActivityRemastered extends AppCompatActivity {
 //                if (etEmail.getText().toString().trim().length()>0){
 //                    etEmail.setError(null);
 //                }else
-            if(inputUserName.getText().toString().trim().length() != 0)
-                if (!emailCustom.matcher(inputUserName.getText().toString()).matches()){
+            if (inputUserName.getText().toString().trim().length() != 0)
+                if (!emailCustom.matcher(inputUserName.getText().toString()).matches()) {
                     inputUserName.setError("Email atau nomor telpon");
                 } else {
                     inputUserName.setError(null);
                 }
-            else if(!phoneCustom.matcher(inputUserName.getText().toString()).matches()){
+            else if (!phoneCustom.matcher(inputUserName.getText().toString()).matches()) {
                 inputUserName.setError("Email atau nomor telpon");
-                }else {
-                    inputUserName.setError(null);
+            } else {
+                inputUserName.setError(null);
             }
 
         }
