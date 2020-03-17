@@ -48,6 +48,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.CardVi
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         holder.bind(cardList.get(position));
+        holder.cardImage.setImageResource(cardList.get(position).getImage());
     }
 
     @Override

@@ -3,6 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.indocyber.itsmeandroid">
 
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".view.App"
         android:allowBackup="true"
@@ -15,6 +25,9 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+        <activity
+            android:name=".viewremastered.promo.Activity.DetailPromoActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -117,7 +130,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_stat_logo_itsme_blue" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorAccent" />
@@ -128,6 +140,7 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.indocyber.itsmeandroid.provider"
@@ -146,15 +159,5 @@
             </intent-filter>
         </service>
     </application>
-
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        android:protectionLevel="signature|privileged" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="replace" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
