@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,10 +21,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
     public static EditText inputUserName;
     public static Pattern emailCustom;
     public static Pattern phoneCustom;
-
-
-
-
+    public static CardView lblLgn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +31,8 @@ public class LoginActivityRemastered extends AppCompatActivity {
         btnNext = findViewById(R.id.btn_login);
         registerText = findViewById(R.id.textView2);
         inputUserName = findViewById(R.id.ipt_username);
+        lblLgn =findViewById(R.id.layout_btn_next);
+        btnNext.setEnabled(false);
 
         emailCustom
                 = Pattern.compile(
@@ -51,6 +51,13 @@ public class LoginActivityRemastered extends AppCompatActivity {
         inputUserName.addTextChangedListener(inputUsernameWatcher);
         inputUserName.requestFocus();
         inputUserName.setError(null);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent formLogin = new Intent(LoginActivityRemastered.this,LoginAuthActivityRemastered.class);
+                startActivityForResult(formLogin,1);
+            }
+        });
 
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,12 +87,19 @@ public class LoginActivityRemastered extends AppCompatActivity {
 //                if (etEmail.getText().toString().trim().length()>0){
 //                    etEmail.setError(null);
 //                }else
-            if(inputUserName.getText().toString().trim().length() != 0)
+            if(inputUserName.getText().toString().trim().length() != 0){
+                btnNext.setEnabled(true);
+                lblLgn.setCardBackgroundColor(getResources().getColor(R.color.blue));
+                btnNext.setTextColor(getResources().getColor(R.color.colorwhite));
+
                 if (!emailCustom.matcher(inputUserName.getText().toString()).matches()){
                     inputUserName.setError("Email atau nomor telpon");
                 } else {
                     inputUserName.setError(null);
                 }
+
+            }
+
 
         }
     };

@@ -1,6 +1,8 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
@@ -11,14 +13,22 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
+
+import java.util.Objects;
+import java.util.Set;
 
 import dmax.dialog.SpotsDialog;
 
@@ -26,6 +36,9 @@ import dmax.dialog.SpotsDialog;
 public class SetPinActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
     public static PinView firstPinView;
     public static AlertDialog alertDialog;
+    public static ImageView backButton;
+    public static TextView submitPin;
+    public static CardView lblSubmit;
 
 
 
@@ -33,21 +46,45 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_remastered);
-
+        firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
-
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(SetPinActivityRemastered.this).build();
 
-
-        NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboard);
+        NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
+
+        backButton = findViewById(R.id.imageView5);
+        submitPin = findViewById(R.id.btn_pin_register);
+        lblSubmit = findViewById(R.id.lbl_btn_validation);
+        submitPin.setEnabled(false);
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(SetPinActivityRemastered.this).build();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        submitPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new Handler().postDelayed(() -> {
+                    alertDialog.show();
+                    new Handler().postDelayed(() -> {
+                        alertDialog.dismiss();
+//                        Intent intent = new Intent(SetPinActivityRemastered.this, PopUpRegisterSucceedRemastered.class);
+//                        startActivity(intent);
+                        PopUpRegisterSucceedRemastered.showDialog(SetPinActivityRemastered.this);
+
+                    }, 800);
+                }, 200);
+            }
+        });
     }
 
     private void setPinView() {
-        firstPinView.setTextColor(
-                ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
-
+        firstPinView.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
         firstPinView.setItemCount(6);
         firstPinView.setItemHeight(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
         firstPinView.setItemWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
@@ -66,17 +103,8 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                 if (before == 6) {
-                    new Handler().postDelayed(() -> {
-                        alertDialog.show();
-                        new Handler().postDelayed(() -> {
-                            alertDialog.dismiss();
-                            finish();
-                            Intent intent = new Intent(SetPinActivityRemastered.this, AddMembershipActivity.class);
-                            startActivity(intent);
-
-
-                        }, 800);
-                    }, 200);
+                    submitPin.setEnabled(true);
+                    lblSubmit.setCardBackgroundColor(getResources().getColor(R.color.blue));
                 }
 
             }
@@ -92,7 +120,6 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
 
         firstPinView.setHideLineWhenFilled(false);
     }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -109,18 +136,41 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
         }
     }
 
+
     @Override
     public void onLeftAuxButtonClicked() {
 
     }
 
     @Override
-    public void onNumberClicked(int i) {
+    public void onNumberClicked(int number) {
+        firstPinView.setText(Objects.requireNonNull(firstPinView.getText()).append(String.valueOf(number)));
+        /*pinview.setValue(pinview.getValue() + number);
+        edit_query.setText(edit_query.getText().append(String.valueOf(number)));
+        Toast.makeText(this, pinview.getValue()+"", Toast.LENGTH_SHORT).show();*/
+
 
     }
 
     @Override
     public void onRightAuxButtonClicked() {
+        if (!Objects.requireNonNull(firstPinView.getText()).toString().equals("")) {
+            StringBuilder build = new StringBuilder(firstPinView.getText().toString());
+            build.deleteCharAt(firstPinView.getText().toString().length() - 1);
+            firstPinView.setText(build.toString());
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
