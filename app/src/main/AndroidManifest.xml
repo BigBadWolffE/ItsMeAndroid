@@ -15,9 +15,11 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar" ></activity>
-        <activity android:name=".viewremastered.loginandregister.LoginActivityRemastered"
+        <activity
+            android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.loginandregister.LoginActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
@@ -108,9 +110,14 @@
             android:name=".view.login.LoginOptionActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".viewremastered.promo.Activity.DetailPromoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".view.splashscreen.SplashScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -154,6 +161,7 @@
     <permission
         android:name="android.permission.CALL_PRIVILEGED"
         android:protectionLevel="signature|privileged" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
