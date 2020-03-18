@@ -63,6 +63,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivityRemastered.this, HomeRemastered.class);
                 startActivity(i);
+                finish();
             }
         });
     }
