@@ -9,11 +9,13 @@
 
     <ImageView
         android:id="@+id/backgrnd_view"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_40sdp"
-        android:src="@drawable/img_bg_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_img_background_top_screen"
         app:layout_constraintBottom_toTopOf="@+id/layout_one"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
 
     <TextView
         android:gravity="center"
@@ -26,7 +28,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/__interstate_regular"
         android:text="Buat Security Code PIN (6 digits) Anda"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="@color/grey_40"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintBottom_toTopOf="@+id/firstPinView"
@@ -49,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/numberKeyboardOtp">
 
         <TextView
-            android:id="@+id/btn_next_register"
+            android:id="@+id/btn_pin_register"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/__quicksand_medium"

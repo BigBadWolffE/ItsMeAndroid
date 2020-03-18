@@ -3,6 +3,7 @@ package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class RegisterActivityRemastered extends AppCompatActivity {
     public static EditText etNama, etEmail,etHandphone,etPassword,etRtPass,etIptSecurity;
     public static TextView register;
     public static CardView registerLayout;
+    public static ImageView backButton;
     public static CheckBox cbAgreement;
     public static LinearLayout securityLayout;
     public static Spinner spinnerSecuitySelection;
@@ -47,6 +50,13 @@ public class RegisterActivityRemastered extends AppCompatActivity {
         cbAgreement = findViewById(R.id.cb_agree);
         securityLayout = findViewById(R.id.layout_answer);
         registerLayout = findViewById(R.id.lbl_btn_next);
+        backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         String[] arraySpinner = new String[]{
                 "Select Question","What is your hobby?", "When is your mom birthday?", "First Pet Name?"
@@ -84,6 +94,14 @@ public class RegisterActivityRemastered extends AppCompatActivity {
                     registerLayout.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
                 }
 
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent registertoSubmit = new Intent(RegisterActivityRemastered.this,SetPinActivityRemastered.class);
+                startActivityForResult(registertoSubmit,1);
             }
         });
 
