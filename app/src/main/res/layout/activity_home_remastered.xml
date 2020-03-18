@@ -36,4 +36,172 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content_main"
         app:menu="@menu/bottom_navigation_menu" />
+
+    <LinearLayout
+       android:visibility="gone"
+        android:id="@+id/linearPullUp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/navigation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:background="@color/overlay_dark_10"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+
+            android:layout_marginTop="-10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bgcardlayout"
+            android:orientation="vertical">
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xlarge" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linearAddMembership"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgAddMembership"
+                        android:layout_width="@dimen/banner_button_icon_width"
+                        android:layout_height="@dimen/banner_button_icon_height"
+                        android:src="@drawable/ic_ico_member" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Tambah \nkartu membership"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearPersonalCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgAddPersonalCard"
+                        android:layout_width="@dimen/banner_button_icon_width"
+                        android:layout_height="@dimen/banner_button_icon_height"
+                        android:src="@drawable/ic_ico_personal" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Tambah \nkartu personal"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linearAddCreditCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgAddCreditCard"
+                        android:layout_width="@dimen/banner_button_icon_width"
+                        android:layout_height="@dimen/banner_button_icon_height"
+                        android:src="@drawable/ic_ico_add_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Tambah kartu kredit"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearBlockCC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgBlockCard"
+                        android:layout_width="@dimen/banner_button_icon_width"
+                        android:layout_height="@dimen/banner_button_icon_height"
+                        android:src="@drawable/ico_block_all_card" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Bloking kartu"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40" />
+
+                </LinearLayout>
+            </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_xlarge" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="50dp"
+
+        android:clickable="true"
+        app:backgroundTint="@color/cyan"
+        app:elevation="8dp"
+        app:fabSize="auto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content_main"
+        app:srcCompat="@drawable/ic_dehaze_white_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

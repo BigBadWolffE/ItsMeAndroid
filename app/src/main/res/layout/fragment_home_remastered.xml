@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         android:orientation="vertical">
 
         <LinearLayout
@@ -88,16 +89,15 @@
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/scrollView3"
-            android:layout_marginBottom="@dimen/spacing_large"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:clipToPadding="false"
+            android:fillViewport="true"
             android:scrollbars="none"
             android:scrollingCache="true"
-
-            android:fillViewport="true"
-            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
@@ -112,30 +112,20 @@
                     android:id="@+id/recCardView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_pager_item"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/recPromoView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="28dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
-
-
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recPromoView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_pager_item"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="@dimen/spacing_medium"
-                    android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/otherMenuContainer"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recCardView">
+                    app:layout_constraintTop_toBottomOf="@+id/recCardView"
+                    tools:layout_editor_absoluteX="28dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
@@ -143,13 +133,10 @@
                     android:id="@+id/otherMenuContainer"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/banner_button"
-                    android:layout_marginTop="@dimen/spacing_medium"
                     android:orientation="horizontal"
 
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-
-                    app:layout_constraintTop_toBottomOf="@id/recPromoView"
+                    app:layout_constraintBottom_toTopOf="@+id/view3"
+                    app:layout_constraintTop_toBottomOf="@+id/recPromoView"
                     tools:layout_editor_absoluteX="20dp">
 
                     <RelativeLayout
@@ -246,8 +233,19 @@
                             android:textColor="@color/colorwhite"
                             android:textSize="14dp" />
                     </RelativeLayout>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_large"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/otherMenuContainer"
+                    tools:layout_editor_absoluteX="-6dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
