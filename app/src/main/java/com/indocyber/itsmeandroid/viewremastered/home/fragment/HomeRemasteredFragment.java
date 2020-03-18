@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.home.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,10 +14,13 @@ import androidx.recyclerview.widget.SnapHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
 
@@ -34,6 +38,7 @@ public class HomeRemasteredFragment extends Fragment {
 
     private RecyclerView mCardRecyclerView;
     private RecyclerView mPromoRecyclerView;
+    private RelativeLayout blockButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +54,11 @@ public class HomeRemasteredFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mCardRecyclerView = view.findViewById(R.id.recCardView);
         mPromoRecyclerView = view.findViewById(R.id.recPromoView);
-
+        blockButton = view.findViewById(R.id.relativeLayout2);
+        blockButton.setOnClickListener(view1 -> {
+            Intent intent = new Intent(getActivity(), AddCcActivity.class);
+            startActivity(intent);
+        });
 
     }
     @Override

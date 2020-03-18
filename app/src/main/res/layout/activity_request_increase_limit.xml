@@ -6,12 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.requestincreaselimit.RequestIncreaseLimitActivity">
 
+    <include
+        layout="@layout/action_bar"
+        android:id="@+id/actionBar"
+        app:layout_constraintBottom_toTopOf="@id/mainContainer"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorwhite" >
+        android:layout_height="0dp"
+        android:background="@color/colorwhite"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:orientation="vertical"
@@ -120,6 +127,7 @@
                             android:layout_height="wrap_content"
                             style="@style/quicksandSemiBold"
                             android:textColor="@color/support_darker_grey"
+                            android:textSize="12sp"
                             android:text="@string/request_limit" />
 
                         <Spinner
@@ -151,6 +159,7 @@
                             android:layout_height="wrap_content"
                             style="@style/quicksandSemiBold"
                             android:textColor="@color/support_darker_grey"
+                            android:textSize="12sp"
                             android:text="@string/request_for" />
 
                         <Spinner
@@ -177,6 +186,7 @@
                     android:layout_height="wrap_content"
                     style="@style/quicksandSemiBold"
                     android:textColor="@color/support_darker_grey"
+                    android:textSize="12sp"
                     android:text="@string/current_limit" />
 
                 <EditText
@@ -196,6 +206,7 @@
                     android:layout_height="wrap_content"
                     style="@style/quicksandSemiBold"
                     android:textColor="@color/support_darker_grey"
+                    android:textSize="12sp"
                     android:text="Nominal Request" />
 
                 <EditText
@@ -225,6 +236,7 @@
                         android:layout_height="wrap_content"
                         style="@style/quicksandSemiBold"
                         android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
                         android:text="@string/i_agree_terms_and_condition" />
 
                 </LinearLayout>
@@ -273,7 +285,7 @@
                     android:background="@drawable/btn_rounded"
                     android:textAllCaps="false"
                     style="@style/quicksandSemiBold"
-                    android:textSize="16dp"
+                    android:textSize="14sp"
                     android:stateListAnimator="@null"
                     android:layout_marginBottom="16dp" />
 

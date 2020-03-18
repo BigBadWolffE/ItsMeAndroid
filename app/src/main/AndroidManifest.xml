@@ -77,14 +77,15 @@
             android:parentActivityName=".view.inbox.InboxActivity" />
         <activity
             android:name=".view.otp.OtpActivity"
-            android:parentActivityName=".view.addcc.AddCcActivity" />
+            android:parentActivityName=".view.addcc.AddCcActivity"/>
         <activity
             android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity"
             android:parentActivityName=".view.addcc.AddCcActivity" />
         <activity
             android:name=".view.addcc.AddCcActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".view.home.activity.HomeActivity" />
+            android:parentActivityName=".view.home.activity.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.home.activity.HomeActivity"
             android:screenOrientation="portrait"
