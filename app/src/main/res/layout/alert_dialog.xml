@@ -10,48 +10,46 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="@dimen/alert_dialog_width"
-        android:layout_height="@dimen/alert_dialog_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp">
 
         <ImageView
             android:id="@+id/imgAlertIcon"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
             android:src="@drawable/ic_invalid" />
 
         <TextView
             android:layout_marginTop="12dp"
             android:id="@+id/txtAlertMessage"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/alert_line_spacing_extra"
-            style="@style/primaryFont"
+            style="@style/quicksandSemiBold"
             android:textColor="#5D5D5D"
-            android:textSize="@dimen/alert_text_size"
+            android:textSize="20sp"
             android:text="Your Card Number is Invalid!" />
 
         <LinearLayout
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="bottom"
-            android:layout_weight="3" >
+            android:gravity="bottom" >
 
             <Button
                 android:id="@+id/btnAlertPositive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/primaryFont"
+                android:fontFamily="@font/quicksand_semibold"
                 android:textAllCaps="false"
-                android:background="@drawable/btn_rounded_primary"
-                android:text="Close"/>
+                android:textColor="@color/colorwhite"
+                android:background="@drawable/btn_rounded_blue"
+                android:text="TUTUP"/>
 
             <Button
                 android:id="@+id/btnAlertNegative"

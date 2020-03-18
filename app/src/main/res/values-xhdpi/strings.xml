@@ -26,5 +26,5 @@
         Formulir belum dilengkapi. Silahkan isi semua kolom.
     </string>
     <string name="invalid_otp_alert">Kode OTP salah, silahkan ulangi kembali.</string>
-
+    <string name="text_pin">Masukan PIN</string>
 </resources>

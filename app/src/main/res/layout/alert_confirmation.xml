@@ -1,61 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/llAlertDialog"
+<LinearLayout android:id="@+id/llAlertDialog"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:background="@drawable/bgalertlayout"
     android:gravity="center"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="@dimen/alert_dialog_width"
-        android:layout_height="@dimen/alert_dialog_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="@dimen/spacing_large">
 
         <TextView
-            android:layout_marginTop="12dp"
             android:id="@+id/txtAlertMessage"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="4"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
             android:gravity="center"
+            android:layout_marginVertical="@dimen/_20sdp"
             android:lineSpacingExtra="@dimen/alert_line_spacing_extra"
-            style="@style/primaryFont"
+            android:fontFamily="@font/quicksand_semibold"
             android:textColor="#5D5D5D"
-            android:textSize="@dimen/alert_text_size"
+            android:textSize="18sp"
             android:text="Your Card Number is Invalid!" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="12dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:gravity="bottom"
-            android:layout_weight="3" >
+            android:layout_height="wrap_content"
+            android:gravity="bottom" >
 
             <Button
                 android:id="@+id/btnAlertPositive"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/primaryFont"
+                android:fontFamily="@font/quicksand_semibold"
                 android:textAllCaps="false"
-                android:background="@drawable/btn_rounded_primary"
-                android:text="Yes"/>
+                android:background="@drawable/btn_rounded_blue"
+                android:text="Yes"
+                android:textColor="@color/colorwhite"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <Button
                 android:id="@+id/btnAlertNegative"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/primaryFont"
-                android:background="@drawable/btn_rounded_primary"
+                android:fontFamily="@font/quicksand_semibold"
+                android:background="@drawable/btn_rounded_blue"
                 android:textAllCaps="false"
-                android:text="No"/>
+                android:textColor="@color/colorwhite"
+                android:text="No"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 
