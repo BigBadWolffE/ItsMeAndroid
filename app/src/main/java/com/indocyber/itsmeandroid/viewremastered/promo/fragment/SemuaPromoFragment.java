@@ -120,7 +120,6 @@ public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Lis
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(getActivity(), position + " clicked", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getActivity(), DetailPromoActivity.class);
 //        intent.putExtra("titlePromo", titleList[position]);
 //        intent.putExtra("imgPromo", imgList[position]);
