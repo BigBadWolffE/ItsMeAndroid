@@ -15,7 +15,7 @@
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
         android:padding="0dp"
-        android:src="@drawable/img_bca_card_template" />
+        android:src="@drawable/img_kartukredit_bca" />
 
     <ImageView
         android:id="@+id/btnCardMoreMenu"

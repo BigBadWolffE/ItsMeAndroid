@@ -16,5 +16,9 @@
     <string name="current_limit">Limit Sekarang</string>
     <string name="request_for">Pengajuan Untuk</string>
     <string name="request">Ajukan</string>
-    <string name="hello_blank_fragment">Semua promo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="block_card_message">Pesan Block Kartu</string>
+    <!--    <string name="hello_blank_fragment">Semua promo</string>-->
 </resources>
