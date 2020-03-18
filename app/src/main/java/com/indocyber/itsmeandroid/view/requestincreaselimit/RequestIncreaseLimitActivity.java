@@ -1,7 +1,10 @@
 package com.indocyber.itsmeandroid.view.requestincreaselimit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -108,11 +111,21 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     }
 
     private  void createToolbar() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Request Increase Limit");
-            getSupportActionBar().setElevation(0f);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+//        if (getSupportActionBar() != null) {
+//            getSupportActionBar().setTitle("Request Increase Limit");
+//            getSupportActionBar().setElevation(0f);
+//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        }
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView textView = findViewById(R.id.toolbar_text);
+        Drawable backButton = getDrawable(R.drawable.ic_ico_arrow_back);
+        int iconDimension = (int) getResources().getDimension(R.dimen._30sdp);
+        Drawable resizedBackButton =
+                UtilitiesCore.resizeDrawable(backButton, this, iconDimension , iconDimension);
+        textView.setText("DATA DELIVERED");
+        toolbar.setNavigationIcon(resizedBackButton);
+        toolbar.setTitleTextColor(Color.WHITE);
+        setSupportActionBar(toolbar);
     }
 
     private void formatCreditCard(String cardNumber, String holderName, String expiryDate){

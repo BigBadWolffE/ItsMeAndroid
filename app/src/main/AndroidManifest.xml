@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.indocyber.itsmeandroid">
+    package="com.indocyber.itsmeandroid" >
+
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <permission
         android:name="android.permission.CALL_PRIVILEGED"
@@ -25,10 +35,18 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".viewremastered.promo.Activity.PinPromoActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.promo.Activity.PinPromoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.blockkartu.BlockKartu"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".viewremastered.editcard.activity.editkartu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".viewremastered.loginandregister.SetPinActivityRemastered" />
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -97,7 +115,8 @@
         <activity
             android:name=".view.addcc.AddCcActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".view.home.activity.HomeActivity" />
+            android:parentActivityName=".view.home.activity.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.home.activity.HomeActivity"
             android:screenOrientation="portrait"
@@ -130,7 +149,7 @@
         <activity
             android:name=".view.splashscreen.SplashScreenActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -156,7 +175,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.indocyber.itsmeandroid.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
@@ -164,7 +183,7 @@
 
         <service
             android:name=".services.firebase.MyFireBaseMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

@@ -6,11 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.graphics.pdf.PdfRenderer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.text.Spanned;
 import android.util.Base64;
@@ -26,6 +29,8 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
@@ -62,6 +67,21 @@ import java.util.regex.Pattern;
  */
 public final class UtilitiesCore {
 
+    public static Bitmap getBitmapFromVectorDrawable(VectorDrawable vectorDrawable) {
+        Drawable drawable = vectorDrawable;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            drawable = (DrawableCompat.wrap(vectorDrawable)).mutate();
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+
+        return bitmap;
+    }
+
     /**
      * Resize an instantiated drawable
      * @author Muhammad Faisal
@@ -74,6 +94,23 @@ public final class UtilitiesCore {
     public static Drawable resizeDrawable(final Drawable drawable, final Context context,
                                           final int dstwidth, final int dstheight) {
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        return new BitmapDrawable(
+                context.getResources(),
+                Bitmap.createScaledBitmap(bitmap, dstwidth, dstheight, true));
+    }
+
+    /**
+     * Resize an instantiated drawable
+     * @author Muhammad Faisal
+     * @param drawable existing drawable
+     * @param context drawable context
+     * @param dstwidth target drawable width
+     * @param dstheight target drawable height
+     * @return resized drawable
+     */
+    public static Drawable resizeDrawable(final VectorDrawable drawable, final Context context,
+                                          final int dstwidth, final int dstheight) {
+        Bitmap bitmap = getBitmapFromVectorDrawable(drawable);
         return new BitmapDrawable(
                 context.getResources(),
                 Bitmap.createScaledBitmap(bitmap, dstwidth, dstheight, true));
@@ -426,4 +463,5 @@ public final class UtilitiesCore {
         negativeButton.setVisibility(View.VISIBLE);
         dialog.show();
     }
+
 }

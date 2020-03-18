@@ -1,7 +1,9 @@
-package com.indocyber.itsmeandroid.view.addcc;
+package com.indocyber.itsmeandroid.viewremastered.editcard.activity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
@@ -10,10 +12,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -21,10 +20,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
@@ -34,12 +29,7 @@ import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimit
 
 import org.apache.commons.text.WordUtils;
 
-
-/**
- * @author Muhammad Faisal
- * @version 1.0
- */
-public final class AddCcActivity extends AppCompatActivity {
+public class editkartu extends AppCompatActivity {
 
     private TextView mCardNumber;
     private TextView mCardHolder;
@@ -52,24 +42,30 @@ public final class AddCcActivity extends AppCompatActivity {
     private Spinner mCityInput;
     private EditText mPostalCodeInput;
     private ImageView mCardImage;
+    private String cardNumber;
+    private int cardImage;
+    private String cardHolder;
+    private String cardBillingAddress;
+    private String expiryDate;
     private int mCardImageResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_cc);
-        createToolbar();
-        initializeCardNumber();
-        initializeCardHolder();
-        initializeCardExpiry();
-        initializeCardDetailInput();
-        initializeButton();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
+        setContentView(R.layout.activity_editkartu);
+        Bundle extras = getIntent().getExtras();
+        cardNumber = extras.getString("cardNumber");
+        cardHolder = extras.getString("cardHolder");
+        cardImage = extras.getInt("cardImage");
+        expiryDate = extras.getString("expiryDate");
+        cardBillingAddress = extras.getString("cardBillingAddress");
         formatCreditCard();
+        initializeCardHolder();
+        initializeButton();
+        initializeCardDetailInput();
+        initializeCardExpiry();
+        initializeCardNumber();
+        createToolbar();
     }
 
     private  void createToolbar() {
@@ -90,7 +86,7 @@ public final class AddCcActivity extends AppCompatActivity {
         int iconDimension = (int) getResources().getDimension(R.dimen._20sdp);
         Drawable resizedBackButton =
                 UtilitiesCore.resizeDrawable(backButton, this, iconDimension , iconDimension);
-        textView.setText("Tambah Kartu Kredit");
+        textView.setText("Edit Kartu Kredit");
         textView.setAllCaps(false);
         toolbar.setNavigationIcon(resizedBackButton);
         setSupportActionBar(toolbar);
@@ -98,17 +94,33 @@ public final class AddCcActivity extends AppCompatActivity {
         scrollView.setPadding(0, appbar.getHeight(), 0, 0);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home){
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+    private void initializeCardHolder() {
+        mCardHolderInput = findViewById(R.id.txtCardHolder);
+        mCardHolderInput.setText(cardHolder);
+        mCardHolder.setText(cardHolder);
+        mCardHolderInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int before, int after,
+                                          int count) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int before, int after,
+                                      int count) {
+                mCardHolder.setText(WordUtils.capitalizeFully(charSequence.toString()));
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
     }
 
     private void initializeCardNumber() {
         mCardImage = findViewById(R.id.imgCreditCard);
         mCardNumberInput = findViewById(R.id.txtCardNumber);
+        mCardNumberInput.setText(cardNumber);
+        mCardNumber.setText(cardNumber);
         mCardNumberInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         mCardNumberInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -139,34 +151,15 @@ public final class AddCcActivity extends AppCompatActivity {
                     );
                     return;
                 }
-                mCardImageResource = randomizeCardImage();
+                mCardImageResource = cardImage;
                 mCardImage.setImageResource(mCardImageResource);
-            }
-        });
-    }
-
-    private void initializeCardHolder() {
-        mCardHolderInput = findViewById(R.id.txtCardHolder);
-        mCardHolderInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-                                          int count) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int before, int after,
-                                      int count) {
-                mCardHolder.setText(WordUtils.capitalizeFully(charSequence.toString()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
             }
         });
     }
 
     private void initializeCardExpiry() {
         mCardExpiryInput = findViewById(R.id.txtExpiryDateMonth);
+        mCardExpiryInput.setText(expiryDate);
         mCardExpiryInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         mCardExpiryInput.addTextChangedListener(new TextWatcher() {
             @Override
@@ -206,30 +199,13 @@ public final class AddCcActivity extends AppCompatActivity {
 
     private void initializeCardDetailInput() {
         mBillingAddressInput = findViewById(R.id.txtBillingAddress);
+        mBillingAddressInput.setText(cardBillingAddress);
         mBillingAddressInput.setMaxLines(5);
         mBillingAddressInput.setSingleLine(false);
         mBillingAddressInput.setVerticalScrollBarEnabled(true);
         mBillingAddressInput.setMovementMethod(ScrollingMovementMethod.getInstance());
         mBillingAddressInput.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
     }
-
-    // TODO: 07/01/2020 uncomment if expiry year need to be limited
-//    private String setMaxYear(String expiryDate) {
-//        String returnedDate = expiryDate;
-//        if (returnedDate.length() == 5) {
-//            try {
-//                if(Integer.valueOf(returnedDate.substring(3, 5))
-//                        > (UtilitiesCore.getCurrentYear() - 2000) + 10) {
-//                    returnedDate = returnedDate.substring(0, 2) + "/"
-//                            + ((UtilitiesCore.getCurrentYear() - 2000) + 10);
-//                }
-//            } catch (Exception e){
-//                Log.e("Error converting value", "Value is not a number");
-//            }
-//            return returnedDate;
-//        }
-//        return expiryDate;
-//    }
 
     private void initializeButton() {
         Button mIncreaseCreditLimitButton;
@@ -249,8 +225,6 @@ public final class AddCcActivity extends AppCompatActivity {
         if (mCardHolderInput.getText().length() < 1) return false;
 
         if (mBillingAddressInput.getText().toString().trim().length() < 1) return false;
-
-        if (mCardImageResource == 0) mCardImageResource = randomizeCardImage();
 
         return true;
     }
@@ -308,7 +282,6 @@ public final class AddCcActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     private void formatCreditCard(){
         ImageView creditCard = findViewById(R.id.imgCreditCard);
         int[] position = {0, 0};
@@ -344,6 +317,12 @@ public final class AddCcActivity extends AppCompatActivity {
                 getResources().getDimension(R.dimen.spacing_xsmall));
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        formatCreditCard();
+    }
+
     private void onCardNumberChange(final CharSequence text){
         StringBuilder paddedText = new StringBuilder(text + "");
         for(int i = paddedText.length(); i < 16; i++){
@@ -356,15 +335,4 @@ public final class AddCcActivity extends AppCompatActivity {
         mCardNumber.setText(updatedText);
     }
 
-    private int randomizeCardImage() {
-        int[] images = {
-                R.drawable.img_bca_card_template,
-                R.drawable.img_blank_kartukredit_anz,
-                R.drawable.img_blank_kartukredit_citi
-        };
-        int randomValue = (int)(Math.random() * images.length);
-        if(randomValue == images.length) randomValue = images.length - 1;
-        return images[randomValue];
-    }
 }
-
