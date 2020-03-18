@@ -60,11 +60,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                 } finally {
                     if (preference.getLogin()) {
                         finish();
-                        Intent newIntent = new Intent(SplashScreenActivity.this, HomeActivity.class);
+                        Intent newIntent = new Intent(SplashScreenActivity.this, HomeRemastered.class);
                         startActivityForResult(newIntent, 0);
                     }else {
                         finish();
-                        Intent newIntent = new Intent(SplashScreenActivity.this, HomeRemastered.class);
+                        Intent newIntent = new Intent(SplashScreenActivity.this, LoginActivityRemastered.class);
                         startActivityForResult(newIntent, 0);
                     }
                 }
