@@ -59,16 +59,14 @@ public class HomeRemasteredFragment extends Fragment {
         initPromo();
     }
     private void initCard(){
-        mCardRecyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mCardRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         CardViewAdapter adapter = new CardViewAdapter(new ArrayList<>(), getActivity());
         adapter.refreshCardList(generateCardList());
         mCardRecyclerView.setAdapter(adapter);
     }
 
     private void initPromo(){
-        mPromoRecyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mPromoRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         PromoPagerAdapter promoAdapter = new PromoPagerAdapter(new ArrayList<>(), getActivity());
         promoAdapter.refreshPromoList(generatePromoList());
@@ -77,17 +75,15 @@ public class HomeRemasteredFragment extends Fragment {
     }
     private List<ImageCardModel> generateCardList() {
         List<ImageCardModel> cardList = new ArrayList<>();
-        cardList.add(new ImageCardModel(1, "1234123412341234", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
-        cardList.add(new ImageCardModel(2, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
+        cardList.add(new ImageCardModel(R.drawable.img_bca_card_template, "1234123412341234", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
+//        cardList.add(new ImageCardModel(2, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
         return cardList;
     }
 
     private List<PromoItemModel> generatePromoList() {
         List<PromoItemModel> promoList = new ArrayList<>();
-        promoList.add(new PromoItemModel("Promo Starbuck", "Promo Starbuck", "27 Desember 2020",
-                R.drawable.img_banner_starbuck));
-        promoList.add(new PromoItemModel("Promo Starbuck2", "Promo Starbuck2", "27 Desember 2020",
-                R.drawable.img_banner_starbuck));
+        promoList.add(new PromoItemModel("Promo Starbuck", "Promo Starbuck", "27 Desember 2020", R.drawable.img_banner_starbuck));
+        promoList.add(new PromoItemModel("Promo Starbuck2", "Promo Starbuck2", "27 Desember 2020", R.drawable.img_banner_starbuck));
         return promoList;
     }
 }

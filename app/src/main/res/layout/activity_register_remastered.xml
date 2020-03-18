@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/back_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_40sdp"
         android:src="@drawable/img_bg_top"
         app:layout_constraintBottom_toTopOf="@+id/title_layout_register"
         app:layout_constraintTop_toTopOf="parent" />
@@ -107,6 +107,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:inputType="text"
                         android:imeOptions="actionNext"
                         android:fontFamily="@font/__quicksand_medium"
                         android:id="@+id/hdr_ipt_name"
@@ -140,6 +141,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:inputType="textEmailAddress"
                         android:imeOptions="actionNext"
                         android:fontFamily="@font/__quicksand_medium"
                         android:id="@+id/hdr_ipt_email"
@@ -174,6 +176,7 @@
 
                     <EditText
                         android:imeOptions="actionNext"
+                        android:maxLength="15"
                         android:inputType="number"
                         android:fontFamily="@font/__quicksand_medium"
                         android:id="@+id/hdr_ipt_handphone"
@@ -203,10 +206,13 @@
                     android:textColor="@color/grey_40" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/grey_40"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:maxLength="20"
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
                         android:fontFamily="@font/__quicksand_medium"
@@ -230,6 +236,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layout_pw">
 
                 <TextView
+                    android:maxLength="20"
                     android:id="@+id/ipt_retype_pass"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -237,6 +244,8 @@
                     android:textColor="@color/grey_40" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/grey_40"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
@@ -300,6 +309,8 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:inputType="text"
+                        android:imeOptions="actionNext"
                         android:fontFamily="@font/__quicksand_medium"
                         android:id="@+id/hdr_ipt_answer_security"
                         android:layout_width="match_parent"
@@ -321,7 +332,7 @@
 
                 <CheckBox
                     android:id="@+id/cb_agree"
-                    android:layout_width="@dimen/_20sdp"
+                    android:layout_width="@dimen/_25sdp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
@@ -332,6 +343,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:textSize="@dimen/_12sdp"
                     android:id="@+id/textView5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -350,7 +362,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/lbl_btn_next"
-                app:cardBackgroundColor="@color/blue"
+                app:cardBackgroundColor="@color/grey_login"
                 app:cardCornerRadius="@dimen/_5sdp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
