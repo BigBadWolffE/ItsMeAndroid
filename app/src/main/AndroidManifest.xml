@@ -29,6 +29,9 @@
             android:name=".viewremastered.blockkartu.BlockKartu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".viewremastered.akun.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".viewremastered.editcard.activity.editkartu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".viewremastered.loginandregister.SetPinActivityRemastered" />

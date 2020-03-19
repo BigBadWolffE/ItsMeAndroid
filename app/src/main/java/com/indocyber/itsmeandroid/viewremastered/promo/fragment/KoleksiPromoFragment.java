@@ -17,6 +17,7 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.CreditCardAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
     @BindView(R.id.recyclerCardCollection)
     RecyclerView mRecyclerCardCollection;
     private MenuPromoAdapter mMenuSemuaKartuAdapter, mMenuBussinesAdapter, mMenuVacationAdapter;
-    private CardViewAdapter mCardViewAdapter;
+    private CreditCardAdapter mCardViewAdapter;
     private Fragment mFragmentIndicator = null;
 
     public KoleksiPromoFragment() {
@@ -71,7 +72,7 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
 
     private void initCard(){
         mRecyclerCardCollection.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mCardViewAdapter = new CardViewAdapter(new ArrayList<>(), getActivity());
+        mCardViewAdapter = new CreditCardAdapter(new ArrayList<>(), getActivity());
         mCardViewAdapter.refreshCardList(generateCardList());
         mRecyclerCardCollection.setAdapter(mCardViewAdapter);
     }
