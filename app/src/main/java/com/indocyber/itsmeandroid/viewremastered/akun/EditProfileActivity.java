@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.view.profile.activity;
+package com.indocyber.itsmeandroid.viewremastered.akun;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -24,7 +24,7 @@ public class SharePromoAdapter extends RecyclerView.Adapter<SharePromoAdapter.It
     private Context mContext;
     Listener mListener;
     public interface Listener {
-        void onClick(int position);
+        void onClick(ItemShareModel mItemShareModel);
     }
 
     public SharePromoAdapter(List<ItemShareModel> itemShareModelList, Context mContext, Listener mListener){
@@ -45,7 +45,13 @@ public class SharePromoAdapter extends RecyclerView.Adapter<SharePromoAdapter.It
     @Override
     public void onBindViewHolder(@NonNull SharePromoAdapter.ItemViewHolder holder, int position) {
         holder.mImageShare.setBackground(itemShareModelList.get(position).icon);
-        holder.mLblTitle.setText(itemShareModelList.get(position).app);
+        holder.mLblTitle.setText(itemShareModelList.get(position).getApp());
+        holder.mImageShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onClick(itemShareModelList.get(position));
+            }
+        });
     }
 
     @Override

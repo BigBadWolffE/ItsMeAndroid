@@ -25,7 +25,7 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".view.profile.activity.EditProfileActivity"
+        <activity android:name=".viewremastered.akun.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
