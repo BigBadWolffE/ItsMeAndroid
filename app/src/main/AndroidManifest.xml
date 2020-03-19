@@ -15,17 +15,20 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-
         <activity
             android:name=".viewremastered.billinginfo.BillingInfo"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.loginandregister.LupaPasswordActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".viewremastered.blockkartu.BlockKartu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -36,6 +39,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.profile.activity.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+=======
+            android:name=".viewremastered.loginandregister.SetPinActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar" />
+>>>>>>> ac7ec7c1cb49b6e7a13769d27329f4a1487e08fe
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -184,9 +191,7 @@
     <permission
         android:name="android.permission.CALL_PRIVILEGED"
         android:protectionLevel="signature|privileged" />
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        android:protectionLevel="signature|privileged" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission
@@ -195,10 +200,9 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:node="replace" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
