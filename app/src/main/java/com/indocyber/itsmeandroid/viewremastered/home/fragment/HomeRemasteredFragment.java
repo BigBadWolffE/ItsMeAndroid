@@ -90,7 +90,6 @@ public class HomeRemasteredFragment extends Fragment {
         int marginValue = dpToPx(getActivity(), 8);
         mViewPagerCard.setPadding(paddingValue,0,marginValue,0);
         mViewPagerCard.setPageMargin(marginValue);
-        Toast.makeText(getActivity(), marginValue+"", Toast.LENGTH_SHORT).show();
        // mViewPagerCard.setPageMargin(getResources().getDimensionPixelOffset(R.dimen.viewpager_margin_overlap_payment));
         mViewPagerCard.setOffscreenPageLimit(mCardAdapter.getCount());
     }

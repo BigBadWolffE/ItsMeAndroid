@@ -15,6 +15,7 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+
         <activity
             android:name=".viewremastered.billinginfo.BillingInfo"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -31,6 +32,8 @@
             android:name=".viewremastered.editcard.activity.editkartu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".viewremastered.loginandregister.SetPinActivityRemastered" />
+        <activity android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
