@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.viewremastered.home.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,12 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.viewremastered.morecard.MoreCardRemasteredActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.loadImage;
 
 public class CardRemasteredAdapter extends PagerAdapter {
@@ -47,6 +50,12 @@ public class CardRemasteredAdapter extends PagerAdapter {
         ImageView cardImage = view.findViewById(R.id.cardListImage);
         ImageView cardMenuButton = view.findViewById(R.id.btnCardMoreMenu);
         loadImage(cardImage,activity,R.drawable.img_bca_card_template);
+
+        cardMenuButton.setOnClickListener(v ->{
+            Intent intent = new Intent(activity, MoreCardRemasteredActivity.class);
+            intent.putExtra(INTENT_ID,data);
+            activity.startActivity(intent);
+        });
         //cardImage.setImageResource(R.drawable.img_bca_card_template);
         container.addView(view);
         return view;

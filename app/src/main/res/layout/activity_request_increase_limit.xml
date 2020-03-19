@@ -6,23 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".view.requestincreaselimit.RequestIncreaseLimitActivity">
 
+    <include
+        layout="@layout/action_bar"
+        android:id="@+id/actionBar"
+        app:layout_constraintBottom_toTopOf="@id/mainContainer"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary" >
+        android:layout_height="0dp"
+        android:background="@color/colorwhite"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="35"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
+            android:paddingLeft="@dimen/_24sdp"
+            android:paddingRight="@dimen/_24sdp"
             android:isScrollContainer="false"
-            android:paddingTop="0dp"
-            android:paddingBottom="16dp">
+            android:paddingTop="0dp" >
 
             <RelativeLayout
                 android:id="@+id/rLayoutCard"
@@ -40,32 +46,13 @@
                     android:src="@drawable/img_blank_cc_anz" />
 
                 <TextView
+
                     android:id="@+id/lblCcNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="XXXX   XXXX   XXXX   XXXX"
                     style="@style/CreditCardTextStyle"
-                    android:textSize="16sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorwhite" />
-
-                <TextView
-                    android:id="@+id/lblHolderLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Card holder"
-                    style="@style/CreditCardTextStyle"
-                    android:textSize="9dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorwhite" />
-
-                <TextView
-                    android:id="@+id/lblExpiryLabel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Expires"
-                    style="@style/CreditCardTextStyle"
-                    android:textSize="9dp"
+                    android:textSize="@dimen/credit_card_number_text_size"
                     android:textAlignment="center"
                     android:textColor="@color/colorwhite" />
 
@@ -73,7 +60,7 @@
                     android:id="@+id/lblCardHolder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="@dimen/card_holder_text_size"
                     style="@style/CreditCardTextStyle"
                     android:text="Jordan Setiawan" />
 
@@ -81,7 +68,7 @@
                     android:id="@+id/lblExpiry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14dp"
+                    android:textSize="10sp"
                     style="@style/CreditCardTextStyle"
                     android:text="09/19" />
 
@@ -119,19 +106,20 @@
                             android:layout_marginTop="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/primaryFontLight"
-                            android:textColor="#B4B4B4"
-                            android:text="Request Limit" />
+                            android:fontFamily="@font/quicksand_medium"
+                            android:textColor="@color/support_darker_grey"
+                            android:textSize="12sp"
+                            android:text="@string/request_limit" />
 
                         <Spinner
                             android:id="@+id/spnRequestLimit"
                             android:inputType="text"
-                            style="@style/primaryFontBold"
-                            android:textSize="18sp"
+                            style="@style/quicksandSemiBold"
+                            android:textColor="@color/support_black"
+                            android:textSize="14sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
-                            android:textColor="@color/black"
                             android:layout_marginRight="4dp"
                             android:padding="0dp"
                             android:background="@drawable/bgspinner"
@@ -150,19 +138,20 @@
                             android:layout_marginTop="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/primaryFontLight"
-                            android:textColor="#B4B4B4"
-                            android:text="Request For" />
+                            android:fontFamily="@font/quicksand_medium"
+                            android:textColor="@color/support_darker_grey"
+                            android:textSize="12sp"
+                            android:text="@string/request_for" />
 
                         <Spinner
                             android:id="@+id/spnRequestFor"
                             android:inputType="text"
-                            style="@style/primaryFontBold"
-                            android:textSize="18sp"
+                            style="@style/quicksandSemiBold"
+                            android:textColor="@color/support_black"
+                            android:textSize="14sp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="4dp"
-                            android:textColor="@color/black"
                             android:layout_marginRight="4dp"
                             android:padding="0dp"
                             android:background="@drawable/bgspinner"
@@ -176,43 +165,41 @@
                     android:layout_marginTop="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/primaryFontLight"
-                    android:textColor="#B4B4B4"
-                    android:text="Current Limit Now" />
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/support_darker_grey"
+                    android:textSize="12sp"
+                    android:text="@string/current_limit" />
 
                 <EditText
-                    android:layout_marginTop="10dp"
                     android:id="@+id/txtCurrentLimit"
                     android:inputType="text"
-                    style="@style/primaryFontBold"
-                    android:background="@drawable/bgdisabledinput"
-                    android:textSize="18sp"
+                    style="@style/quicksandSemiBold"
+                    android:textColor="@color/support_black"
+                    android:textSize="14sp"
                     android:maxLength="10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:textColor="@color/black"
                     android:hint="Rp 20,000,000" />
 
                 <TextView
                     android:layout_marginTop="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/primaryFontLight"
-                    android:textColor="#B4B4B4"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/support_darker_grey"
+                    android:textSize="12sp"
                     android:text="Nominal Request" />
 
                 <EditText
                     android:id="@+id/txtNominalRequest"
                     android:inputType="number"
-                    style="@style/primaryFontBold"
+                    style="@style/quicksandSemiBold"
+                    android:textSize="14sp"
+                    android:textColor="@color/support_black"
                     android:maxLength="30"
-                    android:textColor="@color/black"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter requested nominal" />
+                    android:hint="" />
 
                 <LinearLayout
                     android:layout_marginTop="8dp"
@@ -229,8 +216,45 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
                         android:text="@string/i_agree_terms_and_condition" />
 
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_12sdp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bgformalert">
+                    
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginRight="@dimen/_12sdp"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ico_warning" />
+                    </LinearLayout>
+                    
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7">
+                        
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_semibold"
+                            android:textColor="@color/support_red"
+                            android:text="- Nominal pengajuan harus diisi"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <Button
@@ -238,12 +262,12 @@
                     android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/next"
+                    android:text="@string/request"
                     android:textColor="@color/colorwhite"
-                    android:background="@drawable/btn_rounded_primary"
+                    android:background="@drawable/btn_rounded"
                     android:textAllCaps="false"
-                    style="@style/primaryFontBold"
-                    android:textSize="16dp"
+                    style="@style/quicksandSemiBold"
+                    android:textSize="14sp"
                     android:stateListAnimator="@null"
                     android:layout_marginBottom="16dp" />
 

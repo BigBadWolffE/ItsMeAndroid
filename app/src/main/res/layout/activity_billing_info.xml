@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewremastered.billinginfo.BillingInfo">
+
+    <include
+        layout="@layout/action_bar"
+        android:id="@+id/actionBar"
+        app:layout_constraintBottom_toTopOf="@id/mainContainer"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/colorwhite"
+        app:layout_constraintTop_toBottomOf="@id/actionBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="35"
+            android:paddingLeft="@dimen/_24sdp"
+            android:paddingRight="@dimen/_24sdp"
+            android:isScrollContainer="false"
+            android:paddingBottom="@dimen/_8sdp" >
+
+            <RelativeLayout
+                android:id="@+id/rLayoutCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgCreditCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="false"
+                    android:adjustViewBounds="true"
+                    android:cropToPadding="false"
+                    android:src="@drawable/img_blank_cc_anz" />
+
+                <TextView
+                    android:id="@+id/lblCcNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXXX   XXXX   XXXX   XXXX"
+                    style="@style/CreditCardTextStyle"
+                    android:textSize="@dimen/credit_card_number_text_size"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorwhite" />
+
+                <TextView
+                    android:id="@+id/lblCardHolder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/card_holder_text_size"
+                    style="@style/CreditCardTextStyle"
+                    android:text="Jordan Setiawan" />
+
+                <TextView
+                    android:id="@+id/lblExpiry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    style="@style/CreditCardTextStyle"
+                    android:text="09/19" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="60"
+            android:isScrollContainer="false"
+            android:background="@drawable/bgcardlayout">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingTop="15dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_height="match_parent" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Status Kartu" />
+
+                    <TextView
+                        android:id="@+id/cardStatusInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp"
+                        android:text="Aktif" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Total Tagihan Bulan Ini" />
+
+                    <TextView
+                        android:id="@+id/cardBillingInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp"
+                        android:text="15.000.000" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Pembayaran Minimum" />
+
+                    <TextView
+                        android:id="@+id/cardMinPayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:text="1.500.000"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Tanggal Cetak" />
+
+                    <TextView
+                        android:id="@+id/cardIssueDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:text="1 Januari 2020"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Tanggal Jatuh Tempo" />
+
+                    <TextView
+                        android:id="@+id/cardDueDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp"
+                        android:text="28 Januari 2020" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Total Limit Kredit" />
+
+                    <TextView
+                        android:id="@+id/cardLimit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:text="20.000.000"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/bottom_border_thin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Sisa Limit Kredit" />
+
+                    <TextView
+                        android:id="@+id/cardBalance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_black"
+                        android:textSize="12sp"
+                        android:text="5.000.000" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
+
+                    <TextView
+                        android:id="@+id/lastUpdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Latest update 12 Januari 2020 23:59"
+                        android:fontFamily="@font/quicksand_regular"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="10sp"/>
+
+                    <Button
+                        android:id="@+id/refreshInfo"
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Refresh"
+                        android:textAllCaps="false"
+                        android:background="@drawable/btn_rounded"
+                        android:textColor="@color/colorwhite"
+                        android:fontFamily="@font/quicksand_semibold"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

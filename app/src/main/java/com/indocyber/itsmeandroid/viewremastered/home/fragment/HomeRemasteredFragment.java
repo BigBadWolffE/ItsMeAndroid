@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.viewremastered.home.fragment;
 
 import android.graphics.PorterDuff;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,11 +21,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
@@ -48,7 +52,7 @@ public class HomeRemasteredFragment extends Fragment {
     private CardRemasteredAdapter mCardAdapter;
     private LinearLayout mDotsLayout;
     private TabLayout mTabDots;
-
+    private RelativeLayout blockButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +71,7 @@ public class HomeRemasteredFragment extends Fragment {
         mCardAdapter = new CardRemasteredAdapter(getActivity());
         mTabDots = view.findViewById(R.id.tabDots);
         //mDotsLayout = view.findViewById(R.id.layoutDots);
-
+        blockButton = view.findViewById(R.id.relativeLayout2);
     }
 
     @Override
@@ -86,7 +90,6 @@ public class HomeRemasteredFragment extends Fragment {
         int marginValue = dpToPx(getActivity(), 8);
         mViewPagerCard.setPadding(paddingValue,0,marginValue,0);
         mViewPagerCard.setPageMargin(marginValue);
-        Toast.makeText(getActivity(), marginValue+"", Toast.LENGTH_SHORT).show();
        // mViewPagerCard.setPageMargin(getResources().getDimensionPixelOffset(R.dimen.viewpager_margin_overlap_payment));
         mViewPagerCard.setOffscreenPageLimit(mCardAdapter.getCount());
     }

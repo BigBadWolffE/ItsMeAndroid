@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:layout_marginTop="@dimen/_12sdp"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        android:padding="0dp"
+        android:src="@drawable/img_kartukredit_bca" />
+
+    <ImageView
+        android:id="@+id/cardListImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:padding="0dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_bca_card_template" />
+
+    <LinearLayout
+        android:id="@+id/blockLayout"
+        android:layout_alignTop="@id/cardListImage"
+        android:layout_alignBottom="@id/cardListImage"
+        android:layout_alignLeft="@id/cardListImage"
+        android:layout_alignRight="@id/cardListImage"
+        android:background="@drawable/bg_blockedcard_layer"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="14sp"
+            android:textColor="@color/support_black"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="Kartu kredit terblokir\ntanggal 20/01/2020 14:15 WIB\nOleh Thomas K" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnCardMoreMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/cardListImage"
+        android:src="@drawable/ic_btn_more_menu" />
+</RelativeLayout>

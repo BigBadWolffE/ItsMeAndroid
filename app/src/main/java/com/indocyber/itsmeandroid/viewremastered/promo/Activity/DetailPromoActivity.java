@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.viewremastered.promo.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,7 +32,7 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     @BindView(R.id.btnShare)
     LinearLayout mBtnShaere;
     @BindView(R.id.bottom_sheet_share)
-    ConstraintLayout mBottomSheetShare;
+    CardView mBottomSheetShare;
     @BindView(R.id.recyclerSharePromo)
     RecyclerView mRecyclerSharePromo;
 
