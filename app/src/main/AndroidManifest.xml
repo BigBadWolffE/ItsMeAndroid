@@ -21,11 +21,17 @@
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
+        <activity android:name=".viewremastered.metodepembayaran.MetodePembayaranActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".viewremastered.historytransaction.HistoryTransactionActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".viewremastered.loginandregister.LupaPasswordActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -43,8 +49,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.profile.activity.EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -204,8 +208,5 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="replace" />
 
 </manifest>
