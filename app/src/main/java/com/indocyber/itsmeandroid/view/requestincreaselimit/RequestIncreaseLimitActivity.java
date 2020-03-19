@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Html;
@@ -15,9 +16,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
@@ -36,6 +39,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     private String mExpiryDate;
     private Spinner mRequestLimitSpinner;
     private Spinner mRequestForSpinner;
+    private ImageView cardImage;
 
     private static final String[] REQUEST_LIMIT_OPTIONS = { "Select Limit", "Tetap", "Sementara" };
     private static final String[] REQUEST_FOR_OPTIONS = { "Select For", "Berobat", "Nikah",
@@ -50,7 +54,7 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         mHolderName = extras.getString("holderName");
         mExpiryDate = extras.getString("expiryDate");
 
-        ImageView cardImage = findViewById(R.id.imgCreditCard);
+        cardImage = findViewById(R.id.imgCreditCard);
         cardImage.setImageResource(extras.getInt("cardImageResource"));
 
         createToolbar();
@@ -107,63 +111,54 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        formatCreditCard(mNumber, mHolderName, mExpiryDate);
+        formatCreditCard();
     }
 
     private  void createToolbar() {
 //        if (getSupportActionBar() != null) {
-//            getSupportActionBar().setTitle("Request Increase Limit");
+//            View view = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
+//            TextView title = view.findViewById(R.id.titleText);
+//            ImageView actionBack = view.findViewById(R.id.imgback);
+//            actionBack.setOnClickListener(view1 -> finish());
+//            title.setText("Tambah Kartu Kredit");
+//            getSupportActionBar().setCustomView(view);
 //            getSupportActionBar().setElevation(0f);
-//            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        }
+        AppBarLayout appbar = findViewById(R.id.actionBar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView textView = findViewById(R.id.toolbar_text);
-        Drawable backButton = getDrawable(R.drawable.ic_ico_arrow_back);
-        int iconDimension = (int) getResources().getDimension(R.dimen._30sdp);
+        VectorDrawable backButton = (VectorDrawable) getDrawable(R.drawable.ic_ico_arrow_back);
+        int iconDimension = (int) getResources().getDimension(R.dimen._20sdp);
         Drawable resizedBackButton =
                 UtilitiesCore.resizeDrawable(backButton, this, iconDimension , iconDimension);
-        textView.setText("DATA DELIVERED");
+        textView.setText("Tambah Limit");
+        textView.setAllCaps(false);
         toolbar.setNavigationIcon(resizedBackButton);
-        toolbar.setTitleTextColor(Color.WHITE);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0f);
     }
 
-    private void formatCreditCard(String cardNumber, String holderName, String expiryDate){
-        ImageView creditCard = findViewById(R.id.imgCreditCard);
+    private void formatCreditCard(){
+//        ImageView creditCard = findViewById(R.id.imgCreditCard);
         int[] position = {0, 0};
-        creditCard.getLocationOnScreen(position);
+        cardImage.getLocationOnScreen(position);
 
-        int paddingLeft = (creditCard.getWidth() * 8 / 100);
-        int startYAxis = (creditCard.getHeight() / 2);
+        int paddingLeft = (cardImage.getWidth() * 8 / 100);
+        int startYAxis = (cardImage.getHeight() / 2);
 
         TextView mCardNumber = findViewById(R.id.lblCcNumber);
-        mCardNumber.setText(padCardNumber(cardNumber, 3));
-        mCardNumber.setX(position[0] + paddingLeft);
+        mCardNumber.setText(padCardNumber(mNumber, 3));
+        mCardNumber.setX(paddingLeft);
         mCardNumber.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
         mCardNumber.bringToFront();
-
-        TextView holderLabel = findViewById(R.id.lblHolderLabel);
-        holderLabel.setX(position[0] + paddingLeft);
-        holderLabel.setY(mCardNumber.getY() + mCardNumber.getHeight()
-                + getResources().getDimension(R.dimen.spacing_large));
-
-        TextView expiryLabel = findViewById(R.id.lblExpiryLabel);
-        expiryLabel.setX(position[0] + paddingLeft
-                + mCardNumber.getWidth() - expiryLabel.getWidth());
-        expiryLabel.setY(mCardNumber.getY() + mCardNumber.getHeight()
-                + getResources().getDimension(R.dimen.spacing_large));
-
         TextView mCardHolder = findViewById(R.id.lblCardHolder);
-        mCardHolder.setText(WordUtils.capitalizeFully(holderName));
-        mCardHolder.setX(position[0] + paddingLeft);
-        mCardHolder.setY(holderLabel.getY() + holderLabel.getHeight()
-                + getResources().getDimension(R.dimen.spacing_xsmall));
+        mCardHolder.setText(mHolderName);
+        mCardHolder.setX(paddingLeft);
+        mCardHolder.setY(cardImage.getHeight() * 80 / 100);
 
         TextView mCardExpiry = findViewById(R.id.lblExpiry);
-        mCardExpiry.setText(expiryDate);
-        mCardExpiry.setX(expiryLabel.getX());
-        mCardExpiry.setY(expiryLabel.getY() + expiryLabel.getHeight() +
-                getResources().getDimension(R.dimen.spacing_xsmall));
+        mCardExpiry.setX(cardImage.getWidth() / 2);
+        mCardExpiry.setY(cardImage.getHeight() * 70 / 100);
     }
 
     private void submit() {

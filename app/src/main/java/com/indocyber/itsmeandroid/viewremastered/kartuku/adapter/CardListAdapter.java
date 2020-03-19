@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
 
@@ -41,7 +43,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_pager_layout, parent, false);
+                .inflate(R.layout.card_list_item, parent, false);
         CardViewHolder viewHolder = new CardViewHolder(view);
         return viewHolder;
     }
@@ -59,7 +61,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             context.startActivity(intent);
         };
         View.OnClickListener cardListener = view -> {
-            Intent intent = new Intent(context, BlockKartu.class);
+            Intent intent = new Intent(context, BillingInfo.class);
             intent.putExtra("cardNumber", model.getNumberCard());
             intent.putExtra("cardHolder", model.getNameCard());
             intent.putExtra("cardImage", model.getImage());
@@ -78,18 +80,27 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
         ImageView cardImage;
+        LinearLayout blockedLayout;
         ImageView cardMenuButton;
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             cardImage = itemView.findViewById(R.id.cardListImage);
             cardMenuButton = itemView.findViewById(R.id.btnCardMoreMenu);
+            blockedLayout = itemView.findViewById(R.id.blockLayout);
         }
 
         public void bind(ImageCardModel model, View.OnClickListener cardMenuListener, View.OnClickListener cardListener) {
             cardImage.setImageResource(R.drawable.img_bca_card_template);
             cardImage.setOnClickListener(cardListener);
             cardMenuButton.setOnClickListener(cardMenuListener);
+            if (model.isBlockedCard()) {
+                blockedLayout.setVisibility(View.VISIBLE);
+                cardMenuButton.setVisibility(View.GONE);
+            } else {
+                blockedLayout.setVisibility(View.GONE);
+                cardMenuButton.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

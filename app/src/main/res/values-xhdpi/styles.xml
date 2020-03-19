@@ -50,7 +50,7 @@
     </style>
 
     <style name="CreditCardTextStyle">
-        <item name="android:fontFamily">monospace</item>
+        <item name="android:fontFamily">@font/andale_mono</item>
         <item name="android:textColor">@color/colorwhite</item>
         <item name="android:textSize">14dp</item>
     </style>

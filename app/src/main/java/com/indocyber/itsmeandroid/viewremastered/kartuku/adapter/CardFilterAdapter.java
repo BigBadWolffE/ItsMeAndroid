@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -26,6 +27,7 @@ import java.util.List;
 public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.CardFilterViewHolder> {
     private List<String> filterList;
     private Context context;
+    private int activePosition;
 
     public CardFilterAdapter(List<String> filterList, Context context) {
         this.filterList = filterList;
@@ -48,7 +50,13 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CardFilterViewHolder holder, int position) {
-        holder.bind(filterList.get(position));
+        View.OnClickListener listener = view -> {
+            notifyItemChanged(activePosition);
+            activePosition = position;
+            notifyItemChanged(activePosition);
+        };
+        holder.bind(filterList.get(position), listener);
+        holder.activateButton(position == activePosition);
     }
 
     @Override
@@ -64,10 +72,19 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
             filterButton = itemView.findViewById(R.id.btnPromoMenu);
         }
 
-        public void bind(String label) {
+        public void activateButton(Boolean active) {
+            if (active) {
+                filterButton.setBackground(context.getDrawable(R.drawable.btn_rounded));
+                filterButton.setTextColor(ContextCompat.getColor(context, R.color.colorwhite));
+            } else {
+                filterButton.setBackground(context.getDrawable(R.drawable.button_border_grey));
+                filterButton.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+            }
+        }
+
+        public void bind(String label, View.OnClickListener listener) {
             filterButton.setText(label);
-            filterButton.setOnClickListener(view ->
-                    Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show());
+            filterButton.setOnClickListener(listener);
         }
     }
 }

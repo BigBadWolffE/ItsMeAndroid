@@ -72,10 +72,6 @@ public class HomeRemasteredFragment extends Fragment {
         mTabDots = view.findViewById(R.id.tabDots);
         //mDotsLayout = view.findViewById(R.id.layoutDots);
         blockButton = view.findViewById(R.id.relativeLayout2);
-        blockButton.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(), AddCcActivity.class);
-            startActivity(intent);
-        });
     }
 
     @Override

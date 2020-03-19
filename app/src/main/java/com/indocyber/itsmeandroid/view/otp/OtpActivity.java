@@ -2,6 +2,8 @@ package com.indocyber.itsmeandroid.view.otp;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -11,11 +13,14 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
@@ -244,11 +249,27 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private  void createToolbar() {
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Confirmation OTP");
-            getSupportActionBar().setElevation(0f);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+//        if (getSupportActionBar() != null) {
+//            View view = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
+//            TextView title = view.findViewById(R.id.titleText);
+//            ImageView actionBack = view.findViewById(R.id.imgback);
+//            actionBack.setOnClickListener(view1 -> finish());
+//            title.setText("Tambah Kartu Kredit");
+//            getSupportActionBar().setCustomView(view);
+//            getSupportActionBar().setElevation(0f);
+//        }
+        AppBarLayout appbar = findViewById(R.id.actionBar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        TextView textView = findViewById(R.id.toolbar_text);
+        VectorDrawable backButton = (VectorDrawable) getDrawable(R.drawable.ic_ico_arrow_back);
+        int iconDimension = (int) getResources().getDimension(R.dimen._20sdp);
+        Drawable resizedBackButton =
+                UtilitiesCore.resizeDrawable(backButton, this, iconDimension , iconDimension);
+        textView.setText("Tambah Kartu Kredit");
+        textView.setAllCaps(false);
+        toolbar.setNavigationIcon(resizedBackButton);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setElevation(0f);
     }
 
     private boolean otpIsValid() {

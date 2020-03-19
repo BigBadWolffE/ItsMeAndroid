@@ -84,9 +84,9 @@ public class MemberCardList extends Fragment {
 
     private List<ImageCardModel> generateCardList() {
         List<ImageCardModel> cardList = new ArrayList<>();
-        cardList.add(new ImageCardModel(R.drawable.img_membercard_starbuck, "1234123412341234", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
-        cardList.add(new ImageCardModel(R.drawable.img_membercard_celebrity_fitnest, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
-        cardList.add(new ImageCardModel(R.drawable.img_membercard_ancol, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
+        cardList.add(new ImageCardModel(R.drawable.img_membercard_starbuck, "", "", "", "Rp 15.000.000", "", "", false));
+        cardList.add(new ImageCardModel(R.drawable.img_membercard_celebrity_fitnest, "", "", "", "Rp 15.000.000", "", "12/21", false));
+        cardList.add(new ImageCardModel(R.drawable.img_membercard_ancol, "", "", "", "Rp 15.000.000", "", "", false));
         return cardList;
     }
 

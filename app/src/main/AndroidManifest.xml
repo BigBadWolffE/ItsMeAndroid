@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.indocyber.itsmeandroid" >
-
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        android:protectionLevel="signature|privileged" />
-
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="replace" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-
-    <permission
-        android:name="android.permission.CALL_PRIVILEGED"
-        android:protectionLevel="signature|privileged" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:node="replace" />
+    package="com.indocyber.itsmeandroid">
 
     <application
         android:name=".view.App"
@@ -36,13 +16,17 @@
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
         <activity
+            android:name=".viewremastered.billinginfo.BillingInfo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
+        <activity
+            android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.blockkartu.BlockKartu"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.editcard.activity.editkartu"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -55,7 +39,13 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
             android:parentActivityName=".view.login.LoginOptionActivity" />
@@ -108,10 +98,12 @@
             android:parentActivityName=".view.inbox.InboxActivity" />
         <activity
             android:name=".view.otp.OtpActivity"
-            android:parentActivityName=".view.addcc.AddCcActivity" />
+            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity"
-            android:parentActivityName=".view.addcc.AddCcActivity" />
+            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.addcc.AddCcActivity"
             android:launchMode="singleTop"
@@ -149,13 +141,7 @@
         <activity
             android:name=".view.splashscreen.SplashScreenActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -175,7 +161,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.indocyber.itsmeandroid.provider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
@@ -183,11 +169,31 @@
 
         <service
             android:name=".services.firebase.MyFireBaseMessagingService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>
+
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

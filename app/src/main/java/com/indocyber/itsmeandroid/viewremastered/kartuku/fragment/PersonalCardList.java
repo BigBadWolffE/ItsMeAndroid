@@ -84,9 +84,9 @@ public class PersonalCardList extends Fragment {
 
     private List<ImageCardModel> generateCardList() {
         List<ImageCardModel> cardList = new ArrayList<>();
-        cardList.add(new ImageCardModel(R.drawable.img_ktp, "1234123412341234", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
-        cardList.add(new ImageCardModel(R.drawable.img_npwp, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
-        cardList.add(new ImageCardModel(R.drawable.img_sim, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
+        cardList.add(new ImageCardModel(R.drawable.img_ktp, "", "", "", "Rp 15.000.000", "", "", false));
+        cardList.add(new ImageCardModel(R.drawable.img_npwp, "", "", "", "Rp 15.000.000", "", "", false));
+        cardList.add(new ImageCardModel(R.drawable.img_sim, "", "", "", "Rp 15.000.000", "", "", false));
         return cardList;
     }
 

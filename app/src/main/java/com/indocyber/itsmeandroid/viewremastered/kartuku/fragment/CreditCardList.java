@@ -88,6 +88,10 @@ public class CreditCardList extends Fragment {
         List<ImageCardModel> cardList = new ArrayList<>();
         cardList.add(new ImageCardModel(R.drawable.img_kartukredit_bca, "1234123412341234", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
         cardList.add(new ImageCardModel(R.drawable.img_kartukredit_bca, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false));
+        ImageCardModel blockedModel = new ImageCardModel(R.drawable.img_kartukredit_bca, "4321432143214321", "Johan Sundstein", "12/25", "Rp 15.000.000", "12/20", "12/21", false);
+        blockedModel.setBillingAddress("Cicalengka, Rt 02 / Rw /04 Kecamatan Jatiluhur");
+        blockedModel.setBlockedCard(true);
+        cardList.add(blockedModel);
         return cardList;
     }
 

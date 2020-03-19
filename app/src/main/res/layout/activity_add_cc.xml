@@ -58,31 +58,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="XXXX   XXXX   XXXX   XXXX"
-                        android:visibility="gone"
                         style="@style/CreditCardTextStyle"
                         android:textSize="@dimen/credit_card_number_text_size"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
-                        android:id="@+id/lblHolderLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Card holder"
-                        android:visibility="gone"
-                        style="@style/CreditCardTextStyle"
-                        android:textSize="@dimen/card_holder_label_text_size"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
-                        android:id="@+id/lblExpiryLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires"
-                        android:visibility="gone"
-                        style="@style/CreditCardTextStyle"
-                        android:textSize="@dimen/expiry_label_text_size"
                         android:textAlignment="center"
                         android:textColor="@color/colorwhite" />
 
@@ -90,7 +67,6 @@
                         android:id="@+id/lblCardHolder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
                         android:textSize="@dimen/card_holder_text_size"
                         style="@style/CreditCardTextStyle"
                         android:text="Jordan Setiawan" />
@@ -99,8 +75,7 @@
                         android:id="@+id/lblExpiry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        android:textSize="@dimen/expiry_text_size"
+                        android:textSize="10sp"
                         style="@style/CreditCardTextStyle"
                         android:text="09/19" />
 
@@ -118,7 +93,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/quicksandSemiBold"
+                    android:fontFamily="@font/quicksand_medium"
                     android:textColor="@color/support_darker_grey"
                     android:textSize="12dp"
                     android:text="@string/card_holder_name" />
@@ -151,7 +126,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/quicksandSemiBold"
+                            android:fontFamily="@font/quicksand_medium"
                             android:textSize="12dp"
                             android:textColor="@color/support_darker_grey"
                             android:text="Valid Card Number" />
@@ -161,7 +136,7 @@
                             android:inputType="number"
                             android:digits="0123456789"
                             style="@style/quicksandSemiBold"
-                            android:textColor="@color/support_darker_grey"
+                            android:textColor="@color/support_black"
                             android:maxLength="16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -179,7 +154,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            style="@style/quicksandSemiBold"
+                            android:fontFamily="@font/quicksand_medium"
                             android:textSize="12dp"
                             android:textColor="@color/support_darker_grey"
                             android:text="Expiry Date" />
@@ -197,7 +172,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="3"
                                 style="@style/quicksandSemiBold"
-                                android:textColor="@color/support_darker_grey"
+                                android:textColor="@color/support_black"
                                 android:layout_height="wrap_content" />
 
                             <TextView
@@ -215,7 +190,7 @@
                                 android:inputType="number"
                                 android:textAlignment="center"
                                 style="@style/quicksandSemiBold"
-                                android:textColor="@color/support_darker_grey"
+                                android:textColor="@color/support_black"
                                 android:maxLength="5"
                                 android:layout_width="0dp"
                                 android:layout_weight="3"
@@ -231,7 +206,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/quicksandSemiBold"
+                    android:fontFamily="@font/quicksand_medium"
                     android:textSize="12dp"
                     android:textColor="@color/support_darker_grey"
                     android:text="Billing Address" />
@@ -241,7 +216,7 @@
                     android:inputType="text|textMultiLine"
                     android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     style="@style/quicksandSemiBold"
-                    android:textColor="@color/support_darker_grey"
+                    android:textColor="@color/support_black"
                     android:maxLength="100"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"  />
@@ -263,7 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="12dp"
-                        style="@style/quicksandSemiBold"
+                        android:fontFamily="@font/quicksand_medium"
                         android:textColor="@color/support_darker_grey"
                         android:text="@string/i_agree_terms_and_condition" />
 

@@ -4,14 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorwhite"
     tools:context=".view.otp.OtpActivity">
+
+    <include
+        layout="@layout/action_bar"
+        android:id="@+id/appBar" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bgcardlayout">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:orientation="vertical"
@@ -21,25 +26,15 @@
             android:layout_weight="1">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Masukkan Kode OTP"
-                android:textAlignment="center"
-                style="@style/primaryFont"
-                android:textFontWeight="550"
-                android:textColor="@color/colorPrimary"
-                android:textSize="22sp" />
-
-            <TextView
                 android:layout_marginTop="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Kami telah mengirimkan \nkode OTP ke 081287777222"
+                android:text="SMS Kode OTP telah dikirim\nke Nomor 081287777222,\nSilahkan masukkan Kode OTP Anda"
                 android:textAlignment="center"
-                style="@style/primaryFontBold"
+                android:fontFamily="@font/quicksand_medium"
                 android:lineSpacingExtra="6dp"
-                android:textColor="@color/primary_font_color"
-                android:textSize="18sp" />
+                android:textColor="@color/support_black"
+                android:textSize="14sp" />
 
 
         </LinearLayout>
@@ -48,7 +43,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2">
+            android:layout_weight="4">
 
             <LinearLayout
                 android:gravity="center"
@@ -59,11 +54,11 @@
                 <EditText
                     android:id="@+id/txtOtp1"
                     android:textAlignment="center"
-                    style="@style/primaryFont"
+                    android:fontFamily="@font/quicksand_medium"
                     android:maxLength="1"
                     android:inputType="number"
                     android:textSize="40dp"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="@color/support_black"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_width="50dp"
@@ -72,11 +67,11 @@
                 <EditText
                     android:id="@+id/txtOtp2"
                     android:textAlignment="center"
-                    style="@style/primaryFont"
+                    android:fontFamily="@font/quicksand_medium"
                     android:maxLength="1"
                     android:inputType="number"
                     android:textSize="40dp"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="@color/support_black"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_width="50dp"
@@ -85,11 +80,11 @@
                 <EditText
                     android:id="@+id/txtOtp3"
                     android:textAlignment="center"
-                    style="@style/primaryFont"
+                    android:fontFamily="@font/quicksand_medium"
                     android:inputType="number"
                     android:maxLength="1"
                     android:textSize="40dp"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="@color/support_black"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_width="50dp"
@@ -98,11 +93,11 @@
                 <EditText
                     android:id="@+id/txtOtp4"
                     android:textAlignment="center"
-                    style="@style/primaryFont"
+                    android:fontFamily="@font/quicksand_medium"
                     android:inputType="number"
                     android:maxLength="1"
                     android:textSize="40dp"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="@color/support_black"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:layout_width="50dp"
@@ -114,9 +109,9 @@
                 android:layout_marginTop="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/primaryFontBold"
-                android:textSize="18sp"
-                android:textColor="@color/primary_font_color"
+                android:fontFamily="@font/quicksand_semibold"
+                android:textColor="@color/support_black"
+                android:textSize="16sp"
                 android:textAlignment="center"
                 android:text="00:30" />
 
@@ -125,9 +120,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                style="@style/primaryFontBold"
-                android:textSize="16sp"
-                android:textColor="@color/primary_font_color"
+                android:fontFamily="@font/quicksand_semibold"
+                android:textColor="@color/support_black"
+                android:textSize="14sp"
                 android:textAlignment="center"
                 android:text="Kirim Ulang OTP"/>
         </LinearLayout>
@@ -145,12 +140,13 @@
                 android:id="@+id/btnConfirmationButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/btn_rounded_primary"
-                android:text="Confirmation"
-                style="@style/primaryFont"
+                android:background="@drawable/btn_rounded"
+                android:text="Konfirmasi"
+                android:fontFamily="@font/quicksand_semibold"
+                android:textColor="@color/colorwhite"
                 android:textAllCaps="false"
                 android:stateListAnimator="@null"
-                android:textSize="18dp"/>
+                android:textSize="14dp"/>
 
         </LinearLayout>
 
