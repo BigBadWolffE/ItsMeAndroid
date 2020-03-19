@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_8sdp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Share"
+            android:fontFamily="@font/quicksand_regular"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/closeOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_ico_close"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_12sdp"
+        android:paddingLeft="@dimen/_24sdp"
+        android:paddingRight="@dimen/_24sdp"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/twitterShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/twitterShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_twitter"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/twitterShareIcon"
+                android:layout_alignRight="@id/twitterShareIcon"
+                android:layout_alignLeft="@id/twitterShareIcon"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/whatsappShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/whatsappShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_wa"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Whatsapp"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/whatsappShareIcon"
+                android:layout_alignRight="@id/whatsappShareIcon"
+                android:layout_alignLeft="@id/whatsappShareIcon"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/FacebookShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/FacebookShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_facebook"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Facebook"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/FacebookShareIcon"
+                android:layout_alignRight="@id/FacebookShareIcon"
+                android:layout_alignLeft="@id/FacebookShareIcon"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lineShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/lineShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_line"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/lineShareIcon"
+                android:layout_alignRight="@id/lineShareIcon"
+                android:layout_alignLeft="@id/lineShareIcon"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/_24sdp"
+        android:paddingRight="@dimen/_24sdp"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/gmailShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/gmailShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_gmail"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/gmailShareIcon"
+                android:layout_alignRight="@id/gmailShareIcon"
+                android:layout_alignLeft="@id/gmailShareIcon"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/emailShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/emailShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_mail"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/emailShareIcon"
+                android:layout_alignRight="@id/emailShareIcon"
+                android:layout_alignLeft="@id/emailShareIcon"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/telegramShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/telegramShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_telegram"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/telegramShareIcon"
+                android:layout_alignRight="@id/telegramShareIcon"
+                android:layout_alignLeft="@id/telegramShareIcon"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/hangoutShare"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_6sdp">
+
+            <ImageView
+                android:id="@+id/hangoutShareIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_hangout"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Twitter"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand_regular"
+                android:layout_below="@id/hangoutShareIcon"
+                android:layout_alignRight="@id/hangoutShareIcon"
+                android:layout_alignLeft="@id/hangoutShareIcon"/>
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

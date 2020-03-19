@@ -16,8 +16,11 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
+import com.indocyber.itsmeandroid.viewremastered.morecard.MoreCardRemasteredActivity;
 
 import java.util.List;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 /*
  *
@@ -52,16 +55,17 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         ImageCardModel model = cardList.get(position);
         View.OnClickListener listener = view -> {
-            Intent intent = new Intent(context, editkartu.class);
-            intent.putExtra("cardNumber", model.getNumberCard());
-            intent.putExtra("cardHolder", model.getNameCard());
-            intent.putExtra("cardImage", model.getImage());
-            intent.putExtra("expiryDate", model.getExpireCard());
-            intent.putExtra("billingAddress", model.getBillingAddress());
+            Intent intent = new Intent(context, MoreCardRemasteredActivity.class);
+//            intent.putExtra("cardNumber", model.getNumberCard());
+//            intent.putExtra("cardHolder", model.getNameCard());
+//            intent.putExtra("cardImage", model.getImage());
+//            intent.putExtra("expiryDate", model.getExpireCard());
+//            intent.putExtra("billingAddress", model.getBillingAddress());
+            intent.putExtra(INTENT_ID, model);
             context.startActivity(intent);
         };
         View.OnClickListener cardListener = view -> {
-            Intent intent = new Intent(context, BillingInfo.class);
+            Intent intent = new Intent(context, MoreCardRemasteredActivity.class);
             intent.putExtra("cardNumber", model.getNumberCard());
             intent.putExtra("cardHolder", model.getNameCard());
             intent.putExtra("cardImage", model.getImage());

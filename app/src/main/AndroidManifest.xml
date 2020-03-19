@@ -29,26 +29,26 @@
         <activity
             android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".viewremastered.blockkartu.BlockKartu"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.editcard.activity.editkartu"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".viewremastered.loginandregister.SetPinActivityRemastered" />
+        <activity
+            android:name=".viewremastered.loginandregister.SetPinActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".view.profile.activity.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-=======
-            android:name=".viewremastered.loginandregister.SetPinActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar" />
->>>>>>> ac7ec7c1cb49b6e7a13769d27329f4a1487e08fe
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.LoginActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
         <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar">

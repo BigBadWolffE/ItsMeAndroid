@@ -28,11 +28,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
 
 import org.apache.commons.text.WordUtils;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 
 /**
@@ -320,12 +323,17 @@ public final class AddCcActivity extends AppCompatActivity {
             return;
         }
 
+        ImageCardModel data = new ImageCardModel(
+                mCardImageResource,
+                mCardNumberInput.getText().toString(),
+                mCardHolderInput.getText().toString(),
+                mCardExpiry.getText().toString(),
+                "20.000.000",
+                "12/19",
+                "12/24",
+                false);
         Intent intent = new Intent(this, OtpActivity.class);
-        intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
-        intent.putExtra("cardHolder", mCardHolderInput.getText().toString());
-        intent.putExtra("expiryDate", mCardExpiry.getText().toString());
-        intent.putExtra("billingAddress", mBillingAddressInput.getText().toString());
-        intent.putExtra("cardImageResource", mCardImageResource);
+        intent.putExtra(INTENT_ID, data);
         startActivity(intent);
     }
 

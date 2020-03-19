@@ -22,9 +22,14 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import org.apache.commons.text.WordUtils;
+
+import java.util.Objects;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 /**
  *
@@ -50,12 +55,12 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_increase_limit);
         Bundle extras = getIntent().getExtras();
-        mNumber = extras.getString("cardNumber");
-        mHolderName = extras.getString("holderName");
-        mExpiryDate = extras.getString("expiryDate");
-
+        ImageCardModel data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        mNumber = data.getNumberCard();
+        mHolderName = data.getNameCard();
+        mExpiryDate = data.getExpireCard();
         cardImage = findViewById(R.id.imgCreditCard);
-        cardImage.setImageResource(extras.getInt("cardImageResource"));
+        cardImage.setImageResource(data.getImage());
 
         createToolbar();
 

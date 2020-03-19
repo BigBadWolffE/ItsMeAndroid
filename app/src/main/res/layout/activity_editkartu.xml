@@ -64,26 +64,6 @@
                         android:textColor="@color/colorwhite" />
 
                     <TextView
-                        android:id="@+id/lblHolderLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Card holder"
-                        style="@style/CreditCardTextStyle"
-                        android:textSize="@dimen/card_holder_label_text_size"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
-                        android:id="@+id/lblExpiryLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires"
-                        style="@style/CreditCardTextStyle"
-                        android:textSize="@dimen/expiry_label_text_size"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
                         android:id="@+id/lblCardHolder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,7 +75,7 @@
                         android:id="@+id/lblExpiry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/expiry_text_size"
+                        android:textSize="10sp"
                         style="@style/CreditCardTextStyle"
                         android:text="09/19" />
 
