@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.os.ParcelFileDescriptor;
 import android.text.Spanned;
 import android.util.Base64;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -405,5 +407,11 @@ public final class UtilitiesCore {
         negativeButton.setOnClickListener(view1 -> dialog.dismiss());
         negativeButton.setVisibility(View.VISIBLE);
         dialog.show();
+    }
+
+    public static int dpToPx(Context context, int dp) {
+        Resources resources = context.getResources();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
+                resources.getDisplayMetrics());
     }
 }
