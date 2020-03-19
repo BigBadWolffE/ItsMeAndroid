@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.profile.activity.EditProfileActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -63,19 +63,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/quicksand_bold"
+                        android:fontFamily="@font/quicksand_medium"
                         android:text="Jordan Setiawan"
-                        android:textSize="@dimen/_14sdp" />
+                        android:textSize="19sp" />
 
                     <TextView
                         android:id="@+id/lblEditProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:fontFamily="@font/quicksand_semibold"
+                        android:fontFamily="@font/quicksand_regular"
                         android:text="Edit Profile"
                         android:textColor="@color/grey2"
-                        android:textSize="@dimen/_10sdp" />
+                        android:textSize="14sp" />
 
                 </LinearLayout>
 
@@ -100,9 +100,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:fontFamily="@font/quicksand_bold"
-                    android:textColor="@color/grey_40"
-                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="15sp"
                     android:text="History Transaction"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imgHistory"
@@ -145,10 +145,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:fontFamily="@font/quicksand_bold"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="15sp"
                     android:text="Metode Pembayaran"
-                    android:textColor="@color/grey_40"
-                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imgMetodePembayaran"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -190,10 +190,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:fontFamily="@font/quicksand_bold"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="15sp"
                     android:text="Reset Password"
-                    android:textColor="@color/grey_40"
-                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imgPassword"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -235,10 +235,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:fontFamily="@font/quicksand_bold"
                     android:text="Reset Security Code"
-                    android:textColor="@color/grey_40"
-                    android:textSize="@dimen/_11sdp"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imgRefresh"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -280,10 +280,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:fontFamily="@font/quicksand_bold"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="15sp"
                     android:text="Sign Out"
-                    android:textColor="@color/grey_40"
-                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toRightOf="@+id/imgSignOut"
                     app:layout_constraintTop_toTopOf="parent" />

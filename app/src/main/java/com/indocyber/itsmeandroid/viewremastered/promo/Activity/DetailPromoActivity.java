@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.viewremastered.promo.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.indocyber.itsmeandroid.R;
@@ -19,6 +21,7 @@ import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.SharePromoAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,7 +32,7 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     @BindView(R.id.btnShare)
     LinearLayout mBtnShaere;
     @BindView(R.id.bottom_sheet_share)
-    ConstraintLayout mBottomSheetShare;
+    CardView mBottomSheetShare;
     @BindView(R.id.recyclerSharePromo)
     RecyclerView mRecyclerSharePromo;
 
@@ -73,7 +76,9 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     @OnClick(R.id.btnShare)
     void sharePromo() {
         mBottomSheetBehaviorShare.setPeekHeight(UtilitiesCore.dpToPx(DetailPromoActivity.this, 250));
-
+        String[] removePackageName = new String[]{"com.android.bluetooth","com.facebook.orca","com.google.android.apps.docs","com.discord",
+                "com.google.android.apps.messaging","com.google.android.gm","com.google.android.apps.keep",
+                "com.linkedin.android","com.skype.raider","com.roidapp.photogrid","com.rarlab.rar"};
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "share promo");
@@ -82,10 +87,12 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
 
         List<ItemShareModel> appNames = new ArrayList<ItemShareModel>();
         for (ResolveInfo info : activities) {
-            appNames.add(new ItemShareModel(info.loadLabel(getPackageManager()).toString(), info.loadIcon(getPackageManager())));
+            if(!Arrays.asList(removePackageName).contains(info.activityInfo.packageName)){
+                appNames.add(new ItemShareModel(info.loadLabel(getPackageManager()).toString(),info.activityInfo.packageName, info.loadIcon(getPackageManager())));
+            }
         }
-        final List<ItemShareModel> newItem = appNames;
-        mSharePromoAdapter = new SharePromoAdapter(newItem, getApplicationContext(),this);
+//        final List<ItemShareModel> newItem = appNames;
+        mSharePromoAdapter = new SharePromoAdapter(appNames, getApplicationContext(),this);
         mRecyclerSharePromo.setLayoutManager(gridLayourManager);
         mRecyclerSharePromo.setAdapter(mSharePromoAdapter);
 
@@ -158,7 +165,7 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     }
 
     @Override
-    public void onClick(int position) {
-
+    public void onClick(ItemShareModel mItemShareModel) {
+        Toast.makeText(this, "Ini package " + mItemShareModel.packageName , Toast.LENGTH_LONG).show();
     }
 }

@@ -41,9 +41,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:fontFamily="@font/quicksand_bold"
+                android:fontFamily="@font/quicksand_medium"
                 android:text="Bakmi GM Promo Rp 20.200"
-                android:textColor="@color/grey_40"
+                android:textColor="@color/brown_grey"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/imgback"
@@ -81,9 +81,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_bold"
+                        android:lineSpacingExtra="2sp"
                         android:text="Bakmi GM Promo Rp 20.200"
-                        android:textColor="@color/color99000000"
-                        android:textSize="18sp"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="15sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -101,13 +102,13 @@
                             android:fontFamily="@font/quicksand_bold"
                             android:paddingRight="@dimen/_10sdp"
                             android:text="Share"
-                            android:textColor="@color/grey2" />
+                            android:textColor="@color/brown_grey" />
 
                         <ImageView
                             android:id="@+id/imgShare"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_ico_share" />
+                            android:src="@drawable/ico_share" />
                     </LinearLayout>
 
 
@@ -124,9 +125,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_regular"
+                        android:lineSpacingExtra="8sp"
                         android:text="Lezatnya Nasi Ayam GM, Nasi Ayam Lada Cha Cha dan gurihnya Bakmi Kuah Cha Cha bisa kamu nikmati hanya dengan Rp 20.200,- Buruan Ajak GMania lain untuk ke outlet Bakmi GM terdekat, karena promonya hanya berlaku di Bulan Maret ini."
-                        android:textColor="@color/grey_40"
-                        android:textSize="18sp"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -135,8 +137,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/_10sdp"
-                        android:fontFamily="@font/quicksand_bold"
+                        android:fontFamily="@font/quicksand_semibold"
                         android:text="Syarat Dan Ketentuan:"
+                        android:textColor="@color/greyish_brown"
                         android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/lblDeskripsi" />
@@ -146,9 +149,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/quicksand_regular"
+                        android:lineSpacingExtra="8sp"
                         android:text="- Harga sebelum pajak \n- Berlaku untuk pemakaian Kartu Kredit BCA \n- Berlaku khusus dine-in \n- Dapat digabungkan dengan promo lainnya  "
-                        android:textColor="@color/grey_40"
-                        android:textSize="18sp"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/lblSyaratKetentuan" />
 
@@ -172,47 +176,54 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/bottom_sheet_share"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorwhite"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingTop="@dimen/_20sdp"
+        app:cardElevation="@dimen/_5sdp"
+        android:background="@drawable/rounded_corners"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/quicksand_bold"
-            android:text="Share"
-            android:textColor="@color/grey_40"
-            android:textSize="20sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/btnClose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_ico_close"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerSharePromo"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:numColumns="4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnClose" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/transparent"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingTop="@dimen/_20sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="Share"
+                android:textColor="@color/brown_grey"
+                android:textSize="24sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ico_close"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerSharePromo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:numColumns="4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnClose" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    </androidx.cardview.widget.CardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

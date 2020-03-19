@@ -48,14 +48,22 @@
     <color name="color61F5F5F5">#61F5F5F5</color>
     <color name="color_DEFF3D3D">#DEFF3D3D</color>
 
-  //Guidline
-  <color name="red_main">#EA4444</color>
-  <color name="red_transparent">#FFE7ED</color>
-  <color name="orange_main">#FF9900</color>
-  <color name="soft_pink">#FFF4EB</color>
-  <color name="grey_main_dark">#474747</color>
-  <color name="grey_main_medium">#A2A2A2</color>
-  <color name="grey_soft">#DCDCDC</color>
+    //Guidline
+    <color name="red_main">#EA4444</color>
+    <color name="red_transparent">#FFE7ED</color>
+    <color name="orange_main">#FF9900</color>
+    <color name="soft_pink">#FFF4EB</color>
+    <color name="grey_main_dark">#474747</color>
+    <color name="grey_main_medium">#A2A2A2</color>
+    <color name="grey_soft">#DCDCDC</color>
+    <color name="brown_grey">#898989</color>
+    <color name="very_light_grey">#ebebeb</color>
+
+    <color name="greyish_brown">#474747</color>
+    <color name="dodger_blue">#4a9bef</color>
+    <color name="blue_sea">#e9f2ff</color>
+
+
 
 
 
