@@ -429,9 +429,5 @@ public final class UtilitiesCore {
         dialog.show();
     }
 
-    public static int dpToPx(Context context, int dp) {
-        Resources resources = context.getResources();
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                resources.getDisplayMetrics());
-    }
+
 }

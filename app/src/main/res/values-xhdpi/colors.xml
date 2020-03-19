@@ -34,6 +34,8 @@
     <color name="grey_90">#263238</color>
 
     <color name="grey_20">#cccccc</color>
+    <color name="grey_30">#A2A2A2A2</color>
+    <color name="grey_50">#DCDCDCDC</color>
 
     <color name="colorF5F5F5">#F5F5F5</color>
     <color name="colorFAFAFA">#FAFAFA</color>
