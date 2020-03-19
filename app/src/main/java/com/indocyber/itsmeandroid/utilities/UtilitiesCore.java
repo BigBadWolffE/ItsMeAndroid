@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.text.Spanned;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -25,12 +26,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.indocyber.itsmeandroid.R;
@@ -381,12 +385,28 @@ public final class UtilitiesCore {
                 .into(imageView);
     }
 
+    public static void loadImage(ImageView imageView, Context context,@DrawableRes int drawable) {
+        try {
+            RequestOptions requestOptions = new RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true);
+            Glide.with(context).load(drawable)
+                    .apply(requestOptions)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .into(imageView);
+        } catch (Exception e) {
+        }
+    }
+
     public static void loadImage(ImageView imageView, Bitmap bitmap, Context context) {
         Glide.with(context)
                 .load(bitmap)
                 .into(imageView);
     }
-
+    public static int dpToPx(Context context,int dp) {
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
     public static void buildAlertConfirmation(
             Context context,
             String message,

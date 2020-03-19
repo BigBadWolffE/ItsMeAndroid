@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!--  <color name="colorPrimary">#0069c2</color>
-    <color name="colorPrimaryDark">#0069c1</color>
-    <color name="colorAccent">#C6E2FA</color>-->
+    <!--  <color name="colorPrimary">#0069c2</color>
+      <color name="colorPrimaryDark">#0069c1</color>
+      <color name="colorAccent">#C6E2FA</color>-->
 
     <color name="colorPrimary">#4f9ef0</color>
     <color name="colorPrimaryDark">#cce2ff</color>
@@ -26,19 +26,34 @@
 
     <color name="red_600">#E53935</color>
 
+    <color name="cyan">#2bd2da</color>
+
+    <color name="overlay_dark_10">#1A000000</color>
+
     <color name="grey_5">#f2f2f2</color>
     <color name="grey_90">#263238</color>
 
     <color name="grey_20">#cccccc</color>
 
-  <color name="colorF5F5F5">#F5F5F5</color>
-  <color name="colorFAFAFA">#FAFAFA</color>
-  <color name="blue">#429FF4</color>
-  <color name="grey_login">#E0E0E0</color>
-  <color name="colorDE000000">#DE000000</color>
-  <color name="color61000000">#61000000</color>
-  <color name="color99000000">#99000000</color>
-  <color name="color61F5F5F5">#61F5F5F5</color>
-  <color name="color_DEFF3D3D">#DEFF3D3D</color>
+    <color name="colorF5F5F5">#F5F5F5</color>
+    <color name="colorFAFAFA">#FAFAFA</color>
+    <color name="blue">#429FF4</color>
+    <color name="grey_login">#E0E0E0</color>
+    <color name="colorDE000000">#DE000000</color>
+    <color name="color61000000">#61000000</color>
+    <color name="color99000000">#99000000</color>
+    <color name="color61F5F5F5">#61F5F5F5</color>
+    <color name="color_DEFF3D3D">#DEFF3D3D</color>
+
+  //Guidline
+  <color name="red_main">#EA4444</color>
+  <color name="red_transparent">#FFE7ED</color>
+  <color name="orange_main">#FF9900</color>
+  <color name="soft_pink">#FFF4EB</color>
+  <color name="grey_main_dark">#474747</color>
+  <color name="grey_main_medium">#A2A2A2</color>
+  <color name="grey_soft">#DCDCDC</color>
+
+
 
 </resources>
