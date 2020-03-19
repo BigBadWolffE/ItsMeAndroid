@@ -43,6 +43,8 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
 
     };
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

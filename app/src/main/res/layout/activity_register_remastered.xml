@@ -6,16 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".viewremastered.loginandregister.RegisterActivityRemastered">
 
-    <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_img_background_top_screen"
-        app:layout_constraintBottom_toTopOf="@+id/title_layout_register"
+    <View
+        android:id="@+id/header_bck"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/ic_img_background_top_screen"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.08"
+        android:orientation="horizontal"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_layout_register"
@@ -25,7 +31,7 @@
         app:layout_constraintBottom_toTopOf="@+id/title_img"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_btn">
+        app:layout_constraintTop_toBottomOf="@+id/guideline5">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -60,7 +66,7 @@
     <ImageView
         android:id="@+id/title_img"
         android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_180sdp"
+        android:layout_height="@dimen/_150sdp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -75,6 +81,7 @@
         android:layout_width="@dimen/_270sdp"
         android:layout_height="361dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
         android:orientation="vertical"
         android:scrollbars="vertical"
@@ -281,12 +288,6 @@
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/layout_answer"
                 app:layout_constraintTop_toBottomOf="@+id/layout_retypepw">
-
-                <Spinner
-                    android:id="@+id/sp_security"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp" />
-
                 <TextView
                     android:id="@+id/hdr_sp_security"
                     android:layout_width="wrap_content"
@@ -294,6 +295,12 @@
                     android:fontFamily="@font/__quicksand_medium"
                     android:text="Security Question"
                     android:textColor="@color/grey_40" />
+                <Spinner
+                    android:id="@+id/sp_security"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp" />
+
+
 
             </LinearLayout>
 
@@ -333,30 +340,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/lbl_btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/grey_login"
-                app:cardCornerRadius="@dimen/_5sdp">
-
-                <TextView
-                    android:id="@+id/btn_next_register"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/__quicksand_medium"
-                    android:gravity="center"
-                    android:text="Selanjutnya"
-                    android:textColor="@color/colorwhite"
-                    android:textSize="@dimen/_15sdp" />
-            </androidx.cardview.widget.CardView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layout_agreement"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_25sdp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/layout_name"
@@ -391,6 +381,29 @@
                     app:layout_constraintStart_toEndOf="@+id/cb_agree"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/lbl_btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardBackgroundColor="@color/grey_login"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/btn_next_register"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/__quicksand_medium"
+                    android:gravity="center"
+                    android:text="Selanjutnya"
+                    android:textColor="@color/colorwhite"
+                    android:textSize="@dimen/_15sdp" />
+            </androidx.cardview.widget.CardView>
+
 
         </LinearLayout>
 

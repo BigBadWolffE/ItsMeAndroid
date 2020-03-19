@@ -12,7 +12,12 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+
+import java.util.Objects;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class BillingInfo extends AppCompatActivity {
 
@@ -26,9 +31,11 @@ public class BillingInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing_info);
         Bundle extras = getIntent().getExtras();
-        mNumber = extras.getString("cardNumber");
-        mHolderName = extras.getString("cardHolder");
-        mExpiryDate = extras.getString("expiryDate");
+        ImageCardModel data =
+                Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        mNumber = data.getNumberCard();
+        mHolderName = data.getNameCard();
+        mExpiryDate = data.getExpireCard();
 
         cardImage = findViewById(R.id.imgCreditCard);
         cardImage.setImageResource(R.drawable.img_blank_kartukredit_bca);

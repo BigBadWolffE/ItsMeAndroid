@@ -6,15 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".viewremastered.loginandregister.LoginAuthActivityRemastered">
 
-    <ImageView
+    <View
         android:id="@+id/header_bck"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_img_background_top_screen"
-        app:layout_constraintBottom_toTopOf="@+id/title_layout_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/ic_img_background_top_screen"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.08"
+        android:orientation="horizontal"/>
 
     <ImageView
         android:id="@+id/drawabletitle"
@@ -37,7 +44,7 @@
         app:layout_constraintBottom_toTopOf="@+id/drawabletitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header_bck">
+        app:layout_constraintTop_toBottomOf="@+id/guideline5">
 
         <ImageView
             android:id="@+id/imageView5"

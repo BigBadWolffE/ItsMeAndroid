@@ -23,11 +23,16 @@ import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
 
 import org.apache.commons.text.WordUtils;
+
+import java.util.Objects;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class BlockKartu extends AppCompatActivity {
 
@@ -48,17 +53,19 @@ public class BlockKartu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_block_kartu);
         Bundle extras = getIntent().getExtras();
-        cardNumber = extras.getString("cardNumber");
-        cardHolder = extras.getString("cardHolder");
-        cardImage = extras.getInt("cardImage");
-        expiryDate = extras.getString("expiryDate");
-        cardBillingAddress = extras.getString("cardBillingAddress");
+        ImageCardModel data =
+                Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        cardNumber = data.getNumberCard();
+        cardHolder = data.getNameCard();
+        cardImage = data.getImage();
+        expiryDate = data.getExpireCard();
+        cardBillingAddress = data.getBillingAddress();
         formatCreditCard();
-        mCardHolder.setText(cardHolder);
         initializeButton();
         initializeCardNumber();
         createToolbar();
     }
+
 
     private  void createToolbar() {
 //        if (getSupportActionBar() != null) {
@@ -155,40 +162,6 @@ public class BlockKartu extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void formatCreditCard(){
-        ImageView creditCard = findViewById(R.id.imgCreditCard);
-        int[] position = {0, 0};
-        creditCard.getLocationOnScreen(position);
-
-        int paddingLeft = (creditCard.getWidth() * 8 / 100);
-        int startYAxis = (creditCard.getHeight() / 2);
-
-        mCardNumber = findViewById(R.id.lblCcNumber);
-        mCardNumber.setX(position[0] + paddingLeft);
-        mCardNumber.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
-        mCardNumber.bringToFront();
-
-        TextView holderLabel = findViewById(R.id.lblHolderLabel);
-        holderLabel.setX(position[0] + paddingLeft);
-        holderLabel.setY(mCardNumber.getY() + mCardNumber.getHeight()
-                + getResources().getDimension(R.dimen.spacing_large));
-
-        TextView expiryLabel = findViewById(R.id.lblExpiryLabel);
-        expiryLabel.setX(position[0] + paddingLeft
-                + mCardNumber.getWidth() - expiryLabel.getWidth());
-        expiryLabel.setY(mCardNumber.getY() + mCardNumber.getHeight()
-                + getResources().getDimension(R.dimen.spacing_large));
-
-        mCardHolder = findViewById(R.id.lblCardHolder);
-        mCardHolder.setX(position[0] + paddingLeft);
-        mCardHolder.setY(holderLabel.getY() + holderLabel.getHeight()
-                + getResources().getDimension(R.dimen.spacing_xsmall));
-
-        mCardExpiry = findViewById(R.id.lblExpiry);
-        mCardExpiry.setX(expiryLabel.getX());
-        mCardExpiry.setY(expiryLabel.getY() + expiryLabel.getHeight() +
-                getResources().getDimension(R.dimen.spacing_xsmall));
-    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -206,6 +179,40 @@ public class BlockKartu extends AppCompatActivity {
                 + paddedText.substring(8, 12) + "   " + paddedText.substring(12, 16);
 
         mCardNumber.setText(updatedText);
+    }
+
+    private void formatCreditCard(){
+        ImageView cardImage = findViewById(R.id.imgCreditCard);
+        int[] position = {0, 0};
+        cardImage.getLocationOnScreen(position);
+
+        int paddingLeft = (cardImage.getWidth() * 8 / 100);
+        int startYAxis = (cardImage.getHeight() / 2);
+
+        TextView mCardNumber = findViewById(R.id.lblCcNumber);
+        mCardNumber.setText(padCardNumber(cardNumber, 3));
+        mCardNumber.setX(paddingLeft);
+        mCardNumber.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
+        mCardNumber.bringToFront();
+        TextView mCardHolder = findViewById(R.id.lblCardHolder);
+        mCardHolder.setText(cardHolder);
+        mCardHolder.setX(paddingLeft);
+        mCardHolder.setY(cardImage.getHeight() * 80 / 100);
+
+        TextView mCardExpiry = findViewById(R.id.lblExpiry);
+        mCardExpiry.setX(cardImage.getWidth() / 2);
+        mCardExpiry.setY(cardImage.getHeight() * 70 / 100);
+    }
+
+    private String padCardNumber(String number, int pad) {
+        StringBuilder padding = new StringBuilder();
+        for(int i = 0; i < pad; i++){
+            padding.append(" ");
+        }
+
+        String paddedText = number + "";
+        return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
+                + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
     }
 
 }

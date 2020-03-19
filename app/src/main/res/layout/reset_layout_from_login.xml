@@ -5,15 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:src="@drawable/ic_img_background_top_screen"
-        app:layout_constraintBottom_toTopOf="@+id/layout_header"
+    <View
+        android:id="@+id/header_bck"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/ic_img_background_top_screen"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.08"
+        android:orientation="horizontal"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -24,10 +31,10 @@
         android:layout_marginEnd="8dp"
         app:cardBackgroundColor="@color/grey_login"
         app:cardCornerRadius="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@+id/back_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constrain_email_password_baru_retype">
+        app:layout_constraintTop_toBottomOf="@+id/guideline6">
 
         <TextView
             android:id="@+id/btn_submit_reset"
@@ -63,7 +70,7 @@
             android:text="Password Sekarang"
             android:textColor="@color/grey_main_medium"
             android:textSize="@dimen/_11sdp"
-
+            app:layout_constraintBottom_toTopOf="@+id/layout_input_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -76,8 +83,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
-            >
+            app:layout_constraintTop_toBottomOf="@+id/tooltip_email" >
 
             <EditText
                 android:id="@+id/ipt_email_reset"
@@ -115,6 +121,7 @@
             android:text="Password Baru"
             android:textColor="@color/grey_main_medium"
             android:textSize="@dimen/_11sdp"
+            app:layout_constraintBottom_toTopOf="@+id/layout_input_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -128,7 +135,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-           >
+            app:layout_constraintTop_toBottomOf="@+id/tooltip_email">
 
             <EditText
                 android:id="@+id/ipt_password_baru"
@@ -152,7 +159,6 @@
         android:layout_height="78dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constrain_email_password_baru">
@@ -166,7 +172,7 @@
             android:text="Re-type Password Baru"
             android:textColor="@color/grey_main_medium"
             android:textSize="@dimen/_11sdp"
-
+            app:layout_constraintBottom_toTopOf="@+id/layout_input_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -180,7 +186,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-           >
+            app:layout_constraintTop_toBottomOf="@+id/tooltip_email">
 
             <EditText
                 android:id="@+id/ipt__baru_retype"
@@ -209,7 +215,7 @@
         app:layout_constraintBottom_toTopOf="@+id/constrain_email_password_sekarang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_btn">
+        app:layout_constraintTop_toBottomOf="@+id/guideline5">
 
         <ImageView
             android:id="@+id/imageView5"
@@ -240,6 +246,13 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.88"
+        android:orientation="horizontal"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
