@@ -13,6 +13,8 @@ import com.indocyber.itsmeandroid.R;
 public class PromoRemasteredFragment extends Fragment {
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
