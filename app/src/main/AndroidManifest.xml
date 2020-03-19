@@ -34,6 +34,8 @@
         <activity android:name=".viewremastered.loginandregister.SetPinActivityRemastered" />
         <activity android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.profile.activity.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
