@@ -25,10 +25,14 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".viewremastered.promo.Activity.PinPromoActivity"
+        <activity android:name=".view.profile.activity.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.promo.Activity.PinPromoActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
