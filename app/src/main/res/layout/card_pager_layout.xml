@@ -1,18 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:layout_height="200dp"
 
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
 
 
         >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:translationZ="@dimen/spacing_large">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_68sdp" />
+
+            <TextView
+                android:id="@+id/txtNumberCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:maxLines="1"
+                android:padding="@dimen/spacing_medium"
+                android:text="3454   XXX  XXX  3455"
+                android:textAppearance="@style/quicksandRegular"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_8sdp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.9" />
+
+                <TextView
+                    android:id="@+id/txtValidThru"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="08/21"
+                    android:textAppearance="@style/quicksandRegular"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/txtName"
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_medium"
+                    android:text="Jordan Setywan"
+                    android:textAppearance="@style/quicksandRegular"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/cardListImage"
@@ -30,5 +100,5 @@
             android:layout_height="wrap_content"
             android:layout_alignRight="@id/cardListImage"
             android:src="@drawable/ic_btn_more_menu" />
- </RelativeLayout>
+    </RelativeLayout>
 </RelativeLayout>

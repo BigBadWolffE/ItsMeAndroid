@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
         <LinearLayout
@@ -121,9 +121,8 @@
                     <androidx.viewpager.widget.ViewPager
                         android:id="@+id/viewPagerCard"
                         android:layout_width="match_parent"
-                        android:layout_height="200dip"
+                        android:layout_height="200dp"
                         android:clipToPadding="false"
-                        app:layout_constraintDimensionRatio="h,16:9"
                         app:layout_constraintBottom_toTopOf="@+id/tabDots"
                         app:layout_constraintTop_toTopOf="parent">
 
