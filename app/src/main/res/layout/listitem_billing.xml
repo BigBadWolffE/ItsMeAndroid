@@ -1,38 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
-    android:orientation="horizontal"
-    android:background="@drawable/bglistitem" >
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/btnNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="0dp"
-        android:paddingRight="6dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/txtBillingDate"
+            style="@style/primaryFont"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="11 November 2019, 08:00"
+            android:textColor="#B4B4B4"
+            android:textSize="13dp"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/very_light_grey"
+            android:layout_marginVertical="@dimen/_5sdp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/txtBillingTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/primaryFontBold"
-                android:textColor="@color/primary_font_color"
-                android:layout_weight="7"
-                android:text="Title" />
+                android:fontFamily="@font/quicksand_semibold"
+                android:lineSpacingExtra="5sp"
+                android:text="Title"
+                android:textColor="@color/brown_grey"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/llMessageFlag"
@@ -40,62 +51,61 @@
                 android:layout_height="20dp"
                 android:background="#00A71D"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
+                    style="@style/primaryFont"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/primaryFont"
-                    android:textSize="11sp"
-                    android:text="Inbox" />
+                    android:text="Inbox"
+                    android:textSize="11sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="8dp"
-            android:id="@+id/txtBillingDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/primaryFont"
-            android:textColor="#B4B4B4"
-            android:text="11 November 2019, 08:00"
-            android:textSize="12dp"
-
-            />
 
         <TextView
-            android:layout_marginTop="8dp"
             android:id="@+id/txtBillingMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/primaryFontBold"
-            android:textColor="@color/primary_font_color"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/quicksand_regular"
+            android:lineSpacingExtra="8sp"
+            android:maxLines="3"
             android:text="Sisa limit Credit Card Master Anda:\n9894 xxxx xxxx 9800:\n Rp 2.000.000.0000"
-            android:lineSpacingExtra="4dp"/>
+            android:textColor="@color/brown_grey"
+            android:textSize="14sp" />
 
         <LinearLayout
-            android:layout_marginTop="4dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/txtBillingAttachment"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="9"
-                style="@style/primaryFontLight"
-                android:textColor="@color/primary_font_color"
-                android:text="test"
-                android:textSize="12sp" />
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="15dp"
                 android:layout_height="15dp"
-                android:src="@drawable/icoattachment" />
+                android:layout_gravity="center"
+                android:background="@drawable/ic_attachment" />
+
+            <TextView
+                android:id="@+id/txtBillingAttachment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/quicksand_regular"
+                android:lineSpacingExtra="9sp"
+                android:text="test"
+                android:textColor="@color/brown_grey"
+                android:textSize="13sp" />
+
 
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/very_light_grey"
+            android:layout_marginVertical="@dimen/_5sdp"/>
     </LinearLayout>
 
 
