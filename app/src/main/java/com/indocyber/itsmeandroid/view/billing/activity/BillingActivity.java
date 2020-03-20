@@ -19,8 +19,7 @@ import java.util.List;
 public class BillingActivity extends AppCompatActivity {
 
     private final List<Billing> billingList = new ArrayList<>();
-    private final BillingAdapter adapter =
-            new BillingAdapter(new ArrayList<>(), billing -> onItemClick(billing) );
+    private final BillingAdapter adapter = new BillingAdapter(new ArrayList<>(), billing -> onItemClick(billing) );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

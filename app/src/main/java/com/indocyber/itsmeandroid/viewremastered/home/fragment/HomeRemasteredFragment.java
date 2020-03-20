@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -32,9 +33,14 @@ import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
+import com.indocyber.itsmeandroid.viewremastered.notification.Activity.NotificationRemasteredActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.dpToPx;
 
@@ -53,13 +59,16 @@ public class HomeRemasteredFragment extends Fragment {
     private LinearLayout mDotsLayout;
     private TabLayout mTabDots;
     private RelativeLayout blockButton;
+    @BindView(R.id.imageView4)
+    FrameLayout mBtnNotif;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_remastered, container, false);
-
+        View view = inflater.inflate(R.layout.fragment_home_remastered, container, false);
+        ButterKnife.bind(this, view);
+        return view;
 
     }
 
@@ -121,5 +130,11 @@ public class HomeRemasteredFragment extends Fragment {
         promoList.add(new PromoItemModel("Promo Starbuck2", "Promo Starbuck2", "27 Desember 2020",
                 R.drawable.img_banner_starbuck));
         return promoList;
+    }
+
+    @OnClick(R.id.imageView4)
+    void openNotifikasi(){
+        Intent i = new Intent(getActivity(), NotificationRemasteredActivity.class);
+        startActivity(i);
     }
 }

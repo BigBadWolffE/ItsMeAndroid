@@ -1,67 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:minHeight="100dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@drawable/bglistitem" >
+    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginHorizontal="@dimen/_20sdp">
 
     <LinearLayout
         android:id="@+id/btnNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="0dp"
-        android:paddingRight="6dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:paddingLeft="0dp"
+        android:paddingRight="6dp">
+
+        <TextView
+            android:id="@+id/txtNotificationDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/quicksand_medium"
+            android:text="11 November 2019, 08:00"
+            android:textColor="@color/brown_grey"
+            android:textSize="13dp"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginVertical="@dimen/_5sdp"
+            android:background="#efefef"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:layout_weight="1">
+            android:layout_height="wrap_content">
+
 
             <TextView
                 android:id="@+id/txtNotificationTitle"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/primaryFontBold"
-                android:textColor="@color/primary_font_color"
-                android:layout_weight="9"
-                android:text="Title" />
+                android:fontFamily="@font/quicksand_semibold"
+                android:text="Title"
+                android:textColor="#8a8a8a"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:id="@+id/llMessageFlag"
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:background="@drawable/bgmessageflagunread"
-                android:orientation="horizontal" />
+                android:orientation="horizontal"
+                android:visibility="gone" />
         </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="8dp"
-            android:id="@+id/txtNotificationDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/primaryFont"
-            android:textColor="#B4B4B4"
-            android:text="11 November 2019, 08:00"
-            android:textSize="12dp"
-
-            />
 
         <TextView
-            android:layout_marginTop="8dp"
             android:id="@+id/txtNotificationMessage"
-            android:layout_width="match_parent"
+            android:fontFamily="@font/quicksand_regular"
+            android:textSize="14sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/primaryFontBold"
-            android:textColor="@color/primary_font_color"
-            android:text="Sisa limit Credit Card Master Anda:\n9894 xxxx xxxx 9800:\n Rp 2.000.000.0000"
-            android:lineSpacingExtra="4dp"/>
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="4dp"
+            android:text="Sisa limit Credit Card Master Anda: 9894 xxxx xxxx 9800:\n Rp 2.000.000.0000"
+            android:textColor="#8a8a8a" />
 
     </LinearLayout>
 

@@ -33,7 +33,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-    <style name="ToolBarStyle" parent="ToolBarStyle.Base"/>
+
+    <style name="ToolBarStyle" parent="ToolBarStyle.Base" />
 
     <style name="ToolBarStyle.Base" parent="">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
@@ -198,6 +199,67 @@
         <item name="android:fontFamily">@font/quicksand_medium</item>
         <item name="android:textSize">14pt</item>
         <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="MaterialLightHeadline">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+
+    <style name="MaterialLightHeadline2">
+        <item name="android:textSize">24sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+
+    <style name="MaterialLightSubhead">
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColor">@color/brown_grey</item>
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/brown_grey</item>
+    </style>
+
+    <style name="MaterialDesktopLightSubhead">
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">5sp</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+
+    <style name="MaterialLightBody2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">10sp</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+
+    <style name="MaterialLightBody1">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+
+    <style name="MaterialLightSubTitle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">6sp</item>
+        <item name="android:textColor">@color/brown_grey</item>
+    </style>
+
+    <style name="MaterialLightCaption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">#de000000</item>
+    </style>
+
+    <style name="CustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
 </resources>
