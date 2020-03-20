@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewremastered.AddKartuPersonal.AddKartuPersonal">
+
+    <include
+        android:id="@+id/actionBar"
+        layout="@layout/action_bar"
+        app:layout_constraintBottom_toTopOf="@id/scrollContainer"/>
+
+    <ScrollView
+        android:id="@+id/scrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:isScrollContainer="true"
+        app:layout_constraintTop_toBottomOf="@+id/actionBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/mainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorwhite" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/_24sdp"
+                android:paddingRight="@dimen/_24sdp"
+                android:isScrollContainer="false"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_16sdp">
+
+                <RelativeLayout
+                    android:id="@+id/rLayoutCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_120sdp"
+                    android:gravity="center"
+                    android:background="@drawable/button_border_grey">
+
+                    <ImageView
+                        android:id="@+id/imgCreditCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="false"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:cropToPadding="false"
+                        android:src="@drawable/ic_ico_tambah_limit" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgCreditCard"
+                        android:text="Ambil Foto"
+                        android:layout_alignLeft="@id/imgCreditCard"
+                        android:layout_alignRight="@id/imgCreditCard"
+                        />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingTop="20dp"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:textColor="@color/support_darker_grey"
+                    android:textSize="12sp"
+                    android:text="Tipe Kartu" />
+
+                <Spinner
+                    android:id="@+id/spnTipeKartu"
+                    android:inputType="text"
+                    style="@style/quicksandSemiBold"
+                    android:textColor="@color/support_black"
+                    android:textSize="14sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:padding="0dp"
+                    android:background="@drawable/bgspinner"
+                    android:hint="@string/username" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ktpForm"
+                    android:paddingTop="@dimen/_6sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="NIK" />
+
+                    <EditText
+                        android:id="@+id/txtNik"
+                        android:inputType="text"
+                        android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="30"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="@string/card_holder_name" />
+
+                    <EditText
+                        android:id="@+id/txtNamaLengkap"
+                        android:inputType="text"
+                        android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="30"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="Jenis Kelamin" />
+
+                    <RadioGroup
+                        android:id="@+id/radioJenisKelamin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/_4sdp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/radioLakiLaki"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_semibold"
+                            android:textColor="@color/support_black"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="Laki - Laki"
+                            android:layout_marginRight="@dimen/spacing_mlarge"/>
+
+                        <RadioButton
+                            android:id="@+id/radioPerempuan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_semibold"
+                            android:textColor="@color/support_black"
+                            android:buttonTint="@color/colorPrimary"
+                            android:text="Perempuan" />
+                    </RadioGroup>
+
+                    <RelativeLayout
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/tanggalLahirLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:textColor="@color/support_darker_grey"
+                            android:textSize="12dp"
+                            android:text="Tanggal Lahir" />
+
+                        <EditText
+                            android:id="@+id/txtTanggalLahir"
+                            android:inputType="text"
+                            android:layout_below="@+id/tanggalLahirLabel"
+                            android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                            style="@style/quicksandSemiBold"
+                            android:textColor="@color/support_black"
+                            android:textSize="14sp"
+                            android:maxLength="30"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="" />
+
+                        <ImageView
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:src="@drawable/ic_ico_date_picker"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:layout_alignBottom="@id/txtTanggalLahir"
+                            android:layout_alignRight="@id/txtTanggalLahir"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Agama" />
+
+                    <Spinner
+                        android:id="@+id/spnAgama"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username" />
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Status" />
+
+                    <Spinner
+                        android:id="@+id/spnStatus"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username" />
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Pekerjaan" />
+
+                    <Spinner
+                        android:id="@+id/spnPekerjaan"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username" />
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Kewarganegaraan" />
+
+                    <Spinner
+                        android:id="@+id/spnKewarganegaraan"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="Alamat" />
+
+                    <EditText
+                        android:id="@+id/txtAlamatKtp"
+                        android:inputType="text"
+                        android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="30"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingRight="@dimen/_8sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/quicksand_medium"
+                                android:textColor="@color/support_darker_grey"
+                                android:textSize="12dp"
+                                android:text="RT" />
+
+                            <EditText
+                                android:id="@+id/txtRtKtp"
+                                android:inputType="text"
+                                android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                                style="@style/quicksandSemiBold"
+                                android:textColor="@color/support_black"
+                                android:maxLength="30"
+                                android:textSize="14sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/_8sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/quicksand_medium"
+                                android:textColor="@color/support_darker_grey"
+                                android:textSize="12dp"
+                                android:text="RW" />
+
+                            <EditText
+                                android:id="@+id/txtRwKtp"
+                                android:inputType="text"
+                                android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                                style="@style/quicksandSemiBold"
+                                android:textColor="@color/support_black"
+                                android:maxLength="30"
+                                android:textSize="14sp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Kelurahan" />
+
+                    <Spinner
+                        android:id="@+id/spnKelurahanKtp"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username" />
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Kecamatan" />
+
+                    <Spinner
+                        android:id="@+id/spnKecamatanKtp"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <CheckBox
+                        android:id="@+id/chkTermsAgreement"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:buttonTint="@color/colorPrimary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:text="@string/i_agree_terms_and_condition" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnAddMember"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/next"
+                    android:textAllCaps="false"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:stateListAnimator="@null"
+                    android:textColor="@color/colorwhite"
+                    android:background="@drawable/btn_rounded"
+                    android:layout_marginBottom="@dimen/_32sdp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

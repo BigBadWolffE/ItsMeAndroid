@@ -1,8 +1,11 @@
 package com.indocyber.itsmeandroid.view.requestincreaselimit;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -11,6 +14,8 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,7 +28,9 @@ import android.widget.TextView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import org.apache.commons.text.WordUtils;
 
@@ -45,6 +52,9 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     private Spinner mRequestLimitSpinner;
     private Spinner mRequestForSpinner;
     private ImageView cardImage;
+    int parentCode = -1;
+    ImageCardModel data;
+    AlertDialog customAlert;
 
     private static final String[] REQUEST_LIMIT_OPTIONS = { "Select Limit", "Tetap", "Sementara" };
     private static final String[] REQUEST_FOR_OPTIONS = { "Select For", "Berobat", "Nikah",
@@ -55,7 +65,8 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_increase_limit);
         Bundle extras = getIntent().getExtras();
-        ImageCardModel data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        parentCode = extras.getInt("parentCode");
         mNumber = data.getNumberCard();
         mHolderName = data.getNameCard();
         mExpiryDate = data.getExpireCard();
@@ -190,15 +201,20 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
             return;
         }
 
-        String styledText = "Request Menaikan Limit Credit Card Anda<br>"
-                        + "<big><b>" + padCardNumber(mNumber, 1) + "</b></big><br>"
-                        + " Berhasil";
-        UtilitiesCore.buildAlertDialog(
-                this,
-                Html.fromHtml(styledText),
-                R.drawable.ic_approved,
-                dialogInterface -> finish()
-        );
+        if (parentCode == GlobalVariabel.CARD_MENU) {
+            Intent intent = new Intent(this, SetPinActivityRemastered.class);
+            intent.putExtra("parentCode", GlobalVariabel.TAMBAH_LIMIT_ACTIVITY);
+            intent.putExtra(INTENT_ID, data);
+            startActivity(intent);
+        } else {
+            showSuccessDialog(
+                    R.drawable.ic_img_emotion_smile,
+                    "Pengajuan Limit\nKartu Kredit Anda",
+                    padCardNumber(data.getNumberCard(), 3) + "\nBerhasil",
+                    dialogInterface -> {
+                        finish();
+                    });
+        }
     }
 
     private String padCardNumber(String number, int pad) {
@@ -210,5 +226,23 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
         String paddedText = number + "";
         return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
                 + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
+    }
+
+    private void showSuccessDialog(int icon, String smallText, String bigText, DialogInterface.OnDismissListener onDismiss) {
+        androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(RequestIncreaseLimitActivity.this);
+        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null);
+        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
+        alertIcon.setImageResource(icon);
+        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
+        txtSmallText.setText(smallText);
+        TextView txtBigText = view.findViewById(R.id.txtBigText);
+        txtBigText.setText(bigText);
+        ImageView close = view.findViewById(R.id.closeAlert);
+        builder.setView(view);
+        builder.setOnDismissListener(onDismiss);
+        customAlert = builder.create();
+        close.setOnClickListener(view1 -> customAlert.dismiss());
+        customAlert.show();
     }
 }

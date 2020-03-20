@@ -17,6 +17,8 @@ import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
+import com.indocyber.itsmeandroid.viewremastered.AddKartuPersonal.AddKartuPersonal;
+import com.indocyber.itsmeandroid.viewremastered.addkartumember.AddKartuMember;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;
@@ -103,10 +105,12 @@ public class HomeRemastered extends AppCompatActivity {
 
     private void initOnclick() {
         mLinearAddMembership.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, AddKartuMember.class);
+            startActivity(intent);
         });
         mLinearPersonalCard.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, AddKartuPersonal.class);
+            startActivity(intent);
         });
         mLinearAddCreditCard.setOnClickListener(v -> {
                 Intent intent = new Intent(this, AddCcActivity.class);

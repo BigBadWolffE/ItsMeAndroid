@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewremastered.blockkartu.BlockKartu">
+    tools:context=".viewremastered.tagkartu.TagKartu">
 
     <include
         android:id="@+id/actionBar"
@@ -64,26 +64,6 @@
                         android:textColor="@color/colorwhite" />
 
                     <TextView
-                        android:id="@+id/lblHolderLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Card holder"
-                        style="@style/CreditCardTextStyle"
-                        android:textSize="@dimen/card_holder_label_text_size"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
-                        android:id="@+id/lblExpiryLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expires"
-                        style="@style/CreditCardTextStyle"
-                        android:textSize="@dimen/expiry_label_text_size"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorwhite" />
-
-                    <TextView
                         android:id="@+id/lblCardHolder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,7 +75,7 @@
                         android:id="@+id/lblExpiry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/expiry_text_size"
+                        android:textSize="10sp"
                         style="@style/CreditCardTextStyle"
                         android:text="09/19" />
 
@@ -105,77 +85,46 @@
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:paddingTop="@dimen/_16sdp"
+                android:paddingTop="@dimen/_4sdp"
                 android:paddingLeft="@dimen/_24sdp"
                 android:paddingRight="@dimen/_24sdp"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:background="#fff4eb"
-                    android:padding="@dimen/_16sdp"
+                <TextView
+                    android:id="@+id/cardTags"
                     android:layout_width="match_parent"
-                    android:gravity="center"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:textAlignment="center"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#f1913f"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/quicksand_semibold"
-                        android:text="Apakah anda yakin untuk\n memblokir kartu ini?"/>
-
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="@dimen/_2sdp"
+                    android:textColor="@color/support_darker_grey"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/quicksand_semibold"
+                    android:text=""/>
 
                 <TextView
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
                     style="@style/quicksandSemiBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/block_card_message"
+                    android:text="Edit Tag"
                     android:textColor="@color/support_darker_grey"
                     android:textSize="12sp" />
 
                 <EditText
-                    android:id="@+id/txtPesanBlock"
+                    android:id="@+id/txtEditTag"
                     android:inputType="text|textMultiLine"
                     android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     style="@style/quicksandSemiBold"
-                    android:textColor="@color/support_darker_grey"
+                    android:textColor="@color/black"
                     android:maxLength="100"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"  />
 
-                <LinearLayout
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <CheckBox
-                        android:id="@+id/chkTermsAgreement"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12dp"
-                        style="@style/quicksandSemiBold"
-                        android:textColor="@color/support_darker_grey"
-                        android:text="@string/i_agree_terms_and_condition" />
-
-                </LinearLayout>
-
                 <Button
-                    android:id="@+id/btnBlockCc"
+                    android:id="@+id/btnSubmitTag"
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/next"
+                    android:text="Simpan"
                     android:textAllCaps="false"
                     android:textSize="14dp"
                     android:fontFamily="@font/quicksand_bold"

@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.view.otp;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -10,9 +11,11 @@ import android.text.Editable;
 import android.text.Html;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -26,8 +29,14 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.AddCcViewModel;
+import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
+
+import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 
 /**
@@ -56,10 +65,8 @@ public class OtpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp);
         Bundle extras = getIntent().getExtras();
-        mCardNumber = extras != null ? extras.getString("cardNumber") : "";
-        if (extras != null) {
-            createCardFromExtras(extras);
-        }
+        cardData = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        mCardNumber = cardData.getNumberCard();
         createToolbar();
         initializeOtpInput();
         timer = findViewById(R.id.lblOtpTimer);
@@ -76,28 +83,6 @@ public class OtpActivity extends AppCompatActivity {
 
     // TODO: 23/12/2019 Delete after demo
     private void createCardFromExtras(Bundle extras) {
-        String cardHolder = extras.getString("cardHolder");
-        String expiryDate = extras.getString("expiryDate");
-        String billingAddress = extras.getString("billingAddress");
-        String country = extras.getString("country");
-        String city = extras.getString("city");
-        String postalCode = extras.getString("postalCode");
-        int cardImageResource = extras.getInt("cardImageResource");
-
-        cardData = new ImageCardModel(
-                cardImageResource,
-                mCardNumber.replace("   ", " "),
-                cardHolder,
-                expiryDate,
-                "Rp 20.000.000",
-                "15 November 2019",
-                "1 November 2019",
-                false
-                );
-        cardData.setBillingAddress(billingAddress);
-        cardData.setCountry(country);
-        cardData.setCity(city);
-        cardData.setPostalCode(postalCode);
         cardData.setLastBill("Rp 15.000.000");
         cardData.setMinPayment("Rp 1.500.000");
         cardData.setAvailableCredit("Rp 5.000.000");
@@ -291,7 +276,7 @@ public class OtpActivity extends AppCompatActivity {
     }
 
     private void returnToHome(){
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, HomeRemastered.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -311,18 +296,15 @@ public class OtpActivity extends AppCompatActivity {
 
         viewModel.getIsSaved().observe(this, isSaved -> {
             if (isSaved) {
-                String styledText = "Penambahan Credit Card Anda<br>"
-                        + "<big><b>"
-                        + UtilitiesCore.cardNumberSpacing(mCardNumber, 1)
-                        + "</b></big><br>"
-                        + "Berhasil";
-
-                UtilitiesCore.buildAlertDialog(
-                        this,
-                        Html.fromHtml(styledText),
-                        R.drawable.ic_approved,
-                        dialogInterface -> returnToHome()
-                );
+                showSuccessDialog(
+                        R.drawable.ic_img_emotion_smile,
+                        "Penambahan Kartu Kredit Anda",
+                        padCardNumber(mCardNumber, 3) + "\nBerhasil",
+                        dialogInterface -> {
+                            Intent intent = new Intent(this, HomeRemastered.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        });
             }
         });
 
@@ -336,5 +318,54 @@ public class OtpActivity extends AppCompatActivity {
                 );
             }
         });
+    }
+
+    private void showSuccessDialog(int icon, String smallText, String bigText, DialogInterface.OnDismissListener onDismiss) {
+        androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(OtpActivity.this);
+        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null);
+        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
+        alertIcon.setImageResource(icon);
+        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
+        txtSmallText.setText(smallText);
+        TextView txtBigText = view.findViewById(R.id.txtBigText);
+        txtBigText.setText(bigText);
+        ImageView close = view.findViewById(R.id.closeAlert);
+        builder.setView(view);
+        builder.setOnDismissListener(onDismiss);
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        close.setOnClickListener(view1 -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void showErrorDialog(int icon, String smallText, String bigText, String errorText, DialogInterface.OnDismissListener onDismiss) {
+        androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(OtpActivity.this);
+        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_invalid, null);
+        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
+        alertIcon.setImageResource(icon);
+        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
+        txtSmallText.setText(smallText);
+        TextView txtBigText = view.findViewById(R.id.txtBigText);
+        txtBigText.setText(bigText);
+        TextView txtErrorText = view.findViewById(R.id.txtErrorText);
+        txtBigText.setText(errorText);
+        ImageView close = view.findViewById(R.id.closeAlert);
+        builder.setView(view);
+        builder.setOnDismissListener(onDismiss);
+        androidx.appcompat.app.AlertDialog dialog = builder.create();
+        close.setOnClickListener(view1 -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private String padCardNumber(String number, int pad) {
+        StringBuilder padding = new StringBuilder();
+        for(int i = 0; i < pad; i++){
+            padding.append(" ");
+        }
+
+        String paddedText = number + "";
+        return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
+                + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
     }
 }

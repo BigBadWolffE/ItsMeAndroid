@@ -1,48 +1,34 @@
-package com.indocyber.itsmeandroid.viewremastered.blockkartu;
+package com.indocyber.itsmeandroid.viewremastered.tagkartu;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
-import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
-
-import org.apache.commons.text.WordUtils;
 
 import java.util.Objects;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
-public class BlockKartu extends AppCompatActivity {
+public class TagKartu extends AppCompatActivity {
 
     private TextView mCardNumber;
-    private EditText mBlockNote;
+    private EditText txtEditTag;
+    private TextView savedTag;
     private ImageView mCardImage;
     private String cardNumber;
     private int cardImage;
@@ -54,7 +40,7 @@ public class BlockKartu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_block_kartu);
+        setContentView(R.layout.activity_tag_kartu);
         Bundle extras = getIntent().getExtras();
         data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
         cardNumber = data.getNumberCard();
@@ -87,7 +73,7 @@ public class BlockKartu extends AppCompatActivity {
         int iconDimension = (int) getResources().getDimension(R.dimen._20sdp);
         Drawable resizedBackButton =
                 UtilitiesCore.resizeDrawable(backButton, this, iconDimension , iconDimension);
-        textView.setText("Block Kartu Kredit");
+        textView.setText("Tag Kartu Kredit");
         textView.setAllCaps(false);
         toolbar.setNavigationIcon(resizedBackButton);
         setSupportActionBar(toolbar);
@@ -100,47 +86,24 @@ public class BlockKartu extends AppCompatActivity {
         mCardImage = findViewById(R.id.imgCreditCard);
         mCardNumber = findViewById(R.id.txtCardNumber);
         mCardImage.setImageResource(cardImage);
-        mBlockNote = findViewById(R.id.txtPesanBlock);
+        txtEditTag = findViewById(R.id.txtEditTag);
+        savedTag = findViewById(R.id.cardTags);
     }
 
     private void initializeButton() {
-        Button blockCard;
-        blockCard = findViewById(R.id.btnBlockCc);
-        blockCard.setOnClickListener(view -> submit());
+        Button saveTag;
+        saveTag = findViewById(R.id.btnSubmitTag);
+        saveTag.setOnClickListener(view -> submit());
     }
 
     private boolean formIsValid(){
-        if (mBlockNote.getText().toString().trim().length() < 1) return false;
+        if (txtEditTag.getText().toString().trim().length() < 1) return false;
 
         return true;
     }
 
     private void submit() {
-        if(!formIsValid()){
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    getString(R.string.form_incomplete_warning),
-                    R.drawable.ic_invalid,
-                    null
-            );
-            return;
-        }
-
-        CheckBox termsAgreement = findViewById(R.id.chkTermsAgreement);
-        if (!termsAgreement.isChecked()) {
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    "Please read and indicate your acceptance of the site's Terms of Service",
-                    R.drawable.ic_invalid,
-                    null
-            );
-            return;
-        }
-
-        Intent intent = new Intent(this, SetPinActivityRemastered.class);
-        intent.putExtra("parentCode", GlobalVariabel.BLOCK_KARTU);
-        intent.putExtra(INTENT_ID, data);
-        startActivity(intent);
+        savedTag.setText(txtEditTag.getText().toString());
     }
 
 
@@ -181,6 +144,7 @@ public class BlockKartu extends AppCompatActivity {
         mCardHolder.setY(cardImage.getHeight() * 80 / 100);
 
         TextView mCardExpiry = findViewById(R.id.lblExpiry);
+        mCardExpiry.setText(expiryDate);
         mCardExpiry.setX(cardImage.getWidth() / 2);
         mCardExpiry.setY(cardImage.getHeight() * 70 / 100);
     }
@@ -195,7 +159,4 @@ public class BlockKartu extends AppCompatActivity {
         return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
                 + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
     }
-
-
-
 }
