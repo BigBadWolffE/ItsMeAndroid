@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.home.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -31,6 +33,8 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
+import com.indocyber.itsmeandroid.view.otp.OtpActivity;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
@@ -43,6 +47,7 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.dpToPx;
 
@@ -65,6 +70,8 @@ public class HomeRemasteredFragment extends Fragment {
     private RelativeLayout mRltvBeliPulsa;
     private RelativeLayout mRltvEmpty;
     private TextView txtTambhKartu;
+    private HomeViewModel viewModel;
+    private AlertDialog loader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,7 +80,6 @@ public class HomeRemasteredFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_remastered, container, false);
         ButterKnife.bind(this, view);
         return view;
-
     }
 
     @Override
@@ -86,6 +92,9 @@ public class HomeRemasteredFragment extends Fragment {
         mRltvEmpty = view.findViewById(R.id.rltvEmpty);
         mRltvBeliPulsa = view.findViewById(R.id.rltvBeliPulsa);
         txtTambhKartu = view.findViewById(R.id.txtTambhKartu);
+        viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
+        viewModel.fetchAllCardList();
+        observeViewModel();
         //mDotsLayout = view.findViewById(R.id.layoutDots);
 
     }
@@ -93,7 +102,7 @@ public class HomeRemasteredFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initCard();
+//        initCard();
         initPromo();
         onClick();
     }
@@ -156,6 +165,27 @@ public class HomeRemasteredFragment extends Fragment {
 
     }
 
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader = new SpotsDialog.Builder()
+                        .setCancelable(false)
+                        .setContext(getActivity())
+                        .build();
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+        viewModel.getCardList().observe(this, imageCardModels -> {
+            if (imageCardModels.size() > 0){
+                dataCardAvailable();
+            }else {
+                dataCardEmpty();
+            }
+        });
+    }
 
     private List<ImageCardModel> generateCardList() {
         List<ImageCardModel> cardList = new ArrayList<>();
