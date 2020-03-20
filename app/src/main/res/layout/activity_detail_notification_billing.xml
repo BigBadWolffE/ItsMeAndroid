@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewremastered.notification.Activity.DetailNotificationBillingActivity">
+
+    <LinearLayout
+        android:id="@+id/backgroundTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_bg_top"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/backgroundTop">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_ico_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/lblTitle"
+            style="@style/MaterialLightSubhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail Billing"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/viewDevider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="#efefef"
+        app:layout_constraintTop_toBottomOf="@id/appBar" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewDevider">
+
+        <LinearLayout
+            android:id="@+id/layoutBody"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/lblDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="12 Januari 2020, 18.00 WIB"
+                android:textColor="@color/brown_grey"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/lblTitleBilling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:fontFamily="@font/quicksand_semibold"
+                android:lineSpacingExtra="5sp"
+                android:text="eStatement Kartu Kredit BCA Mastercard"
+                android:textColor="@color/greyish_brown"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/lblBody"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="5"
+                android:fontFamily="@font/quicksand_regular"
+                android:lineSpacingExtra="8sp"
+                android:text="Yang Terhormat Ibu Permata Putri,\n\nBerikut ini adalah tagihan e-Statement Kartu Kredit Anda periode bulan Januari 2020.
+Password standar e-Statement Anda adalah ddmmyyyy (contoh: 01121980), di mana :\n\ndd      : dua digit tanggal lahir Anda, contoh 01\nmm    : dua digit pertama bulan lahir Anda, contoh 12\nyyyy  : tahun lahir Anda, contoh 1980\n\nApabila Anda ingin mengubah password yang Anda miliki, silakan klik www.bca.co.id/creditcard.\n\nSimpan alamat email eStatement@klikbca.com pada Address Book email Anda agar informasi tagihan tidak masuk ke dalam Junk Mail/Spam.\n\nRegards,\n\nPT Bank Central Asia Tbk"
+                android:textColor="@color/greyish_brown"
+                android:textSize="14sp" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutFile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_40sdp">
+
+                <ImageView
+                    android:id="@+id/imgFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_attachment"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lblFile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand_semibold"
+                    android:lineSpacingExtra="9sp"
+                    android:text="electronic-statement-credit-card-15112019.pdf"
+                    android:textColor="#000303"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/imgFile"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

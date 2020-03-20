@@ -465,4 +465,29 @@ public final class UtilitiesCore {
         negativeButton.setVisibility(View.VISIBLE);
         dialog.show();
     }
+
+    public static void buildAlertConfirmPasswordBilling(
+            Context context,
+            String message,
+            View.OnClickListener positiveAction,
+            DialogInterface.OnDismissListener onDismissListener
+    ){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.dialog_open_notif_billing, null);
+        TextView messageText = view.findViewById(R.id.txtPassword);
+        messageText.setText(message);
+        builder.setOnDismissListener(onDismissListener);
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        TextView positiveButton = view.findViewById(R.id.lblBtnOpen);
+
+        TextView negativeButton = view.findViewById(R.id.lblBtnCancel);
+        positiveButton.setOnClickListener(positiveAction);
+        negativeButton.setOnClickListener(view1 -> dialog.dismiss());
+        negativeButton.setVisibility(View.VISIBLE);
+        dialog.show();
+
+    }
+
+
 }

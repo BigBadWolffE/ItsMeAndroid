@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.notification.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.Billing;
 import com.indocyber.itsmeandroid.model.Notification;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.billing.adapter.BillingAdapter;
+import com.indocyber.itsmeandroid.view.billingdetail.BillingDetailActivity;
+import com.indocyber.itsmeandroid.viewremastered.notification.Activity.DetailNotificationBillingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +32,7 @@ import butterknife.ButterKnife;
 public class BillingFragment extends Fragment implements BillingAdapter.BillingListener {
 
     private final List<Billing> billingList = new ArrayList<>();
-    private final BillingAdapter mBillingAdapter = new BillingAdapter(new ArrayList<>(), billing -> onItemClick(billing) );
+    private final BillingAdapter mBillingAdapter = new BillingAdapter(new ArrayList<>(), billing -> onItemClick(billing));
 
     @BindView(R.id.recyclerBilling)
     RecyclerView mRecyclerBilling;
@@ -84,12 +89,15 @@ public class BillingFragment extends Fragment implements BillingAdapter.BillingL
     }
 
     private void onItemClick(Billing billing) {
-//        Intent intent = new Intent(this, BillingDetailActivity.class);
-//        intent.putExtra("billingTitle", billing.getTitle());
-//        intent.putExtra("billingDate", billing.getDate());
-//        intent.putExtra("billingBody", billing.getBody());
-//        intent.putExtra("billingAttachmentName", billing.getAttachmentName());
-//        intent.putExtra("billingAttachmentPassword", billing.getAttachmentPassword());
-//        startActivity(intent);
+
+        Intent intent = new Intent(getActivity(), DetailNotificationBillingActivity.class);
+        intent.putExtra("billingTitle", billing.getTitle());
+        intent.putExtra("billingDate", billing.getDate());
+        intent.putExtra("billingBody", billing.getBody());
+        intent.putExtra("billingAttachmentName", billing.getAttachmentName());
+        intent.putExtra("billingAttachmentPassword", billing.getAttachmentPassword());
+        startActivity(intent);
+
+
     }
 }

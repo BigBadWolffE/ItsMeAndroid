@@ -79,12 +79,12 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
 
         private void bind(Billing billing){
             billingTitle.setText(billing.getTitle());
-            if (billing.getBody().length() > 70) {
-                String cutText = billing.getBody().substring(0, 67) + "...";
-                billing.setBody(cutText);
-            } else {
-                billingBody.setText(billing.getBody());
-            }
+//            if (billing.getBody().length() > 70) {
+//                String cutText = billing.getBody().substring(0, 67) + "...";
+//                billing.setBody(cutText);
+//            } else {
+//                billingBody.setText(billing.getBody());
+//            }
             billingDate.setText(billing.getDate());
             billingAttachment.setText(billing.getAttachmentName());
         }
