@@ -41,7 +41,6 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
     public static CardView lblSubmit;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,6 +119,7 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
 
         firstPinView.setHideLineWhenFilled(false);
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -173,4 +173,6 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

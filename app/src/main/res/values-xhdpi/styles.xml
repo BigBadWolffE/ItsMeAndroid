@@ -6,11 +6,23 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:elevation">0dp</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ShareDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@drawable/bgcardlayout</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="NavigationViewStyle">
@@ -47,7 +59,7 @@
     </style>
 
     <style name="CreditCardTextStyle">
-        <item name="android:fontFamily">monospace</item>
+        <item name="android:fontFamily">@font/andale_mono</item>
         <item name="android:textColor">@color/colorwhite</item>
         <item name="android:textSize">14dp</item>
     </style>
@@ -156,6 +168,36 @@
         <item name="android:fontFamily">@font/quicksand_semibold</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColor">#333333</item>
+    </style>
+
+    <style name="title">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">35pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="headline">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">16pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="label">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">13pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="field">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">15pt</item>
+        <item name="android:textColor">#474747</item>
+    </style>
+
+    <style name="paragraph">
+        <item name="android:fontFamily">@font/quicksand_medium</item>
+        <item name="android:textSize">14pt</item>
+        <item name="android:textColor">#474747</item>
     </style>
 
 </resources>
