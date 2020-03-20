@@ -16,7 +16,8 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
-import com.indocyber.itsmeandroid.viewremastered.morecard.MoreCardRemasteredActivity;
+import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
+
 
 import java.util.List;
 

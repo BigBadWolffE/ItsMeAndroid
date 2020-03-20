@@ -25,8 +25,33 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
+        <activity
+            android:name=".viewremastered.morecard.activity.MoreCardRemasteredActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".viewremastered.belipulsa.activity.WebviewPembayaranActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.belipulsa.activity.PembayaranKreditActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.belipulsa.activity.PembayaranPulsaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.belipulsa.activity.CheckOutPulsaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.belipulsa.activity.BeliPulsaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
+        <activity
+            android:name=".viewremastered.editcard.activity.editkartu"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".viewremastered.blockkartu.BlockKartu"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
             android:theme="@style/AppTheme.NoActionBar" />

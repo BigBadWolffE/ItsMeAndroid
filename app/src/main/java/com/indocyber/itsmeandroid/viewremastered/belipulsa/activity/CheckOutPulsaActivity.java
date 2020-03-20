@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
@@ -17,11 +18,12 @@ import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_PARCELA
 
 public class CheckOutPulsaActivity extends AppCompatActivity {
 
-    private TextView txtHargaPulsa;
-    private TextView txtOperator;
-    private TextView txtNomor;
-    private TextView txtHargaBayar;
-    private Button btnBayar;
+    private TextView mTxtHargaPulsa;
+    private TextView mTxtOperator;
+    private TextView mTxtNomor;
+    private TextView mTxtHargaBayar;
+    private ImageButton mImageBtnBack;
+    private Button mBtnBayar;
     private Pulsa data;
 
     @Override
@@ -38,29 +40,35 @@ public class CheckOutPulsaActivity extends AppCompatActivity {
 
     }
 
-    private void initView(){
-        txtHargaPulsa = findViewById(R.id.txtHargaPulsa);
-        txtOperator = findViewById(R.id.txtOperator);
-        txtNomor = findViewById(R.id.txtNomor);
-        txtHargaBayar = findViewById(R.id.txtHargaBayar);
-        btnBayar = findViewById(R.id.btnBayar);
+    private void initView() {
+        mTxtHargaPulsa = findViewById(R.id.txtHargaPulsa);
+        mTxtOperator = findViewById(R.id.txtOperator);
+        mTxtNomor = findViewById(R.id.txtNomor);
+        mTxtHargaBayar = findViewById(R.id.txtHargaBayar);
+        mBtnBayar = findViewById(R.id.btnBayar);
+        mImageBtnBack = findViewById(R.id.imageBtnBack);
     }
 
-    private void initData(){
-        txtHargaPulsa.setText("Rp "+data.getHargaPulsa());
-        txtOperator.setText(data.getOperator());
-        txtNomor.setText(data.getHargaPulsa());
-        txtHargaBayar.setText("Rp "+data.getHargaBayar());
+    private void initData() {
+        mTxtHargaPulsa.setText("Rp " + data.getHargaPulsa());
+        mTxtOperator.setText(data.getOperator());
+        mTxtNomor.setText(data.getHargaPulsa());
+        mTxtHargaBayar.setText("Rp " + data.getHargaBayar());
     }
 
-    private void onClick(){
-    btnBayar.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(CheckOutPulsaActivity.this,PembayaranPulsaActivity.class);
-            intent.putExtra(INTENT_PARCELABLE,data);
-            startActivity(intent);
-        }
-    });
+    private void onClick() {
+
+        mImageBtnBack.setOnClickListener(v -> {
+            finish();
+        });
+
+        mBtnBayar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CheckOutPulsaActivity.this, PembayaranPulsaActivity.class);
+                intent.putExtra(INTENT_PARCELABLE, data);
+                startActivity(intent);
+            }
+        });
     }
 }
