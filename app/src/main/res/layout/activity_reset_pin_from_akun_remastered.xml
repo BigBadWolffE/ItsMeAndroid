@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:keyboard="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewremastered.loginandregister.SetPinActivityRemastered">
+    tools:context=".viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered">
 
     <View
         android:id="@+id/header_bck"
@@ -21,7 +22,7 @@
         android:id="@+id/guideline5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.05"
+        app:layout_constraintGuide_percent="0.08"
         android:orientation="horizontal"/>
 
     <TextView
@@ -34,7 +35,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/__interstate_regular"
-        android:text="Buat Security Code PIN (6 digits) Anda"
+        android:text="PIN (6 digits) Anda"
         android:textAlignment="center"
         android:textColor="@color/grey_40"
         android:textSize="@dimen/_14sdp"
@@ -94,7 +95,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/__interstate_regular"
             android:gravity="center"
-            android:text="Register 2/2"
+            android:text="Security Code"
             android:textColor="@color/grey_40"
             android:textSize="@dimen/_14sdp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -140,6 +141,9 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:outlineSpotShadowColor="@color/grey_main_medium"
+        keyboard:numberkeyboard_numberKeyTextColor="@color/grey_40"
+        android:outlineAmbientShadowColor="@color/grey_main_dark"
         app:layout_constraintBottom_toTopOf="@+id/lbl_btn_validation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

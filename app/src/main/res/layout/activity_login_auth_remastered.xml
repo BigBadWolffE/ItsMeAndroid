@@ -20,7 +20,7 @@
         android:id="@+id/guideline5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.08"
+        app:layout_constraintGuide_percent="0.05"
         android:orientation="horizontal"/>
 
     <ImageView
@@ -146,11 +146,16 @@
             android:id="@+id/layout_btn_next"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:cardBackgroundColor="@color/grey_login"
             app:cardCornerRadius="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/caution"
-            tools:layout_editor_absoluteX="13dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/caution">
 
             <TextView
                 android:id="@+id/btn_login"
@@ -170,7 +175,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/constraint_pass"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
 
             <TextView
                 android:id="@+id/tooltip_username"
@@ -214,8 +220,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/lupa_pass_layout"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintBottom_toTopOf="@+id/caution"
             app:layout_constraintEnd_toEndOf="parent"

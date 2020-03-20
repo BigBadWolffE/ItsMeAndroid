@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
 
@@ -63,6 +63,13 @@ public class AkunRemasteredFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ResetPasswordFromForgotActivity.class);
+                getActivity().startActivityForResult(intent,9);
+            }
+        });
+        tvSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ResetPinFromAkunActivityRemastered.class);
                 getActivity().startActivityForResult(intent,9);
             }
         });
