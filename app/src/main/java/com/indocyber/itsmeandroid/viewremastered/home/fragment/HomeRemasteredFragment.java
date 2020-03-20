@@ -18,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class HomeRemasteredFragment extends Fragment {
     private TabLayout mTabDots;
     private RelativeLayout blockButton;
     @BindView(R.id.imageView4)
-    ImageView mBtnNotif;
+    FrameLayout mBtnNotif;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
