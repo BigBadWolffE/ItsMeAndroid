@@ -164,10 +164,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:clipToPadding="false"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toTopOf="@+id/tabDots"
                         app:layout_constraintTop_toTopOf="parent">
 
                     </androidx.viewpager.widget.ViewPager>
+
+                    <RelativeLayout
+                        android:visibility="visible"
+                        android:id="@+id/rltvEmpty"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+
+                        app:layout_constraintBottom_toTopOf="@+id/tabDots"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/credit_card_0" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/txtTambhKartu"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:textColor="@color/dodger_blue"
+                                android:textSize="16sp"
+                                android:visibility="visible"
+                                android:text="Tambahkan \nKartu Perdanamu Disini" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                     <!-- <LinearLayout
                         android:padding="@dimen/spacing_medium"
@@ -205,6 +240,7 @@
                     android:paddingTop="@dimen/spacing_medium"
                     android:paddingBottom="@dimen/spacing_medium"
                     android:text="Promo Terbaru"
+                    android:layout_marginBottom="@dimen/spacing_medium"
                     app:layout_constraintBottom_toTopOf="@+id/recPromoView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -239,7 +275,7 @@
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingTop="@dimen/spacing_xmedium"
                         android:paddingRight="@dimen/spacing_large"
-                        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+                        app:layout_constraintEnd_toStartOf="@+id/rltvBeliPulsa"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent">
 
@@ -278,7 +314,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/relativeLayout"
+                        android:id="@+id/rltvBeliPulsa"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

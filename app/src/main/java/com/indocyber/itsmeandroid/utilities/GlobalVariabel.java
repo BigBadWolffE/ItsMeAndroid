@@ -9,6 +9,7 @@ public class GlobalVariabel {
     public static final int TAMBAH_MEMBER = 4;
     public static final int CARD_MENU = 6;
     public static final int BLOCK_SEMUA_KARTU = 5;
+    public static String INTENT_PARCELABLE = "INTENT_PARCELABLE";
     public static final int TAG_REMOVE = 0;
     public static final int TAG_ADD = 1;
 }
