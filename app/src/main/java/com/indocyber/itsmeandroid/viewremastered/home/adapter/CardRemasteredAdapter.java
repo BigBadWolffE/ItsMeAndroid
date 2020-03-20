@@ -47,7 +47,7 @@ public class CardRemasteredAdapter extends PagerAdapter {
         ImageCardModel data = list.get(position);
         ImageView cardImage = view.findViewById(R.id.cardListImage);
         ImageView cardMenuButton = view.findViewById(R.id.btnCardMoreMenu);
-        loadImage(cardImage,activity,R.drawable.img_bca_card_template);
+        loadImage(cardImage,activity, data.getImage());
 
         cardMenuButton.setOnClickListener(v ->{
             Intent intent = new Intent(activity, MoreCardRemasteredActivity.class);

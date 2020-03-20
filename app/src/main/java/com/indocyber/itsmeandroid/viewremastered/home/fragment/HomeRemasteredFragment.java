@@ -118,11 +118,11 @@ public class HomeRemasteredFragment extends Fragment {
 
     private void initCard() {
 
-        if (generateCardList().size() > 0){
-            dataCardAvailable();
-        }else {
-            dataCardEmpty();
-        }
+//        if (generateCardList().size() > 0){
+//            dataCardAvailable();
+//        }else {
+//            dataCardEmpty();
+//        }
     }
 
     private void dataCardEmpty() {
@@ -132,11 +132,11 @@ public class HomeRemasteredFragment extends Fragment {
         mTabDots.setVisibility(View.GONE);
     }
 
-    private void dataCardAvailable() {
+    private void dataCardAvailable(List<ImageCardModel> list) {
         mRltvEmpty.setVisibility(View.GONE);
         mViewPagerCard.setVisibility(View.VISIBLE);
         mTabDots.setVisibility(View.VISIBLE);
-        mCardAdapter.insertData(generateCardList());
+        mCardAdapter.insertData(list);
         mViewPagerCard.setAdapter(mCardAdapter);
         mTabDots.setupWithViewPager(mViewPagerCard, true);
         int paddingValue = dpToPx(getActivity(), 16);
@@ -180,7 +180,7 @@ public class HomeRemasteredFragment extends Fragment {
 
         viewModel.getCardList().observe(this, imageCardModels -> {
             if (imageCardModels.size() > 0){
-                dataCardAvailable();
+                dataCardAvailable(imageCardModels);
             }else {
                 dataCardEmpty();
             }
