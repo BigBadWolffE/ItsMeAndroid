@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,14 +25,13 @@ import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpResetPinSuccess;
 
 import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
+public class ResetPinSebelumnyaActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
 
     public static PinView firstPinView;
     public static AlertDialog alertDialog;
@@ -41,11 +42,13 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_pin_from_akun_remastered);
+        setContentView(R.layout.activity_reset_pin_sebelumnya_remastered);
+
+
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
-        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinFromAkunActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinSebelumnyaActivityRemastered.this).build();
 
         NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
@@ -54,7 +57,7 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
         submitPin = findViewById(R.id.btn_pin_register);
         lblSubmit = findViewById(R.id.lbl_btn_validation);
         submitPin.setEnabled(false);
-        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinFromAkunActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinSebelumnyaActivityRemastered.this).build();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,14 +72,16 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
                     alertDialog.show();
                     new Handler().postDelayed(() -> {
                         alertDialog.dismiss();
-//                        Intent intent = new Intent(SetPinActivityRemastered.this, PopUpRegisterSucceedRemastered.class);
-//                        startActivity(intent);
-                        PopUpResetPinSuccess.showDialog(ResetPinFromAkunActivityRemastered.this);
+                        Intent intent = new Intent(ResetPinSebelumnyaActivityRemastered.this, ResetPinFromAkunActivityRemastered.class);
+                        startActivity(intent);
+
+
                     }, 800);
                 }, 200);
             }
         });
     }
+
     private void setPinView() {
         firstPinView.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
         firstPinView.setItemCount(6);
@@ -167,5 +172,7 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
         }
         return super.onOptionsItemSelected(item);
     }
-}
 
+
+
+}

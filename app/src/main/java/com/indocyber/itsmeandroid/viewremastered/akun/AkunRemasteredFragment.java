@@ -15,6 +15,7 @@ import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFro
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,7 +70,7 @@ public class AkunRemasteredFragment extends Fragment {
         tvSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ResetPinFromAkunActivityRemastered.class);
+                Intent intent = new Intent(getActivity(), ResetPinSebelumnyaActivityRemastered.class);
                 getActivity().startActivityForResult(intent,9);
             }
         });

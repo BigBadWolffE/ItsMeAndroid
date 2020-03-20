@@ -2,6 +2,8 @@ package com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
 public class PopUpResetPinSuccess {
 
@@ -47,8 +51,9 @@ public class PopUpResetPinSuccess {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Intent register = new Intent(activity, AkunRemasteredFragment.class);
-                activity.startActivityForResult(register,1);
+                Intent register = new Intent(activity, LoginAuthActivityRemastered.class);
+                activity.startActivity(register);
+
             }
         });
         dialog.show();
