@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".viewremastered.belipulsa.activity.PembayaranKreditActivity">
+
+    <LinearLayout
+        android:id="@+id/backgroundTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarSize"
+        android:background="@drawable/img_bg_top"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionBarSize"
+        android:orientation="horizontal">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="Pembayaran"
+            android:textAppearance="@style/quicksandSemiBold"
+            android:textColor="@color/grey_40"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/imageBtnBack"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/spacing_large"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:padding="@dimen/spacing_medium"
+            android:src="@drawable/ic_ico_arrow_back" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_large"
+        android:scrollbars="none"
+        android:scrollingCache="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/spacing_xxlarge"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="Total Tagihan"
+                    android:textAppearance="@style/quicksandSemiBold"
+                    android:textColor="@color/greyish_brown" />
+
+                <TextView
+                    android:id="@+id/txtHargaBayar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rp 50.000"
+                    android:textAppearance="@style/quicksandSemiBold"
+                    android:textColor="@color/greyish_brown" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_20" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+
+                android:text="Kartu Kredit"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/greyish_brown" />
+
+            <ImageView
+                android:layout_width="match_parent"
+
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_bca_card_template" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:padding="@dimen/spacing_medium"
+                android:text="Nama Lengkap"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/grey_40" />
+
+            <EditText
+                android:id="@+id/edtxNamaLengkap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="5sp"
+                android:hint="Contoh: Jordan Setiawan"
+                android:padding="@dimen/spacing_medium"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:padding="@dimen/spacing_medium"
+                android:text="Nomor Kartu"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/grey_40" />
+
+            <EditText
+                android:id="@+id/edtxNomorKartu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Contoh: 1234 1234 1234 1234"
+
+                android:padding="@dimen/spacing_medium"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xlarge"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="Masa Berlaku"
+                        android:textAppearance="@style/quicksandSemiBold"
+                        android:textColor="@color/grey_40" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:lineSpacingExtra="5sp"
+                            android:hint="01"
+                            android:inputType="number"
+                            android:maxLength="2"
+                            android:padding="@dimen/spacing_medium"
+                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/spacing_medium"
+                            android:text="/"
+                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textColor="@color/grey_40"
+                            android:textSize="16sp" />
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:hint="12"
+                            android:inputType="number"
+                            android:lineSpacingExtra="5sp"
+                            android:maxLength="2"
+                            android:padding="@dimen/spacing_medium"
+                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1.5" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_xlarge"
+                        android:padding="@dimen/spacing_medium"
+                        android:text="CVV"
+                        android:textAppearance="@style/quicksandSemiBold"
+                        android:textColor="@color/grey_40" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="***"
+                            android:digits="123456789"
+                            android:lineSpacingExtra="5sp"
+                            android:inputType="numberPassword"
+                            android:maxLength="3"
+                            android:padding="@dimen/spacing_medium"
+                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:src="@drawable/ic_credit_card_black_24dp"
+                            android:tint="@color/greyish_brown"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnBayar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@drawable/btn_rounded_blue"
+                android:text="Bayar"
+                android:textColor="@color/colorwhite" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/spacing_large"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</LinearLayout>

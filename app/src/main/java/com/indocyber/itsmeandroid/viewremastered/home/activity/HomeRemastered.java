@@ -131,19 +131,19 @@ public class HomeRemastered extends AppCompatActivity {
                 if (id == R.id.action_home) {
                     fadeOutIn(content);
                     fragment = new HomeRemasteredFragment();
-                    showOutPullUpGone();
+                    //showOutPullUpGone();
                 } else if (id == R.id.action_promo) {
                     fadeOutIn(content);
                     fragment = new PromoRemasteredFragment();
-                    showOutPullUpGone();
+                    //showOutPullUpGone();
                 } else if (id == R.id.action_kartuku) {
                     fadeOutIn(content);
                     fragment = new KartukuRemasteredFragment();
-                    showOutPullUpGone();
+                    //showOutPullUpGone();
                 } else if (id == R.id.action_akun) {
                     fadeOutIn(content);
                     fragment = new AkunRemasteredFragment();
-                    showOutPullUpGone();
+                    //showOutPullUpGone();
                 }
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment)
@@ -154,5 +154,12 @@ public class HomeRemastered extends AppCompatActivity {
         });
     }
 
+    public void onClickPromo(){
+        mNavigation.getMenu().findItem(R.id.action_promo).setChecked(true);
+        Fragment fragment = null;
+        fragment = new PromoRemasteredFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment)
+                .commit();
+    }
 
 }

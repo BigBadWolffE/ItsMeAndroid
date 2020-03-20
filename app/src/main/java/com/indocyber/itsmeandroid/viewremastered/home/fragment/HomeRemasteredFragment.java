@@ -1,10 +1,12 @@
 package com.indocyber.itsmeandroid.viewremastered.home.fragment;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -27,10 +30,13 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
+import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
+import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.dpToPx;
 
@@ -48,7 +54,9 @@ public class HomeRemasteredFragment extends Fragment {
     private CardRemasteredAdapter mCardAdapter;
     private LinearLayout mDotsLayout;
     private TabLayout mTabDots;
+    private RelativeLayout mRltvBeliPulsa;
 
+    private HomeRemastered homeRemastered = new HomeRemastered();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +74,7 @@ public class HomeRemasteredFragment extends Fragment {
         mPromoRecyclerView = view.findViewById(R.id.recPromoView);
         mCardAdapter = new CardRemasteredAdapter(getActivity());
         mTabDots = view.findViewById(R.id.tabDots);
+        mRltvBeliPulsa = view.findViewById(R.id.rltvBeliPulsa);
         //mDotsLayout = view.findViewById(R.id.layoutDots);
 
     }
@@ -75,8 +84,16 @@ public class HomeRemasteredFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         initCard();
         initPromo();
+        onClick();
     }
 
+    private void onClick(){
+        mRltvBeliPulsa.setOnClickListener(v ->{
+            Intent intent = new Intent(getActivity(), BeliPulsaActivity.class);
+            startActivity(intent);
+        });
+
+    }
     private void initCard() {
 
         mCardAdapter.insertData(generateCardList());
@@ -99,6 +116,13 @@ public class HomeRemasteredFragment extends Fragment {
 
 
         mPromoRecyclerView.setAdapter(promoAdapter);
+
+        promoAdapter.SetItemOnclickListener(new PromoPagerAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick() {
+                ((HomeRemastered) Objects.requireNonNull(getActivity())).onClickPromo();
+            }
+        });
     }
 
 

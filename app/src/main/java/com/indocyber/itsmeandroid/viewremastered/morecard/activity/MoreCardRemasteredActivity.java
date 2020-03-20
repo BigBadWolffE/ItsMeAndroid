@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.viewremastered.morecard;
+package com.indocyber.itsmeandroid.viewremastered.morecard.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

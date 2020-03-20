@@ -198,7 +198,7 @@
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingTop="@dimen/spacing_xmedium"
                         android:paddingRight="@dimen/spacing_large"
-                        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+                        app:layout_constraintEnd_toStartOf="@+id/rltvBeliPulsa"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent">
 
@@ -237,7 +237,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/relativeLayout"
+                        android:id="@+id/rltvBeliPulsa"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

@@ -13,6 +13,8 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:node="replace" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:name=".view.App"
         android:allowBackup="true"
@@ -25,8 +27,23 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
-        <activity android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
+        <activity android:name=".viewremastered.belipulsa.activity.WebviewPembayaranActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.belipulsa.activity.PembayaranKreditActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.belipulsa.activity.PembayaranPulsaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.belipulsa.activity.CheckOutPulsaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.belipulsa.activity.BeliPulsaActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.morecard.activity.MoreCardRemasteredActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
             android:theme="@style/AppTheme.NoActionBar" />
