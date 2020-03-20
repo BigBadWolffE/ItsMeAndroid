@@ -12,6 +12,7 @@ import com.indocyber.itsmeandroid.viewremastered.notification.Adapter.TabLayoutA
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class NotificationRemasteredActivity extends AppCompatActivity {
     @BindView(R.id.tabLayout)
@@ -29,6 +30,11 @@ public class NotificationRemasteredActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setupTabLayout();
 
+    }
+
+    @OnClick(R.id.imageBtnBack)
+    void back(){
+        finish();
     }
 
     private void setupTabLayout(){

@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,8 @@ public class DetailNotificationBillingActivity extends AppCompatActivity {
     TextView mlblTitleBilling;
     @BindView(R.id.lblFile)
     TextView mLblFile;
+    @BindView(R.id.imageBtnBack)
+    ImageView mBtnBack;
     String attachmentName;
 
     private EditText mAttachmentPassword;
@@ -83,6 +86,11 @@ public class DetailNotificationBillingActivity extends AppCompatActivity {
     @OnClick(R.id.lblFile)
     void openFilePdf() {
         renderPdf(attachmentName);
+    }
+
+    @OnClick(R.id.imageBtnBack)
+    void back(){
+        finish();
     }
 
     private void renderPdf(String fileName) {
