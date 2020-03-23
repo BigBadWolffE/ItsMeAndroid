@@ -112,31 +112,58 @@
                             android:src="@drawable/ico_share" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/lblDiskon"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/layoutDiskon"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_local_offer"
-                        android:fontFamily="@font/quicksand_regular"
-                        android:text="  Discount 50%"
-                        android:textSize="14sp"
-                        android:visibility="gone"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/lblTitlePromo" />
+                        app:layout_constraintTop_toBottomOf="@id/lblTitlePromo">
 
-                    <TextView
-                        android:id="@+id/lblJarak"
-                        android:layout_width="wrap_content"
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_local_offer" />
+
+                        <TextView
+                            android:id="@+id/lblDiskon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:text="  Discount 50%"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/layoutJarak"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:drawableLeft="@drawable/ic_location"
-                        android:fontFamily="@font/quicksand_regular"
-                        android:text="  1.8 km"
+                        android:orientation="horizontal"
                         android:visibility="gone"
-                        android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/lblTitlePromo" />
+
+                        app:layout_constraintTop_toBottomOf="@id/lblTitlePromo">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_location" />
+
+                        <TextView
+                            android:id="@+id/lblJarak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:text="  1.8 km"
+                            android:textSize="14sp" />
+                    </LinearLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -209,6 +236,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rounded_corners"
+        android:visibility="gone"
         app:cardElevation="@dimen/_5sdp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 

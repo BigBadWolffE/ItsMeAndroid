@@ -162,6 +162,7 @@ public class ProfileActivity extends BaseActivity {
                     break;
             }
         }
+
     }
 
     private void observeViewModel() {

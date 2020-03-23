@@ -61,6 +61,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  *
  *
@@ -436,6 +438,11 @@ public final class UtilitiesCore {
     }
 
     public static void loadImage(ImageView imageView, Bitmap bitmap, Context context) {
+        Glide.with(context)
+                .load(bitmap)
+                .into(imageView);
+    }
+    public static void loadCircleImage(CircleImageView imageView, Bitmap bitmap, Context context) {
         Glide.with(context)
                 .load(bitmap)
                 .into(imageView);

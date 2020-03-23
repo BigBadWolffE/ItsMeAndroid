@@ -1,12 +1,5 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
@@ -14,6 +7,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.indocyber.itsmeandroid.R;
@@ -40,10 +39,12 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     TextView mLblJarak;
     @BindView(R.id.lblDiskon)
     TextView mLblDiskon;
+    @BindView(R.id.layoutDiskon)
+    LinearLayout mLayoutDiskon;
+    @BindView(R.id.layoutJarak)
+    LinearLayout mLayoutJarak;
 
-    private boolean dealerSelected = false;
     BottomSheetBehavior mBottomSheetBehaviorShare;
-    private int sheetSharePeek, deviceHeight, statusBarHeight;
     GridLayoutManager gridLayourManager;
     SharePromoAdapter mSharePromoAdapter;
 
@@ -56,13 +57,16 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
         setContentView(R.layout.activity_detail_promo);
         ButterKnife.bind(this);
 
-        if (!getIntent().getStringExtra("jarak").equals("")){
-            mLblJarak.setVisibility(View.VISIBLE);
-        }else if (!getIntent().getStringExtra("diskon").equals("")){
-            mLblDiskon.setVisibility(View.VISIBLE);
-        }else {
-            mLblJarak.setVisibility(View.GONE);
-            mLblDiskon.setVisibility(View.GONE);
+        if (!getIntent().getStringExtra("jarak").equals("")) {
+            mLayoutJarak.setVisibility(View.VISIBLE);
+            mLayoutDiskon.setVisibility(View.GONE);
+
+        } else if (!getIntent().getStringExtra("diskon").equals("")) {
+            mLayoutDiskon.setVisibility(View.VISIBLE);
+            mLayoutJarak.setVisibility(View.GONE);
+        } else {
+            mLayoutJarak.setVisibility(View.GONE);
+            mLayoutDiskon.setVisibility(View.GONE);
         }
 
         mBottomSheetBehaviorShare = BottomSheetBehavior.from(mBottomSheetShare);
@@ -83,18 +87,17 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
             }
         });
 
-         gridLayourManager = new GridLayoutManager(this,4);
+        gridLayourManager = new GridLayoutManager(this, 4);
 
     }
-
 
 
     @OnClick(R.id.btnShare)
     void sharePromo() {
         mBottomSheetBehaviorShare.setPeekHeight(UtilitiesCore.dpToPx(DetailPromoActivity.this, 250));
-        String[] removePackageName = new String[]{"com.android.bluetooth","com.facebook.orca","com.google.android.apps.docs","com.discord",
-                "com.google.android.apps.messaging","com.google.android.gm","com.google.android.apps.keep",
-                "com.linkedin.android","com.skype.raider","com.roidapp.photogrid","com.rarlab.rar"};
+        String[] removePackageName = new String[]{"com.android.bluetooth", "com.facebook.orca", "com.google.android.apps.docs", "com.discord",
+                "com.google.android.apps.messaging", "com.google.android.gm", "com.google.android.apps.keep",
+                "com.linkedin.android", "com.skype.raider", "com.roidapp.photogrid", "com.rarlab.rar"};
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
         sendIntent.putExtra(Intent.EXTRA_TEXT, "share promo");
@@ -103,15 +106,14 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
 
         List<ItemShareModel> appNames = new ArrayList<ItemShareModel>();
         for (ResolveInfo info : activities) {
-            if(!Arrays.asList(removePackageName).contains(info.activityInfo.packageName)){
-                appNames.add(new ItemShareModel(info.loadLabel(getPackageManager()).toString(),info.activityInfo.packageName, info.loadIcon(getPackageManager())));
+            if (!Arrays.asList(removePackageName).contains(info.activityInfo.packageName)) {
+                appNames.add(new ItemShareModel(info.loadLabel(getPackageManager()).toString(), info.activityInfo.packageName, info.loadIcon(getPackageManager())));
             }
         }
 //        final List<ItemShareModel> newItem = appNames;
-        mSharePromoAdapter = new SharePromoAdapter(appNames, getApplicationContext(),this);
+        mSharePromoAdapter = new SharePromoAdapter(appNames, getApplicationContext(), this);
         mRecyclerSharePromo.setLayoutManager(gridLayourManager);
         mRecyclerSharePromo.setAdapter(mSharePromoAdapter);
-
 
 
 //        ListAdapter adapter = new ArrayAdapter<ItemShareModel>(this, R.layout.select_dialog_item,R.id.lblTittle, newItem) {
@@ -175,18 +177,18 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     }
 
     @OnClick(R.id.imageBtnBack)
-    void back(){
+    void back() {
         finish();
     }
 
     @OnClick(R.id.btnClose)
-    void close(){
+    void close() {
         mBottomSheetBehaviorShare.setPeekHeight(UtilitiesCore.dpToPx(DetailPromoActivity.this, 0));
 
     }
 
     @Override
     public void onClick(ItemShareModel mItemShareModel) {
-        Toast.makeText(this, "Ini package " + mItemShareModel.packageName , Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Ini package " + mItemShareModel.packageName, Toast.LENGTH_LONG).show();
     }
 }
