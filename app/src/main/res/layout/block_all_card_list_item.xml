@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_12sdp"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/checkCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:buttonTint="@color/dodger_blue"
+        android:backgroundTint="@color/dodger_blue"
+        android:padding="@dimen/spacing_medium" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_kartukredit_bca" />
+
+        <ImageView
+            android:id="@+id/cardListImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_bca_card_template" />
+
+        <TextView
+            android:id="@+id/lblCcNumber"
+            style="@style/CreditCardTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXX   XXXX   XXXX   XXXX"
+            android:textAlignment="center"
+            android:textColor="@color/colorwhite"
+            android:textSize="@dimen/card_holder_text_size" />
+
+        <TextView
+            android:id="@+id/lblCardHolder"
+            style="@style/CreditCardTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jordan Setiawan"
+            android:textSize="@dimen/card_holder_text_size" />
+
+        <TextView
+            android:id="@+id/lblExpiry"
+            style="@style/CreditCardTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="09/19"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:id="@+id/blockLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/cardListImage"
+            android:layout_alignTop="@id/cardListImage"
+            android:layout_alignRight="@id/cardListImage"
+            android:layout_alignBottom="@id/cardListImage"
+            android:background="@drawable/bg_blockedcard_layer"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="Kartu kredit terblokir\ntanggal 20/01/2020 14:15 WIB\nOleh Thomas K"
+                android:textAlignment="center"
+                android:textColor="@color/support_black"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <!--<ImageView
+            android:id="@+id/btnCardMoreMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/cardListImage"
+            android:src="@drawable/ic_btn_more_menu" />-->
+    </RelativeLayout>
+
+
+</LinearLayout>
