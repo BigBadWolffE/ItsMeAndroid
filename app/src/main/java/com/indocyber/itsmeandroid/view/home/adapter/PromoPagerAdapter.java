@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.model.Pulsa;
+import com.indocyber.itsmeandroid.viewremastered.belipulsa.adapter.BeliPulsaAdapter;
 
 import java.util.List;
 
@@ -25,6 +27,11 @@ public class PromoPagerAdapter extends RecyclerView.Adapter<PromoPagerAdapter.Pr
 
     List<PromoItemModel> listPromo;
     Context context;
+    private onItemClickListener listener;
+
+    public void SetItemOnclickListener(onItemClickListener listener) {
+        this.listener = listener;
+    }
 
     public void refreshPromoList(List<PromoItemModel> newPromoList) {
         listPromo.clear();
@@ -68,8 +75,18 @@ public class PromoPagerAdapter extends RecyclerView.Adapter<PromoPagerAdapter.Pr
 
         public void bind(PromoItemModel model) {
             promoItemImage.setImageResource(R.drawable.img_banner_starbuck);
-            morePromoButton.setOnClickListener(view ->
-                    Toast.makeText(context, "More Promo", Toast.LENGTH_SHORT).show());
-        }
+            morePromoButton.setOnClickListener(view -> {
+                if (listener != null) {
+                    listener.onItemClick();
+                }
+
+        });
+        //Toast.makeText(context, "More Promo", Toast.LENGTH_SHORT).show());
     }
+}
+
+public interface onItemClickListener {
+    void onItemClick();
+
+}
 }

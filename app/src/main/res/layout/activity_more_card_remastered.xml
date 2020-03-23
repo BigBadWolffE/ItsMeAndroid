@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewremastered.morecard.MoreCardRemasteredActivity">
+    tools:context=".viewremastered.morecard.activity.MoreCardRemasteredActivity">
 
 
     <LinearLayout
@@ -109,8 +109,8 @@
 
                 <ImageView
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_menu_billing" />
 
@@ -140,8 +140,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_edit_card" />
 
@@ -171,8 +171,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ico_block_all_card" />
 
@@ -216,8 +216,8 @@
 
                 <ImageView
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_tambah_limit" />
 
@@ -248,8 +248,8 @@
 
                 <ImageView
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_tag" />
 
@@ -279,8 +279,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_share" />
 
@@ -323,8 +323,8 @@
 
                 <ImageView
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_menu_promo" />
 
@@ -356,8 +356,8 @@
 
                 <ImageView
 
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_menu_chat" />
 
@@ -388,8 +388,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/banner_button_icon_height"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_ico_menu_call" />
 

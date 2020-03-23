@@ -18,20 +18,20 @@ public class ImageCardModel implements Parcelable {
     @NonNull
     private int id;
     private int image;
-    private String numberCard;
-    private String nameCard;
-    private String expireCard;
-    private String cost;
-    private String printDate;
-    private String printDueDate;
+    private String numberCard = "";
+    private String nameCard = "";
+    private String expireCard = "";
+    private String cost = "";
+    private String printDate = "";
+    private String printDueDate = "";
     private boolean isBlockedCard;
-    private String billingAddress;
-    private String country;
-    private String city;
-    private String postalCode;
-    private String lastBill;
-    private String minPayment;
-    private String availableCredit;
+    private String billingAddress = "";
+    private String country = "";
+    private String city = "";
+    private String postalCode = "";
+    private String lastBill = "";
+    private String minPayment = "";
+    private String availableCredit = "";
     private List<String> tagList;
 
     public ImageCardModel(int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {

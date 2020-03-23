@@ -7,12 +7,11 @@
         android:name="android.permission.CALL_PRIVILEGED"
         android:protectionLevel="signature|privileged" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:node="replace" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".view.App"
@@ -26,14 +25,20 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+
         <activity
-            android:name=".viewremastered.notification.Activity.DetailNotificationBillingActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".viewremastered.AddKartuPersonal.AddKartuPersonal"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.notification.Activity.NotificationRemasteredActivity"
+            android:name=".viewremastered.addkartumember.AddKartuMember"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".viewremastered.tagkartu.TagKartu"
+            android:parentActivityName=".view.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.billinginfo.BillingInfo"
+            android:parentActivityName=".view.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
@@ -41,47 +46,67 @@
         <activity
             android:name=".viewremastered.metodepembayaran.MetodePembayaranActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".viewremastered.morecard.activity.MoreCardRemasteredActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".viewremastered.belipulsa.activity.WebviewPembayaranActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.belipulsa.activity.PembayaranKreditActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.akun.AkunRemasteredFragment"></activity>
+
         <activity
             android:name=".viewremastered.historytransaction.HistoryTransactionActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
+            android:name=".viewremastered.belipulsa.activity.PembayaranPulsaActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.loginandregister.LupaPasswordActivityRemastered"
+            android:name=".viewremastered.belipulsa.activity.CheckOutPulsaActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
+            android:name=".viewremastered.belipulsa.activity.BeliPulsaActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".viewremastered.blockkartu.BlockKartu"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".viewremastered.akun.EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".viewremastered.editcard.activity.editkartu"
+            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".viewremastered.blockkartu.BlockKartu"
+            android:parentActivityName=".view.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.SetPinActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.morecard.MoreCardRemasteredActivity"
+            android:name=".viewremastered.loginandregister.LoginAuthActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.RegisterActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.LoginActivityRemastered"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".viewremastered.home.activity.HomeRemastered"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".viewremastered.home.activity.HomeRemastered"
+            android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
@@ -136,16 +161,16 @@
         <activity
             android:name=".view.otp.OtpActivity"
             android:parentActivityName=".view.addcc.AddCcActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity"
             android:parentActivityName=".view.addcc.AddCcActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.addcc.AddCcActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".view.home.activity.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.home.activity.HomeActivity"
             android:screenOrientation="portrait"
@@ -166,6 +191,13 @@
         <activity android:name=".view.login.LoginWithEmailActivity" />
         <activity android:name=".view.BaseActivity" />
         <activity
+            android:name=".viewremastered.notification.Activity.DetailNotificationBillingActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".viewremastered.notification.Activity.NotificationRemasteredActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".view.chat.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -178,7 +210,9 @@
         <activity
             android:name=".view.splashscreen.SplashScreenActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" >
+
+        </activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -212,5 +246,15 @@
             </intent-filter>
         </service>
     </application>
+    <permission
+        android:name="android.permission.CALL_PRIVILEGED"
+        android:protectionLevel="signature|privileged" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:node="replace" />
 
 </manifest>

@@ -1,8 +1,10 @@
 package com.indocyber.itsmeandroid.viewremastered.blockkartu;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -12,6 +14,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,9 +27,11 @@ import android.widget.TextView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import org.apache.commons.text.WordUtils;
 
@@ -37,8 +42,6 @@ import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 public class BlockKartu extends AppCompatActivity {
 
     private TextView mCardNumber;
-    private TextView mCardHolder;
-    private TextView mCardExpiry;
     private EditText mBlockNote;
     private ImageView mCardImage;
     private String cardNumber;
@@ -46,15 +49,14 @@ public class BlockKartu extends AppCompatActivity {
     private String cardHolder;
     private String cardBillingAddress;
     private String expiryDate;
-    private int mCardImageResource;
+    ImageCardModel data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_block_kartu);
         Bundle extras = getIntent().getExtras();
-        ImageCardModel data =
-                Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
         cardNumber = data.getNumberCard();
         cardHolder = data.getNameCard();
         cardImage = data.getImage();
@@ -96,7 +98,7 @@ public class BlockKartu extends AppCompatActivity {
 
     private void initializeCardNumber() {
         mCardImage = findViewById(R.id.imgCreditCard);
-        mCardNumber.setText(cardNumber);
+        mCardNumber = findViewById(R.id.txtCardNumber);
         mCardImage.setImageResource(cardImage);
         mBlockNote = findViewById(R.id.txtPesanBlock);
     }
@@ -111,25 +113,6 @@ public class BlockKartu extends AppCompatActivity {
         if (mBlockNote.getText().toString().trim().length() < 1) return false;
 
         return true;
-    }
-
-    private void requestIncreaseCreditLimit() {
-        if(!formIsValid()){
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    getString(R.string.form_incomplete_warning),
-                    R.drawable.ic_invalid,
-                    null
-            );
-            return;
-        }
-
-        Intent intent = new Intent(this, RequestIncreaseLimitActivity.class);
-        intent.putExtra("cardNumber", cardNumber);
-        intent.putExtra("holderName", cardHolder);
-        intent.putExtra("expiryDate", expiryDate);
-        intent.putExtra("cardImageResource", mCardImageResource);
-        startActivity(intent);
     }
 
     private void submit() {
@@ -154,11 +137,9 @@ public class BlockKartu extends AppCompatActivity {
             return;
         }
 
-        Intent intent = new Intent(this, OtpActivity.class);
-        intent.putExtra("cardNumber", cardNumber);
-        intent.putExtra("holderName", cardHolder);
-        intent.putExtra("expiryDate", expiryDate);
-        intent.putExtra("cardImageResource", mCardImageResource);
+        Intent intent = new Intent(this, SetPinActivityRemastered.class);
+        intent.putExtra("parentCode", GlobalVariabel.BLOCK_KARTU);
+        intent.putExtra(INTENT_ID, data);
         startActivity(intent);
     }
 
@@ -214,5 +195,7 @@ public class BlockKartu extends AppCompatActivity {
         return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
                 + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
     }
+
+
 
 }

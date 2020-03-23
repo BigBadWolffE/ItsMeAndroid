@@ -11,18 +11,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
-
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AkunRemasteredFragment extends Fragment {
+public class AkunRemasteredFragment extends BaseFragment {
 
     public AkunRemasteredFragment() {
         // Required empty public constructor
@@ -32,44 +31,60 @@ public class AkunRemasteredFragment extends Fragment {
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_akun_remastered;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_akun_remastered, container, false);
-        ButterKnife.bind(this, rootView);
+        final View rootView = inflater.inflate(layoutRes(), container, false);
+
+
+
+        tvHistory = rootView.findViewById(R.id.textView9);
+        tvReset = rootView.findViewById(R.id.textView10);
+        tvSecurity = rootView.findViewById(R.id.textView11);
+        tvMetodePembayaran = rootView.findViewById(R.id.tv10);
+
+        tvMetodePembayaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), MetodePembayaranActivityRemastered.class);
+                getActivity().startActivityForResult(intent,8);
+
+            }
+        });
+
+        tvHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent register = new Intent(getActivity(), HistoryTransactionActivityRemastered.class);
+                getActivity().startActivityForResult(register,1);
+            }
+        });
+
+        tvReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ResetPasswordFromForgotActivity.class);
+                getActivity().startActivityForResult(intent,9);
+            }
+        });
+        tvSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ResetPinSebelumnyaActivityRemastered.class);
+                getActivity().startActivityForResult(intent,9);
+            }
+        });
+
+
+
 
         return rootView;
 
-    }
-
-    @OnClick(R.id.layoutHistory)
-    void openHistory(){
-        Intent register = new Intent(getActivity(), HistoryTransactionActivityRemastered.class);
-        getActivity().startActivityForResult(register,1);
-
-    }
-
-    @OnClick(R.id.layoutMetodePembayaran)
-    void  openMetodePembayaran(){
-        Intent intent = new Intent(getActivity(), MetodePembayaranActivityRemastered.class);
-        getActivity().startActivityForResult(intent,8);
-    }
-
-    @OnClick(R.id.layoutResetPassword)
-    void openResetPassword(){
-        Intent intent = new Intent(getActivity(), ResetPasswordFromForgotActivity.class);
-        getActivity().startActivityForResult(intent,9);
-
-    }
-
-    @OnClick(R.id.layoutResetSecurityCode)
-    void openResetSecurityCode(){
-
-    }
-
-    @OnClick(R.id.lblEditProfile)
-    void EditProfile(){
-        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-        startActivity(intent);
     }
 }

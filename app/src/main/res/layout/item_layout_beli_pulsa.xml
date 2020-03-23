@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:clickable="true"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_large"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/spacing_medium"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginRight="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:background="@drawable/edit_text_round_bg_outline"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtHargaPulsa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_small"
+            android:text="Rp. 15.000"
+            android:textAppearance="@style/quicksandSemiBold"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtMasaBerlaku"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_small"
+            android:text="Masa Berlaku 30 hari"
+            android:textAppearance="@style/quicksandSemiBold"
+            android:textColor="@color/brown_grey"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_small">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harga "
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtHargaBayar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 15.300"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

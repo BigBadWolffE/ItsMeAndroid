@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.viewremastered.morecard;
+package com.indocyber.itsmeandroid.viewremastered.morecard.activity;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,11 +19,13 @@ import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.view.chat.ChatActivity;
 import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
 import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
+import com.indocyber.itsmeandroid.viewremastered.tagkartu.TagKartu;
 
 import java.util.Objects;
 
@@ -98,12 +100,15 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
 
         mLinearTambahLimit.setOnClickListener(v -> {
             Intent intent = new Intent(this, RequestIncreaseLimitActivity.class);
+            intent.putExtra("parentCode", GlobalVariabel.CARD_MENU);
             intent.putExtra(INTENT_ID, data);
             startActivity(intent);
         });
 
         mLinearHastag.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, TagKartu.class);
+            intent.putExtra(INTENT_ID, data);
+            startActivity(intent);
         });
 
         mLinearShare.setOnClickListener(v -> {

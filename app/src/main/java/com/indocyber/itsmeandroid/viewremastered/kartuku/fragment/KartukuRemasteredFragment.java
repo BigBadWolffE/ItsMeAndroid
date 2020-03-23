@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
 import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
@@ -23,7 +24,7 @@ import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KartukuRemasteredFragment extends Fragment {
+public class KartukuRemasteredFragment extends BaseFragment {
 
     public KartukuRemasteredFragment() {
         // Required empty public constructor
@@ -31,10 +32,15 @@ public class KartukuRemasteredFragment extends Fragment {
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_kartuku_remastered;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_kartuku_remastered, container, false);
+        return inflater.inflate(layoutRes(), container, false);
     }
 
 

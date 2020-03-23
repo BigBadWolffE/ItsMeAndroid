@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
@@ -25,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapter.Listener {
+public class PromoRemasteredFragment extends BaseFragment implements PromoMenuAdapter.Listener {
     @BindView(R.id.recyclerMenuPromoHorizontal)
     RecyclerView mPromoMenuRecycler;
     @BindView(R.id.layoutNoPromo)
@@ -40,13 +41,17 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
     };
 
 
+    @Override
+    protected int layoutRes() {
+        return R.layout.fragment_promo_remastered;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View promoRemasteredView = inflater.inflate(R.layout.fragment_promo_remastered, container, false);
+        View promoRemasteredView = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, promoRemasteredView);
         mPromoMenuAdapter = new MenuPromoAdapter(initializeMenu(), getActivity(), this);
         mNearbyMenuAdapter = new MenuPromoAdapter(nearbyActive(), getActivity(), this);

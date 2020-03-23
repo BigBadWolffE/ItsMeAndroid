@@ -293,11 +293,17 @@ public final class AddCcActivity extends AppCompatActivity {
             return;
         }
 
+        ImageCardModel data = new ImageCardModel(
+                mCardImageResource,
+                mCardNumberInput.getText().toString(),
+                mCardHolderInput.getText().toString(),
+                mCardExpiry.getText().toString(),
+                "20.000.000",
+                "12/19",
+                "12/24",
+                false);
         Intent intent = new Intent(this, RequestIncreaseLimitActivity.class);
-        intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
-        intent.putExtra("holderName", mCardHolderInput.getText().toString());
-        intent.putExtra("expiryDate", mCardExpiry.getText().toString());
-        intent.putExtra("cardImageResource", mCardImageResource);
+        intent.putExtra(INTENT_ID, data);
         startActivity(intent);
     }
 
