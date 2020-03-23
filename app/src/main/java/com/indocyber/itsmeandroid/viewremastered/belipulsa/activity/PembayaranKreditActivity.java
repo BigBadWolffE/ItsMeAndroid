@@ -133,7 +133,7 @@ public class PembayaranKreditActivity extends AppCompatActivity {
             }
         });
 
-        mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
+      /*  mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
             if (!onFocus && mCardNumberInput.getText().length() == 16) {
                 if (!mCardNumberInput.getText().toString().substring(0, 1).equals("5")
                         && !mCardNumberInput.getText().toString().substring(0, 1).equals("4")) {
@@ -147,7 +147,7 @@ public class PembayaranKreditActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
     private boolean formIsValid(){
         if (mCardNumberInput.getText().length() < 16) return false;
