@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.di;
 
+import com.indocyber.itsmeandroid.di.FragmentBindingModules.HomeFragmentModule;
 import com.indocyber.itsmeandroid.di.FragmentBindingModules.ProfileFragmentModule;
 import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
@@ -30,4 +31,7 @@ public abstract class ActivityBuilder {
     @ContributesAndroidInjector(modules = ProfileFragmentModule.class)
     abstract ProfileActivity profileActivity();
 
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector(modules = HomeFragmentModule.class)
+    abstract HomeRemastered homeActivity();
 }

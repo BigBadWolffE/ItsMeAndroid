@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
@@ -20,7 +21,7 @@ import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSeb
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AkunRemasteredFragment extends Fragment {
+public class AkunRemasteredFragment extends BaseFragment {
 
     public AkunRemasteredFragment() {
         // Required empty public constructor
@@ -30,10 +31,15 @@ public class AkunRemasteredFragment extends Fragment {
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_akun_remastered;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_akun_remastered, container, false);
+        final View rootView = inflater.inflate(layoutRes(), container, false);
 
 
 

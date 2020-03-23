@@ -25,6 +25,32 @@
         android:scaleType="fitXY"
         android:src="@drawable/img_bca_card_template" />
 
+    <TextView
+        android:id="@+id/lblCcNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="XXXX   XXXX   XXXX   XXXX"
+        style="@style/CreditCardTextStyle"
+        android:textSize="@dimen/credit_card_number_text_size"
+        android:textAlignment="center"
+        android:textColor="@color/colorwhite" />
+
+    <TextView
+        android:id="@+id/lblCardHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/card_holder_text_size"
+        style="@style/CreditCardTextStyle"
+        android:text="Jordan Setiawan" />
+
+    <TextView
+        android:id="@+id/lblExpiry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        style="@style/CreditCardTextStyle"
+        android:text="09/19" />
+
     <LinearLayout
         android:id="@+id/blockLayout"
         android:layout_alignTop="@id/cardListImage"
@@ -34,6 +60,7 @@
         android:background="@drawable/bg_blockedcard_layer"
         android:layout_width="match_parent"
         android:gravity="center"
+        android:visibility="gone"
         android:layout_height="wrap_content" >
 
         <TextView

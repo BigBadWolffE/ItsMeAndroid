@@ -31,10 +31,12 @@ import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
@@ -43,6 +45,8 @@ import com.indocyber.itsmeandroid.viewremastered.notification.Activity.Notificat
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +58,7 @@ import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.dpToPx;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeRemasteredFragment extends Fragment {
+public class HomeRemasteredFragment extends BaseFragment {
 
     public HomeRemasteredFragment() {
         // Required empty public constructor
@@ -74,10 +78,15 @@ public class HomeRemasteredFragment extends Fragment {
     private AlertDialog loader;
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_home_remastered;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_remastered, container, false);
+        View view = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, view);
         return view;
     }

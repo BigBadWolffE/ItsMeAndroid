@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.di;
 
 import androidx.lifecycle.ViewModel;
 
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
@@ -36,4 +37,10 @@ public abstract class ViewModelModule {
     @ViewModelKey(ProfileDetailViewModel.class)
     @SuppressWarnings("unused")
     abstract ViewModel bindsProfileDetailViewModel(ProfileDetailViewModel profileDetailViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel.class)
+    @SuppressWarnings("unused")
+    abstract ViewModel bindsHomeViewModel(HomeViewModel homeViewModel);
 }

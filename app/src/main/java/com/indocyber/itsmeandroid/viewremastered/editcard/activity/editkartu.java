@@ -315,6 +315,7 @@ public class editkartu extends AppCompatActivity {
 
     private void formatCreditCard(){
         ImageView creditCard = findViewById(R.id.imgCreditCard);
+        creditCard.setImageResource(data.getImage());
         int[] position = {0, 0};
         creditCard.getLocationOnScreen(position);
 
