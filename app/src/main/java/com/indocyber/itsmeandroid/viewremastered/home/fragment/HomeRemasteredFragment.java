@@ -38,6 +38,7 @@ import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
+import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
 import com.indocyber.itsmeandroid.viewremastered.notification.Activity.NotificationRemasteredActivity;
@@ -72,6 +73,7 @@ public class HomeRemasteredFragment extends BaseFragment {
     @BindView(R.id.imageView4)
     FrameLayout mBtnNotif;
     private RelativeLayout mRltvBeliPulsa;
+    private RelativeLayout mRltvBlockAllCard;
     private RelativeLayout mRltvEmpty;
     private TextView txtTambhKartu;
     private HomeViewModel viewModel;
@@ -101,6 +103,9 @@ public class HomeRemasteredFragment extends BaseFragment {
         mRltvEmpty = view.findViewById(R.id.rltvEmpty);
         mRltvBeliPulsa = view.findViewById(R.id.rltvBeliPulsa);
         txtTambhKartu = view.findViewById(R.id.txtTambhKartu);
+        mRltvBlockAllCard = view.findViewById(R.id.rltvBlockAllCard);
+
+
         viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
         viewModel.fetchAllCardList();
         observeViewModel();
@@ -119,6 +124,11 @@ public class HomeRemasteredFragment extends BaseFragment {
     private void onClick() {
         mRltvBeliPulsa.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), BeliPulsaActivity.class);
+            startActivity(intent);
+        });
+
+        mRltvBlockAllCard.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), BlockAllCardRemasterActivity.class);
             startActivity(intent);
         });
 

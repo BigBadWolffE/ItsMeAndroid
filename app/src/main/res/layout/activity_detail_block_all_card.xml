@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewremastered.blockallcard.activity.DetailBlockAllCardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/backgroundTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionBarSize"
+            android:background="@drawable/img_bg_top"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionBarSize"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:text="Blokir Semua Kartu Kredit"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/grey_20"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/imageBtnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/spacing_medium"
+                android:src="@drawable/ic_ico_arrow_back" />
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:scrollbars="none"
+            android:scrollingCache="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycBlockAllCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:padding="@dimen/spacing_medium"
+                    android:scrollbars="vertical"
+                    android:scrollingCache="true" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/_310sdp"
+                    android:layout_height="@dimen/_62sdp"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:gravity="center"
+                    app:cardBackgroundColor="#fff4eb"
+                    app:cardCornerRadius="@dimen/spacing_small">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                          android:layout_centerInParent="true"
+
+                            android:gravity="center_horizontal"
+                            android:lineSpacingExtra="6sp"
+                            android:text="Apakah Anda yakin untuk \nBlokir Semua Kartu Kredit ini ?"
+                            android:textColor="#ee8327"
+
+                            android:textSize="15sp" />
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:padding="@dimen/spacing_small"
+                    android:textColor="@color/brown_grey"
+                    android:textSize="13sp"
+                    android:text="Pesan Blokir Kartu " />
+
+                <EditText
+                    android:focusable="true"
+                    android:focusedByDefault="true"
+                    android:id="@+id/edtxInfoKartu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_small"
+                    android:hint="Pesan Blokir Kartu"
+                    android:lineSpacingExtra="6sp"
+                    android:textColor="#3a3a3a"
+                    android:textSize="15sp"
+                    tools:text="Dompet hilang dijalan sekitar , jl iskandar muda - Pondok Indah, pukul 15.00 wib " />
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/spacing_mlarge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/checkAgree"
+                        android:buttonTint="@color/dodger_blue"
+                        android:layout_width="wrap_content"
+                        android:backgroundTint="@color/dodger_blue"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/txtAgree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/brown_grey"
+                        />
+                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/actionBarSize"
+                    />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnBlokirKartu"
+        android:text="Blokir Semua Kartu"
+        android:layout_alignParentBottom="true"
+        android:padding="@dimen/spacing_small"
+        android:textAppearance="@style/quicksandSemiBold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_rounded_red"
+        android:textColor="@color/colorwhite"/>
+</RelativeLayout>
