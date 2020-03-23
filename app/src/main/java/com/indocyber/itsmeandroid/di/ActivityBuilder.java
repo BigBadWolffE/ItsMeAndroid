@@ -7,6 +7,7 @@ import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.tagkartu.TagKartu;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -39,4 +40,8 @@ public abstract class ActivityBuilder {
     @SuppressWarnings("unused")
     @ContributesAndroidInjector
     abstract SetPinActivityRemastered pinActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector
+    abstract TagKartu tagKartu();
 }
