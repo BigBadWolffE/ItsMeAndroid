@@ -37,7 +37,8 @@
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
         <activity android:name=".viewremastered.blockallcard.activity.SetPinBlockCardActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".viewremastered.blockallcard.activity.DetailBlockAllCardActivity"
             android:theme="@style/AppTheme.NoActionBar"
