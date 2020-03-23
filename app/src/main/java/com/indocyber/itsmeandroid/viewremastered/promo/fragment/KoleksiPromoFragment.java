@@ -18,7 +18,7 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
-import com.indocyber.itsmeandroid.viewremastered.morecard.MoreCardRemasteredActivity;
+import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.CreditCardAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 

@@ -18,6 +18,10 @@ import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordF
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -26,8 +30,11 @@ public class AkunRemasteredFragment extends BaseFragment {
     public AkunRemasteredFragment() {
         // Required empty public constructor
     }
+    @BindView(R.id.textView9)
+    TextView tvHistory;
 
-    public static TextView tvHistory,tvReset,tvSecurity,tvMetodePembayaran;
+
+    public static TextView tvReset,tvSecurity,tvMetodePembayaran;
 
 
     @Override
@@ -41,9 +48,7 @@ public class AkunRemasteredFragment extends BaseFragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(layoutRes(), container, false);
 
-
-
-        tvHistory = rootView.findViewById(R.id.textView9);
+        ButterKnife.bind(this, rootView);
         tvReset = rootView.findViewById(R.id.textView10);
         tvSecurity = rootView.findViewById(R.id.textView11);
         tvMetodePembayaran = rootView.findViewById(R.id.tv10);
@@ -81,10 +86,13 @@ public class AkunRemasteredFragment extends BaseFragment {
             }
         });
 
-
-
-
         return rootView;
 
+    }
+
+    @OnClick(R.id.lblEditProfile)
+    void editProfile(){
+        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        startActivity(intent);
     }
 }

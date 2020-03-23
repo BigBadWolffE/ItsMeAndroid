@@ -44,6 +44,7 @@
         android:textColor="@color/greyish_brown"
         android:textColorHint="@color/greyish_brown"
         android:textSize="15sp"
+        android:inputType="textPassword"
         android:theme="@style/AppTheme.NoActionBar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
