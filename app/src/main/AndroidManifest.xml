@@ -40,7 +40,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".viewremastered.blockallcard.activity.DetailBlockAllCardActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".viewremastered.blockallcard.activity.BlockAllCardRemasterActivity"
             android:theme="@style/AppTheme.NoActionBar" />

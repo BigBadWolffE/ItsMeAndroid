@@ -107,10 +107,10 @@ public class DetailBlockAllCardActivity extends AppCompatActivity {
                 Toast.makeText(DetailBlockAllCardActivity.this, "Please Check Agreement", Toast.LENGTH_SHORT).show();
 
             } else {
-
+                Intent intent = new Intent(DetailBlockAllCardActivity.this, SetPinBlockCardActivity.class);
+                startActivity(intent);
             }
-            Intent intent = new Intent(DetailBlockAllCardActivity.this, SetPinBlockCardActivity.class);
-            startActivity(intent);
+
         });
     }
 }
