@@ -64,7 +64,7 @@ public class DetailNotificationBillingActivity extends AppCompatActivity {
 
             String body = extras.getString("billingBody");
 
-            mLblBody.setText(body);
+//            mLblBody.setText(body);
 
             String date = extras.getString("billingDate");
 

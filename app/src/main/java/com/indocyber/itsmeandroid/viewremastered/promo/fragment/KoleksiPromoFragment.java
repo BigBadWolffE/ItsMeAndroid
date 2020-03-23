@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.CreditCardAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
@@ -26,10 +28,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.Listener {
+public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.Listener, CreditCardAdapter.Listener {
     @BindView(R.id.recyclerMenuKoleksiPromoHorizontal)
     RecyclerView mMenuPromoKoleksiRecycler;
     @BindView(R.id.recyclerCardCollection)
@@ -72,7 +76,7 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
 
     private void initCard(){
         mRecyclerCardCollection.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mCardViewAdapter = new CreditCardAdapter(new ArrayList<>(), getActivity());
+        mCardViewAdapter = new CreditCardAdapter(new ArrayList<>(), getActivity(),this);
         mCardViewAdapter.refreshCardList(generateCardList());
         mRecyclerCardCollection.setAdapter(mCardViewAdapter);
     }
@@ -119,5 +123,12 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
     @Override
     public void onClick(int position) {
 
+    }
+
+    @Override
+    public void MoreCardonClick(ImageCardModel imgCardModel) {
+        Intent intent = new Intent(getActivity(), MoreCardRemasteredActivity.class);
+        intent.putExtra(INTENT_ID,imgCardModel);
+        startActivity(intent);
     }
 }

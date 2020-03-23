@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ItemPromoNearbyModel;
-import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.viewremastered.promo.Activity.DetailPromoActivity;
-import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.ItemPromoAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.ItemPromoNearbyAdapter;
 
 import java.util.ArrayList;
@@ -27,18 +26,17 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PromoTerdekatFragment extends Fragment implements ItemPromoNearbyAdapter.Listener {
+public class PromoSpesialDiscountFragment extends Fragment implements ItemPromoNearbyAdapter.Listener {
 
-    public PromoTerdekatFragment() {
+    public PromoSpesialDiscountFragment() {
         // Required empty public constructor
     }
 
-    @BindView(R.id.recyclerNearbyPromoList)
-    RecyclerView mRecyclerNearbyPromo;
+    @BindView(R.id.recyclerDiskonPromoList)
+    RecyclerView mrecyclerDiskon;
 
-    private ItemPromoNearbyAdapter mPromoItemAdapter;
-
-    private  String[] titleList = {
+    private ItemPromoNearbyAdapter mPromoAdapter;
+    private String[] titleList = {
             "Dining Exclusive Get 10% Discount off",
             "Bakmi GM promo Rp 20.200",
             "Geprek Bensu, September Bersama",
@@ -59,7 +57,7 @@ public class PromoTerdekatFragment extends Fragment implements ItemPromoNearbyAd
     private String[] descList = {
             "Promo ini merupakan program promo kerjasama alacarte dengan Abuba Steak",
             "Promo ini merupakan program promo kerjasama alacarte dengan Bandar Jakarta",
-            "Promo ini merupakan program promo kerjasama alacarte dengan Starbuck & Bank Mandiri" ,
+            "Promo ini merupakan program promo kerjasama alacarte dengan Starbuck & Bank Mandiri",
             "Promo ini merupakan program promo kerjasama alacarte dengan Abuba Steak",
             "Promo ini merupakan program promo kerjasama alacarte dengan Bandar Jakarta",
             "Promo ini merupakan program promo kerjasama alacarte dengan Starbuck & Bank Mandiri"
@@ -75,32 +73,36 @@ public class PromoTerdekatFragment extends Fragment implements ItemPromoNearbyAd
     };
 
     private String[] jarak = {
-            "0.3","1.8","2.2","2.7","3.3","4.5"
+            "0.3", "1.8", "2.2", "2.7", "3.3", "4.5"
     };
 
+    private  String[] diskon = {
+            "70","50","40","30","20","10"
+    };
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_promo_terdekat, container, false);
+        View view = inflater.inflate(R.layout.fragment_promo_makanan, container, false);
         ButterKnife.bind(this, view);
-        mPromoItemAdapter = new ItemPromoNearbyAdapter(nearbyList(), getActivity(), this);
-        GridLayoutManager horizontalLayourManager = new GridLayoutManager(getActivity(),2);
-        mRecyclerNearbyPromo.setLayoutManager(horizontalLayourManager);
-        mRecyclerNearbyPromo.setAdapter(mPromoItemAdapter);
+        mPromoAdapter = new ItemPromoNearbyAdapter(diskonList(), getActivity(), this);
+        GridLayoutManager horizontalLayourManager = new GridLayoutManager(getActivity(), 2);
+        mrecyclerDiskon.setLayoutManager(horizontalLayourManager);
+        mrecyclerDiskon.setAdapter(mPromoAdapter);
+
         return view;
     }
 
 
-    private  List<ItemPromoNearbyModel> nearbyList(){
-        List<ItemPromoNearbyModel> nearbyModelList = new ArrayList<>();
-        for (int i = 0; i <imgList.length ; i++) {
-            nearbyModelList.add(new ItemPromoNearbyModel(titleList[i],descList[i],periodeList[i],imgList[i], jarak[i],""));
+    private List<ItemPromoNearbyModel> diskonList() {
+        List<ItemPromoNearbyModel> diskonModelList = new ArrayList<>();
+        for (int i = 0; i < imgList.length; i++) {
+            diskonModelList.add(new ItemPromoNearbyModel(titleList[i], descList[i], periodeList[i], imgList[i], jarak[i], diskon[i]));
         }
 
-        return nearbyModelList;
+        return diskonModelList;
     }
 
 
@@ -111,7 +113,8 @@ public class PromoTerdekatFragment extends Fragment implements ItemPromoNearbyAd
         intent.putExtra("imgPromo", itemPromoNearbyModel.getBanner());
         intent.putExtra("descPromo", itemPromoNearbyModel.getDesc());
         intent.putExtra("periodePromo", itemPromoNearbyModel.getPeriode());
-        intent.putExtra("jarak", itemPromoNearbyModel.getJarak());
+        intent.putExtra("jarak", "");
+        intent.putExtra("diskon", itemPromoNearbyModel.getJarak());
         startActivity(intent);
     }
 }
