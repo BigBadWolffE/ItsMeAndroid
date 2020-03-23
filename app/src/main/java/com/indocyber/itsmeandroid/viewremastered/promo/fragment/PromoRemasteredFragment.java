@@ -2,8 +2,6 @@ package com.indocyber.itsmeandroid.viewremastered.promo.fragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,10 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
@@ -80,7 +76,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         allActiveList.add(new PromoMenuModel("Semua Promo", R.color.colorPrimary, R.drawable.button_coloraccent));
         allActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         allActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
-        allActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
+        allActiveList.add(new PromoMenuModel("Special Discount", R.color.grey2, R.drawable.button_border_grey));
         return allActiveList;
     }
 
@@ -90,7 +86,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         nearbyActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         nearbyActiveList.add(new PromoMenuModel("Near By", R.color.colorPrimary, R.drawable.button_coloraccent));
         nearbyActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
-        nearbyActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
+        nearbyActiveList.add(new PromoMenuModel("Special Discount", R.color.grey2, R.drawable.button_border_grey));
         return nearbyActiveList;
     }
 
@@ -100,7 +96,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         dinningActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         dinningActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         dinningActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
-        dinningActiveList.add(new PromoMenuModel("Dinning", R.color.colorPrimary, R.drawable.button_coloraccent));
+        dinningActiveList.add(new PromoMenuModel("Special Discount", R.color.colorPrimary, R.drawable.button_coloraccent));
         return dinningActiveList;
     }
 
@@ -110,7 +106,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         collectionActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         collectionActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         collectionActiveList.add(new PromoMenuModel("Collection", R.color.colorPrimary, R.drawable.button_coloraccent));
-        collectionActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
+        collectionActiveList.add(new PromoMenuModel("Special Discount", R.color.grey2, R.drawable.button_border_grey));
         return collectionActiveList;
     }
 
@@ -136,7 +132,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
             loadFragment(new KoleksiPromoFragment());
             mPromoMenuRecycler.swapAdapter(mCollectionMenuAdapter, false);
         } else if (position == 3) {
-            loadFragment(new PromoMakananFragment());
+            loadFragment(new PromoSpesialDiscountFragment());
             mPromoMenuRecycler.swapAdapter(mDinigMenuAdapter, false);
         }
     }

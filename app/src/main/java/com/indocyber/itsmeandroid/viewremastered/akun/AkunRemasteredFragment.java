@@ -38,10 +38,6 @@ public class AkunRemasteredFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_akun_remastered, container, false);
         ButterKnife.bind(this, rootView);
 
-
-
-
-
         return rootView;
 
     }
@@ -69,5 +65,11 @@ public class AkunRemasteredFragment extends Fragment {
     @OnClick(R.id.layoutResetSecurityCode)
     void openResetSecurityCode(){
 
+    }
+
+    @OnClick(R.id.lblEditProfile)
+    void EditProfile(){
+        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        startActivity(intent);
     }
 }
