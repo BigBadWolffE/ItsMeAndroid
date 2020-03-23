@@ -1,8 +1,13 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.Activity;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -95,69 +100,17 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     @OnClick(R.id.btnShare)
     void sharePromo() {
         mBottomSheetBehaviorShare.setPeekHeight(UtilitiesCore.dpToPx(DetailPromoActivity.this, 250));
-        String[] removePackageName = new String[]{"com.android.bluetooth", "com.facebook.orca", "com.google.android.apps.docs", "com.discord",
-                "com.google.android.apps.messaging", "com.google.android.gm", "com.google.android.apps.keep",
-                "com.linkedin.android", "com.skype.raider", "com.roidapp.photogrid", "com.rarlab.rar"};
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, "share promo");
-        sendIntent.setType("text/plain");
-        final List<ResolveInfo> activities = getPackageManager().queryIntentActivities(sendIntent, 0);
 
-        List<ItemShareModel> appNames = new ArrayList<ItemShareModel>();
-        for (ResolveInfo info : activities) {
-            if (!Arrays.asList(removePackageName).contains(info.activityInfo.packageName)) {
-                appNames.add(new ItemShareModel(info.loadLabel(getPackageManager()).toString(), info.activityInfo.packageName, info.loadIcon(getPackageManager())));
-            }
-        }
-//        final List<ItemShareModel> newItem = appNames;
-        mSharePromoAdapter = new SharePromoAdapter(appNames, getApplicationContext(), this);
-        mRecyclerSharePromo.setLayoutManager(gridLayourManager);
-        mRecyclerSharePromo.setAdapter(mSharePromoAdapter);
+        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "ini promo");
+        shareIntent.setType("text/plain");
 
-
-//        ListAdapter adapter = new ArrayAdapter<ItemShareModel>(this, R.layout.select_dialog_item,R.id.lblTittle, newItem) {
-//            public View getView(int position, View convertView, ViewGroup parent) {
-//                //Use super class to create the View
-//                View v = super.getView(position, convertView, parent);
-//                TextView tv = v.findViewById(R.id.lblTittle);
-//                tv.setText(newItem.get(position).app);
-//                tv.setTextSize(15.0f);
-//                //Put the image on the TextView
-//                tv.setCompoundDrawablesWithIntrinsicBounds(newItem.get(position).icon, null, null, null);
-//
-//                //Add margin between image and text (support various screen densities)
-//                int dp5 = (int) (5 * getResources().getDisplayMetrics().density + 0.5f);
-//                tv.setCompoundDrawablePadding(dp5);
-//
-//                return v;
-//            }
-//        };
-
-//        mRecyclerSharePromo.setLayoutManager(gridLayourManager);
-//        mRecyclerSharePromo.setAdapter(adapter);
-//
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("Custom Sharing Dialog");
-//        builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-//            public void onClick(DialogInterface dialog, int item) {
-//                ResolveInfo info = activities.get(item);
-//
-//                if (info.activityInfo.packageName.equals("com.facebook.katana")) {
-//                    Toast.makeText(getApplicationContext(), "Facebook Selected ", Toast.LENGTH_LONG).show();
-//                } else {
-//
-//                    // start the selected activity
-//                    Log.i("tes", "Hi..hello. Intent is selected");
-//
-//                    sendIntent.setPackage(info.activityInfo.packageName);
-//                    startActivity(sendIntent);
-//                }
-//            }
-//        });
-//
-//        AlertDialog alert = builder.create();
-//        alert.show();
+// Ask Android to create the chooser for us
+        final Intent chooser = Intent.createChooser(shareIntent, getString(R.string.share));
+        startActivity(chooser);
+        Intent customSharer = new Intent(this, DetailPromoActivity.class);
+        Intent[] initialIntents = new Intent[]{customSharer};
+        chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, initialIntents);
 
 
     }
@@ -187,8 +140,10 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
 
     }
 
+
     @Override
-    public void onClick(ItemShareModel mItemShareModel) {
-        Toast.makeText(this, "Ini package " + mItemShareModel.packageName, Toast.LENGTH_LONG).show();
+    public void SharePromoonClick(ItemShareModel mItemShareModel) {
+//        sendIntent.setPackage(info.activityInfo.packageName);
+//                    startActivity(sendIntent);
     }
 }
