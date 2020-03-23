@@ -72,6 +72,29 @@ public class PinActivityViewModel extends ViewModel {
         );
     }
 
+    public void updateCard(int id, String cardNumber, String cardHolder, String cardExpiry, String billingAddress) {
+        isDone.setValue(false);
+        isLoading.setValue(true);
+        disposable.add(
+                dao.update(id, cardNumber, cardHolder, cardExpiry, billingAddress)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableCompletableObserver() {
+                            @Override
+                            public void onComplete() {
+                                isLoading.setValue(false);
+                                isDone.setValue(true);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                error.setValue(e.getMessage());
+                                isLoading.setValue(false);
+                            }
+                        })
+        );
+    }
+
     public void blockCard(int id) {
         isDone.setValue(false);
         isLoading.setValue(true);

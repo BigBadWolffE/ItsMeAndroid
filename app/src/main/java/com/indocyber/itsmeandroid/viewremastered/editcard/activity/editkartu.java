@@ -304,14 +304,12 @@ public class editkartu extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, SetPinActivityRemastered.class);
-        data.setNumberCard(mCardNumberInput.getText().toString());
-        data.setNameCard(mCardHolderInput.getText().toString());
-        data.setExpireCard(mCardExpiry.getText().toString());
-        data.setBillingAddress(mBillingAddressInput.getText().toString());
-        Bundle bundle = new Bundle();
-        bundle.putInt("parentCode", GlobalVariabel.EDIT_KARTU);
-        bundle.putParcelable(INTENT_ID, data);
-        intent.putExtras(bundle);
+        intent.putExtra("cardHolder", mCardHolderInput.getText().toString());
+        intent.putExtra("cardExpiry", mCardExpiry.getText().toString());
+        intent.putExtra("billingAddress", mBillingAddressInput.getText().toString());
+        intent.putExtra("cardId", data.getId());
+        intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
+        intent.putExtra("parentCode", 2);
         startActivity(intent);
     }
 

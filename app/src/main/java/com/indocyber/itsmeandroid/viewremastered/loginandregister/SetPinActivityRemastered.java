@@ -59,9 +59,13 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
     private AlertDialog loader;
     @Inject
     ViewModelFactory factory;
-    int parentCode = -1;
-    String cardNumber = "";
-    ImageCardModel data;
+    private int parentCode = -1;
+    private String cardNumber = "";
+    private String cardHolder = "";
+    private String cardExpiry = "";
+    private String billingAddress = "";
+    private int id;
+//    private ImageCardModel data;
 
 
     @Override
@@ -74,12 +78,17 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
         super.onCreate(savedInstanceState);
         setContentView(layoutRes());
         parentCode = getIntent().getIntExtra("parentCode", -1);
-        if (parentCode >= 0) {
-            data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
-        }
-        if (data != null) {
-            cardNumber = data.getNumberCard();
-        }
+        cardNumber = getIntent().getStringExtra("cardNumber");
+        cardHolder = getIntent().getStringExtra("cardHolder");
+        cardExpiry = getIntent().getStringExtra("cardExpiry");
+        billingAddress = getIntent().getStringExtra("billingAddress");
+        id = getIntent().getIntExtra("cardId", -1);
+//        if (parentCode >= 0) {
+//            data = getIntent().getParcelableExtra(INTENT_ID);
+//        }
+//        if (data != null) {
+//            cardNumber = data.getNumberCard();
+//        }
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
@@ -117,9 +126,9 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
                                 startActivity(intent);
                             });
                 } else if (parentCode == GlobalVariabel.BLOCK_KARTU) {
-                    viewModel.blockCard(data.getId());
+                    viewModel.blockCard(id);
                 } else if (parentCode == GlobalVariabel.EDIT_KARTU) {
-                    viewModel.updateCard(data);
+                    viewModel.updateCard(id, cardNumber, cardHolder, cardExpiry, billingAddress);
                 } else if (parentCode == GlobalVariabel.TAMBAH_PERSONAL) {
                     showSuccessDialog(
                             R.drawable.ic_img_emotion_smile,

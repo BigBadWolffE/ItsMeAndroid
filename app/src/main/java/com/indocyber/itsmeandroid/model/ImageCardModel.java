@@ -87,6 +87,10 @@ public class ImageCardModel implements Parcelable {
         dest.writeString(cost);
         dest.writeString(printDate);
         dest.writeString(printDueDate);
+        dest.writeString(billingAddress);
+        dest.writeString(minPayment);
+        dest.writeString(lastBill);
+        dest.writeString(availableCredit);
         dest.writeByte((byte) (isBlockedCard ? 1 : 0));
     }
 
