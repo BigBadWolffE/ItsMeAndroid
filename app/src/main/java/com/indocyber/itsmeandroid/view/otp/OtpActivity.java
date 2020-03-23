@@ -77,6 +77,11 @@ public class OtpActivity extends AppCompatActivity {
         confirmationButton.setOnClickListener(view -> confirm());
         startTimer();
 
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(OtpActivity.this)
+                .build();
+
         viewModel = ViewModelProviders.of(this).get(AddCcViewModel.class);
         observeViewModel();
     }
@@ -284,10 +289,6 @@ public class OtpActivity extends AppCompatActivity {
     private void observeViewModel() {
         viewModel.getIsLoading().observe(this, isLoading -> {
             if (isLoading) {
-                loader = new SpotsDialog.Builder()
-                        .setCancelable(false)
-                        .setContext(OtpActivity.this)
-                        .build();
                 loader.show();
             } else {
                 loader.dismiss();

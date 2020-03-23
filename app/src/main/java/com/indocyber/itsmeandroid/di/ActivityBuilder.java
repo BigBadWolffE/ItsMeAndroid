@@ -6,6 +6,7 @@ import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -34,4 +35,8 @@ public abstract class ActivityBuilder {
     @SuppressWarnings("unused")
     @ContributesAndroidInjector(modules = HomeFragmentModule.class)
     abstract HomeRemastered homeActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector
+    abstract SetPinActivityRemastered pinActivity();
 }

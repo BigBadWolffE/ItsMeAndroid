@@ -139,7 +139,8 @@ public class BlockKartu extends AppCompatActivity {
 
         Intent intent = new Intent(this, SetPinActivityRemastered.class);
         intent.putExtra("parentCode", GlobalVariabel.BLOCK_KARTU);
-        intent.putExtra(INTENT_ID, data);
+        intent.putExtra("cardId", data.getId());
+        intent.putExtra("cardNumber", cardNumber);
         startActivity(intent);
     }
 

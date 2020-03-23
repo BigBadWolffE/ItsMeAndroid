@@ -302,6 +302,7 @@ public final class AddCcActivity extends AppCompatActivity {
                 "12/19",
                 "12/24",
                 false);
+        data.setBillingAddress(mBillingAddressInput.getText().toString());
         Intent intent = new Intent(this, RequestIncreaseLimitActivity.class);
         intent.putExtra(INTENT_ID, data);
         startActivity(intent);
