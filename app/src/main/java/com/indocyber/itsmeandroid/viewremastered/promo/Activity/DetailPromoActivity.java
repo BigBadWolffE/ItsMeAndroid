@@ -158,6 +158,11 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
         );
     }
 
+    @OnClick(R.id.imageBtnBack)
+    void back(){
+        finish();
+    }
+
     @OnClick(R.id.btnClose)
     void close(){
         mBottomSheetBehaviorShare.setPeekHeight(UtilitiesCore.dpToPx(DetailPromoActivity.this, 0));

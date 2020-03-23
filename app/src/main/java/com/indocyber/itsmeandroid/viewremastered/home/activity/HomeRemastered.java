@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,17 +17,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
+import com.indocyber.itsmeandroid.viewremastered.AddKartuPersonal.AddKartuPersonal;
+import com.indocyber.itsmeandroid.viewremastered.addkartumember.AddKartuMember;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.promo.fragment.PromoRemasteredFragment;
 
+import javax.inject.Inject;
+
 import static com.indocyber.itsmeandroid.utilities.core.Animations.fadeOutIn;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.showIn;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.showOut;
 
-public class HomeRemastered extends AppCompatActivity {
+public class HomeRemastered extends BaseActivity {
 
     //    @Override
 //    protected int layoutRes() {
@@ -37,12 +45,20 @@ public class HomeRemastered extends AppCompatActivity {
     private FloatingActionButton mFloatingActionButton;
     private LinearLayout mLinearPullUp, mLinearAddMembership,
             mLinearPersonalCard, mLinearAddCreditCard, mLinearBlockCC;
+    @Inject
+    ViewModelFactory factory;
+    private HomeViewModel viewModel;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_home_remastered;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_remastered);
-
+        setContentView(layoutRes());
+        viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
         initView();
 
         if (savedInstanceState == null) {
@@ -55,8 +71,6 @@ public class HomeRemastered extends AppCompatActivity {
         initComponent();
         initFab();
         initOnclick();
-
-
     }
 
     private void initView() {
@@ -103,10 +117,12 @@ public class HomeRemastered extends AppCompatActivity {
 
     private void initOnclick() {
         mLinearAddMembership.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, AddKartuMember.class);
+            startActivity(intent);
         });
         mLinearPersonalCard.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, AddKartuPersonal.class);
+            startActivity(intent);
         });
         mLinearAddCreditCard.setOnClickListener(v -> {
                 Intent intent = new Intent(this, AddCcActivity.class);

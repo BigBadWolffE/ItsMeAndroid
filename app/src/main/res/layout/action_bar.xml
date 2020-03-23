@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/toolbar_text"
             android:textColor="@color/support_darker_grey"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:fontFamily="@font/quicksand_medium"
             android:layout_marginRight="@dimen/_30sdp"
             android:gravity="center"/>

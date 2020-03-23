@@ -45,6 +45,10 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
     @Override
     public void onBindViewHolder(@NonNull BillingViewHolder holder, int position) {
         holder.bind(billingList.get(position));
+        holder.billingDate.setText(billingList.get(position).getDate());
+        holder.billingTitle.setText(billingList.get(position).getTitle());
+        holder.billingBody.setText(billingList.get(position).getBody());
+        holder.billingAttachment.setText(billingList.get(position).getAttachmentName());
         holder.itemView.setOnClickListener(view ->
                 onItemClickListener.onBillingItemClick(billingList.get(position)));
     }
@@ -75,12 +79,12 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
 
         private void bind(Billing billing){
             billingTitle.setText(billing.getTitle());
-            if (billing.getBody().length() > 70) {
-                String cutText = billing.getBody().substring(0, 67) + "...";
-                billing.setBody(cutText);
-            } else {
-                billingBody.setText(billing.getBody());
-            }
+//            if (billing.getBody().length() > 70) {
+//                String cutText = billing.getBody().substring(0, 67) + "...";
+//                billing.setBody(cutText);
+//            } else {
+//                billingBody.setText(billing.getBody());
+//            }
             billingDate.setText(billing.getDate());
             billingAttachment.setText(billing.getAttachmentName());
         }

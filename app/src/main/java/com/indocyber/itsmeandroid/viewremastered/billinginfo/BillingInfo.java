@@ -25,22 +25,39 @@ public class BillingInfo extends AppCompatActivity {
     private String mHolderName;
     private String mExpiryDate;
     private ImageView cardImage;
+    private ImageCardModel data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing_info);
         Bundle extras = getIntent().getExtras();
-        ImageCardModel data =
-                Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
         mNumber = data.getNumberCard();
         mHolderName = data.getNameCard();
         mExpiryDate = data.getExpireCard();
-
+        bindBillingInfo();
         cardImage = findViewById(R.id.imgCreditCard);
         cardImage.setImageResource(R.drawable.img_blank_kartukredit_bca);
 
         createToolbar();
+    }
+
+    private void bindBillingInfo() {
+        TextView status = findViewById(R.id.cardStatusInfo);
+        status.setText(data.isBlockedCard() ? "Diblokir" : "Aktif");
+        TextView currentBilling = findViewById(R.id.cardBillingInfo);
+        currentBilling.setText(data.getLastBill() != null ? data.getLastBill() : "0");
+        TextView minimumPayment = findViewById(R.id.cardMinPayment);
+        minimumPayment.setText(data.getMinPayment()!= null ? data.getMinPayment() : "0");
+        TextView printDate = findViewById(R.id.cardIssueDate);
+        printDate.setText(data.getPrintDate());
+        TextView dueDate = findViewById(R.id.cardDueDate);
+        dueDate.setText(data.getPrintDueDate());
+        TextView creditLimit = findViewById(R.id.cardLimit);
+        creditLimit.setText(data.getMinPayment()!= null ? data.getMinPayment() : "0" );
+        TextView credit = findViewById(R.id.cardBalance);
+        credit.setText(data.getLastBill()!= null ? data.getLastBill() : "0");
     }
 
     private  void createToolbar() {

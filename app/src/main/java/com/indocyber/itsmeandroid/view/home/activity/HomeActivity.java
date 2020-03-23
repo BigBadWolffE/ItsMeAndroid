@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.aboutus.activity.AboutUsActivity;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 
@@ -31,7 +32,7 @@ import com.indocyber.itsmeandroid.view.splashscreen.SplashScreenActivity;
 
 import dmax.dialog.SpotsDialog;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawer;
     private Toolbar mToolbar;
@@ -42,9 +43,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private String mFullName = "";
 
     @Override
+    protected int layoutRes() {
+        return R.layout.activity_home;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(layoutRes());
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setElevation(0f);
         mPreference = new Preference(this);

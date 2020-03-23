@@ -23,8 +23,7 @@ import java.util.List;
 public class NotificationActivity extends AppCompatActivity {
 
     private final List<Notification> notificationList = new ArrayList<>();
-    NotificationAdapter notificationAdapter =
-            new NotificationAdapter(new ArrayList<>(), notification -> onItemClick(notification));
+    NotificationAdapter notificationAdapter =new NotificationAdapter(new ArrayList<>(), notification -> onItemClick(notification));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

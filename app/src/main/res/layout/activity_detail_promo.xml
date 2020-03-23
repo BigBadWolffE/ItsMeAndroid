@@ -28,7 +28,7 @@
             app:layout_constraintTop_toBottomOf="@+id/backgroundTop">
 
             <ImageView
-                android:id="@+id/imgback"
+                android:id="@+id/imageBtnBack"
                 android:layout_width="@dimen/_16sdp"
                 android:layout_height="@dimen/_16sdp"
                 android:src="@drawable/ic_ico_arrow_back"
@@ -46,7 +46,7 @@
                 android:textColor="@color/brown_grey"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/imgback"
+                app:layout_constraintLeft_toRightOf="@+id/imageBtnBack"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

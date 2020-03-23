@@ -5,12 +5,16 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
+import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -22,17 +26,18 @@ import io.reactivex.schedulers.Schedulers;
  * @version 1.0
  */
 
-public class HomeViewModel extends AndroidViewModel {
-    private ImageCardDao dao;
+public class HomeViewModel extends ViewModel {
+
+    ImageCardDao dao;
 
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<List<ImageCardModel>> cardList = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
 
-    public HomeViewModel(@NonNull Application application) {
-        super(application);
-        dao = AppDatabase.getInstance(application).imageCardDao();
+    @Inject
+    public HomeViewModel(ImageCardDao dao) {
+        this.dao = dao;
     }
 
     public MutableLiveData<Boolean> getIsLoading() {

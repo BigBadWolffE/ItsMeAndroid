@@ -136,7 +136,7 @@
                             android:inputType="number"
                             android:digits="0123456789"
                             style="@style/quicksandSemiBold"
-                            android:textColor="@color/support_darker_grey"
+                            android:textColor="@color/support_black"
                             android:maxLength="16"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="3"
                                 style="@style/quicksandSemiBold"
-                                android:textColor="@color/support_darker_grey"
+                                android:textColor="@color/support_black"
                                 android:layout_height="wrap_content" />
 
                             <TextView
@@ -190,7 +190,7 @@
                                 android:inputType="number"
                                 android:textAlignment="center"
                                 style="@style/quicksandSemiBold"
-                                android:textColor="@color/support_darker_grey"
+                                android:textColor="@color/support_black"
                                 android:maxLength="5"
                                 android:layout_width="0dp"
                                 android:layout_weight="3"
@@ -216,7 +216,7 @@
                     android:inputType="text|textMultiLine"
                     android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                     style="@style/quicksandSemiBold"
-                    android:textColor="@color/support_darker_grey"
+                    android:textColor="@color/support_black"
                     android:maxLength="100"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"  />

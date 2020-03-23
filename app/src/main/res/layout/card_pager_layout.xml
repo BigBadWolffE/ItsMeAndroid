@@ -6,78 +6,6 @@
     android:layout_marginBottom="@dimen/_5sdp"
     android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:translationZ="@dimen/spacing_large">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_68sdp" />
-
-            <TextView
-                android:id="@+id/txtNumberCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:maxLines="1"
-                android:padding="@dimen/spacing_medium"
-                android:text="3454   XXX  XXX  3455"
-                android:textAppearance="@style/quicksandRegular"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_8sdp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.9" />
-
-                <TextView
-                    android:id="@+id/txtValidThru"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="08/21"
-                    android:textAppearance="@style/quicksandRegular"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"/>
-                <TextView
-                    android:maxLines="1"
-                    android:id="@+id/txtName"
-                    android:layout_weight="15"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/spacing_medium"
-                    android:text="Jordan Setywan"
-                    android:textAppearance="@style/quicksandRegular"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-        </LinearLayout>
-
         <ImageView
             android:id="@+id/cardListImage"
             android:layout_width="match_parent"
@@ -87,6 +15,32 @@
             android:padding="0dp"
             android:scaleType="fitXY"
             android:src="@drawable/img_bca_card_template" />
+
+        <TextView
+            android:id="@+id/lblCcNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXX   XXXX   XXXX   XXXX"
+            style="@style/CreditCardTextStyle"
+            android:textSize="@dimen/credit_card_number_text_size"
+            android:textAlignment="center"
+            android:textColor="@color/colorwhite" />
+
+        <TextView
+            android:id="@+id/lblCardHolder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/card_holder_text_size"
+            style="@style/CreditCardTextStyle"
+            android:text="Jordan Setiawan" />
+
+        <TextView
+            android:id="@+id/lblExpiry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            style="@style/CreditCardTextStyle"
+            android:text="09/19" />
 
         <ImageView
             android:id="@+id/btnCardMoreMenu"

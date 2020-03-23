@@ -11,15 +11,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AkunRemasteredFragment extends Fragment {
+public class AkunRemasteredFragment extends BaseFragment {
 
     public AkunRemasteredFragment() {
         // Required empty public constructor
@@ -29,10 +31,15 @@ public class AkunRemasteredFragment extends Fragment {
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_akun_remastered;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_akun_remastered, container, false);
+        final View rootView = inflater.inflate(layoutRes(), container, false);
 
 
 
@@ -63,6 +70,13 @@ public class AkunRemasteredFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), ResetPasswordFromForgotActivity.class);
+                getActivity().startActivityForResult(intent,9);
+            }
+        });
+        tvSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ResetPinSebelumnyaActivityRemastered.class);
                 getActivity().startActivityForResult(intent,9);
             }
         });

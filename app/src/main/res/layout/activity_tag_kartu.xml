@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewremastered.tagkartu.TagKartu">
+
+    <include
+        android:id="@+id/actionBar"
+        layout="@layout/action_bar"
+        app:layout_constraintBottom_toTopOf="@id/scrollContainer"/>
+
+    <ScrollView
+        android:id="@+id/scrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:isScrollContainer="true"
+        app:layout_constraintTop_toBottomOf="@+id/actionBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/mainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorwhite" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/_24sdp"
+                android:paddingRight="@dimen/_24sdp"
+                android:isScrollContainer="false"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_16sdp">
+
+                <RelativeLayout
+                    android:id="@+id/rLayoutCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/_120sdp" >
+
+                    <ImageView
+                        android:id="@+id/imgCreditCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="false"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:cropToPadding="false"
+                        android:src="@drawable/img_bca_card_template" />
+
+                    <TextView
+                        android:id="@+id/lblCcNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="XXXX   XXXX   XXXX   XXXX"
+                        style="@style/CreditCardTextStyle"
+                        android:textSize="@dimen/credit_card_number_text_size"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorwhite" />
+
+                    <TextView
+                        android:id="@+id/lblCardHolder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/card_holder_text_size"
+                        style="@style/CreditCardTextStyle"
+                        android:text="Jordan Setiawan" />
+
+                    <TextView
+                        android:id="@+id/lblExpiry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="10sp"
+                        style="@style/CreditCardTextStyle"
+                        android:text="09/19" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/_4sdp"
+                android:paddingLeft="@dimen/_24sdp"
+                android:paddingRight="@dimen/_24sdp"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/cardTags"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="@dimen/_2sdp"
+                    android:textColor="@color/support_darker_grey"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/quicksand_semibold"
+                    android:text=""/>
+
+                <TextView
+                    android:layout_marginTop="@dimen/_16sdp"
+                    style="@style/quicksandSemiBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Tag"
+                    android:textColor="@color/support_darker_grey"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:id="@+id/txtEditTag"
+                    android:inputType="text|textMultiLine"
+                    android:digits="0123456789.,qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                    style="@style/quicksandSemiBold"
+                    android:textColor="@color/black"
+                    android:maxLength="100"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"  />
+
+                <Button
+                    android:id="@+id/btnSubmitTag"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Simpan"
+                    android:textAllCaps="false"
+                    android:textSize="14dp"
+                    android:fontFamily="@font/quicksand_bold"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:stateListAnimator="@null"
+                    android:textColor="@color/colorwhite"
+                    android:background="@drawable/btn_rounded"
+                    android:layout_marginBottom="@dimen/_32sdp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

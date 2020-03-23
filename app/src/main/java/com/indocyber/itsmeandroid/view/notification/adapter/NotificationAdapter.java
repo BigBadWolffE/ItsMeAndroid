@@ -22,8 +22,7 @@ import java.util.List;
  *@author Muhammad Faisal
  *@version 1.0
  */
-public class NotificationAdapter extends
-        RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
+public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder> {
 
     private List<Notification> notificationList;
     private NotificationClickListener clickListener;

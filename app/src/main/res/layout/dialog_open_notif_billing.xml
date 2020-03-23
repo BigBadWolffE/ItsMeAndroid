@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="6sp"
+        android:text="This File protected"
+        android:textColor="#1f1f1f"
+        android:textSize="17sp"
+        android:textStyle="normal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblHintPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="normal"
+        android:textColor="#bababa"
+        android:lineSpacingExtra="10sp"
+        android:layout_marginVertical="@dimen/_10sdp"
+        android:text="Password"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblTitle"
+        />
+
+
+    <EditText
+        android:id="@+id/txtPasswordBilling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand_medium"
+        android:imeOptions="actionNext"
+        android:textColor="@color/greyish_brown"
+        android:textColorHint="@color/greyish_brown"
+        android:textSize="15sp"
+        android:theme="@style/AppTheme.NoActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblHintPassword" />
+
+    <TextView
+        android:id="@+id/lblBtnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal"
+        android:letterSpacing="0.04"
+        android:padding="@dimen/_5sdp"
+        android:text="CANCEL"
+        android:textColor="#074dd9"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintRight_toLeftOf="@id/lblBtnOpen"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPasswordBilling" />
+
+    <TextView
+        android:id="@+id/lblBtnOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_horizontal"
+        android:letterSpacing="0.04"
+        android:padding="@dimen/_5sdp"
+        android:text="OPEN"
+        android:textColor="#074dd9"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPasswordBilling" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

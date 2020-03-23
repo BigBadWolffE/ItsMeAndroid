@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/llAlertDialog"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@drawable/bgalertlayout"
+    android:gravity="center"
+    android:padding="@dimen/_16sdp"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_ico_close" />
+
+    <ImageView
+        android:id="@+id/imgAlertIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_img_emotion_sad2" />
+
+    <TextView
+        android:layout_marginTop="@dimen/_4sdp"
+        android:id="@+id/txtSmallText"
+        android:layout_below="@+id/imgAlertIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/alert_line_spacing_extra"
+        style="@style/quicksandRegular"
+        android:textColor="@color/support_darker_grey"
+        android:textSize="12sp"
+        android:text="Penambahan Kartu Anda" />
+
+    <TextView
+        android:layout_marginTop="@dimen/_4sdp"
+        android:id="@+id/txtBigText"
+        android:layout_below="@+id/txtSmallText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/alert_line_spacing_extra"
+        style="@style/quicksandSemiBold"
+        android:textColor="#5D5D5D"
+        android:textSize="14sp"
+        android:text="3434 XXXX XXXX 4567\nBelum Berhasil" />
+
+    <TextView
+        android:layout_marginTop="@dimen/_4sdp"
+        android:id="@+id/txtErrorText"
+        android:layout_below="@+id/txtBigText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/alert_line_spacing_extra"
+        style="@style/quicksandRegular"
+        android:textColor="@color/support_darker_grey"
+        android:textSize="12sp"
+        android:text="Nama tidak sesuai dengan\nakun anda dalam aplikasi it's me" />
+
+</RelativeLayout>
