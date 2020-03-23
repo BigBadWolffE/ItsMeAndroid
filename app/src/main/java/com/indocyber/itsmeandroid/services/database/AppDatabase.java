@@ -23,7 +23,7 @@ import com.indocyber.itsmeandroid.services.database.typeconverter.UserPinTypeCon
  *@version 1.0
  */
 
-@Database(entities = {ImageCardModel.class, User.class, SecretQuestion.class}, version = 7, exportSchema = false)
+@Database(entities = {ImageCardModel.class, User.class, SecretQuestion.class}, version = 8, exportSchema = false)
 @TypeConverters({ListStringTypeConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;

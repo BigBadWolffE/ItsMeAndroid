@@ -107,7 +107,7 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
 
         mLinearHastag.setOnClickListener(v -> {
             Intent intent = new Intent(this, TagKartu.class);
-            intent.putExtra(INTENT_ID, data);
+            intent.putExtra("cardId", data.getId());
             startActivity(intent);
         });
 

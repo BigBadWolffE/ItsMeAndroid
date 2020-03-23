@@ -54,7 +54,7 @@ public interface ImageCardDao {
     @Query("Select tagList from ImageCardModel where id = :id")
     Single<List<String>> getTaglistByCardId(int id);
 
-    @Query("Update ImageCardModel set tagList = :newTagList where id = :id")
+    @Query("Update ImageCardModel set newTagList = :newTagList where id = :id")
     Completable updateCardTagList(int id, String newTagList);
 
     @Query("Select tagList from ImageCardModel where tagList is not null")

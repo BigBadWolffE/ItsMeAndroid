@@ -33,6 +33,7 @@ public class ImageCardModel implements Parcelable {
     private String minPayment = "";
     private String availableCredit = "";
     private List<String> tagList;
+    private String newTagList;
 
     public ImageCardModel(int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {
         this.image = image;
@@ -245,5 +246,13 @@ public class ImageCardModel implements Parcelable {
 
     public void setTagList(List<String> tagList) {
         this.tagList = tagList;
+    }
+
+    public String getNewTagList() {
+        return newTagList;
+    }
+
+    public void setNewTagList(String newTagList) {
+        this.newTagList = newTagList;
     }
 }
