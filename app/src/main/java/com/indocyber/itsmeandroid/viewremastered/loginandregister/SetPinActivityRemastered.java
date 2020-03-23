@@ -48,15 +48,17 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
     public static ImageView backButton;
     public static TextView submitPin;
     public static CardView lblSubmit;
-    int parentCode;
+    int parentCode = -1;
     String cardNumber = "";
-
+    ImageCardModel data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_remastered);
-        parentCode = getIntent().getIntExtra("parentCode", 0);
-        ImageCardModel data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        parentCode = getIntent().getIntExtra("parentCode", -1);
+        if (parentCode >= 0) {
+            data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        }
         if (data != null) {
             cardNumber = data.getNumberCard();
         }
