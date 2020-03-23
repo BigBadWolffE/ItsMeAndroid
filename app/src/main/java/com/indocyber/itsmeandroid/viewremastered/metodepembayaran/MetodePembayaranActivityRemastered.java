@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
 
@@ -15,6 +19,8 @@ public class MetodePembayaranActivityRemastered extends AppCompatActivity implem
     private RecyclerView rcMetode;
     public static List<MetodePembayaranModel> mMetodePembayaran = new ArrayList<>();
     public static MetodePembayaranAdapter mMetodePembayaranAdapter;
+    public static TextView tambahBtn;
+    public static ImageView backButton;
 
     private String[] bankNames = {
 
@@ -43,6 +49,21 @@ public class MetodePembayaranActivityRemastered extends AppCompatActivity implem
                 new LinearLayoutManager(MetodePembayaranActivityRemastered.this);
         rcMetode.setLayoutManager(horizontalLayoutManager);
         rcMetode.setAdapter(mMetodePembayaranAdapter);
+        backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        tambahBtn = findViewById(R.id.btnTambah);
+        tambahBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent tambah = new Intent(MetodePembayaranActivityRemastered.this,TambahMetodePembayaranActivityRemastered.class);
+                startActivityForResult(tambah, 71);
+            }
+        });
 
     }
 

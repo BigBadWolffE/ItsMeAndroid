@@ -7,6 +7,7 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,15 +24,13 @@ import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpResetPinSuccess;
 
 import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
-
+public class LupaPinActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
     public static PinView firstPinView;
     public static AlertDialog alertDialog;
     public static ImageView backButton;
@@ -41,25 +40,21 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_pin_from_akun_remastered);
+        setContentView(R.layout.activity_lupa_pin_remastered);
+
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
-        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinFromAkunActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(LupaPinActivityRemastered.this).build();
 
         NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
+
         backButton = findViewById(R.id.imageView5);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         submitPin = findViewById(R.id.btn_pin_register);
         lblSubmit = findViewById(R.id.lbl_btn_validation);
         submitPin.setEnabled(false);
-        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinFromAkunActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(LupaPinActivityRemastered.this).build();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,20 +69,22 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
                     alertDialog.show();
                     new Handler().postDelayed(() -> {
                         alertDialog.dismiss();
-//                        Intent intent = new Intent(SetPinActivityRemastered.this, PopUpRegisterSucceedRemastered.class);
-//                        startActivity(intent);
-                        PopUpResetPinSuccess.showDialog(ResetPinFromAkunActivityRemastered.this);
+                        Intent intent = new Intent(LupaPinActivityRemastered.this, ResetPinFromAkunActivityRemastered.class);
+                        startActivity(intent);
                     }, 800);
                 }, 200);
             }
         });
     }
+
     private void setPinView() {
         firstPinView.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
+        firstPinView.setItemCount(4);
         firstPinView.setBackgroundColor(ResourcesCompat.getColor(getResources(),R.color.transparent,getTheme()));
-        firstPinView.setItemCount(6);
+        firstPinView.setItemSpacing(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_spacing));
         firstPinView.setLineWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_line_width));
-        firstPinView.setAnimationEnable(true);// start animation when adding text
+        firstPinView.setAnimationEnable(true);
+        // start animation when adding text
         firstPinView.setCursorVisible(false);
         firstPinView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -98,7 +95,7 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                if (before == 6) {
+                if (before == 4) {
                     submitPin.setEnabled(true);
                     lblSubmit.setCardBackgroundColor(getResources().getColor(R.color.blue));
                 }
@@ -170,4 +167,3 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
         return super.onOptionsItemSelected(item);
     }
 }
-

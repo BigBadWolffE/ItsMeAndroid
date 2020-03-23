@@ -25,6 +25,7 @@ import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpLupaPinKirimEmailRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpResetPinSuccess;
 
 import java.util.Objects;
@@ -36,7 +37,7 @@ public class ResetPinSebelumnyaActivityRemastered extends AppCompatActivity impl
     public static PinView firstPinView;
     public static AlertDialog alertDialog;
     public static ImageView backButton;
-    public static TextView submitPin;
+    public static TextView submitPin,lupaPin;
     public static CardView lblSubmit;
 
     @Override
@@ -54,8 +55,15 @@ public class ResetPinSebelumnyaActivityRemastered extends AppCompatActivity impl
         numberKeyboard.setListener(this);
 
         backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         submitPin = findViewById(R.id.btn_pin_register);
         lblSubmit = findViewById(R.id.lbl_btn_validation);
+        lupaPin = findViewById(R.id.layout_lupa);
         submitPin.setEnabled(false);
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinSebelumnyaActivityRemastered.this).build();
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +72,19 @@ public class ResetPinSebelumnyaActivityRemastered extends AppCompatActivity impl
                 finish();
             }
         });
+        lupaPin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                new Handler().postDelayed(() -> {
+                    alertDialog.show();
+                    new Handler().postDelayed(() -> {
+                        alertDialog.dismiss();
+                        PopUpLupaPinKirimEmailRemastered.showDialog(ResetPinSebelumnyaActivityRemastered.this);
+                    }, 1000);
+                }, 1000);
+            }
+        });
         submitPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,10 +105,7 @@ public class ResetPinSebelumnyaActivityRemastered extends AppCompatActivity impl
     private void setPinView() {
         firstPinView.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
         firstPinView.setItemCount(6);
-        firstPinView.setItemHeight(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
-        firstPinView.setItemWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
-        firstPinView.setItemRadius(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_radius));
-        firstPinView.setItemSpacing(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_spacing));
+        firstPinView.setBackgroundColor(ResourcesCompat.getColor(getResources(),R.color.transparent,getTheme()));
         firstPinView.setLineWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_line_width));
         firstPinView.setAnimationEnable(true);// start animation when adding text
         firstPinView.setCursorVisible(false);

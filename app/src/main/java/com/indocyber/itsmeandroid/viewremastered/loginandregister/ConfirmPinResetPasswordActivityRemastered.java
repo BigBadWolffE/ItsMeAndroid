@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount;
+package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,15 +23,15 @@ import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpSuccessResetPassword;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpResetPinSuccess;
 
 import java.util.Objects;
 
 import dmax.dialog.SpotsDialog;
 
-public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
-
+public class ConfirmPinResetPasswordActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
     public static PinView firstPinView;
     public static AlertDialog alertDialog;
     public static ImageView backButton;
@@ -41,25 +41,20 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reset_pin_from_akun_remastered);
+        setContentView(R.layout.activity_confirm_pin_reset_password_remastered);
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
-        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinFromAkunActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ConfirmPinResetPasswordActivityRemastered.this).build();
 
         NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
+
         backButton = findViewById(R.id.imageView5);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
         submitPin = findViewById(R.id.btn_pin_register);
         lblSubmit = findViewById(R.id.lbl_btn_validation);
         submitPin.setEnabled(false);
-        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ResetPinFromAkunActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(ConfirmPinResetPasswordActivityRemastered.this).build();
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,7 +71,7 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
                         alertDialog.dismiss();
 //                        Intent intent = new Intent(SetPinActivityRemastered.this, PopUpRegisterSucceedRemastered.class);
 //                        startActivity(intent);
-                        PopUpResetPinSuccess.showDialog(ResetPinFromAkunActivityRemastered.this);
+                        PopUpSuccessResetPassword.showDialog(ConfirmPinResetPasswordActivityRemastered.this);
                     }, 800);
                 }, 200);
             }
@@ -170,4 +165,3 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
         return super.onOptionsItemSelected(item);
     }
 }
-

@@ -101,6 +101,13 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
         numberKeyboard.setListener(this);
         viewModel = ViewModelProviders.of(this, factory).get(PinActivityViewModel.class);
         backButton = findViewById(R.id.imageView5);
+        backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         submitPin = findViewById(R.id.btn_pin_register);
         lblSubmit = findViewById(R.id.lbl_btn_validation);
         submitPin.setEnabled(false);

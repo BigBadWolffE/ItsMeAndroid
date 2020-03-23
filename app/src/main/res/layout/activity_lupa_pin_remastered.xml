@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:keyboard="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered">
+    tools:context=".viewremastered.resetpinfromaccount.LupaPinActivityRemastered">
 
 
     <View
@@ -35,34 +35,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/__interstate_regular"
-        android:text="Masukan PIN anda saat ini"
+        android:text="Security Code telah dikirimkan ke email andajordan.setiawan95@gmail.com"
         android:textAlignment="center"
         android:textColor="@color/grey_main_dark"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/firstPinView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_one" />
-
-    <TextView
-        android:clickable="true"
-        android:gravity="center"
-        android:id="@+id/layout_lupa"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_20sdp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/__interstate_regular"
-        android:text="Lupa Security Code ?"
-        android:textAlignment="center"
-        android:textColor="@color/grey_main_medium"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstPinView" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/lbl_btn_validation"
@@ -115,7 +95,7 @@
             android:layout_marginEnd="8dp"
             android:fontFamily="@font/__interstate_regular"
             android:gravity="center"
-            android:text="Security Code"
+            android:text="Lupa Security Code"
             android:textColor="@color/grey_40"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -140,10 +120,10 @@
         android:textStyle="bold"
         app:cursorWidth="2dp"
         app:hideLineWhenFilled="false"
-        app:itemCount="6"
+        app:itemCount="4"
         app:lineColor="@color/grey_40"
         app:viewType="line"
-        app:layout_constraintBottom_toTopOf="@+id/layout_lupa"
+        app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_two" />
@@ -163,7 +143,7 @@
         app:layout_constraintBottom_toTopOf="@+id/lbl_btn_validation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_lupa"
+        app:layout_constraintTop_toBottomOf="@+id/firstPinView"
         keyboard:numberkeyboard_keyboardType="integer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

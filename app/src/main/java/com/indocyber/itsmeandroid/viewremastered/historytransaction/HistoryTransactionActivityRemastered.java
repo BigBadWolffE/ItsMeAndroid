@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
@@ -23,6 +25,7 @@ public class HistoryTransactionActivityRemastered extends AppCompatActivity impl
     private RecyclerView rcHistoryTransaction;
     private List<HistoryTransactionModel> mHistoryTransaction = new ArrayList<>();
     private HistoryTransactionAdapter mHistoryTransactionAdapter;
+    public static ImageView backButton;
 
     private String[] tanggal = {
 
@@ -60,6 +63,13 @@ public class HistoryTransactionActivityRemastered extends AppCompatActivity impl
                 new LinearLayoutManager(HistoryTransactionActivityRemastered.this);
         rcHistoryTransaction.setLayoutManager(horizontalLayoutManager);
         rcHistoryTransaction.setAdapter(mHistoryTransactionAdapter);
+        backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
     }
