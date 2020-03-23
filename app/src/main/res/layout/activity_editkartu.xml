@@ -168,7 +168,7 @@
                                 android:id="@+id/txtExpiryDateMonth"
                                 android:inputType="number"
                                 android:textAlignment="center"
-                                android:maxLength="5"
+                                android:maxLength="2"
                                 android:layout_width="0dp"
                                 android:layout_weight="3"
                                 style="@style/quicksandSemiBold"
@@ -191,7 +191,7 @@
                                 android:textAlignment="center"
                                 style="@style/quicksandSemiBold"
                                 android:textColor="@color/support_black"
-                                android:maxLength="5"
+                                android:maxLength="2"
                                 android:layout_width="0dp"
                                 android:layout_weight="3"
                                 android:layout_height="wrap_content" />

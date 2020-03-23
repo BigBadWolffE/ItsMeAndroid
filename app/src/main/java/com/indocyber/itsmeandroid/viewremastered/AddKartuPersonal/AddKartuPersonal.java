@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -33,14 +35,16 @@ import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 public class AddKartuPersonal extends AppCompatActivity {
 
     private EditText mCardHolderInput;
     private EditText mExpiryInput;
-    private EditText mMerchantInput;
+    private EditText mBirthDate;
     private ImageView mCardImage;
     private int mCardImageResource;
+    private Spinner mTipeKartu;
     private Spinner spnAgama;
     private Spinner spnStatus;
     private Spinner spnPekerjaan;
@@ -50,6 +54,10 @@ public class AddKartuPersonal extends AppCompatActivity {
     private ImageView ktpImage;
     private static final int GET_KTP_PICTURE_FROM_GALLERY = 0;
     private static final int GET_KTP_PICTURE_FROM_CAMERA = 1;
+    private final static String[] MONTH_LIST = {"Januari", "Februari", "Maret", "April",
+            "Mei", "Juni", "Juli", "Agustus", "September",
+            "Oktober", "November", "Desember"};
+    private static final String[] TIPE_KARTU_OPTIONS = {"KTP", "NPWP", "SIM"};
     private static final String[] AGAMA_OPTIONS =
             { "Pilih Agama", "Islam", "Hindu", "Buddha", "Kristen", "Katolik", "Konghuchu" };
     private static final String[] STATUS_OPTIONS =
@@ -73,8 +81,33 @@ public class AddKartuPersonal extends AppCompatActivity {
     }
 
     private void initializeField() {
+        mTipeKartu = findViewById(R.id.spnTipeKartu);
+        mTipeKartu.setAdapter(new ArrayAdapter<>(this,
+                R.layout.spinner_item_text, TIPE_KARTU_OPTIONS));
         mCardHolderInput = findViewById(R.id.txtCardHolder);
-        mMerchantInput = findViewById(R.id.txtMerchant);
+        mBirthDate = findViewById(R.id.txtTanggalLahir);
+        mBirthDate.setOnFocusChangeListener((view, isFocus) -> {
+            if (isFocus) {
+                final Calendar c = Calendar.getInstance();
+                final int mYear = c.get(Calendar.YEAR) - 18;
+                final int mMonth = c.get(Calendar.MONTH);
+                final int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                        R.style.Theme_MaterialComponents_Light_Dialog_Alert,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                String dateValue = dayOfMonth + " " + MONTH_LIST[monthOfYear] + " " + year;
+                                mBirthDate.setText(dateValue);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
         spnAgama = findViewById(R.id.spnAgama);
         spnAgama.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, AGAMA_OPTIONS));
