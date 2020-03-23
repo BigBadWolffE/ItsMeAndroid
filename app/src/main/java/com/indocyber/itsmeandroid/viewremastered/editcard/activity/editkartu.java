@@ -308,8 +308,10 @@ public class editkartu extends AppCompatActivity {
         data.setNameCard(mCardHolderInput.getText().toString());
         data.setExpireCard(mCardExpiry.getText().toString());
         data.setBillingAddress(mBillingAddressInput.getText().toString());
-        intent.putExtra("parentCode", GlobalVariabel.EDIT_KARTU);
-        intent.putExtra(INTENT_ID, data);
+        Bundle bundle = new Bundle();
+        bundle.putInt("parentCode", GlobalVariabel.EDIT_KARTU);
+        bundle.putParcelable(INTENT_ID, data);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

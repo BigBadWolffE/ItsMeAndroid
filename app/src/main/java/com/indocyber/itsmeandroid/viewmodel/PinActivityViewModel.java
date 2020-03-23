@@ -1,14 +1,9 @@
 package com.indocyber.itsmeandroid.viewmodel;
 
-import android.app.Application;
-
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
 
 import javax.inject.Inject;
@@ -18,57 +13,44 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class EditCardViewModel extends ViewModel {
+/*
+ *
+ *
+ *@Author
+ *@Version
+ */
+public class PinActivityViewModel extends ViewModel {
 
     ImageCardDao dao;
-
-    @Inject
-    public EditCardViewModel(ImageCardDao dao) {
-        this.dao = dao;
-    }
-
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
-    private MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isDone = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private MutableLiveData<ImageCardModel> data = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
-
-    public MutableLiveData<ImageCardModel> getData() {
-        return data;
-    }
 
     public MutableLiveData<Boolean> getIsLoading() {
         return isLoading;
     }
 
-    public MutableLiveData<Boolean> getIsSaved() {
-        return isSaved;
+    public MutableLiveData<Boolean> getIsDone() {
+        return isDone;
     }
 
     public MutableLiveData<String> getError() {
         return error;
     }
 
-    public void getEditCard(int id) {
-        isLoading.setValue(true);
-        disposable.add(
-                dao.getCardById(id)
-                        .subscribeOn(Schedulers.computation())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(model -> {
-                            isLoading.setValue(false);
-                            data.setValue(model);
-                        }, e -> {
-                            error.setValue(e.getMessage());
-                            e.printStackTrace();
-                            isLoading.setValue(false);
-                        })
-        );
-
+    public MutableLiveData<ImageCardModel> getData() {
+        return data;
     }
 
-    public void setIsSaved(ImageCardModel model) {
-        isSaved.setValue(false);
+    @Inject
+    public PinActivityViewModel(ImageCardDao dao) {
+        this.dao = dao;
+    }
+
+    public void updateCard(ImageCardModel model) {
+        isDone.setValue(false);
         isLoading.setValue(true);
         disposable.add(
                 dao.update(model)
@@ -78,8 +60,7 @@ public class EditCardViewModel extends ViewModel {
                             @Override
                             public void onComplete() {
                                 isLoading.setValue(false);
-                                isSaved.setValue(true);
-
+                                isDone.setValue(true);
                             }
 
                             @Override
@@ -91,9 +72,35 @@ public class EditCardViewModel extends ViewModel {
         );
     }
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        disposable.clear();
+    public void blockCard(int id) {
+        isDone.setValue(false);
+        isLoading.setValue(true);
+        disposable.add(
+                dao.blockCard(id)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableCompletableObserver() {
+                            @Override
+                            public void onComplete() {
+                                isLoading.setValue(false);
+                                isDone.setValue(true);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                isLoading.setValue(false);
+                                isDone.setValue(false);
+                                error.setValue(e.getMessage());
+                            }
+                        })
+        );
     }
+
+//    public void updateTag() {
+//        isDone.setValue(false);
+//        isLoading.setValue(false);
+//        disposable.add(dao.)
+//    }
+
+
 }

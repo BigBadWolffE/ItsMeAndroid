@@ -2,8 +2,10 @@ package com.indocyber.itsmeandroid.di;
 
 import androidx.lifecycle.ViewModel;
 
+import com.indocyber.itsmeandroid.viewmodel.EditCardViewModel;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
+import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
 
@@ -43,4 +45,16 @@ public abstract class ViewModelModule {
     @ViewModelKey(HomeViewModel.class)
     @SuppressWarnings("unused")
     abstract ViewModel bindsHomeViewModel(HomeViewModel homeViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EditCardViewModel.class)
+    @SuppressWarnings("unused")
+    abstract ViewModel bindsEditCardViewModel(EditCardViewModel editCardViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PinActivityViewModel.class)
+    @SuppressWarnings("unused")
+    abstract ViewModel bindsPinActivityViewModel(PinActivityViewModel pinActivityViewModel);
 }

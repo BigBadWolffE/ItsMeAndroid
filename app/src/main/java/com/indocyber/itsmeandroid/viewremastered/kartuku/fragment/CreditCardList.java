@@ -2,7 +2,10 @@ package com.indocyber.itsmeandroid.viewremastered.kartuku.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +16,8 @@ import android.view.ViewGroup;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardFilterAdapter;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardListAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
@@ -25,11 +30,13 @@ import java.util.List;
  * Use the {@link CreditCardList#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CreditCardList extends Fragment {
+public class CreditCardList extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private HomeViewModel viewModel;
+    private CardListAdapter cardAdapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -67,21 +74,34 @@ public class CreditCardList extends Fragment {
     }
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_credit_card_list;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_credit_card_list, container, false);
+        View view = inflater.inflate(layoutRes(), container, false);
         RecyclerView filterRecycler = view.findViewById(R.id.recyclerCardFilter);
         RecyclerView cardListRecycler = view.findViewById(R.id.recyclerCardList);
+
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CardListAdapter cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
         filterRecycler.setLayoutManager(horizontalLayoutManager);
         CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
-        cardAdapter.refreshCardList(generateCardList());
         cardListRecycler.setAdapter(cardAdapter);
         filterRecycler.setAdapter(cardFilterAdapter);
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewModel = ViewModelProviders.of(getParentFragment().getActivity()).get(HomeViewModel.class);
+        viewModel.getCardList();
+        observeViewModel();
     }
 
     private List<ImageCardModel> generateCardList() {
@@ -102,6 +122,12 @@ public class CreditCardList extends Fragment {
         filterList.add("Vacation");
 
         return filterList;
+    }
+
+    private void observeViewModel() {
+        viewModel.getCardList().observe(this, imageCardModels -> {
+            cardAdapter.refreshCardList(imageCardModels);
+        });
     }
 
 }
