@@ -106,7 +106,7 @@
             android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.home.activity.HomeRemastered"
+            android:name=".viewremastered.loginandregister.LoginActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -114,9 +114,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-       <!-- <activity
+        <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
-            android:theme="@style/AppTheme.NoActionBar" />-->
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
             android:parentActivityName=".view.login.LoginOptionActivity" />
