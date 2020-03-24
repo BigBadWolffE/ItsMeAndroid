@@ -2,10 +2,14 @@ package com.indocyber.itsmeandroid.viewremastered.promo.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,10 +22,14 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +43,9 @@ public class PromoRemasteredFragment extends BaseFragment implements PromoMenuAd
     FrameLayout mLayoutPromo;
     private MenuPromoAdapter mPromoMenuAdapter, mNearbyMenuAdapter, mDinigMenuAdapter, mCollectionMenuAdapter;
     private Fragment mFragmentIndicator = null;
-
+    private HomeViewModel viewModel;
+    @Inject
+    ViewModelFactory factory;
     private String[] titleList = {
 
     };
@@ -53,6 +63,7 @@ public class PromoRemasteredFragment extends BaseFragment implements PromoMenuAd
 
         View promoRemasteredView = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, promoRemasteredView);
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(HomeViewModel.class);
         mPromoMenuAdapter = new MenuPromoAdapter(initializeMenu(), getActivity(), this);
         mNearbyMenuAdapter = new MenuPromoAdapter(nearbyActive(), getActivity(), this);
         mDinigMenuAdapter = new MenuPromoAdapter(dinningActive(), getActivity(), this);
@@ -64,6 +75,21 @@ public class PromoRemasteredFragment extends BaseFragment implements PromoMenuAd
         loadFragment(mFragmentIndicator);
         getPromo();
         return promoRemasteredView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        observeViewModel();
+    }
+
+    private void observeViewModel() {
+        viewModel.getPromoList().observe(this, new Observer<List<PromoMenuModel>>() {
+            @Override
+            public void onChanged(List<PromoMenuModel> promoMenuModels) {
+                
+            }
+        });
     }
 
     private void getPromo() {

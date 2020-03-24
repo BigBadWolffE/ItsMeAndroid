@@ -33,7 +33,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApplicationModule {
 
 //    private static final String BASE_URL = "http://10.100.10.251:5000/";
-    private static final String BASE_URL = "http://10.100.10.251:7771/";
+//    private static final String BASE_URL = "http://10.100.10.251:7771/";
+    private static final String BASE_URL = "http://34.87.100.8:7771/";
 
     @Provides
     Api provideApi() {

@@ -8,10 +8,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
+import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
+import com.indocyber.itsmeandroid.services.network.ApiService;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,6 +23,7 @@ import javax.inject.Inject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -29,14 +34,17 @@ import io.reactivex.schedulers.Schedulers;
 public class HomeViewModel extends ViewModel {
 
     ImageCardDao dao;
+    ApiService service;
 
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<List<ImageCardModel>> cardList = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
+    private MutableLiveData<List<PromoMenuModel>> promoList = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
 
     @Inject
-    public HomeViewModel(ImageCardDao dao) {
+    public HomeViewModel(ImageCardDao dao, ApiService service) {
+        this.service = service;
         this.dao = dao;
     }
 
@@ -50,6 +58,10 @@ public class HomeViewModel extends ViewModel {
 
     public MutableLiveData<String> getError() {
         return error;
+    }
+
+    public MutableLiveData<List<PromoMenuModel>> getPromoList() {
+        return promoList;
     }
 
     public void fetchAllCardList() {
@@ -93,6 +105,36 @@ public class HomeViewModel extends ViewModel {
                                 isLoading.setValue(false);
                             }
                         })
+        );
+    }
+
+    public void fetchPromoList(String kategori) {
+        isLoading.setValue(true);
+        HashMap<String, String> body = new HashMap<>();
+        body.put("category", kategori);
+        body.put("latitude", "99");
+        body.put("longitude", "99");
+        disposable.add(
+            service.getPromoList("ZXJ3YW5keS53aWpheWFAaW5kb2N5YmVyLmNvLmlkOnJhaGFzaWE=", body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<ApiResponse<List<PromoMenuModel>>>() {
+
+                    @Override
+                    public void onSuccess(ApiResponse<List<PromoMenuModel>> listApiResponse) {
+                        isLoading.setValue(true);
+                        if (listApiResponse.getStatus() != 200) {
+                            error.setValue(listApiResponse.getMessage());
+                        }
+                        promoList.setValue(listApiResponse.getContent());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        isLoading.setValue(false);
+                        error.setValue("Gagal menghubungkan ke server.");
+                    }
+                })
         );
     }
 

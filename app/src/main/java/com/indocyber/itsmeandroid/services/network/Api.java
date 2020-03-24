@@ -4,6 +4,7 @@ import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
 import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
 import com.indocyber.itsmeandroid.model.ProfilePassportModel;
+import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.model.User;
 
@@ -87,4 +88,8 @@ public interface Api {
     @POST(value = "authentication/login/mobile")
     @Headers({"Accept: " + ACCEPT})
     Single<ApiResponse<User>> login(@HeaderMap Map<String, String> authHeader);
+
+    @GET(value = "promo/getpromolist/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<List<PromoMenuModel>>> getPromoList(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
 }

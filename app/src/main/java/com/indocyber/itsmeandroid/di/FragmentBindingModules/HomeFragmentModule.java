@@ -24,7 +24,7 @@ public abstract class HomeFragmentModule {
     @ContributesAndroidInjector
     abstract HomeRemasteredFragment provideHomeFragment();
 
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = PromoFragmentModule.class)
     abstract PromoRemasteredFragment providePromoFragment();
 
     @ContributesAndroidInjector(modules = KartukuFragmentModule.class)

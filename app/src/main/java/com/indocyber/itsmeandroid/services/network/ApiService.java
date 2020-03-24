@@ -5,6 +5,7 @@ import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
 import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
 import com.indocyber.itsmeandroid.model.ProfilePassportModel;
+import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.model.User;
 
@@ -136,5 +137,9 @@ public class ApiService {
 
     public Single<ApiResponse<User>> login(String authKey) {
         return api.login(generateAuthenticationHeader(authKey));
+    }
+
+    public Single<ApiResponse<List<PromoMenuModel>>> getPromoList(String authKey, HashMap<String, String> body) {
+        return api.getPromoList(generateAuthenticationHeader(authKey), body);
     }
 }
