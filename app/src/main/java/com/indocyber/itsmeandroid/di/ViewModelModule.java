@@ -9,6 +9,7 @@ import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
 import com.indocyber.itsmeandroid.viewmodel.TagKartuViewModel;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 
 import dagger.Binds;
 import dagger.Module;
@@ -64,4 +65,6 @@ public abstract class ViewModelModule {
     @ViewModelKey(TagKartuViewModel.class)
     @SuppressWarnings("unused")
     abstract ViewModel bindsTagKartuViewModel(TagKartuViewModel tagKartuViewModel);
+
+
 }

@@ -12,17 +12,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
 
 import java.util.regex.Pattern;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+
 public class LoginActivityRemastered extends AppCompatActivity {
 
-    public static TextView btnNext,registerText;
-    public static EditText inputUserName;
-    public static Pattern emailCustom;
-    public static Pattern phoneCustom;
-    public static CardView lblLgn;
+    private TextView btnNext,registerText;
+    private EditText inputUserName;
+    private Pattern emailCustom;
+    private Pattern phoneCustom;
+    private CardView lblLgn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +55,8 @@ public class LoginActivityRemastered extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent formLogin = new Intent(LoginActivityRemastered.this,LoginAuthActivityRemastered.class);
-                startActivityForResult(formLogin,1);
-                SavePref.saveLoginUser(LoginActivityRemastered.this,inputUserName.getText().toString());
+                formLogin.putExtra(INTENT_ID,inputUserName.getText().toString().trim());
+                startActivity(formLogin);
             }
         });
 
