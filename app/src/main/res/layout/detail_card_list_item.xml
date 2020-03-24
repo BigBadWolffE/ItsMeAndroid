@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:paddingBottom="@dimen/spacing_medium"
+        android:layout_width="match_parent"
+        android:background="#ededed"
+        android:layout_height="1dp"/>
+    <LinearLayout
+        android:paddingTop="@dimen/spacing_large"
+        android:paddingBottom="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_small"
+        android:paddingLeft="@dimen/spacing_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/txtNamaKartu"
+            android:maxLines="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/greyish_brown"
+            android:text="Kartu Kredit BCA"
+            />
+
+        <TextView
+            android:id="@+id/txtNomorKartu"
+            android:maxLines="1"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/greyish_brown"
+            android:lineSpacingExtra="6sp"
+            android:gravity="end"
+            android:text="3454 XXXX XXXX 3455"
+            />
+    </LinearLayout>
+    <View
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium"
+        android:layout_width="match_parent"
+        android:background="#ededed"
+        android:layout_height="1dp"/>
+
+
+</LinearLayout>

@@ -267,11 +267,12 @@
                     tools:layout_editor_absoluteX="20dp">
 
                     <RelativeLayout
-                        android:id="@+id/relativeLayout2"
+                        android:id="@+id/rltvBlockAllCard"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:clickable="true"
                         android:paddingLeft="@dimen/spacing_large"
                         android:paddingTop="@dimen/spacing_xmedium"
                         android:paddingRight="@dimen/spacing_large"
@@ -324,7 +325,7 @@
                         android:paddingRight="@dimen/spacing_large"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/relativeLayout2">
+                        app:layout_constraintStart_toEndOf="@+id/rltvBlockAllCard">
 
                         <LinearLayout
                             android:id="@+id/buttonBeliPulsa"
