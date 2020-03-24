@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
@@ -58,6 +59,7 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
     public static TextView submitPin;
     public static CardView lblSubmit;
     private PinActivityViewModel viewModel;
+
     private AlertDialog loader;
     @Inject
     ViewModelFactory factory;
@@ -85,6 +87,7 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
         cardExpiry = getIntent().getStringExtra("cardExpiry");
         billingAddress = getIntent().getStringExtra("billingAddress");
         id = getIntent().getIntExtra("cardId", -1);
+
 //        if (parentCode >= 0) {
 //            data = getIntent().getParcelableExtra(INTENT_ID);
 //        }

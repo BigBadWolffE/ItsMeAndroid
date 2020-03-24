@@ -118,7 +118,7 @@
 
     <TextView
         android:gravity="center"
-        android:id="@+id/layout_two"
+        android:id="@+id/txt_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -163,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/layout_two"
+        app:layout_constraintBottom_toTopOf="@+id/txt_info"
         app:layout_constraintTop_toBottomOf="@+id/backgrnd_view">
 
         <ImageView
@@ -217,7 +217,7 @@
         app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_two"
+        app:layout_constraintTop_toBottomOf="@+id/txt_info"
         app:lineColor="@color/grey_40"
         app:lineWidth="1dp"
         app:viewType="rectangle" />

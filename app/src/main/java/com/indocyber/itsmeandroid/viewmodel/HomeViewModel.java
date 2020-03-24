@@ -1,13 +1,16 @@
 package com.indocyber.itsmeandroid.viewmodel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
+import com.indocyber.itsmeandroid.model.BlockAllCardModel;
 import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
@@ -16,8 +19,10 @@ import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
 import com.indocyber.itsmeandroid.services.network.ApiService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -39,6 +44,7 @@ public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<List<ImageCardModel>> cardList = new MutableLiveData<>();
+    private MutableLiveData<List<BlockAllCardModel>> blockAllCardList = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private MutableLiveData<List<PromoItemModel>> promoList = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -55,6 +61,10 @@ public class HomeViewModel extends ViewModel {
 
     public MutableLiveData<List<ImageCardModel>> getCardList() {
         return cardList;
+    }
+
+    public MutableLiveData<List<BlockAllCardModel>> getBlockCardList() {
+        return blockAllCardList;
     }
 
     public MutableLiveData<String> getError() {
@@ -93,6 +103,50 @@ public class HomeViewModel extends ViewModel {
                             public void onNext(List<ImageCardModel> imageCardModels) {
                                 isLoading.setValue(false);
                                 if (imageCardModels != null) cardList.setValue(imageCardModels);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                isLoading.setValue(false);
+                                error.setValue(e.getMessage());
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                isLoading.setValue(false);
+                            }
+                        })
+        );
+    }
+
+    public void fetchBlockAllCardList() {
+        isLoading.setValue(true);
+        disposable.add(
+                dao.getActiveCard()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<List<ImageCardModel>>() {
+                            @Override
+                            public void onNext(List<ImageCardModel> imageCardModels) {
+                                isLoading.setValue(false);
+
+                                if (imageCardModels != null) {
+                                 List<BlockAllCardModel> blockCardList = new ArrayList<>();
+                                    for (int i = 0; i < imageCardModels.size(); i++) {
+                                        blockCardList.add(new BlockAllCardModel(
+                                                imageCardModels.get(i).getId(),
+                                                imageCardModels.get(i).getImage(),
+                                                imageCardModels.get(i).getNumberCard(),
+                                                imageCardModels.get(i).getNameCard(),
+                                                imageCardModels.get(i).getExpireCard(),
+                                                imageCardModels.get(i).getCost(),
+                                                imageCardModels.get(i).getPrintDate(),
+                                                imageCardModels.get(i).getPrintDueDate(),
+                                                imageCardModels.get(i).isBlockedCard()
+                                        ));
+                                    }
+                                    blockAllCardList.setValue(blockCardList);
+                                }
                             }
 
                             @Override

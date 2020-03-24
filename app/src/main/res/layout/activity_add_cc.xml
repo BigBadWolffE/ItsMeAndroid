@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/card_holder_text_size"
                         style="@style/CreditCardTextStyle"
-                        android:text="Jordan Setiawan" />
+                         />
 
                     <TextView
                         android:id="@+id/lblExpiry"

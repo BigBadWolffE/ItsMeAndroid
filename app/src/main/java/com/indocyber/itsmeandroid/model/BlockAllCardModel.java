@@ -34,7 +34,8 @@ public class BlockAllCardModel implements Parcelable {
     private List<String> tagList;
     private boolean isCheckCard = false;
 
-    public BlockAllCardModel(int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {
+    public BlockAllCardModel(int id, int image, String numberCard, String nameCard, String expireCard, String cost, String printDate, String printDueDate, boolean isBlockedCard) {
+        this.id = id;
         this.image = image;
         this.numberCard = numberCard;
         this.nameCard = nameCard;

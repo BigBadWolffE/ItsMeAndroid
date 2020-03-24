@@ -1,9 +1,12 @@
 package com.indocyber.itsmeandroid.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.model.ListBlockAllCard;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
 
 import javax.inject.Inject;
@@ -117,6 +120,45 @@ public class PinActivityViewModel extends ViewModel {
                             }
                         })
         );
+    }
+
+    public void blockAllCard(ListBlockAllCard listBlockAllCard) {
+        isDone.setValue(false);
+        isLoading.setValue(true);
+        final boolean[] check = {false};
+        for (int i = 0; i < listBlockAllCard.getList().size(); i++) {
+            disposable.add(
+                    dao.blockCard(listBlockAllCard.getList().get(i).getId())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeWith(new DisposableCompletableObserver() {
+                                @Override
+                                public void onComplete() {
+                                    //isLoading.setValue(false);
+                                    //isDone.setValue(true);
+
+                                }
+
+                                @Override
+                                public void onError(Throwable e) {
+                                    check[0] = true;
+
+                                    //isLoading.setValue(false);
+                                    //isDone.setValue(false);
+                                    error.setValue(e.getMessage());
+                                }
+                            })
+            );
+            if (check[0]){
+                isLoading.setValue(false);
+            }
+           if (i == ( listBlockAllCard.getList().size() - 1)){
+                isLoading.setValue(false);
+                isDone.setValue(true);
+               Log.e("PinActivity",i+"");
+            }
+
+        }
     }
 
     @Override

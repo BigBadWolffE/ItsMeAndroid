@@ -115,7 +115,7 @@ public class HomeRemasteredFragment extends BaseFragment {
         TextView userDisplayName = view.findViewById(R.id.userName);
         userDisplayName.setText(preference.getLoggedUserFullname());
         viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
-        viewModel.fetchAllCardList();
+        viewModel.fetchCardList();
         observeViewModel();
         //mDotsLayout = view.findViewById(R.id.layoutDots);
 
