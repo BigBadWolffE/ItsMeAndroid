@@ -20,7 +20,7 @@ public class PopUpRegisterSucceedRemastered {
     }
 
     public static TextView throwLogin;
-    public static ImageView closeDialog;
+    public static ImageView closeDialog,imageBerhasil;
     public static AlertDialog dialog;
 
 
@@ -37,6 +37,7 @@ public class PopUpRegisterSucceedRemastered {
 
         //finally creating the alert dialog and displaying it
         dialog = builder.create();
+        imageBerhasil = dialogView.findViewById(R.id.imageView6);
         throwLogin = dialogView.findViewById(R.id.btn_next_login);
         closeDialog = dialogView.findViewById(R.id.ivClose);
 

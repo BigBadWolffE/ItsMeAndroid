@@ -3,8 +3,10 @@ package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -17,12 +19,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 
 import java.util.regex.Pattern;
 
-public class RegisterActivityRemastered extends AppCompatActivity {
+import dmax.dialog.SpotsDialog;
+
+public class RegisterActivityRemastered extends AppCompatActivity implements View.OnClickListener {
     public static EditText etNama, etEmail,etHandphone,etPassword,etRtPass,etIptSecurity;
     public static TextView register;
     public static CardView registerLayout;
@@ -30,8 +37,12 @@ public class RegisterActivityRemastered extends AppCompatActivity {
     public static CheckBox cbAgreement;
     public static LinearLayout securityLayout;
     public static Spinner spinnerSecuitySelection;
-    public static Pattern emailCustom;
+    public static Pattern emailCustom,nameCustom,passCustom;
     public static Pattern phoneCustom;
+    boolean isEmpty;
+    public static AlertDialog alertDialog;
+
+
 
 
     @Override
@@ -83,28 +94,41 @@ public class RegisterActivityRemastered extends AppCompatActivity {
 
 
         register.setEnabled(false);
+//        cbAgreement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                if(cbAgreement.isChecked()){
+//                    register.setEnabled(true);
+//                    registerLayout.setCardBackgroundColor(getResources().getColor(R.color.blue));
+//                }else{
+//                    registerLayout.setEnabled(false);
+//                    registerLayout.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+//                }
+//
+//            }
+//        });
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(RegisterActivityRemastered.this).build();
+        alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(RegisterActivityRemastered.this).build();
+        register.setOnClickListener(this);
+
         cbAgreement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(cbAgreement.isChecked()){
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (cbAgreement.isChecked()){
                     register.setEnabled(true);
                     registerLayout.setCardBackgroundColor(getResources().getColor(R.color.blue));
-                }else{
-                    registerLayout.setEnabled(false);
-                    registerLayout.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+                }else {
+                    register.setEnabled(false);
+                    registerLayout.setCardBackgroundColor(getResources().getColor(R.color.grey_main_medium));
                 }
 
             }
         });
+        final String Password_Pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+        final String Password_Pattern1 = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent registertoSubmit = new Intent(RegisterActivityRemastered.this,SetPinActivityRemastered.class);
-                startActivityForResult(registertoSubmit,1);
-            }
-        });
-
+        passCustom = Pattern.compile(Password_Pattern);
+        nameCustom = Pattern.compile("^[a-zA-Z\\s]*$");
 
         emailCustom
                 = Pattern.compile(
@@ -124,6 +148,8 @@ public class RegisterActivityRemastered extends AppCompatActivity {
         etEmail.requestFocus();
         etEmail.setError(null);
         etHandphone.addTextChangedListener(phoneWatcher);
+        etNama.addTextChangedListener(generalWatcher);
+        etPassword.addTextChangedListener(passwordWatcher);
 
     }
 
@@ -141,15 +167,58 @@ public class RegisterActivityRemastered extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
 
-
-//                if (etEmail.getText().toString().trim().length()>0){
-//                    etEmail.setError(null);
-//                }else
             if(etEmail.getText().toString().trim().length() != 0)
                 if (!emailCustom.matcher(etEmail.getText().toString()).matches()){
                     etEmail.setError("anda@kamu.com");
                 }else {
                     etEmail.setError(null);
+                }
+
+        }
+    };
+
+    public TextWatcher passwordWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if(etPassword.getText().toString().trim().length() != 0)
+                if (!passCustom.matcher(etPassword.getText().toString()).matches()){
+                    etPassword.setError("Minimal 1 Huruf Besar 1 Angka dan Spesial Karakter");
+                }else {
+                    etPassword.setError(null);
+                }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+
+
+        }
+    };
+
+    public TextWatcher generalWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(etNama.getText().toString().trim().length() != 0)
+                if (!nameCustom.matcher(etNama.getText().toString()).matches()){
+                    etNama.setError("Format nama tidak tepat");
+                }else {
+                    etNama.setError(null);
                 }
 
         }
@@ -178,8 +247,60 @@ public class RegisterActivityRemastered extends AppCompatActivity {
         public void afterTextChanged(Editable s) {
 
 
-
-
         }
     };
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.btn_next_register:
+                regist();
+                break;
+        }
+
+    }
+
+    public void regist(){
+        isEmpty = false;
+        if(etNama.getText().toString().trim().length() == 0){
+            isEmpty = true;
+            Toast.makeText(this,"Nama kosong",Toast.LENGTH_SHORT).show();
+        }else if (etEmail.getText().toString().trim().length() == 0){
+            isEmpty = true;
+            Toast.makeText(this,"Email kosong",Toast.LENGTH_SHORT).show();
+        }else if (etHandphone.getText().toString().trim().length() == 0){
+            isEmpty = true;
+            Toast.makeText(this,"Phone number kosong",Toast.LENGTH_SHORT).show();
+        }else if (etPassword.getText().toString().trim().length() == 0){
+            isEmpty = true;
+            etPassword.setError("Input minimal 8 karakter");
+            Toast.makeText(this,"Input minimal 8 karakter",Toast.LENGTH_SHORT).show();
+        }else if (!etRtPass.getText().toString().equals(etPassword.getText().toString())){
+            isEmpty = true;
+            etRtPass.setError("Kata Sandi Tidak Sama");
+        } else if (spinnerSecuitySelection.getSelectedItem().equals("Select Question")){
+            ((TextView)spinnerSecuitySelection.getSelectedView()).setError("Wajib Pilih");
+            isEmpty = true;
+            Toast.makeText(this,"Pilih pertanyaan sekuritas anda!",Toast.LENGTH_SHORT).show();
+        }else if (etIptSecurity.getText().toString().trim().length() == 0){
+            isEmpty = true;
+            etIptSecurity.setError("Tidak boleh kosong");
+            Toast.makeText(this,"Tidak boleh kosong",Toast.LENGTH_SHORT).show();
+        }new Handler().postDelayed(() -> {
+            if(!isEmpty){
+                alertDialog.show();
+                SavePref.saveName(this,etNama.getText().toString());
+                SavePref.saveEmail(this,etEmail.getText().toString());
+                SavePref.savePhone(this,etHandphone.getText().toString());
+                SavePref.savePass(this,etRtPass.getText().toString());
+                SavePref.saveSecretAnswer(this,etIptSecurity.getText().toString());
+                new Handler().postDelayed(() -> {
+                    alertDialog.dismiss();
+                    Intent intent = new Intent(RegisterActivityRemastered.this, SetPinActivityRemastered.class);
+                    startActivity(intent);
+                }, 800);
+            }
+        }, 200);
+    }
 }

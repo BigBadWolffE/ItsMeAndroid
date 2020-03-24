@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.view.splashscreen.SplashScreenActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
 
 import java.util.regex.Pattern;
 
@@ -28,6 +29,7 @@ public class LoginAuthActivityRemastered extends AppCompatActivity {
     public static CardView cdCaution,cdlblAuthlogin;
     public static Pattern emailCustom;
     public static Pattern phoneCustom;
+    private Pattern passwordCustom;
 
 
     @Override
@@ -41,12 +43,16 @@ public class LoginAuthActivityRemastered extends AppCompatActivity {
         backButton = findViewById(R.id.imageView5);
         cdCaution = findViewById(R.id.caution);
         cdlblAuthlogin = findViewById(R.id.layout_btn_next);
+
+        final String Password_Pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+        passwordCustom = Pattern.compile(Password_Pattern);
 
         emailCustom
                 = Pattern.compile(
@@ -63,6 +69,7 @@ public class LoginAuthActivityRemastered extends AppCompatActivity {
                 = Pattern.compile("08"+"[0-9]{9,13}");
 
         btnLoginAuth.setEnabled(false);
+        etusernameauth.setText(SavePref.readLoginUser(this));
         etusernameauth.addTextChangedListener(usernameauthWatcher);
         etusernameauth.requestFocus();
         etusernameauth.setError(null);
@@ -131,13 +138,17 @@ public class LoginAuthActivityRemastered extends AppCompatActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if(etpasswordauth.toString().trim().length()!=0){
-                cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.blue));
-                btnLoginAuth.setEnabled(true);
-                btnLoginAuth.setTextColor(getResources().getColor(R.color.colorwhite));
-            } else{
-                btnLoginAuth.setEnabled(false);
-                cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+            if(etpasswordauth.getText().toString().trim().length() != 0){
+                if (!passwordCustom.matcher(etpasswordauth.getText().toString()).matches()){
+                    etpasswordauth.setError("Berisi 1 huruf kapital 1 angka 1 symbol");
+                    btnLoginAuth.setEnabled(false);
+                    cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+                } else {
+                    etpasswordauth.setError(null);
+                    cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.blue));
+                    btnLoginAuth.setEnabled(true);
+                    btnLoginAuth.setTextColor(getResources().getColor(R.color.colorwhite));
+                }
             }
         }
 

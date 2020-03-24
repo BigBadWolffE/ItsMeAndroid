@@ -37,6 +37,8 @@ import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.RegistrationModel;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.RegistrationRequest;
 
 import java.util.Objects;
 import java.util.Set;
@@ -163,7 +165,9 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
                             alertDialog.dismiss();
 //                        Intent intent = new Intent(SetPinActivityRemastered.this, PopUpRegisterSucceedRemastered.class);
 //                        startActivity(intent);
-                            PopUpRegisterSucceedRemastered.showDialog(SetPinActivityRemastered.this);
+//                            PopUpRegisterSucceedRemastered.showDialog(SetPinActivityRemastered.this);
+                            RegistrationModel registrationModel = new RegistrationModel();
+                            RegistrationRequest.postRegistrationData(SetPinActivityRemastered.this,registrationModel);
 
                         }, 800);
                     }, 200);
@@ -312,6 +316,23 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
         String paddedText = number + "";
         return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
                 + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
+    }
+
+    public static void alertWrong (final Context activity ){
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
+        builder1.setMessage("Data Anda Telah Terdaftar!");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Dismiss",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
     private void observeViewModel() {
