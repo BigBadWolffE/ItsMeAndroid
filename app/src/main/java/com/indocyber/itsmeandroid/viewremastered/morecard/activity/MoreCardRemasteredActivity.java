@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
 import com.indocyber.itsmeandroid.viewremastered.tagkartu.TagKartu;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
@@ -52,8 +55,8 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_card_remastered);
         initView();
-
         data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+
 
         onClick();
         setData();

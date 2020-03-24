@@ -3,6 +3,7 @@ package com.indocyber.itsmeandroid.viewremastered.home.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class CardRemasteredAdapter extends PagerAdapter {
             Intent intent = new Intent(activity, MoreCardRemasteredActivity.class);
             intent.putExtra(INTENT_ID,data);
             activity.startActivity(intent);
+            Log.d("data image" , "datanya " +data.getId() + " "+data.getImage() + " "+data.getNumberCard() + " "+data.getNameCard() + " "+data.getExpireCard() + " "+data.getCost() + " "+data.getPrintDate() + " "+data.getPrintDueDate() + " "+data.isBlockedCard() + " "+data.getBillingAddress() + " "+data.getCountry() + " "+data.getCity() + " "+data.getPostalCode() + " "+data.getLastBill() + " "+data.getMinPayment() + " "+data.getAvailableCredit() + " "+data.getTagList() + " "+data.getNewTagList() + " " );
         });
         container.addView(view);
 

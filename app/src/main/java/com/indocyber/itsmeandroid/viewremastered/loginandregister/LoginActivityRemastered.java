@@ -34,8 +34,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
         lblLgn =findViewById(R.id.layout_btn_next);
         btnNext.setEnabled(false);
 
-        emailCustom
-                = Pattern.compile(
+        emailCustom = Pattern.compile(
                 "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,500}" +
                         "\\@" +
                         "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,500}" +
@@ -45,8 +44,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
                         ")+"
         );
 
-        phoneCustom
-                = Pattern.compile("08"+"[0-9]{9,13}");
+        phoneCustom = Pattern.compile("08"+"[0-9]{9,13}");
 
         inputUserName.addTextChangedListener(inputUsernameWatcher);
         inputUserName.requestFocus();

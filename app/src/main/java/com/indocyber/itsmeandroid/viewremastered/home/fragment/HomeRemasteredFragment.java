@@ -157,8 +157,7 @@ public class HomeRemasteredFragment extends BaseFragment {
     }
 
     private void initPromo() {
-        mPromoRecyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mPromoRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         PromoPagerAdapter promoAdapter = new PromoPagerAdapter(new ArrayList<>(), getActivity());
         promoAdapter.refreshPromoList(generatePromoList());
