@@ -129,7 +129,7 @@
                         android:id="@+id/lblCcNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="XXXX   XXXX   XXXX   XXXX"
+                        android:text="3433   XXXX   XXXX   3455"
                         style="@style/CreditCardTextStyle"
                         android:textSize="@dimen/credit_card_number_text_size"
                         android:textAlignment="center"
@@ -149,7 +149,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
                         style="@style/CreditCardTextStyle"
-                        android:text="09/19" />
+                        android:text="08/21" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -173,7 +173,8 @@
                 android:padding="@dimen/spacing_medium"
                 android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
                 android:maxLength="30"
-                android:textAppearance="@style/quicksandSemiBold"
+                android:text="Jordan Setiawan"
+                android:textAppearance="@style/quicksandRegular"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -194,8 +195,9 @@
                 android:inputType="number"
                 android:maxLength="16"
                 android:digits="0123456789"
+                android:text="3433787378723455"
                 android:padding="@dimen/spacing_medium"
-                android:textAppearance="@style/quicksandSemiBold"
+                android:textAppearance="@style/quicksandRegular"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 
@@ -233,11 +235,12 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:lineSpacingExtra="5sp"
-                            android:hint="01"
+
+                            android:text="08"
                             android:inputType="number"
                             android:maxLength="2"
                             android:padding="@dimen/spacing_medium"
-                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textAppearance="@style/quicksandRegular"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -246,7 +249,7 @@
                             android:layout_height="wrap_content"
                             android:padding="@dimen/spacing_medium"
                             android:text="/"
-                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textAppearance="@style/quicksandRegular"
                             android:textColor="@color/grey_40"
                             android:textSize="16sp" />
 
@@ -257,12 +260,12 @@
                             android:layout_gravity="center"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:hint="12"
+                            android:text="21"
                             android:inputType="number"
                             android:lineSpacingExtra="5sp"
                             android:maxLength="2"
                             android:padding="@dimen/spacing_medium"
-                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textAppearance="@style/quicksandRegular"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -306,7 +309,7 @@
                             android:inputType="numberPassword"
                             android:maxLength="3"
                             android:padding="@dimen/spacing_medium"
-                            android:textAppearance="@style/quicksandSemiBold"
+                            android:textAppearance="@style/quicksandRegular"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                         <ImageButton
