@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
 
 import java.util.regex.Pattern;
 
@@ -56,6 +57,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
             public void onClick(View view) {
                 Intent formLogin = new Intent(LoginActivityRemastered.this,LoginAuthActivityRemastered.class);
                 startActivityForResult(formLogin,1);
+                SavePref.saveLoginUser(LoginActivityRemastered.this,inputUserName.getText().toString());
             }
         });
 
