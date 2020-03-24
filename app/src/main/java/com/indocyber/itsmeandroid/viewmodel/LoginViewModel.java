@@ -1,5 +1,7 @@
 package com.indocyber.itsmeandroid.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -59,6 +61,7 @@ public class LoginViewModel extends ViewModel {
                                 error.setValue(response.getMessage());
                                 return;
                             }
+                            Log.e("ViewModelLogin",response.getMessage());
                             user.setValue(response.getContent());
                         }
 
@@ -66,6 +69,7 @@ public class LoginViewModel extends ViewModel {
                         public void onError(Throwable e) {
                             isLoading.setValue(false);
                             error.setValue(e.getMessage());
+                            Log.e("ViewModelLogin",e.getMessage());
                         }
                     })
         );
