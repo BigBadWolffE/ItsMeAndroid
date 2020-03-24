@@ -177,8 +177,9 @@
             android:name=".view.promo.activity.PromoActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />
         <activity
-            android:name=".view.profile.activity.ProfileActivity"
-            android:parentActivityName=".view.home.activity.HomeActivity" />
+            android:name=".viewremastered.akun.EditProfileActivity"
+            android:parentActivityName=".viewremastered.home.activity.HomeRemastered"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.inbox.InboxActivity"
             android:parentActivityName=".view.home.activity.HomeActivity" />
