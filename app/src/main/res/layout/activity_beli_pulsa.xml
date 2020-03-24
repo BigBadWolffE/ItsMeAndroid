@@ -98,12 +98,13 @@
                         <EditText
                             android:id="@+id/edtxPhoneNumber"
                             android:layout_width="match_parent"
-                            android:digits="0123456789"
                             android:layout_height="wrap_content"
+                            android:digits="0123456789"
+                            android:maxLength="12"
                             android:hint="@string/contoh_nomor_handphone"
+                            android:inputType="number"
                             android:textAppearance="@style/quicksandSemiBold"
                             android:textColor="#3a3a3a"
-                            android:inputType="number"
                             android:textSize="14sp" />
 
                         <ImageView

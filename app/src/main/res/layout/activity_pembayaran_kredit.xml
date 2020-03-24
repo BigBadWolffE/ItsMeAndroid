@@ -81,7 +81,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Rp 50.000"
                     android:textAppearance="@style/quicksandSemiBold"
                     android:textColor="@color/greyish_brown" />
             </LinearLayout>
@@ -172,6 +171,8 @@
                 android:lineSpacingExtra="5sp"
                 android:hint="@string/contoh_nama"
                 android:padding="@dimen/spacing_medium"
+                android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                android:maxLength="30"
                 android:textAppearance="@style/quicksandSemiBold"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -190,7 +191,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/contoh_kartu"
-
+                android:inputType="number"
+                android:maxLength="16"
+                android:digits="0123456789"
                 android:padding="@dimen/spacing_medium"
                 android:textAppearance="@style/quicksandSemiBold"
                 android:textColor="@color/black"

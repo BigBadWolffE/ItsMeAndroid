@@ -15,6 +15,18 @@
         android:usesCleartextTraffic="true"
         android:vmSafeMode="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
+
+        <activity android:name=".viewremastered.blockallcard.activity.SetPinBlockCardActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
+        <activity
+            android:name=".viewremastered.blockallcard.activity.DetailBlockAllCardActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".viewremastered.blockallcard.activity.BlockAllCardRemasterActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".viewremastered.loginandregister.ConfirmPinResetPasswordActivityRemastered"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
@@ -94,7 +106,7 @@
             android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.loginandregister.LoginActivityRemastered"
+            android:name=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,9 +114,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+       <!-- <activity
             android:name=".viewremastered.home.activity.HomeRemastered"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />-->
         <activity
             android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
             android:parentActivityName=".view.login.LoginOptionActivity" />
@@ -259,5 +271,6 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:node="replace" />
+
 
 </manifest>
