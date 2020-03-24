@@ -38,7 +38,7 @@ public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Lis
 
     @BindView(R.id.recyclerSemuaPromoList)
     RecyclerView mPromoItemRecyler;
-    private List<PromoItemModel> mResourceList = new ArrayList<>();
+//    private List<PromoItemModel> mResourceList = new ArrayList<>();
     private ItemPromoAdapter mPromoItemAdapter;
 
     private  String[] titleList = {
@@ -121,10 +121,12 @@ public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Lis
     @Override
     public void onClick(int position) {
         Intent intent = new Intent(getActivity(), DetailPromoActivity.class);
-//        intent.putExtra("titlePromo", titleList[position]);
-//        intent.putExtra("imgPromo", imgList[position]);
-//        intent.putExtra("descPromo", descList[position]);
-//        intent.putExtra("periodePromo", periodeList[position]);
+        intent.putExtra("titlePromo", titleList[position]);
+        intent.putExtra("imgPromo", imgList[position]);
+        intent.putExtra("descPromo", descList[position]);
+        intent.putExtra("periodePromo", periodeList[position]);
+        intent.putExtra("jarak", "");
+        intent.putExtra("diskon", "");
         startActivity(intent);
     }
 }

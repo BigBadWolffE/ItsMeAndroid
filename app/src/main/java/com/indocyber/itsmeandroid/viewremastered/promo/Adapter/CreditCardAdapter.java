@@ -18,15 +18,21 @@ import java.util.List;
 public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.ItemViewHolder> {
     private List<ImageCardModel> cardList;
     private Context context;
+    private Listener mListener;
 
-    public CreditCardAdapter(List<ImageCardModel> cardList, Context context) {
+    public CreditCardAdapter(List<ImageCardModel> cardList, Context context, Listener mListener) {
         this.cardList = cardList;
         this.context = context;
+        this.mListener = mListener;
     }
 
     public void refreshCardList(List<ImageCardModel> newCardList) {
         cardList.clear();
         cardList = newCardList;
+    }
+
+    public interface Listener{
+        void MoreCardonClick(ImageCardModel imgCardModel);
     }
     @NonNull
     @Override
@@ -41,6 +47,12 @@ public class CreditCardAdapter extends RecyclerView.Adapter<CreditCardAdapter.It
     public void onBindViewHolder(@NonNull CreditCardAdapter.ItemViewHolder holder, int position) {
         holder.bind(cardList.get(position));
         holder.cardImage.setImageResource(cardList.get(position).getImage());
+        holder.cardMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.MoreCardonClick(cardList.get(position));
+            }
+        });
     }
 
     @Override

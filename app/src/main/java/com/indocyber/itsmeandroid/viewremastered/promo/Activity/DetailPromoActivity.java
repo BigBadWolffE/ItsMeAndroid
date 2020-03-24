@@ -12,6 +12,7 @@ import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -35,6 +36,10 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     CardView mBottomSheetShare;
     @BindView(R.id.recyclerSharePromo)
     RecyclerView mRecyclerSharePromo;
+    @BindView(R.id.lblJarak)
+    TextView mLblJarak;
+    @BindView(R.id.lblDiskon)
+    TextView mLblDiskon;
 
     private boolean dealerSelected = false;
     BottomSheetBehavior mBottomSheetBehaviorShare;
@@ -42,12 +47,23 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     GridLayoutManager gridLayourManager;
     SharePromoAdapter mSharePromoAdapter;
 
+    String jarak;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_promo);
         ButterKnife.bind(this);
+
+        if (!getIntent().getStringExtra("jarak").equals("")){
+            mLblJarak.setVisibility(View.VISIBLE);
+        }else if (!getIntent().getStringExtra("diskon").equals("")){
+            mLblDiskon.setVisibility(View.VISIBLE);
+        }else {
+            mLblJarak.setVisibility(View.GONE);
+            mLblDiskon.setVisibility(View.GONE);
+        }
 
         mBottomSheetBehaviorShare = BottomSheetBehavior.from(mBottomSheetShare);
         mBottomSheetBehaviorShare.setHideable(false);

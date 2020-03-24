@@ -44,6 +44,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_one" />
 
+    <TextView
+        android:clickable="true"
+        android:gravity="center"
+        android:id="@+id/layout_lupa"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/__interstate_regular"
+        android:text="Lupa Security Code ?"
+        android:textAlignment="center"
+        android:textColor="@color/grey_main_medium"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstPinView" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/lbl_btn_validation"
         android:layout_width="0dp"
@@ -111,6 +131,7 @@
         style="@style/PinWidget.PinView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_40sdp"
+        android:background="@color/transparent"
         android:layout_gravity="center"
         android:cursorVisible="false"
         android:gravity="center"
@@ -120,17 +141,12 @@
         app:cursorWidth="2dp"
         app:hideLineWhenFilled="false"
         app:itemCount="6"
-        app:itemHeight="48dp"
-        app:itemRadius="4dp"
-        app:itemSpacing="5dp"
-        app:itemWidth="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
+        app:lineColor="@color/grey_40"
+        app:viewType="line"
+        app:layout_constraintBottom_toTopOf="@+id/layout_lupa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_two"
-        app:lineColor="@color/grey_40"
-        app:lineWidth="1dp"
-        app:viewType="rectangle" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_two" />
 
     <com.davidmiguel.numberkeyboard.NumberKeyboard
 
@@ -147,7 +163,7 @@
         app:layout_constraintBottom_toTopOf="@+id/lbl_btn_validation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstPinView"
+        app:layout_constraintTop_toBottomOf="@+id/layout_lupa"
         keyboard:numberkeyboard_keyboardType="integer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

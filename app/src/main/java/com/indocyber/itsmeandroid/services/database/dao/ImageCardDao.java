@@ -42,6 +42,9 @@ public interface ImageCardDao {
     @Query("Delete from imagecardmodel where id = :id")
     Completable delete(int id);
 
+    @Query("Update imagecardmodel set numberCard = :cardNumber, nameCard = :cardHolder, expireCard = :cardExpiry, billingAddress = :billingAddress where id = :id")
+    Completable update(int id, String cardNumber, String cardHolder, String cardExpiry, String billingAddress);
+
     @Query("Update imagecardmodel set isBlockedCard = 1 where id = :id")
     Completable blockCard(int id);
 
@@ -51,7 +54,7 @@ public interface ImageCardDao {
     @Query("Select tagList from ImageCardModel where id = :id")
     Single<List<String>> getTaglistByCardId(int id);
 
-    @Query("Update ImageCardModel set tagList = :newTagList where id = :id")
+    @Query("Update ImageCardModel set newTagList = :newTagList where id = :id")
     Completable updateCardTagList(int id, String newTagList);
 
     @Query("Select tagList from ImageCardModel where tagList is not null")

@@ -111,6 +111,7 @@
         style="@style/PinWidget.PinView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_40sdp"
+        android:background="@color/transparent"
         android:layout_gravity="center"
         android:cursorVisible="false"
         android:gravity="center"
@@ -120,17 +121,12 @@
         app:cursorWidth="2dp"
         app:hideLineWhenFilled="false"
         app:itemCount="6"
-        app:itemHeight="48dp"
-        app:itemRadius="4dp"
-        app:itemSpacing="5dp"
-        app:itemWidth="48dp"
+        app:lineColor="@color/grey_40"
+        app:viewType="line"
         app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_two"
-        app:lineColor="@color/grey_40"
-        app:lineWidth="1dp"
-        app:viewType="rectangle" />
+        app:layout_constraintTop_toBottomOf="@+id/layout_two" />
 
     <com.davidmiguel.numberkeyboard.NumberKeyboard
 

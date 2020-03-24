@@ -2,7 +2,9 @@ package com.indocyber.itsmeandroid.viewremastered.tagkartu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -18,13 +20,22 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewmodel.TagKartuViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import javax.inject.Inject;
+
+import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
-public class TagKartu extends AppCompatActivity {
+public class TagKartu extends BaseActivity {
 
     private TextView mCardNumber;
     private EditText txtEditTag;
@@ -35,25 +46,57 @@ public class TagKartu extends AppCompatActivity {
     private String cardHolder;
     private String cardBillingAddress;
     private String expiryDate;
-    ImageCardModel data;
+    private TagKartuViewModel viewModel;
+    private List<String> tags = new ArrayList<>();
+    private AlertDialog loader;
+    private int cardId;
+    @Inject
+    ViewModelFactory factory;
+//    ImageCardModel data;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_tag_kartu;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tag_kartu);
+        setContentView(layoutRes());
         Bundle extras = getIntent().getExtras();
-        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
-        cardNumber = data.getNumberCard();
-        cardHolder = data.getNameCard();
-        cardImage = data.getImage();
-        expiryDate = data.getExpireCard();
-        cardBillingAddress = data.getBillingAddress();
+        cardId = extras.getInt("cardId");
+//        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        viewModel = ViewModelProviders.of(this, factory).get(TagKartuViewModel.class);
+        viewModel.getCardById(cardId);
+        loader = new SpotsDialog.Builder().setCancelable(false).setContext(TagKartu.this).build();
         formatCreditCard();
         initializeButton();
         initializeCardNumber();
         createToolbar();
+        observeViewModel();
     }
 
+    private void observeViewModel() {
+        viewModel.getCardData().observe(this, data -> {
+            cardNumber = data.getNumberCard();
+            cardHolder = data.getNameCard();
+            cardImage = data.getImage();
+            expiryDate = data.getExpireCard();
+            cardBillingAddress = data.getBillingAddress();
+            mCardImage.setImageResource(cardImage);
+            txtEditTag.setText(data.getNewTagList());
+            savedTag.setText(data.getNewTagList());
+        });
+
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) loader.show();
+            else loader.dismiss();
+        });
+
+        viewModel.getIsDone().observe(this, isDone -> {
+            savedTag.setText(txtEditTag.getText().toString());
+        });
+    }
 
     private  void createToolbar() {
 //        if (getSupportActionBar() != null) {
@@ -85,7 +128,6 @@ public class TagKartu extends AppCompatActivity {
     private void initializeCardNumber() {
         mCardImage = findViewById(R.id.imgCreditCard);
         mCardNumber = findViewById(R.id.txtCardNumber);
-        mCardImage.setImageResource(cardImage);
         txtEditTag = findViewById(R.id.txtEditTag);
         savedTag = findViewById(R.id.cardTags);
     }
@@ -103,7 +145,7 @@ public class TagKartu extends AppCompatActivity {
     }
 
     private void submit() {
-        savedTag.setText(txtEditTag.getText().toString());
+        if (formIsValid()) viewModel.saveTag(cardId, txtEditTag.getText().toString());
     }
 
 
@@ -150,6 +192,8 @@ public class TagKartu extends AppCompatActivity {
     }
 
     private String padCardNumber(String number, int pad) {
+        if (number == null) return "";
+        if (number.length() < 16) return number;
         StringBuilder padding = new StringBuilder();
         for(int i = 0; i < pad; i++){
             padding.append(" ");

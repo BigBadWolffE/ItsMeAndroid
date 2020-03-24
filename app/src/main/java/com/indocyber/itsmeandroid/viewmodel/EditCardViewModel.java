@@ -5,24 +5,28 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-public class EditCardViewModel extends AndroidViewModel {
+public class EditCardViewModel extends ViewModel {
 
-    public EditCardViewModel(@NonNull Application application) {
-        super(application);
-        dao = AppDatabase.getInstance(application).imageCardDao();
+    ImageCardDao dao;
+
+    @Inject
+    public EditCardViewModel(ImageCardDao dao) {
+        this.dao = dao;
     }
 
-    private ImageCardDao dao;
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSaved = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();

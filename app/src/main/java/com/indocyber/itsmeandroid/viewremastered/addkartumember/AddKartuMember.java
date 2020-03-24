@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
@@ -14,9 +15,11 @@ import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -34,17 +37,23 @@ import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivity
 
 import org.apache.commons.text.WordUtils;
 
+import java.util.Calendar;
+
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class AddKartuMember extends AppCompatActivity {
 
     private EditText mCardHolderInput;
     private EditText mExpiryInput;
-    private EditText mMerchantInput;
+    private Spinner mSpnMerchant;
     private ImageView mCardImage;
     private int mCardImageResource;
     private Spinner spnTipeMember;
+    private final static String[] MONTH_LIST = {"Januari", "Februari", "Maret", "April",
+            "Mei", "Juni", "Juli", "Agustus", "September",
+            "Oktober", "November", "Desember"};
     private static final String[] TIPE_MEMBER_OPTIONS = { "Pilih Tipe Member", "Regular", "VIP" };
+    private static final String[] MERCHANT_OPTIONS = { "Pilih Merchant", "Starbuck", "Ancol", "Celebrity Fitness" };
 
 
     @Override
@@ -61,12 +70,52 @@ public class AddKartuMember extends AppCompatActivity {
     }
 
     private void initializeField() {
+        mCardImage = findViewById(R.id.imgMemberCard);
         mCardHolderInput = findViewById(R.id.txtCardHolder);
-        mMerchantInput = findViewById(R.id.txtMerchant);
+        mSpnMerchant = findViewById(R.id.spnMerchant);
+        mSpnMerchant.setAdapter(new ArrayAdapter<>(this,
+                R.layout.spinner_item_text, MERCHANT_OPTIONS));
+        mSpnMerchant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mSpnMerchant.getSelectedItemPosition() == 1) {
+                    mCardImage.setImageResource(R.drawable.img_membercard_starbuck);
+                } else if (mSpnMerchant.getSelectedItemPosition() == 2) {
+                    mCardImage.setImageResource(R.drawable.img_membercard_ancol);
+                } else if (mSpnMerchant.getSelectedItemPosition() == 3) {
+                    mCardImage.setImageResource(R.drawable.img_membercard_celebrity_fitnest);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         spnTipeMember = findViewById(R.id.spnTipeMember);
         spnTipeMember.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, TIPE_MEMBER_OPTIONS));
         mExpiryInput = findViewById(R.id.txtExpireDate);
+        mExpiryInput.setOnFocusChangeListener((view, isFocus) -> {
+            final Calendar c = Calendar.getInstance();
+            final int mYear = c.get(Calendar.YEAR);
+            final int mMonth = c.get(Calendar.MONTH);
+            final int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+            DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                    R.style.Theme_MaterialComponents_Light_Dialog_Alert,
+                    new DatePickerDialog.OnDateSetListener() {
+
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            String dateValue = dayOfMonth + " " + MONTH_LIST[monthOfYear] + " " + year;
+                            mExpiryInput.setText(dateValue);
+
+                        }
+                    }, mYear, mMonth, mDay);
+            datePickerDialog.show();
+        });
     }
 
     @Override
@@ -267,7 +316,7 @@ public class AddKartuMember extends AppCompatActivity {
 
         if (mCardHolderInput.getText().length() < 1) return false;
 
-        if (mMerchantInput.getText().length() < 1) return false;
+        if (mSpnMerchant.getSelectedItemPosition() < 1) return false;
 
         if (mExpiryInput.getText().length() < 1) return false;
 

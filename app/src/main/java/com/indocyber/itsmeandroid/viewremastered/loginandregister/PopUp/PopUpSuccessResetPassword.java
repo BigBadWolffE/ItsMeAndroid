@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 
 public class PopUpSuccessResetPassword {
 
@@ -46,7 +47,7 @@ public class PopUpSuccessResetPassword {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Intent register = new Intent(activity, LoginAuthActivityRemastered.class);
+                Intent register = new Intent(activity, ResetPasswordFromForgotActivity.class);
                 activity.startActivityForResult(register,1);
             }
         });

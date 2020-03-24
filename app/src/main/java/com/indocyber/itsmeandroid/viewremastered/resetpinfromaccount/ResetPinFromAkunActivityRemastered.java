@@ -49,8 +49,13 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
 
         NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
-
         backButton = findViewById(R.id.imageView5);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         submitPin = findViewById(R.id.btn_pin_register);
         lblSubmit = findViewById(R.id.lbl_btn_validation);
         submitPin.setEnabled(false);
@@ -79,11 +84,8 @@ public class ResetPinFromAkunActivityRemastered extends AppCompatActivity implem
     }
     private void setPinView() {
         firstPinView.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
+        firstPinView.setBackgroundColor(ResourcesCompat.getColor(getResources(),R.color.transparent,getTheme()));
         firstPinView.setItemCount(6);
-        firstPinView.setItemHeight(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
-        firstPinView.setItemWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_size));
-        firstPinView.setItemRadius(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_radius));
-        firstPinView.setItemSpacing(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_spacing));
         firstPinView.setLineWidth(getResources().getDimensionPixelSize(R.dimen.pv_pin_view_item_line_width));
         firstPinView.setAnimationEnable(true);// start animation when adding text
         firstPinView.setCursorVisible(false);

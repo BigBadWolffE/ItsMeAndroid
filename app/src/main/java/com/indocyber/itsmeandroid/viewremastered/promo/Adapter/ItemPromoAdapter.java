@@ -50,6 +50,8 @@ public class ItemPromoAdapter extends RecyclerView.Adapter<ItemPromoAdapter.Item
         holder.imgPromoItem.setImageResource(mItemPromo.get(position).getBanner());
         holder.lblAllPromoTittle.setText(mItemPromo.get(position).getTitle());
         holder.lblAllPromoTglPeriode.setText(mItemPromo.get(position).getPeriode());
+        holder.mLblJarak.setVisibility(View.GONE);
+        holder.mLblDiskon.setVisibility(View.GONE);
         holder.mCardviewPromoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +75,10 @@ public class ItemPromoAdapter extends RecyclerView.Adapter<ItemPromoAdapter.Item
         TextView lblAllPromoTglPeriode;
         @BindView(R.id.cardviewPromoItem)
         CardView mCardviewPromoItem;
+        @BindView(R.id.lblJarak)
+        TextView mLblJarak;
+        @BindView(R.id.lblDiskon)
+        TextView mLblDiskon;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);

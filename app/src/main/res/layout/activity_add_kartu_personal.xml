@@ -126,10 +126,10 @@
                     <EditText
                         android:id="@+id/txtNik"
                         android:inputType="text"
-                        android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                        android:digits="0123456789"
                         style="@style/quicksandSemiBold"
                         android:textColor="@color/support_black"
-                        android:maxLength="30"
+                        android:maxLength="16"
                         android:textSize="14sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

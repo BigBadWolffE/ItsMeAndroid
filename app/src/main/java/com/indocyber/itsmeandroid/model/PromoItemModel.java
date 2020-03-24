@@ -1,13 +1,11 @@
 package com.indocyber.itsmeandroid.model;
 
 public class PromoItemModel {
-    private String title;
-    private String desc;
-    private String periode;
-    private int banner;
+    public String title;
+    public String desc;
+    public String periode;
+    public int banner;
 
-    public PromoItemModel() {
-    }
 
     public PromoItemModel(String title, String desc, String periode, int banner) {
         this.title = title;
