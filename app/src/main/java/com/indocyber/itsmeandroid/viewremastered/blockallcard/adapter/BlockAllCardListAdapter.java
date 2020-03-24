@@ -35,12 +35,16 @@ import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
  *@Version
  */
 public class BlockAllCardListAdapter extends RecyclerView.Adapter<BlockAllCardListAdapter.CardViewHolder> {
-    private List<BlockAllCardModel> cardList;
+    private List<BlockAllCardModel> cardList = new ArrayList<>();
     private Context context;
 
-    public BlockAllCardListAdapter(List<BlockAllCardModel> cardList, Context context) {
-        this.cardList = cardList;
+    public BlockAllCardListAdapter( Context context) {
         this.context = context;
+    }
+    public void insertCardList(List<BlockAllCardModel> newCardList) {
+        cardList.clear();
+        cardList = newCardList;
+        notifyDataSetChanged();
     }
 
     public void refreshCardList(List<BlockAllCardModel> newCardList) {
@@ -76,6 +80,10 @@ public class BlockAllCardListAdapter extends RecyclerView.Adapter<BlockAllCardLi
         }else {
             holder.checkCard.setChecked(false);
         }
+        holder.cardHolderLabel.setText(model.getNameCard());
+        holder.cardExpiryLabel.setText(model.getExpireCard());
+        holder.cardNumberLabel.setText(onCardNumberChange(model.getNumberCard()));
+
         holder.checkCard.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -178,6 +186,17 @@ public class BlockAllCardListAdapter extends RecyclerView.Adapter<BlockAllCardLi
                     + "XXXX" + padding + paddedText.substring(12, 16);
         }
     }
+    private String onCardNumberChange(final String text){
+        StringBuilder paddedText = new StringBuilder(text + "");
+        for(int i = 4; i <= 11; i++){
+            paddedText.replace(i,i,"X");
+        }
 
+        String updatedText = paddedText.substring(0, 4) + "   " + paddedText.substring(4, 8) + "   "
+                + paddedText.substring(8, 12) + "   " + paddedText.substring(12, 16);
+
+
+       return updatedText;
+    }
 
 }

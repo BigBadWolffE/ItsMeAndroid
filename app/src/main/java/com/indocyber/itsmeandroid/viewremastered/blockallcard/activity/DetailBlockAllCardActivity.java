@@ -9,17 +9,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.BlockAllCardModel;
 import com.indocyber.itsmeandroid.model.ListBlockAllCard;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.adapter.BlockAllCardListAdapter;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.adapter.DetailCardListAdapter;
 
@@ -40,6 +44,7 @@ public class DetailBlockAllCardActivity extends AppCompatActivity {
     private ListBlockAllCard listBlockAllCard;
     private boolean isTrue;
     private TextView txtAgree;
+    private RelativeLayout rltvProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +57,12 @@ public class DetailBlockAllCardActivity extends AppCompatActivity {
         onClick();
         initData();
         edtxInfoKartu.requestFocus();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideProgress();
     }
 
     private void initData() {
@@ -73,6 +84,7 @@ public class DetailBlockAllCardActivity extends AppCompatActivity {
         checkAgree = findViewById(R.id.checkAgree);
         btnBlokirKartu = findViewById(R.id.btnBlokirKartu);
         txtAgree = findViewById(R.id.txtAgree);
+        rltvProgress = findViewById(R.id.rltvProgress);
 
         txtAgree.setText(Html.fromHtml("<p align=right> <b> "
                 + "<font color= \"#a2a2a2\" size=6>"
@@ -99,18 +111,36 @@ public class DetailBlockAllCardActivity extends AppCompatActivity {
 
             }
         });
+
         btnBlokirKartu.setOnClickListener(v -> {
             if (edtxInfoKartu.getText().toString().isEmpty()) {
                 edtxInfoKartu.requestFocus();
                 edtxInfoKartu.setError("field empty");
             } else if (!isTrue) {
-                Toast.makeText(DetailBlockAllCardActivity.this, "Please Check Agreement", Toast.LENGTH_SHORT).show();
-
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        "Please read and indicate your acceptance of the site's Terms of Service",
+                        R.drawable.ic_invalid,
+                        null
+                );
             } else {
+                showProgress();
                 Intent intent = new Intent(DetailBlockAllCardActivity.this, SetPinBlockCardActivity.class);
+                intent.putExtra(INTENT_PARCELABLE, listBlockAllCard);
                 startActivity(intent);
             }
 
         });
+    }
+
+    private void hideProgress(){
+        rltvProgress.setVisibility(View.GONE);
+        btnBlokirKartu.setEnabled(true);
+
+
+    }
+    private void showProgress(){
+        rltvProgress.setVisibility(View.VISIBLE);
+        btnBlokirKartu.setEnabled(false);
     }
 }

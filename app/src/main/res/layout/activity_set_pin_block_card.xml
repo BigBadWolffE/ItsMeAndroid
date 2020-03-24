@@ -27,7 +27,7 @@
 
     <TextView
         android:gravity="center"
-        android:id="@+id/layout_two"
+        android:id="@+id/txt_info"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_45sdp"
         android:layout_marginStart="8dp"
@@ -73,7 +73,7 @@
         android:id="@+id/layout_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/layout_two"
+        app:layout_constraintBottom_toTopOf="@+id/txt_info"
         app:layout_constraintTop_toBottomOf="@+id/guideline5">
 
         <ImageView
@@ -127,7 +127,7 @@
         app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_two"
+        app:layout_constraintTop_toBottomOf="@+id/txt_info"
         app:lineColor="@color/grey_40"
         app:lineWidth="1dp"
         app:viewType="rectangle" />

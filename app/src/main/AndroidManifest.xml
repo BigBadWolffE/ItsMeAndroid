@@ -22,7 +22,7 @@
         <activity
             android:name=".viewremastered.blockallcard.activity.DetailBlockAllCardActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".viewremastered.blockallcard.activity.BlockAllCardRemasterActivity"
             android:theme="@style/AppTheme.NoActionBar" />

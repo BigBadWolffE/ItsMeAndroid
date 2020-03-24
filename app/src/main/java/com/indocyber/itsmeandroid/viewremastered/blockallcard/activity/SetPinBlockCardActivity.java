@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -23,36 +24,73 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.ListBlockAllCard;
+import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
+import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
+import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.WebviewPembayaranActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpResetPinSuccess;
 
 import java.util.Objects;
 
-public class SetPinBlockCardActivity extends AppCompatActivity implements NumberKeyboardListener {
+import javax.inject.Inject;
+
+import dmax.dialog.SpotsDialog;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_PARCELABLE;
+
+public class SetPinBlockCardActivity extends BaseActivity implements NumberKeyboardListener {
 
     private PinView firstPinView;
-    private AlertDialog alertDialog;
+    private AlertDialog loader;
     private ImageView backButton;
     private TextView submitPin;
     private CardView lblSubmit;
+    private ListBlockAllCard listBlockAllCard;
+    private PinActivityViewModel viewModel;
+
+
+    @Inject
+    ViewModelFactory factory;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_set_pin_block_card;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_set_pin_block_card);
+        // setContentView(R.layout.activity_set_pin_block_card);
+        viewModel = ViewModelProviders.of(this, factory).get(PinActivityViewModel.class);
+
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(SetPinBlockCardActivity.this)
+                .build();
         NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
+
+        listBlockAllCard = getIntent().getExtras().getParcelable(INTENT_PARCELABLE);
+
+        Toast.makeText(this, listBlockAllCard.getList().get(0).getId()+"", Toast.LENGTH_SHORT).show();
         initView();
         setPinView();
         onClick();
         hideKeyboard();
+        initViewModel();
     }
 
     private void initView() {
@@ -65,15 +103,40 @@ public class SetPinBlockCardActivity extends AppCompatActivity implements Number
 
     private void onClick() {
         backButton.setOnClickListener(v -> {
-        finish();
+            finish();
         });
         submitPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             showSuccessDialog();
+
+                viewModel.blockAllCard(listBlockAllCard);
             }
         });
     }
+
+    private void initViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+        viewModel.getError().observe(this, error -> {
+            if (error != null) {
+                Toast.makeText(this, error + "", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        viewModel.getIsDone().observe(this, isDone -> {
+            if (isDone) {
+                showSuccessDialog();
+
+            }
+        });
+    }
+
 
     private void showSuccessDialog() {
         final Dialog dialog = new Dialog(this);
@@ -81,8 +144,6 @@ public class SetPinBlockCardActivity extends AppCompatActivity implements Number
         dialog.setContentView(R.layout.dialog_success_block_all_card);
         dialog.setCancelable(false);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
-        TextView txtNomor = dialog.findViewById(R.id.txtNomor);
 
 
         ((ImageButton) dialog.findViewById(R.id.imgBtnClose)).setOnClickListener(new View.OnClickListener() {
@@ -98,6 +159,7 @@ public class SetPinBlockCardActivity extends AppCompatActivity implements Number
         dialog.show();
         //dialog.getWindow().setAttributes(lp);
     }
+
     private void setPinView() {
         firstPinView.setTextColor(ResourcesCompat.getColor(getResources(), R.color.black, getTheme()));
         firstPinView.setItemCount(6);

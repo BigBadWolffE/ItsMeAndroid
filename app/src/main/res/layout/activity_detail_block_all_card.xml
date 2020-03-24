@@ -75,9 +75,9 @@
                     android:scrollingCache="true" />
 
                 <androidx.cardview.widget.CardView
-                    android:layout_gravity="center"
                     android:layout_width="@dimen/_310sdp"
                     android:layout_height="@dimen/_62sdp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:gravity="center"
                     app:cardBackgroundColor="#fff4eb"
@@ -85,12 +85,12 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        >
+                        android:layout_height="match_parent">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                          android:layout_centerInParent="true"
+                            android:layout_centerInParent="true"
 
                             android:gravity="center_horizontal"
                             android:lineSpacingExtra="6sp"
@@ -103,22 +103,22 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:layout_marginStart="@dimen/spacing_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
                     android:layout_marginTop="@dimen/spacing_large"
                     android:padding="@dimen/spacing_small"
+                    android:text="Pesan Blokir Kartu "
                     android:textColor="@color/brown_grey"
-                    android:textSize="13sp"
-                    android:text="Pesan Blokir Kartu " />
+                    android:textSize="13sp" />
 
                 <EditText
-                    android:focusable="true"
-                    android:focusedByDefault="true"
                     android:id="@+id/edtxInfoKartu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_small"
+                    android:focusable="true"
+                    android:focusedByDefault="true"
                     android:hint="Pesan Blokir Kartu"
                     android:lineSpacingExtra="6sp"
                     android:textColor="#3a3a3a"
@@ -126,40 +126,60 @@
                     tools:text="Dompet hilang dijalan sekitar , jl iskandar muda - Pondok Indah, pukul 15.00 wib " />
 
                 <LinearLayout
-                    android:layout_marginTop="@dimen/spacing_mlarge"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_mlarge"
                     android:orientation="horizontal">
+
                     <CheckBox
                         android:id="@+id/checkAgree"
-                        android:buttonTint="@color/dodger_blue"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:backgroundTint="@color/dodger_blue"
-                        android:layout_height="wrap_content"/>
+                        android:buttonTint="@color/dodger_blue" />
+
                     <TextView
                         android:id="@+id/txtAgree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
                         android:textColor="@color/brown_grey"
-                        />
+                        android:textSize="13sp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/actionBarSize"
-                    />
+                    android:layout_height="@dimen/actionBarSize" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rltvProgress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/overlay_dark_10"
+        android:clickable="true">
+
+        <ProgressBar
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/colorPrimary"
+            android:visibility="visible" />
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btnBlokirKartu"
-        android:text="Blokir Semua Kartu"
-        android:layout_alignParentBottom="true"
-        android:padding="@dimen/spacing_small"
-        android:textAppearance="@style/quicksandSemiBold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/btn_rounded_red"
-        android:textColor="@color/colorwhite"/>
+        android:padding="@dimen/spacing_small"
+        android:text="Blokir Semua Kartu"
+        android:textAppearance="@style/quicksandSemiBold"
+        android:textColor="@color/colorwhite" />
+
 </RelativeLayout>

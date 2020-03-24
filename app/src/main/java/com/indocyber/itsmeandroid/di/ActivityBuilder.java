@@ -5,6 +5,8 @@ import com.indocyber.itsmeandroid.di.FragmentBindingModules.ProfileFragmentModul
 import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
+import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
+import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.SetPinBlockCardActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
@@ -50,4 +52,12 @@ public abstract class ActivityBuilder {
     @SuppressWarnings("unused")
     @ContributesAndroidInjector
     abstract LoginAuthActivityRemastered loginAuthActivityRemastered();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector
+    abstract BlockAllCardRemasterActivity blockAllCardRemasterActivity();
+
+    @SuppressWarnings("unused")
+    @ContributesAndroidInjector
+    abstract SetPinBlockCardActivity setPinBlockCardActivity();
 }
