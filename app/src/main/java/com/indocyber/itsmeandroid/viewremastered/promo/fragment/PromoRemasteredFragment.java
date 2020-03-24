@@ -80,16 +80,6 @@ public class PromoRemasteredFragment extends BaseFragment implements PromoMenuAd
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        observeViewModel();
-    }
-
-    private void observeViewModel() {
-        viewModel.getPromoList().observe(this, new Observer<List<PromoMenuModel>>() {
-            @Override
-            public void onChanged(List<PromoMenuModel> promoMenuModels) {
-                
-            }
-        });
     }
 
     private void getPromo() {

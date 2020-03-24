@@ -8,9 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
@@ -27,12 +31,9 @@ import butterknife.OnClick;
  */
 public class AkunRemasteredFragment extends BaseFragment {
 
-    public AkunRemasteredFragment() {
-        // Required empty public constructor
-    }
+    private ImageView profileImage;
     @BindView(R.id.textView9)
     TextView tvHistory;
-
 
     public static TextView tvReset,tvSecurity,tvMetodePembayaran;
 
@@ -49,6 +50,12 @@ public class AkunRemasteredFragment extends BaseFragment {
         final View rootView = inflater.inflate(layoutRes(), container, false);
 
         ButterKnife.bind(this, rootView);
+        TextView profileName = rootView.findViewById(R.id.userProfileName);
+        Preference preference = new Preference(getActivity());
+        profileName.setText(preference.getLoggedUserFullname());
+        profileImage = rootView.findViewById(R.id.circleImageProfile);
+        UtilitiesCore.loadImageFromUri(profileImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
         tvReset = rootView.findViewById(R.id.textView10);
         tvSecurity = rootView.findViewById(R.id.textView11);
         tvMetodePembayaran = rootView.findViewById(R.id.tv10);

@@ -37,16 +37,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-
+                android:id="@+id/titleToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Bakmi GM Promo Rp 20.200"
                 android:textColor="@color/brown_grey"
-                android:textSize="22sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/imageBtnBack"
+                app:layout_constraintStart_toEndOf="@+id/imageBtnBack"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

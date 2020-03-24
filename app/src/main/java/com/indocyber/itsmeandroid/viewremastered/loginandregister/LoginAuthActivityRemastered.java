@@ -151,8 +151,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
                 preference.setLoginFirstTime(true);
                 preference.setLoggedUser(user.getNamaLengkap(), user.getEmail());
                 preference.saveUserAuth(base64key);
-
-
+                preference.setMetaData(user.getPictureMetaData());
 
                 Intent intent = new Intent(LoginAuthActivityRemastered.this, HomeRemastered.class);
                 startActivity(intent);
@@ -256,8 +255,9 @@ public class LoginAuthActivityRemastered extends BaseActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            if(etpasswordauth.getText().toString().trim().length() != 0){
-                if (!passwordCustom.matcher(etpasswordauth.getText().toString()).matches()){
+                if(etpasswordauth.getText().toString().trim().length() < 1){
+//                if(etpasswordauth.getText().toString().trim().length() != 0){
+//                if (!passwordCustom.matcher(etpasswordauth.getText().toString()).matches()){
                     etpasswordauth.setError("Berisi 1 huruf kapital 1 angka 1 symbol");
                     btnLoginAuth.setEnabled(false);
                     cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
@@ -267,7 +267,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
                     btnLoginAuth.setEnabled(true);
                     btnLoginAuth.setTextColor(getResources().getColor(R.color.colorwhite));
                 }
-            }
+//            }
         }
 
         @Override

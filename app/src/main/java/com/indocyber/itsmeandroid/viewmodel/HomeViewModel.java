@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.indocyber.itsmeandroid.di.DaggerApplicationComponent;
 import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.services.database.AppDatabase;
 import com.indocyber.itsmeandroid.services.database.dao.ImageCardDao;
@@ -39,7 +40,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<List<ImageCardModel>> cardList = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
-    private MutableLiveData<List<PromoMenuModel>> promoList = new MutableLiveData<>();
+    private MutableLiveData<List<PromoItemModel>> promoList = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
 
     @Inject
@@ -60,7 +61,7 @@ public class HomeViewModel extends ViewModel {
         return error;
     }
 
-    public MutableLiveData<List<PromoMenuModel>> getPromoList() {
+    public MutableLiveData<List<PromoItemModel>> getPromoList() {
         return promoList;
     }
 
@@ -118,11 +119,11 @@ public class HomeViewModel extends ViewModel {
             service.getPromoList("ZXJ3YW5keS53aWpheWFAaW5kb2N5YmVyLmNvLmlkOnJhaGFzaWE=", body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<ApiResponse<List<PromoMenuModel>>>() {
+                .subscribeWith(new DisposableSingleObserver<ApiResponse<List<PromoItemModel>>>() {
 
                     @Override
-                    public void onSuccess(ApiResponse<List<PromoMenuModel>> listApiResponse) {
-                        isLoading.setValue(true);
+                    public void onSuccess(ApiResponse<List<PromoItemModel>> listApiResponse) {
+                        isLoading.setValue(false);
                         if (listApiResponse.getStatus() != 200) {
                             error.setValue(listApiResponse.getMessage());
                         }

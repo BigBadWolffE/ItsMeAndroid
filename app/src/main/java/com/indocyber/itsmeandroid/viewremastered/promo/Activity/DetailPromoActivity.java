@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.Activity;
 
+import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.LabeledIntent;
@@ -9,6 +10,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,24 +18,33 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ItemShareModel;
+import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewmodel.DetailPromoViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.SharePromoAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dmax.dialog.SpotsDialog;
 
-public class DetailPromoActivity extends AppCompatActivity implements SharePromoAdapter.Listener {
+public class DetailPromoActivity extends BaseActivity implements SharePromoAdapter.Listener {
     @BindView(R.id.btnShare)
     LinearLayout mBtnShaere;
     @BindView(R.id.bottom_sheet_share)
@@ -42,13 +53,25 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
     RecyclerView mRecyclerSharePromo;
     @BindView(R.id.lblJarak)
     TextView mLblJarak;
+    @BindView(R.id.imgBanner)
+    ImageView promoImage;
+    @BindView(R.id.lblTitlePromo)
+    TextView titlePromo;
+    @BindView(R.id.lblDeskripsi)
+    TextView promoDesc;
     @BindView(R.id.lblDiskon)
     TextView mLblDiskon;
+    @BindView(R.id.titleToolbar)
+    TextView titleToolbar;
     @BindView(R.id.layoutDiskon)
     LinearLayout mLayoutDiskon;
     @BindView(R.id.layoutJarak)
     LinearLayout mLayoutJarak;
-
+    private DetailPromoViewModel viewModel;
+    private AlertDialog dialog;
+    @Inject
+    ViewModelFactory factory;
+    private String promoId = null;
     BottomSheetBehavior mBottomSheetBehaviorShare;
     GridLayoutManager gridLayourManager;
     SharePromoAdapter mSharePromoAdapter;
@@ -57,11 +80,25 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.activity_detail_promo;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_promo);
+        setContentView(layoutRes());
         ButterKnife.bind(this);
-
+        viewModel = ViewModelProviders.of(this, factory).get(DetailPromoViewModel.class);
+        promoId = getIntent().getStringExtra("idPromo");
+        dialog = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(DetailPromoActivity.this)
+                .build();
+        Preference preference = new Preference(this);
+        if (promoId != null) {
+            viewModel.fetchPromo(preference.getUserAuth(), promoId);
+        }
         if (!getIntent().getStringExtra("jarak").equals("")) {
             mLayoutJarak.setVisibility(View.VISIBLE);
             mLayoutDiskon.setVisibility(View.GONE);
@@ -93,9 +130,22 @@ public class DetailPromoActivity extends AppCompatActivity implements SharePromo
         });
 
         gridLayourManager = new GridLayoutManager(this, 4);
-
+        observeViewModel();
     }
 
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) dialog.show();
+            else dialog.dismiss();
+        });
+
+        viewModel.getPromo().observe(this, promoItemModel -> {
+            Glide.with(this).load("http://" + promoItemModel.getUrl()).into(promoImage);
+            titlePromo.setText(promoItemModel.getTitle());
+            titleToolbar.setText(promoItemModel.getTitle());
+            promoDesc.setText(promoItemModel.getDesc());
+        });
+    }
 
     @OnClick(R.id.btnShare)
     void sharePromo() {

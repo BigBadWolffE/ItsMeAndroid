@@ -26,15 +26,14 @@
                 android:id="@+id/imgPromoItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:src="@drawable/img_dummy_promoalacarte" />
 
             <TextView
                 android:id="@+id/lblJarak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginRight="4dp"
                 android:background="@color/colorwhite"
                 android:paddingHorizontal="@dimen/_5sdp"
                 android:text="2.2 km"

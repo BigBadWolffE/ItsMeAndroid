@@ -119,7 +119,13 @@ public class PinActivityViewModel extends ViewModel {
         );
     }
 
-//    public void updateTag() {
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        disposable.clear();
+    }
+
+    //    public void updateTag() {
 //        isDone.setValue(false);
 //        isLoading.setValue(false);
 //        disposable.add(dao.)

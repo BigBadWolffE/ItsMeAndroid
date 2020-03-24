@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ItemPromoNearbyModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,18 +23,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ItemPromoNearbyAdapter extends RecyclerView.Adapter<ItemPromoNearbyAdapter.ItemViewHolder> {
-    private List<ItemPromoNearbyModel> mItemPromoNearbyList = new ArrayList<>();
+    private List<PromoItemModel> mItemPromoNearbyList = new ArrayList<>();
     private Context mContext;
     Listener mListener;
+    int promoType;
+    public final static int NEARBY = 0;
+    public final static int SPECIAL_DISCOUNT = 1;
 
     public interface Listener {
-        void ItemNearbyonClick(ItemPromoNearbyModel itemPromoNearbyModel);
+        void ItemNearbyonClick(PromoItemModel promoItemModel);
     }
 
-    public ItemPromoNearbyAdapter(List<ItemPromoNearbyModel> mItemPromoNearbyList, Context mContext, Listener mListner) {
+    public ItemPromoNearbyAdapter(List<PromoItemModel> mItemPromoNearbyList, Context mContext, Listener mListner, int promoType) {
         this.mItemPromoNearbyList = mItemPromoNearbyList;
         this.mContext = mContext;
         this.mListener = mListner;
+        this.promoType = promoType;
+    }
+
+    public void refreshList(List<PromoItemModel> newList) {
+        mItemPromoNearbyList.clear();
+        mItemPromoNearbyList = newList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -46,16 +58,21 @@ public class ItemPromoNearbyAdapter extends RecyclerView.Adapter<ItemPromoNearby
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
-        holder.imgPromoItem.setImageResource(mItemPromoNearbyList.get(position).getBanner());
+        Glide.with(mContext)
+                .load("http://" + mItemPromoNearbyList.get(position).getUrl())
+                .into(holder.imgPromoItem);
+//        holder.imgPromoItem.setImageResource(mItemPromoNearbyList.get(position).getBanner());
         holder.lblAllPromoTittle.setText(mItemPromoNearbyList.get(position).getTitle());
         holder.lblAllPromoTglPeriode.setText(mItemPromoNearbyList.get(position).getPeriode());
-        holder.mLblJarak.setText(mItemPromoNearbyList.get(position).getJarak() + " km");
-        holder.mLblDiskon.setText(mItemPromoNearbyList.get(position).getDiskon() + " %");
+        String distance = mItemPromoNearbyList.get(position).getDistance().substring(0, 3);
+        holder.mLblJarak.setText(distance + " km");
+        String diskon = mItemPromoNearbyList.get(position).getTitle().replaceAll("\\D+","");
+        holder.mLblDiskon.setText(diskon + " %");
 
-        if (!mItemPromoNearbyList.get(position).getDiskon().equals("")) {
+        if (promoType == SPECIAL_DISCOUNT) {
             holder.mLblDiskon.setVisibility(View.VISIBLE);
             holder.mLblJarak.setVisibility(View.GONE);
-        } else {
+        } else if (promoType == NEARBY){
             holder.mLblDiskon.setVisibility(View.GONE);
             holder.mLblJarak.setVisibility(View.VISIBLE);
         }

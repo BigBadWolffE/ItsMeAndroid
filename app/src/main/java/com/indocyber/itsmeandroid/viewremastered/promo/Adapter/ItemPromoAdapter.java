@@ -12,14 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.internal.Util;
 
 public class ItemPromoAdapter extends RecyclerView.Adapter<ItemPromoAdapter.ItemViewHolder> {
     private List<PromoItemModel> mItemPromo = new ArrayList<>();
@@ -27,13 +30,19 @@ public class ItemPromoAdapter extends RecyclerView.Adapter<ItemPromoAdapter.Item
     Listener mListener;
 
     public interface Listener {
-        void onClick(int position);
+        void onClick(PromoItemModel promo);
     }
 
     public ItemPromoAdapter(List<PromoItemModel> mPromoItem, Context mContext, Listener mListner) {
         this.mItemPromo = mPromoItem;
         this.mContext = mContext;
         this.mListener = mListner;
+    }
+
+    public void refreshList(List<PromoItemModel> newList) {
+        mItemPromo.clear();
+        mItemPromo = newList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -47,7 +56,10 @@ public class ItemPromoAdapter extends RecyclerView.Adapter<ItemPromoAdapter.Item
 
     @Override
     public void onBindViewHolder(@NonNull ItemPromoAdapter.ItemViewHolder holder, int position) {
-        holder.imgPromoItem.setImageResource(mItemPromo.get(position).getBanner());
+//        holder.imgPromoItem.setImageResource(mItemPromo.get(position).getBanner());
+        Glide.with(mContext)
+                .load("http://" + mItemPromo.get(position).getUrl())
+                .into(holder.imgPromoItem);
         holder.lblAllPromoTittle.setText(mItemPromo.get(position).getTitle());
         holder.lblAllPromoTglPeriode.setText(mItemPromo.get(position).getPeriode());
         holder.mLblJarak.setVisibility(View.GONE);
@@ -55,7 +67,7 @@ public class ItemPromoAdapter extends RecyclerView.Adapter<ItemPromoAdapter.Item
         holder.mCardviewPromoItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClick(position);
+                mListener.onClick(mItemPromo.get(position));
             }
         });
 

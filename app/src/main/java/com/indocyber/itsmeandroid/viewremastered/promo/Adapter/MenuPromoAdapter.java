@@ -29,6 +29,12 @@ public class MenuPromoAdapter extends RecyclerView.Adapter<MenuPromoAdapter.Menu
         void onClick(int position);
     }
 
+    public void refreshList(List<PromoMenuModel> newList) {
+        mPromoMenuList.clear();
+        mPromoMenuList = newList;
+        notifyDataSetChanged();
+    }
+
     public MenuPromoAdapter(List<PromoMenuModel> mPromoMenuList, Context context, PromoMenuAdapter.Listener listener) {
         this.mPromoMenuList = mPromoMenuList;
         this.context = context;

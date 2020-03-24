@@ -3,6 +3,7 @@ package com.indocyber.itsmeandroid.viewremastered.akun;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,22 +17,32 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.EmailValidator;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewmodel.EditProfileViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
+import com.indocyber.itsmeandroid.viewremastered.promo.Activity.DetailPromoActivity;
 
 import java.io.IOException;
+import java.util.Date;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
+import dmax.dialog.SpotsDialog;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class EditProfileActivity extends BaseActivity {
     @BindView(R.id.txtEmail)
     EditText mTxtEmail;
     @BindView(R.id.layout_input_email)
@@ -42,22 +53,73 @@ public class EditProfileActivity extends AppCompatActivity {
     ImageView mBtnTakePhoto;
     @BindView(R.id.imageFotoProfile)
     CircleImageView imgPhotoProfile;
-
+    @BindView(R.id.lblProfileName)
+    TextView profileName;
+    @BindView(R.id.txtPhonenumber)
+    EditText phone;
+    private EditProfileViewModel viewModel;
+    private android.app.AlertDialog dialog;
+    @Inject
+    ViewModelFactory factory;
     private Preference preference;
+//    private Preference preference;
 
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
     private String extension = ".jpg";
+    private String profileImage = "";
 
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_edit_profile;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_profile);
+        setContentView(layoutRes());
         ButterKnife.bind(this);
+        preference = new Preference(this);
+        viewModel = ViewModelProviders.of(this, factory).get(EditProfileViewModel.class);
+        viewModel.fetchProfile(preference.getUserAuth());
+        dialog = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(EditProfileActivity.this)
+                .build();
+        profileName.setText(preference.getLoggedUserFullname());
+        mTxtEmail.setText(preference.getLoggedUserEmail());
+        UtilitiesCore.loadImageFromUri(imgPhotoProfile, this, Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
         textWatcher(mLayoutEmail);
+        observeViewModel();
+    }
 
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) dialog.show();
+            else dialog.dismiss();
+        });
 
+        viewModel.getUserData().observe(this, user -> {
+            phone.setText(user.getNoTelp());
+        });
+
+        viewModel.getIsDone().observe(this, isDone -> {
+            if (isDone) {
+                preference.setLoggedUser(preference.getLoggedUserFullname(),
+                        mTxtEmail.getText().toString());
+                preference.setMetaData(System.currentTimeMillis() + "");
+                UtilitiesCore.buildAlertDialog(
+                        this,
+                        "Profile berhasil DiUbah.",
+                        R.drawable.ic_approved,
+                        dialogInterface -> {
+                            dialogInterface.dismiss();
+                            finish();
+                        });
+            }
+        });
     }
 
     private boolean validasi() {
@@ -133,8 +195,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
 
                     UtilitiesCore.loadCircleImage(imgPhotoProfile, imageBitmap, this);
-                    String encode = UtilitiesCore.encodeToBase64Only(imageBitmap, extension);
-                    Log.d("Base64", encode);
+                    profileImage = UtilitiesCore.encodeToBase64Only(imageBitmap, extension);
+//                    Log.d("Base64", encode);
 //                    viewModel.updateProfilePicture(authKey, encode, ".jpg");
 //                    saveToSharedPreferences(encode);
 
@@ -144,12 +206,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     String filePath = uri.getPath();
                     try {
                         if (filePath != null) {
-//                            extension = filePath.substring(filePath.lastIndexOf("."));
+                            extension = filePath.substring(filePath.lastIndexOf("."));
                         }
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                         UtilitiesCore.loadCircleImage(imgPhotoProfile, bitmap, this);
-                        String end = UtilitiesCore.encodeBase64UsingStream(this, uri);
-                        Log.d("Base64", end);
+                        profileImage = UtilitiesCore.encodeBase64UsingStream(this, uri);
+//                        Log.d("Base64", end);
 //                        viewModel.updateProfilePicture(authKey, end, extension);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -163,16 +225,13 @@ public class EditProfileActivity extends AppCompatActivity {
     @OnClick(R.id.btnKonfirmasi)
     void submit(){
         if(validasi()){
-//            Toast.makeText(this, "Berhasil", Toast.LENGTH_SHORT).show();
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    "Profile berhasil DiUbah.",
-                    R.drawable.ic_approved,
-                    dialogInterface -> {
-                        dialogInterface.dismiss();
-                        finish();
-                    });
-
+            viewModel.updateProfile(
+                    preference.getUserAuth(),
+                    mTxtEmail.getText().toString(),
+                    phone.getText().toString(),
+                    profileImage,
+                    extension
+            );
         }
     }
 

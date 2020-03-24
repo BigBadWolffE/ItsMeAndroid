@@ -31,6 +31,9 @@ import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
@@ -78,6 +81,7 @@ public class HomeRemasteredFragment extends BaseFragment {
     private TextView txtTambhKartu;
     private HomeViewModel viewModel;
     private AlertDialog loader;
+    private ImageView userImage;
 
     @Override
     protected int layoutRes() {
@@ -104,8 +108,12 @@ public class HomeRemasteredFragment extends BaseFragment {
         mRltvBeliPulsa = view.findViewById(R.id.rltvBeliPulsa);
         txtTambhKartu = view.findViewById(R.id.txtTambhKartu);
         mRltvBlockAllCard = view.findViewById(R.id.rltvBlockAllCard);
-
-
+        Preference preference = new Preference(getActivity());
+        userImage = view.findViewById(R.id.circleImageView);
+        UtilitiesCore.loadImageFromUri(userImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
+        TextView userDisplayName = view.findViewById(R.id.userName);
+        userDisplayName.setText(preference.getLoggedUserFullname());
         viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
         viewModel.fetchAllCardList();
         observeViewModel();

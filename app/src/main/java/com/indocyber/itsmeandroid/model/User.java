@@ -27,7 +27,7 @@ public class User {
     private String secretQuestionId;
     @SerializedName("userSecretAnswer")
     private String secretAnswer;
-    @SerializedName("userImage")
+    @SerializedName("updateDate")
     private String pictureMetaData;
 
     public String getNamaLengkap() {

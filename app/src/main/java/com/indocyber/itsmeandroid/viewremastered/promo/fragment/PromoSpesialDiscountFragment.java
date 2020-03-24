@@ -1,9 +1,13 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,19 +18,31 @@ import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ItemPromoNearbyModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.promo.Activity.DetailPromoActivity;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.ItemPromoNearbyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PromoSpesialDiscountFragment extends Fragment implements ItemPromoNearbyAdapter.Listener {
+public class PromoSpesialDiscountFragment extends BaseFragment implements ItemPromoNearbyAdapter.Listener {
+
+    private HomeViewModel viewModel;
+    @Inject
+    ViewModelFactory factory;
+    private AlertDialog loader;
 
     public PromoSpesialDiscountFragment() {
         // Required empty public constructor
@@ -82,12 +98,19 @@ public class PromoSpesialDiscountFragment extends Fragment implements ItemPromoN
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_promo_makanan;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_promo_makanan, container, false);
+        View view = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, view);
-        mPromoAdapter = new ItemPromoNearbyAdapter(diskonList(), getActivity(), this);
+        viewModel = ViewModelProviders.of(getParentFragment().getActivity(), factory).get(HomeViewModel.class);
+        mPromoAdapter = new ItemPromoNearbyAdapter(new ArrayList<>(), getActivity(),
+                this, ItemPromoNearbyAdapter.SPECIAL_DISCOUNT);
         GridLayoutManager horizontalLayourManager = new GridLayoutManager(getActivity(), 2);
         mrecyclerDiskon.setLayoutManager(horizontalLayourManager);
         mrecyclerDiskon.setAdapter(mPromoAdapter);
@@ -95,6 +118,27 @@ public class PromoSpesialDiscountFragment extends Fragment implements ItemPromoN
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(getParentFragment().getActivity())
+                .build();
+        viewModel.fetchPromoList("Special Discount");
+        observeViewModel();
+    }
+
+    private void observeViewModel(){
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) loader.show();
+            else loader.dismiss();
+        });
+
+        viewModel.getPromoList().observe(this, promoMenuModels -> {
+            mPromoAdapter.refreshList(promoMenuModels);
+        });
+    }
 
     private List<ItemPromoNearbyModel> diskonList() {
         List<ItemPromoNearbyModel> diskonModelList = new ArrayList<>();
@@ -107,14 +151,15 @@ public class PromoSpesialDiscountFragment extends Fragment implements ItemPromoN
 
 
     @Override
-    public void ItemNearbyonClick(ItemPromoNearbyModel itemPromoNearbyModel) {
+    public void ItemNearbyonClick(PromoItemModel itemPromoNearbyModel) {
         Intent intent = new Intent(getActivity(), DetailPromoActivity.class);
+        intent.putExtra("idPromo", itemPromoNearbyModel.getId());
         intent.putExtra("titlePromo", itemPromoNearbyModel.getTitle());
         intent.putExtra("imgPromo", itemPromoNearbyModel.getBanner());
         intent.putExtra("descPromo", itemPromoNearbyModel.getDesc());
         intent.putExtra("periodePromo", itemPromoNearbyModel.getPeriode());
         intent.putExtra("jarak", "");
-        intent.putExtra("diskon", itemPromoNearbyModel.getJarak());
+        intent.putExtra("diskon", itemPromoNearbyModel.getDistance());
         startActivity(intent);
     }
 }
