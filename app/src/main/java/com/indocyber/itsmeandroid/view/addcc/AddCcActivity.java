@@ -146,7 +146,7 @@ public final class AddCcActivity extends AppCompatActivity {
                 mCardImageResource = randomizeCardImage();
                 mCardImage.setImageResource(mCardImageResource);
                 mCardNumber.setVisibility(View.VISIBLE);
-                mCardNumber.setText(mCardNumberInput.getText().toString());
+                mCardNumber.setText(padCardNumber(mCardNumberInput.getText().toString(), 3));
                 mCardHolder.setVisibility(View.VISIBLE);
                 mCardHolder.setText(mCardHolderInput.getText().toString());
             }
@@ -395,6 +395,20 @@ public final class AddCcActivity extends AppCompatActivity {
         int randomValue = (int)(Math.random() * images.length);
         if(randomValue == images.length) randomValue = images.length - 1;
         return images[randomValue];
+    }
+
+    private String padCardNumber(String number, int pad) {
+        if (number.length() < 16) {
+            return "";
+        }
+        StringBuilder padding = new StringBuilder();
+        for(int i = 0; i < pad; i++){
+            padding.append(" ");
+        }
+
+        String paddedText = number + "";
+        return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
+                + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
     }
 }
 

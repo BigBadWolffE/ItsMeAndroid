@@ -75,7 +75,9 @@ public class PersonalCardList extends Fragment {
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         CardListAdapter cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
         filterRecycler.setLayoutManager(horizontalLayoutManager);
-        CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
+        CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity(), tag -> {
+            return;
+        });
         cardAdapter.refreshCardList(generateCardList());
         cardListRecycler.setAdapter(cardAdapter);
         filterRecycler.setAdapter(cardFilterAdapter);

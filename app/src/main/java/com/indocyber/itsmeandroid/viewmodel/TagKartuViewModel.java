@@ -79,10 +79,10 @@ public class TagKartuViewModel extends ViewModel {
         );
     }
 
-    public void saveTag(int id, String tags) {
+    public void saveTag(ImageCardModel model) {
         isDone.setValue(false);
         isLoading.setValue(true);
-        disposable.add(dao.updateCardTagList(id, tags)
+        disposable.add(dao.update(model)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableCompletableObserver() {

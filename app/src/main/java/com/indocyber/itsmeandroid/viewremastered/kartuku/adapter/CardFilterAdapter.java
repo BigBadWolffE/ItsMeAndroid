@@ -15,7 +15,9 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -28,15 +30,25 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
     private List<String> filterList;
     private Context context;
     private int activePosition;
+    private Listener listener;
 
-    public CardFilterAdapter(List<String> filterList, Context context) {
-        this.filterList = filterList;
-        this.context = context;
+    public interface Listener {
+        void onClick(String tag);
     }
 
-    public void refreshCardList(List<String> newFilterList) {
+    public CardFilterAdapter(List<String> filterList, Context context, Listener listener) {
+        this.filterList = filterList;
+        this.context = context;
+        this.listener = listener;
+    }
+
+    public void refreshFilterList(final List<String> newFilterList) {
         filterList.clear();
-        filterList = newFilterList;
+        List<String> nextFilterList = new ArrayList<>();
+        nextFilterList.add("Semua");
+        nextFilterList.addAll(newFilterList);
+        filterList.addAll(nextFilterList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -54,6 +66,7 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
             notifyItemChanged(activePosition);
             activePosition = position;
             notifyItemChanged(activePosition);
+            this.listener.onClick(filterList.get(position));
         };
         holder.bind(filterList.get(position), listener);
         holder.activateButton(position == activePosition);
