@@ -3,12 +3,20 @@ package com.indocyber.itsmeandroid.viewremastered.home.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +36,7 @@ public class CardRemasteredAdapter extends PagerAdapter {
     private Activity activity;
     private List<ImageCardModel> list = new ArrayList<>();
     private View view = null;
+    Bitmap bitmap = null;
 
     public CardRemasteredAdapter(Activity activity) {
         this.activity = activity;
@@ -58,13 +67,31 @@ public class CardRemasteredAdapter extends PagerAdapter {
         cardExpiryLabel.setText(data.getExpireCard());
         loadImage(cardImage,activity, data.getImage());
 
+
         cardMenuButton.setOnClickListener(v ->{
+            System.out.println("isi bitmap : " + bitmap);
             Intent intent = new Intent(activity, MoreCardRemasteredActivity.class);
             intent.putExtra(INTENT_ID,data);
+            intent.putExtra("BITMAP_KARTU",bitmap);
             activity.startActivity(intent);
             Log.d("data image" , "datanya " +data.getId() + " "+data.getImage() + " "+data.getNumberCard() + " "+data.getNameCard() + " "+data.getExpireCard() + " "+data.getCost() + " "+data.getPrintDate() + " "+data.getPrintDueDate() + " "+data.isBlockedCard() + " "+data.getBillingAddress() + " "+data.getCountry() + " "+data.getCity() + " "+data.getPostalCode() + " "+data.getLastBill() + " "+data.getMinPayment() + " "+data.getAvailableCredit() + " "+data.getTagList() + " "+data.getNewTagList() + " " );
         });
         container.addView(view);
+
+        /*view.post(new Runnable() {
+            @Override
+            public void run() {
+                getBitmapFromView(view);
+            }
+        });*/
+
+        bitmap = getBitmapFromView(view);
+
+
+//        view.setDrawingCacheEnabled(true);
+//        view.buildDrawingCache();
+//        Bitmap bitmap = view.getDrawingCache();
+//        BitmapDrawable drawable = new BitmapDrawable(bitmap);
 
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -87,9 +114,20 @@ public class CardRemasteredAdapter extends PagerAdapter {
                 cardExpiryLabel.setY(cardImage.getHeight() * 70 / 100);
                 if (cardImage.getHeight() > 0 && cardImage.getWidth() > 0)
                 view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+//                bitmap = getBitmapFromView(view);
             }
-
         });
+
+
+        /*view.setDrawingCacheEnabled(true);
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        view.layout(0, 0, view.getMeasuredWidth(),view.getMeasuredHeight());
+        view.buildDrawingCache();
+        bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);*/
+
         //cardImage.setImageResource(R.drawable.img_bca_card_template);
         return view;
     }
@@ -125,5 +163,42 @@ public class CardRemasteredAdapter extends PagerAdapter {
         return paddedText.substring(0, 4) + padding + "XXXX" + padding
                 + "XXXX" + padding + paddedText.substring(12, 16);
     }
+
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight)
+    {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        Matrix matrix = new Matrix(); // CREATE A MATRIX FOR THE MANIPULATION
+        matrix.postScale(scaleWidth, scaleHeight); // RESIZE THE BIT MAP
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        view.layout(0, 0, view.getMeasuredWidth(),view.getMeasuredHeight());
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnedBitmap);
+        Drawable bgDrawable = view.getBackground();
+
+        if (bgDrawable != null){
+            bgDrawable.draw(canvas);
+        }
+        else{
+            System.out.println("canvas masuk white");
+            canvas.drawColor(Color.WHITE);
+        }
+        view.draw(canvas);
+        return returnedBitmap;
+    }
+
+
 
 }
