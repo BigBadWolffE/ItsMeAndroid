@@ -1,8 +1,10 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -65,6 +67,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
             public void onClick(View view) {
                 Intent register = new Intent(LoginActivityRemastered.this,RegisterActivityRemastered.class);
                 startActivityForResult(register,1);
+                finish();
             }
         });
 
@@ -104,6 +107,34 @@ public class LoginActivityRemastered extends AppCompatActivity {
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(LoginActivityRemastered.this);
+        ab.setTitle("Its Me!");
+        ab.setMessage("Apakah anda yakin untuk keluar?");
+        ab.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //if you want to kill app . from other then your main avtivity.(Launcher)
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+
+                //if you want to finish just current activity
+
+                LoginActivityRemastered.this.finish();
+            }
+        });
+        ab.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        ab.show();
+    }
 
 
 }

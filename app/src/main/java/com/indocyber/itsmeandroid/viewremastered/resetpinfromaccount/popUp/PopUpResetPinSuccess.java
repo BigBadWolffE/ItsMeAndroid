@@ -16,8 +16,10 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.ConfirmPinResetPasswordActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
 public class PopUpResetPinSuccess {
@@ -51,8 +53,7 @@ public class PopUpResetPinSuccess {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Intent register = new Intent(activity, LoginAuthActivityRemastered.class);
-                activity.startActivity(register);
+                ((ResetPinFromAkunActivityRemastered) activity).finish();
 
             }
         });

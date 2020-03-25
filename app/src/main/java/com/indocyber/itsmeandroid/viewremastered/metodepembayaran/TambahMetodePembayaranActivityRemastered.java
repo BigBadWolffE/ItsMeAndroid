@@ -30,6 +30,7 @@ public class TambahMetodePembayaranActivityRemastered extends AppCompatActivity 
         tambahKartu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
                 Intent tambah = new Intent(TambahMetodePembayaranActivityRemastered.this,TambahKartuPembayaranActivityRemastered.class);
                 startActivityForResult(tambah,75);
             }

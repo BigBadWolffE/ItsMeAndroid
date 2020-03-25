@@ -45,7 +45,7 @@ public class ResetPasswordFromForgotActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                finish();
                 Intent reset = new Intent(ResetPasswordFromForgotActivity.this,ConfirmPinResetPasswordActivityRemastered.class);
                 startActivityForResult(reset,56);
 

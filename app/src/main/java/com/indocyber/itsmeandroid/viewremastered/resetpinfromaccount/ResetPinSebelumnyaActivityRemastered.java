@@ -92,6 +92,7 @@ public class ResetPinSebelumnyaActivityRemastered extends AppCompatActivity impl
                     alertDialog.show();
                     new Handler().postDelayed(() -> {
                         alertDialog.dismiss();
+                        finish();
                         Intent intent = new Intent(ResetPinSebelumnyaActivityRemastered.this, ResetPinFromAkunActivityRemastered.class);
                         startActivity(intent);
 

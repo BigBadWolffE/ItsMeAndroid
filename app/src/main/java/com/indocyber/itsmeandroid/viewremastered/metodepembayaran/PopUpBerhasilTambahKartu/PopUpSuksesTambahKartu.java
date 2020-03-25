@@ -12,7 +12,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.ConfirmPinResetPasswordActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.TambahKartuPembayaranActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.LupaPinActivityRemastered;
 
 public class PopUpSuksesTambahKartu {
@@ -44,8 +46,8 @@ public class PopUpSuksesTambahKartu {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Intent intent = new Intent(activity, MetodePembayaranActivityRemastered.class);
-                activity.startActivityForResult(intent,92);
+                ((TambahKartuPembayaranActivityRemastered) activity).finish();
+
 
             }
         });

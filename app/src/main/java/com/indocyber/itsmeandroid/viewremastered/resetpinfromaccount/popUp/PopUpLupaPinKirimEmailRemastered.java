@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.LupaPinActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
 public class PopUpLupaPinKirimEmailRemastered {
 
@@ -45,6 +47,7 @@ public class PopUpLupaPinKirimEmailRemastered {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
+                ((ResetPinSebelumnyaActivityRemastered) activity).finish();
                 Intent intent = new Intent(activity, LupaPinActivityRemastered.class);
                 activity.startActivityForResult(intent,91);
 
