@@ -18,12 +18,15 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -39,11 +42,30 @@ import java.util.Calendar;
 
 public class AddKartuPersonal extends AppCompatActivity {
 
+    private TextView lblmasaBerlaku;
+    private TextView lbltipeSIM;
+    private TextView lblNPWP;
+    private TextView lblSIM;
+    private TextView txtKantorPajak;
+    private TextView txtJenisKelamin;
+    private TextView txtKewarganegaraan;
+    private TextView txtPekerjaan;
+    private TextView txtStatus;
+    private TextView txtAgama;
+    private RelativeLayout layoutTglLahir;
+    private RadioGroup rdoJenisKelamin;
+    private TextView lblNik;
+    private EditText txtmasaBerlaku;
+    private EditText txtNPWP;
+    private EditText txtSIM;
+    private EditText txtNik;
+    private EditText mKantorPajak;
     private EditText mCardHolderInput;
     private EditText mExpiryInput;
     private EditText mBirthDate;
     private ImageView mCardImage;
     private int mCardImageResource;
+    private Spinner spnTipeSIM;
     private Spinner mTipeKartu;
     private Spinner spnAgama;
     private Spinner spnStatus;
@@ -54,10 +76,11 @@ public class AddKartuPersonal extends AppCompatActivity {
     private ImageView ktpImage;
     private static final int GET_KTP_PICTURE_FROM_GALLERY = 0;
     private static final int GET_KTP_PICTURE_FROM_CAMERA = 1;
+    private final static String[] SIM_LIST = {"Jenis SIM","SIM A", "SIM B", "SIM C"};
     private final static String[] MONTH_LIST = {"Januari", "Februari", "Maret", "April",
             "Mei", "Juni", "Juli", "Agustus", "September",
             "Oktober", "November", "Desember"};
-    private static final String[] TIPE_KARTU_OPTIONS = {"KTP", "NPWP", "SIM"};
+    private static final String[] TIPE_KARTU_OPTIONS = {"Pilih Kartu","KTP", "NPWP", "SIM"};
     private static final String[] AGAMA_OPTIONS =
             { "Pilih Agama", "Islam", "Hindu", "Buddha", "Kristen", "Katolik", "Konghuchu" };
     private static final String[] STATUS_OPTIONS =
@@ -78,9 +101,29 @@ public class AddKartuPersonal extends AppCompatActivity {
         createToolbar();
         initializeField();
         initializeButton();
+        System.out.println("isi tipe kartu : " + mTipeKartu.getSelectedItem().toString());
+        //cekKartu();
     }
 
     private void initializeField() {
+        lbltipeSIM = findViewById(R.id.lblTipeSIM);
+        txtNPWP = findViewById(R.id.txtNPWP);
+        txtSIM = findViewById(R.id.txtSIM);
+        txtNik = findViewById(R.id.txtNik);
+        txtmasaBerlaku = findViewById(R.id.txtMasaBerlaku);
+        txtKantorPajak = findViewById(R.id.txtKantorPajak);
+        mKantorPajak = findViewById(R.id.txtAlamatKantorPajak);
+        txtKewarganegaraan = findViewById(R.id.txtKewarganegaraan);
+        txtPekerjaan = findViewById(R.id.txtPekerjaan);
+        txtStatus = findViewById(R.id.txtStatus);
+        txtAgama = findViewById(R.id.txtAgama);
+        layoutTglLahir = findViewById(R.id.layoutTglLahir);
+        txtJenisKelamin = findViewById(R.id.txtJenisKelamin);
+        rdoJenisKelamin = findViewById(R.id.radioJenisKelamin);
+        lblNPWP = findViewById(R.id.lblNPWP);
+        lblNik = findViewById(R.id.lblNik);
+        lblSIM = findViewById(R.id.lblSIM);
+        lblmasaBerlaku = findViewById(R.id.lblMasaBerlaku);
         mTipeKartu = findViewById(R.id.spnTipeKartu);
         mTipeKartu.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, TIPE_KARTU_OPTIONS));
@@ -108,6 +151,9 @@ public class AddKartuPersonal extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+        spnTipeSIM = findViewById(R.id.spnTipeSIM);
+        spnTipeSIM.setAdapter(new ArrayAdapter<>(this,
+                R.layout.spinner_item_text, SIM_LIST));
         spnAgama = findViewById(R.id.spnAgama);
         spnAgama.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, AGAMA_OPTIONS));
@@ -132,6 +178,89 @@ public class AddKartuPersonal extends AppCompatActivity {
         pictureButton.setOnClickListener(view -> {
             startTakePhotoDialog();
         });
+    }
+
+    private void cekKartu(){
+        String sTipeKartu = String.valueOf(mTipeKartu.getSelectedItemPosition());
+        System.out.println("isi kartu : "+sTipeKartu);
+        if(sTipeKartu.equals("1")){
+            System.out.println("kartu KTP");
+            lblNik.setVisibility(View.VISIBLE);
+            txtNik.setVisibility(View.VISIBLE);
+            txtJenisKelamin.setVisibility(View.VISIBLE);
+            rdoJenisKelamin.setVisibility(View.VISIBLE);
+            layoutTglLahir.setVisibility(View.VISIBLE);
+            txtAgama.setVisibility(View.VISIBLE);
+            spnAgama.setVisibility(View.VISIBLE);
+            txtStatus.setVisibility(View.VISIBLE);
+            spnStatus.setVisibility(View.VISIBLE);
+            txtPekerjaan.setVisibility(View.VISIBLE);
+            spnPekerjaan.setVisibility(View.VISIBLE);
+            txtKewarganegaraan.setVisibility(View.VISIBLE);
+            spnKewarganegaraan.setVisibility(View.VISIBLE);
+
+            lblNPWP.setVisibility(View.GONE);
+            txtNPWP.setVisibility(View.GONE);
+            txtKantorPajak.setVisibility(View.GONE);
+            mKantorPajak.setVisibility(View.GONE);
+            lblSIM.setVisibility(View.GONE);
+            txtSIM.setVisibility(View.GONE);
+            lbltipeSIM.setVisibility(View.GONE);
+            spnTipeSIM.setVisibility(View.GONE);
+            lblmasaBerlaku.setVisibility(View.GONE);
+            txtmasaBerlaku.setVisibility(View.GONE);
+        }
+        else if(sTipeKartu.equals("2")){
+            System.out.println("kartu NPWP");
+            lblNPWP.setVisibility(View.VISIBLE);
+            txtNPWP.setVisibility(View.VISIBLE);
+            txtKantorPajak.setVisibility(View.VISIBLE);
+            mKantorPajak.setVisibility(View.VISIBLE);
+            lblNik.setVisibility(View.GONE);
+            txtNik.setVisibility(View.GONE);
+            txtJenisKelamin.setVisibility(View.GONE);
+            rdoJenisKelamin.setVisibility(View.GONE);
+            layoutTglLahir.setVisibility(View.GONE);
+            txtAgama.setVisibility(View.GONE);
+            spnAgama.setVisibility(View.GONE);
+            txtStatus.setVisibility(View.GONE);
+            spnStatus.setVisibility(View.GONE);
+            txtPekerjaan.setVisibility(View.GONE);
+            spnPekerjaan.setVisibility(View.GONE);
+            txtKewarganegaraan.setVisibility(View.GONE);
+            spnKewarganegaraan.setVisibility(View.GONE);
+            lblmasaBerlaku.setVisibility(View.GONE);
+            txtmasaBerlaku.setVisibility(View.GONE);
+            lblSIM.setVisibility(View.GONE);
+            txtSIM.setVisibility(View.GONE);
+        }
+        else if(sTipeKartu.equals("3")){
+            System.out.println("kartu SIM");
+            lblSIM.setVisibility(View.VISIBLE);
+            txtSIM.setVisibility(View.VISIBLE);
+            lbltipeSIM.setVisibility(View.VISIBLE);
+            spnTipeSIM.setVisibility(View.VISIBLE);
+            lblmasaBerlaku.setVisibility(View.VISIBLE);
+            txtmasaBerlaku.setVisibility(View.VISIBLE);
+            layoutTglLahir.setVisibility(View.VISIBLE);
+            lblNik.setVisibility(View.GONE);
+            txtNik.setVisibility(View.GONE);
+            lblNPWP.setVisibility(View.GONE);
+            txtNPWP.setVisibility(View.GONE);
+            txtJenisKelamin.setVisibility(View.GONE);
+            rdoJenisKelamin.setVisibility(View.GONE);
+            txtAgama.setVisibility(View.GONE);
+            spnAgama.setVisibility(View.GONE);
+            txtStatus.setVisibility(View.GONE);
+            spnStatus.setVisibility(View.GONE);
+            txtKewarganegaraan.setVisibility(View.GONE);
+            spnKewarganegaraan.setVisibility(View.GONE);
+            txtKantorPajak.setVisibility(View.GONE);
+            mKantorPajak.setVisibility(View.GONE);
+        }
+        else{
+
+        }
     }
 
     private void startTakePhotoDialog() {
@@ -235,6 +364,33 @@ public class AddKartuPersonal extends AppCompatActivity {
         Button addMemberCardButton;
         addMemberCardButton = findViewById(R.id.btnAddMember);
         addMemberCardButton.setOnClickListener(view -> submit());
+
+        mTipeKartu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(final AdapterView<?> parent, final View view, final int position, final long id) {
+                // position is what you want i think
+                if(position == 0){
+
+                }else{
+//                    String sTipe_Kartu = TIPE_KARTU_OPTIONS.get(position - 1)
+////                    System.out.println("Tipe Kartu : " + sTipe_Kartu);
+                    //editor.putString(StaticValues.sWilayah_Code, sWilayah_Code);
+                    //editor.commit();
+                    cekKartu();
+
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(final AdapterView<?> parent) {
+
+            }
+        });
+
+
 
     }
 

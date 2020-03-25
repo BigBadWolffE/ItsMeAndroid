@@ -2,6 +2,10 @@ package com.indocyber.itsmeandroid.viewremastered.kartuku.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +25,7 @@ import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
 import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
@@ -71,6 +76,10 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 //            intent.putExtra("cardImage", model.getImage());
 //            intent.putExtra("expiryDate", model.getExpireCard());
 //            intent.putExtra("billingAddress", model.getBillingAddress());
+            holder.toggleButtonVisibility();
+            Bitmap sharable = getBitmapFromView(holder.itemView);
+            intent.putExtra("BITMAP_KARTU", convertBitmapToBytes(sharable));
+            holder.toggleButtonVisibility();
             intent.putExtra(INTENT_ID, model);
             intent.putExtra(CARD_TYPE,cardType);
             context.startActivity(intent);
@@ -112,6 +121,13 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             cardHolderLabel = itemView.findViewById(R.id.lblCardHolder);
             cardExpiryLabel = itemView.findViewById(R.id.lblExpiry);
             blockedLayout = itemView.findViewById(R.id.blockLayout);
+        }
+
+        public void toggleButtonVisibility() {
+            if (cardMenuButton.getVisibility() == View.VISIBLE)
+                cardMenuButton.setVisibility(View.INVISIBLE);
+            else
+                cardMenuButton.setVisibility(View.VISIBLE);
         }
 
         public void bind(ImageCardModel model, View.OnClickListener cardMenuListener) {
@@ -162,5 +178,30 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             return paddedText.substring(0, 4) + padding + "XXXX" + padding
                     + "XXXX" + padding + paddedText.substring(12, 16);
         }
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+
+    private byte[] convertBitmapToBytes(Bitmap bitmap) {
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+        return bStream.toByteArray();
     }
 }

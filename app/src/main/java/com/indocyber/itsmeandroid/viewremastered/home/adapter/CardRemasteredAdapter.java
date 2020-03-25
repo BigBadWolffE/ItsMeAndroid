@@ -3,12 +3,20 @@ package com.indocyber.itsmeandroid.viewremastered.home.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +26,7 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +39,7 @@ public class CardRemasteredAdapter extends PagerAdapter {
     private Activity activity;
     private List<ImageCardModel> list = new ArrayList<>();
     private View view = null;
+    Bitmap bitmap = null;
 
     public CardRemasteredAdapter(Activity activity) {
         this.activity = activity;
@@ -58,16 +68,36 @@ public class CardRemasteredAdapter extends PagerAdapter {
         cardHolderLabel.setText(data.getNameCard());
         TextView cardExpiryLabel = view.findViewById(R.id.lblExpiry);
         cardExpiryLabel.setText(data.getExpireCard());
-        loadImage(cardImage,activity, data.getImage());
+        loadImage(cardImage, activity, data.getImage());
 
         cardMenuButton.setOnClickListener(v ->{
             Intent intent = new Intent(activity, MoreCardRemasteredActivity.class);
             intent.putExtra(INTENT_ID,data);
             intent.putExtra(CARD_TYPE,CREDIT_CARD);
+            cardMenuButton.setVisibility(View.INVISIBLE);
+            View view = container.findViewWithTag("Layout" + position);
+            Bitmap sharable = getBitmapFromView(view);
+            intent.putExtra("BITMAP_KARTU", convertBitmapToBytes(sharable));
+            cardMenuButton.setVisibility(View.VISIBLE);
             activity.startActivity(intent);
-            Log.d("data image" , "datanya " +data.getId() + " "+data.getImage() + " "+data.getNumberCard() + " "+data.getNameCard() + " "+data.getExpireCard() + " "+data.getCost() + " "+data.getPrintDate() + " "+data.getPrintDueDate() + " "+data.isBlockedCard() + " "+data.getBillingAddress() + " "+data.getCountry() + " "+data.getCity() + " "+data.getPostalCode() + " "+data.getLastBill() + " "+data.getMinPayment() + " "+data.getAvailableCredit() + " "+data.getTagList() + " "+data.getNewTagList() + " " );
+//            Log.d("data image" , "datanya " +data.getId() + " "+data.getImage() + " "+data.getNumberCard() + " "+data.getNameCard() + " "+data.getExpireCard() + " "+data.getCost() + " "+data.getPrintDate() + " "+data.getPrintDueDate() + " "+data.isBlockedCard() + " "+data.getBillingAddress() + " "+data.getCountry() + " "+data.getCity() + " "+data.getPostalCode() + " "+data.getLastBill() + " "+data.getMinPayment() + " "+data.getAvailableCredit() + " "+data.getTagList() + " "+data.getNewTagList() + " " );
         });
         container.addView(view);
+
+        /*view.post(new Runnable() {
+            @Override
+            public void run() {
+                getBitmapFromView(view);
+            }
+        });*/
+
+//        bitmap = getBitmapFromView(view);
+
+
+//        view.setDrawingCacheEnabled(true);
+//        view.buildDrawingCache();
+//        Bitmap bitmap = view.getDrawingCache();
+//        BitmapDrawable drawable = new BitmapDrawable(bitmap);
 
         view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -94,6 +124,7 @@ public class CardRemasteredAdapter extends PagerAdapter {
 
         });
         //cardImage.setImageResource(R.drawable.img_bca_card_template);
+        view.setTag("Layout" + position);
         return view;
     }
 
@@ -127,6 +158,47 @@ public class CardRemasteredAdapter extends PagerAdapter {
         String paddedText = number + "";
         return paddedText.substring(0, 4) + padding + "XXXX" + padding
                 + "XXXX" + padding + paddedText.substring(12, 16);
+    }
+
+    public static Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight)
+    {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+
+        Matrix matrix = new Matrix(); // CREATE A MATRIX FOR THE MANIPULATION
+        matrix.postScale(scaleWidth, scaleHeight); // RESIZE THE BIT MAP
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+
+        return resizedBitmap;
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable =view.getBackground();
+        if (bgDrawable!=null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+
+    private byte[] convertBitmapToBytes(Bitmap bitmap) {
+        ByteArrayOutputStream bStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bStream);
+       return bStream.toByteArray();
     }
 
 }
