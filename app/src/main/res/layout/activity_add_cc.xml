@@ -51,7 +51,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:cropToPadding="false"
-                        android:src="@drawable/img_bca_card_template" />
+                        android:src="@drawable/image_blank_kartukredit" />
 
                     <TextView
                         android:id="@+id/lblCcNumber"
@@ -60,6 +60,7 @@
                         android:text="XXXX   XXXX   XXXX   XXXX"
                         style="@style/CreditCardTextStyle"
                         android:textSize="@dimen/credit_card_number_text_size"
+                        android:visibility="invisible"
                         android:textAlignment="center"
                         android:textColor="@color/colorwhite" />
 
@@ -67,6 +68,7 @@
                         android:id="@+id/lblCardHolder"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="invisible"
                         android:textSize="@dimen/card_holder_text_size"
                         style="@style/CreditCardTextStyle"
                          />
@@ -75,6 +77,7 @@
                         android:id="@+id/lblExpiry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="invisible"
                         android:textSize="10sp"
                         style="@style/CreditCardTextStyle"
                         android:text="09/19" />

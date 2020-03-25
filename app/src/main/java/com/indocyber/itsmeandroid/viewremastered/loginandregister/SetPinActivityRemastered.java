@@ -364,7 +364,9 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
                             "Perubahan Kartu Kredit Anda",
                             padCardNumber(cardNumber, 3) + "\nBerhasil",
                             dialogInterface -> {
-                                finish();
+                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
                             });
                 }
             }

@@ -84,8 +84,9 @@ public class TagKartu extends BaseActivity {
             expiryDate = data.getExpireCard();
             cardBillingAddress = data.getBillingAddress();
             mCardImage.setImageResource(cardImage);
-            txtEditTag.setText(data.getNewTagList());
-            savedTag.setText(data.getNewTagList());
+//            txtEditTag.setText(data.getNewTagList());
+            tags = data.getTagList();
+            savedTag.setText(formatTagsToString());
         });
 
         viewModel.getIsLoading().observe(this, isLoading -> {
@@ -202,5 +203,13 @@ public class TagKartu extends BaseActivity {
         String paddedText = number + "";
         return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
                 + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
+    }
+
+    private String formatTagsToString() {
+        StringBuilder tagString = new StringBuilder();
+        for (String tag : tags ) {
+            tagString.append("#" + tag);
+        }
+        return tagString.toString();
     }
 }
