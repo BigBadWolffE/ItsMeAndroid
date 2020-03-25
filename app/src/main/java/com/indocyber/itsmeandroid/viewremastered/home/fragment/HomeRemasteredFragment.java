@@ -73,8 +73,7 @@ public class HomeRemasteredFragment extends BaseFragment {
     private CardRemasteredAdapter mCardAdapter;
     private TabLayout mTabDots;
     private RelativeLayout blockButton;
-    @BindView(R.id.imageView4)
-    FrameLayout mBtnNotif;
+
     private RelativeLayout mRltvBeliPulsa;
     private RelativeLayout mRltvBlockAllCard;
     private RelativeLayout mRltvEmpty;
