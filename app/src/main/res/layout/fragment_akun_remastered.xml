@@ -101,7 +101,7 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:fontFamily="@font/quicksand_medium"
@@ -148,7 +148,7 @@
 
                 <TextView
                     android:id="@+id/tv10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:fontFamily="@font/quicksand_medium"
@@ -195,7 +195,7 @@
 
                 <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:fontFamily="@font/quicksand_medium"
@@ -241,7 +241,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
                     android:fontFamily="@font/quicksand_medium"
@@ -288,6 +288,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/tvSignOut"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"

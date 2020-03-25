@@ -209,12 +209,12 @@ public class HomeRemastered extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 //if you want to kill app . from other then your main avtivity.(Launcher)
-//                android.os.Process.killProcess(android.os.Process.myPid());
-//                System.exit(1);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
                 //LoginAuthActivityRemastered.etusernameauth.setText("");
-                Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+//                Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
 
                 //if you want to finish just current activity
 

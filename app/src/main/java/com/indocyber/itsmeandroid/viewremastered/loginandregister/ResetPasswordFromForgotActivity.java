@@ -14,12 +14,15 @@ import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
 
+import java.util.regex.Pattern;
+
 public class ResetPasswordFromForgotActivity extends AppCompatActivity {
 
     public static EditText pwSekarang, pwBaru, retypePwBaru;
     public static CardView lblButton;
     public static TextView btnSubmit;
     public static ImageView backButton;
+    private Pattern passCustom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,9 @@ public class ResetPasswordFromForgotActivity extends AppCompatActivity {
         });
 
         btnSubmit.setEnabled(false);
-
+        final String Password_Pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
+        passCustom = Pattern.compile(Password_Pattern);
+        pwBaru.addTextChangedListener(passwordWatcher);
         retypePwBaru.addTextChangedListener(textWatcher);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +58,31 @@ public class ResetPasswordFromForgotActivity extends AppCompatActivity {
         });
     }
 
+    public TextWatcher passwordWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            if(pwBaru.getText().toString().trim().length() != 0)
+                if (!passCustom.matcher(pwBaru.getText().toString()).matches()){
+                    pwBaru.setError("Minimal 1 Huruf Besar 1 Angka dan Spesial Karakter @!^?");
+                }else {
+                    pwBaru.setError(null);
+                }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+
+
+        }
+    };
+
+
     public TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -62,15 +92,15 @@ public class ResetPasswordFromForgotActivity extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            if(pwBaru.getText().toString()!= null && pwSekarang.getText().toString()!= null && retypePwBaru.getText().toString()!= null){
+            if(!retypePwBaru.getText().toString().equals(pwBaru.getText().toString())){
+                btnSubmit.setEnabled(false);
+                lblButton.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+                btnSubmit.setTextColor(getResources().getColor(R.color.support_darker_grey));
+            }
+            else{
                 btnSubmit.setEnabled(true);
                 lblButton.setCardBackgroundColor(getResources().getColor(R.color.blue));
                 btnSubmit.setTextColor(getResources().getColor(R.color.colorwhite));
-            }
-            else{
-                btnSubmit.setEnabled(false);
-                lblButton.setCardBackgroundColor(getResources().getColor(R.color.grey_40));
-                btnSubmit.setTextColor(getResources().getColor(R.color.grey_main_medium));
             }
         }
 
