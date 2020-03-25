@@ -8,36 +8,55 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinSebelumnyaActivityRemastered;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AkunRemasteredFragment extends Fragment {
+public class AkunRemasteredFragment extends BaseFragment {
 
-    public AkunRemasteredFragment() {
-        // Required empty public constructor
+    private ImageView profileImage;
+    @BindView(R.id.textView9)
+    TextView tvHistory;
+    Preference preference;
+
+    public static TextView tvReset,tvSecurity,tvMetodePembayaran;
+
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.fragment_akun_remastered;
     }
-
-    public static TextView tvHistory,tvReset,tvSecurity,tvMetodePembayaran;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView = inflater.inflate(R.layout.fragment_akun_remastered, container, false);
+        final View rootView = inflater.inflate(layoutRes(), container, false);
 
-
-
-        tvHistory = rootView.findViewById(R.id.textView9);
+        ButterKnife.bind(this, rootView);
+        TextView profileName = rootView.findViewById(R.id.userProfileName);
+        preference = new Preference(getActivity());
+        profileName.setText(preference.getLoggedUserFullname());
+        profileImage = rootView.findViewById(R.id.circleImageProfile);
+        UtilitiesCore.loadImageFromUri(profileImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
         tvReset = rootView.findViewById(R.id.textView10);
         tvSecurity = rootView.findViewById(R.id.textView11);
         tvMetodePembayaran = rootView.findViewById(R.id.tv10);
@@ -74,10 +93,20 @@ public class AkunRemasteredFragment extends Fragment {
             }
         });
 
-
-
-
         return rootView;
 
+    }
+
+    @OnClick(R.id.lblEditProfile)
+    void editProfile(){
+        Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UtilitiesCore.loadImageFromUri(profileImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
     }
 }

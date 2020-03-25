@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="@dimen/spacing_medium"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/imgBtnClose"
+            android:padding="@dimen/spacing_medium"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:tint="#979797"
+            android:src="@drawable/ic_close"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/ic_img_emotion_smile" />
+
+            <TextView
+                android:padding="@dimen/spacing_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="8sp"
+                android:text="Semua Kartu Kredit Anda"
+                android:textColor="@color/brown_grey"
+                android:textSize="15sp" />
+
+
+
+            <TextView
+                android:padding="@dimen/spacing_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/greyish_brown"
+                android:lineSpacingExtra="7sp"
+                android:gravity="center_horizontal"
+                android:text="Berhasil di blokir"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

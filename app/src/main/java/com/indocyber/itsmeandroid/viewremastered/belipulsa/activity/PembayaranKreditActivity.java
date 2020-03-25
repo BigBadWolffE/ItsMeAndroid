@@ -36,6 +36,7 @@ public class PembayaranKreditActivity extends AppCompatActivity {
     private String expiryDate;
     private String cardHolder;
 
+    private TextView txtHargaBayar;
     private TextView mCardNumber;
     private TextView mCardHolder;
     private TextView mCardExpiry;
@@ -44,7 +45,7 @@ public class PembayaranKreditActivity extends AppCompatActivity {
     private EditText mExpiryMonthInput;
     private EditText mExpiryYearInput;
     private EditText edtxCvv;
-    private EditText mBillingAddressInput;
+
     private ImageView mCardImage;
 
     @Override
@@ -72,6 +73,9 @@ public class PembayaranKreditActivity extends AppCompatActivity {
         edtxNomorKartu = findViewById(R.id.edtxNomorKartu);
         imageBtnBack = findViewById(R.id.imageBtnBack);
         edtxCvv = findViewById(R.id.edtxCvv);
+        txtHargaBayar = findViewById(R.id.txtHargaBayar);
+
+        txtHargaBayar.setText(data.getHargaBayar());
     }
 
     private void onClick() {
@@ -133,7 +137,7 @@ public class PembayaranKreditActivity extends AppCompatActivity {
             }
         });
 
-        mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
+      /*  mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
             if (!onFocus && mCardNumberInput.getText().length() == 16) {
                 if (!mCardNumberInput.getText().toString().substring(0, 1).equals("5")
                         && !mCardNumberInput.getText().toString().substring(0, 1).equals("4")) {
@@ -147,7 +151,7 @@ public class PembayaranKreditActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
     private boolean formIsValid(){
         if (mCardNumberInput.getText().length() < 16) return false;
@@ -157,9 +161,9 @@ public class PembayaranKreditActivity extends AppCompatActivity {
         if (mExpiryMonthInput.getText().length() < 2) return false;
 
         if (mCardHolderInput.getText().length() < 1) return false;
-        if (edtxCvv.getText().length() < 2)return false;
+        if (edtxCvv.getText().length() < 3)return false;
 
-        if (mBillingAddressInput.getText().toString().trim().length() < 1) return false;
+
 
 
         return true;

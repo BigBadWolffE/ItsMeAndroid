@@ -1,13 +1,27 @@
 package com.indocyber.itsmeandroid.model;
 
-public class PromoItemModel {
-    private String title;
-    private String desc;
-    private String periode;
-    private int banner;
+import com.google.gson.annotations.SerializedName;
 
-    public PromoItemModel() {
-    }
+public class PromoItemModel {
+    @SerializedName("id")
+    private String id;
+    @SerializedName("category")
+    private String category;
+    @SerializedName("description")
+    private String desc;
+    @SerializedName("startDate")
+    private String startDate;
+    @SerializedName("endDate")
+    private String endDate;
+    @SerializedName("fileName")
+    private String url;
+    @SerializedName("promoName")
+    private String title;
+    @SerializedName("distance")
+    private String distance;
+    public String periode;
+    public int banner;
+
 
     public PromoItemModel(String title, String desc, String periode, int banner) {
         this.title = title;
@@ -46,5 +60,53 @@ public class PromoItemModel {
 
     public void setBanner(int banner) {
         this.banner = banner;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }

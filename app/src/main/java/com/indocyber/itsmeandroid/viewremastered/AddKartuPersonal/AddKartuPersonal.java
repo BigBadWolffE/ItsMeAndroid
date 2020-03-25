@@ -1,17 +1,27 @@
 package com.indocyber.itsmeandroid.viewremastered.AddKartuPersonal;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -24,25 +34,42 @@ import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
+import java.io.IOException;
+import java.util.Calendar;
+
 public class AddKartuPersonal extends AppCompatActivity {
 
     private EditText mCardHolderInput;
     private EditText mExpiryInput;
-    private EditText mMerchantInput;
+    private EditText mBirthDate;
     private ImageView mCardImage;
     private int mCardImageResource;
+    private Spinner mTipeKartu;
     private Spinner spnAgama;
     private Spinner spnStatus;
     private Spinner spnPekerjaan;
     private Spinner spnKewarganegaraan;
     private Spinner spnKelurahan;
     private Spinner spnKecamatan;
-    private static final String[] AGAMA_OPTIONS = { "Pilih Agama", "Islam", "Hindu", "Buddha", "Kristen", "Katolik", "Konghuchu" };
-    private static final String[] STATUS_OPTIONS = { "Pilih Status", "Lajang", "Menikah" };
-    private static final String[] PEKERJAAN_OPTIONS = { "Pilih Pekerjaan", "Karyawan", "Wirausaha" };
-    private static final String[] KEWARGANEGARAAN_OPTIONS = { "Pilih Status", "WNI", "WNA" };
-    private static final String[] KELURAHAN_OPTIONS = { "Pilih Status", "Tanjung Duren", "Duri Kepa" };
-    private static final String[] KECAMATAN_OPTIONS = { "Pilih Status", "Grogol Petamburan", "Kebon Jeruk" };
+    private ImageView ktpImage;
+    private static final int GET_KTP_PICTURE_FROM_GALLERY = 0;
+    private static final int GET_KTP_PICTURE_FROM_CAMERA = 1;
+    private final static String[] MONTH_LIST = {"Januari", "Februari", "Maret", "April",
+            "Mei", "Juni", "Juli", "Agustus", "September",
+            "Oktober", "November", "Desember"};
+    private static final String[] TIPE_KARTU_OPTIONS = {"KTP", "NPWP", "SIM"};
+    private static final String[] AGAMA_OPTIONS =
+            { "Pilih Agama", "Islam", "Hindu", "Buddha", "Kristen", "Katolik", "Konghuchu" };
+    private static final String[] STATUS_OPTIONS =
+            { "Pilih Status", "Lajang", "Menikah" };
+    private static final String[] PEKERJAAN_OPTIONS =
+            { "Pilih Pekerjaan", "Karyawan", "Wirausaha" };
+    private static final String[] KEWARGANEGARAAN_OPTIONS =
+            { "Pilih Status", "WNI", "WNA" };
+    private static final String[] KELURAHAN_OPTIONS =
+            { "Pilih Status", "Tanjung Duren", "Duri Kepa" };
+    private static final String[] KECAMATAN_OPTIONS =
+            { "Pilih Status", "Grogol Petamburan", "Kebon Jeruk" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +77,37 @@ public class AddKartuPersonal extends AppCompatActivity {
         setContentView(R.layout.activity_add_kartu_personal);
         createToolbar();
         initializeField();
-//        initializeCardNumber();
-//        initializeCardHolder();
-//        initializeCardExpiry();
-//        initializeCardDetailInput();
         initializeButton();
     }
 
     private void initializeField() {
+        mTipeKartu = findViewById(R.id.spnTipeKartu);
+        mTipeKartu.setAdapter(new ArrayAdapter<>(this,
+                R.layout.spinner_item_text, TIPE_KARTU_OPTIONS));
         mCardHolderInput = findViewById(R.id.txtCardHolder);
-        mMerchantInput = findViewById(R.id.txtMerchant);
+        mBirthDate = findViewById(R.id.txtTanggalLahir);
+        mBirthDate.setOnFocusChangeListener((view, isFocus) -> {
+            if (isFocus) {
+                final Calendar c = Calendar.getInstance();
+                final int mYear = c.get(Calendar.YEAR) - 18;
+                final int mMonth = c.get(Calendar.MONTH);
+                final int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                        R.style.Theme_MaterialComponents_Light_Dialog_Alert,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                String dateValue = dayOfMonth + " " + MONTH_LIST[monthOfYear] + " " + year;
+                                mBirthDate.setText(dateValue);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
         spnAgama = findViewById(R.id.spnAgama);
         spnAgama.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, AGAMA_OPTIONS));
@@ -79,24 +127,88 @@ public class AddKartuPersonal extends AppCompatActivity {
         spnKelurahan.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, KECAMATAN_OPTIONS));
         mExpiryInput = findViewById(R.id.txtExpireDate);
+        ktpImage = findViewById(R.id.fotoKtpResult);
+        ImageView pictureButton = findViewById(R.id.addPicture);
+        pictureButton.setOnClickListener(view -> {
+            startTakePhotoDialog();
+        });
+    }
+
+    private void startTakePhotoDialog() {
+        final AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this,
+                R.style.Theme_MaterialComponents_Light_Dialog_Alert);
+        myAlertDialog.setTitle("Select Option");
+        myAlertDialog.setMessage("How do you want to set your picture?");
+
+        myAlertDialog.setPositiveButton("Gallery",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        pickFromGallery();
+                    }
+                });
+
+        myAlertDialog.setNegativeButton("Camera",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        takeFromCamera();
+                    }
+                });
+
+        myAlertDialog.show();
+    }
+
+    private void pickFromGallery() {
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        String[] mimeTypes = {"image/jpeg", "image/png"};
+        intent.putExtra(Intent.EXTRA_MIME_TYPES,mimeTypes);
+        startActivityForResult(intent, GET_KTP_PICTURE_FROM_GALLERY);
+    }
+
+    private void takeFromCamera() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, GET_KTP_PICTURE_FROM_CAMERA);
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            switch (requestCode) {
+                case GET_KTP_PICTURE_FROM_CAMERA:
+                    Bundle extras = data.getExtras();
+                    Bitmap imageBitmap = (Bitmap) extras.get("data");
+                    ktpImage.setImageBitmap(imageBitmap);
+                    ktpImage.setVisibility(View.VISIBLE);
+
+//                    fotoBase64 = UtilitiesCore.encodeToBase64Only(imageBitmap, extension);
+                    break;
+                case GET_KTP_PICTURE_FROM_GALLERY:
+                    Uri uri = data.getData();
+                    String filePath = uri.getPath();
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        UtilitiesCore.loadImage(ktpImage, bitmap, this);
+                        ktpImage.setImageBitmap(bitmap);
+//                        fotoBase64  = UtilitiesCore.encodeToBase64Only(bitmap, extension);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                default:
+                    Log.d("AddKartuPersonal", "Canceled taking picture");
+            }
+        }
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-//        formatCreditCard();
     }
 
     private  void createToolbar() {
-//        if (getSupportActionBar() != null) {
-//            View view = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
-//            TextView title = view.findViewById(R.id.titleText);
-//            ImageView actionBack = view.findViewById(R.id.imgback);
-//            actionBack.setOnClickListener(view1 -> finish());
-//            title.setText("Tambah Kartu Kredit");
-//            getSupportActionBar().setCustomView(view);
-//            getSupportActionBar().setElevation(0f);
-//        }
         AppBarLayout appbar = findViewById(R.id.actionBar);
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView textView = findViewById(R.id.toolbar_text);
@@ -119,190 +231,16 @@ public class AddKartuPersonal extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-//    private void initializeCardNumber() {
-//        mCardImage = findViewById(R.id.imgCreditCard);
-//        mCardNumberInput = findViewById(R.id.txtCardNumber);
-//        mCardNumberInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-//        mCardNumberInput.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-//                                          int count) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
-//                onCardNumberChange(charSequence);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                mCardNumber.setVisibility(View.VISIBLE);
-//            }
-//        });
-//
-//        mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
-//            if (!onFocus && mCardNumberInput.getText().length() == 16) {
-//                if (!mCardNumberInput.getText().toString().substring(0, 1).equals("5")
-//                        && !mCardNumberInput.getText().toString().substring(0, 1).equals("4")) {
-//                    UtilitiesCore.buildAlertDialog(
-//                            this,
-//                            "Kartu tidak dikenal!",
-//                            R.drawable.ic_invalid,
-//                            null
-//                    );
-//                    return;
-//                }
-//                mCardImageResource = randomizeCardImage();
-//                mCardImage.setImageResource(mCardImageResource);
-//            }
-//        });
-//    }
-//
-//    private void initializeCardHolder() {
-//        mCardHolderInput = findViewById(R.id.txtCardHolder);
-//        mCardHolderInput.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-//                                          int count) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int before, int after,
-//                                      int count) {
-//                mCardHolder.setText(WordUtils.capitalizeFully(charSequence.toString()));
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
-//    }
-//
-//    private void initializeCardExpiry() {
-//        mExpiryMonthInput = findViewById(R.id.txtExpiryDateMonth);
-//        mExpiryYearInput = findViewById(R.id.txtExpiryDateYear);
-//        mExpiryMonthInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-//        mExpiryMonthInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-//        mExpiryMonthInput.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-//                                          int count) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
-//                String expiryDate = charSequence.toString();
-//                String newExpiryDate = "";
-//                if (charSequence.length() == 2 && count > 0 ) {
-//                    mExpiryYearInput.requestFocus();
-//                }
-//
-//                if (mExpiryYearInput.length() < 1) {
-//                    newExpiryDate = expiryDate + "/20";
-//                } else if (mExpiryYearInput.length() < 2) {
-//                    newExpiryDate = expiryDate + "/0" + mExpiryYearInput.getText().toString();
-//                } else {
-//                    newExpiryDate = expiryDate + "/" + mExpiryYearInput.getText().toString();
-//                }
-//                mCardExpiry.setText(newExpiryDate);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
-//
-//        mExpiryYearInput.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-//                                          int count) {
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
-//                String expiryYear = charSequence.toString();
-//                String newExpiry = "";
-//                if (mExpiryMonthInput.length() < 1) {
-//                    newExpiry = "01/" + expiryYear;
-//                } else if (mExpiryMonthInput.length() < 2) {
-//                    newExpiry = "0" + mExpiryMonthInput.getText().toString() + "/" + expiryYear;
-//                } else {
-//                    newExpiry = mExpiryMonthInput.getText().toString() + "/" + expiryYear;
-//                }
-//                mCardExpiry.setText(newExpiry);
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//            }
-//        });
-//    }
-//
-//    private void initializeCardDetailInput() {
-//        mBillingAddressInput = findViewById(R.id.txtBillingAddress);
-//        mBillingAddressInput.setMaxLines(5);
-//        mBillingAddressInput.setSingleLine(false);
-//        mBillingAddressInput.setVerticalScrollBarEnabled(true);
-//        mBillingAddressInput.setMovementMethod(ScrollingMovementMethod.getInstance());
-//        mBillingAddressInput.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
-//    }
-
-    // TODO: 07/01/2020 uncomment if expiry year need to be limited
-//    private String setMaxYear(String expiryDate) {
-//        String returnedDate = expiryDate;
-//        if (returnedDate.length() == 5) {
-//            try {
-//                if(Integer.valueOf(returnedDate.substring(3, 5))
-//                        > (UtilitiesCore.getCurrentYear() - 2000) + 10) {
-//                    returnedDate = returnedDate.substring(0, 2) + "/"
-//                            + ((UtilitiesCore.getCurrentYear() - 2000) + 10);
-//                }
-//            } catch (Exception e){
-//                Log.e("Error converting value", "Value is not a number");
-//            }
-//            return returnedDate;
-//        }
-//        return expiryDate;
-//    }
-
     private void initializeButton() {
         Button addMemberCardButton;
         addMemberCardButton = findViewById(R.id.btnAddMember);
         addMemberCardButton.setOnClickListener(view -> submit());
 
-//        Button mAddCreditCardButton;
-//        mAddCreditCardButton = findViewById(R.id.btnAddCc);
-//        mAddCreditCardButton.setOnClickListener(view -> submit());
     }
 
     private boolean formIsValid(){
         return true;
     }
-
-//    private void requestIncreaseCreditLimit() {
-//        if(!formIsValid()){
-//            UtilitiesCore.buildAlertDialog(
-//                    this,
-//                    getString(R.string.form_incomplete_warning),
-//                    R.drawable.ic_invalid,
-//                    null
-//            );
-//            return;
-//        }
-//
-//        ImageCardModel data = new ImageCardModel(
-//                mCardImageResource,
-//                "",
-//                mCardHolderInput.getText().toString(),
-//                mCardExpiry.getText().toString(),
-//                "20.000.000",
-//                "12/19",
-//                "12/24",
-//                false);
-//        Intent intent = new Intent(this, RequestIncreaseLimitActivity.class);
-//        intent.putExtra(INTENT_ID, data);
-//        startActivity(intent);
-//    }
 
     private void submit() {
         if(!formIsValid()){
@@ -326,64 +264,9 @@ public class AddKartuPersonal extends AppCompatActivity {
             return;
         }
 
-//        ImageCardModel data = new ImageCardModel(
-//                R.drawable.img_membercard_starbuck,
-//                "",
-//                mCardHolderInput.getText().toString(),
-//                mExpiryInput.getText().toString(),
-//                "20.000.000",
-//                "12/19",
-//                "12/24",
-//                false);
         Intent intent = new Intent(this, SetPinActivityRemastered.class);
         intent.putExtra("parentCode", GlobalVariabel.TAMBAH_PERSONAL);
         startActivity(intent);
     }
-
-
-//    private void formatCreditCard(){
-//        ImageView creditCard = findViewById(R.id.imgCreditCard);
-//        int[] position = {0, 0};
-//        creditCard.getLocationOnScreen(position);
-//
-//        int paddingLeft = (creditCard.getWidth() * 8 / 100);
-//        int startYAxis = (creditCard.getHeight() / 2);
-//
-//        mCardNumber = findViewById(R.id.lblCcNumber);
-//        mCardNumber.setX(paddingLeft);
-//        mCardNumber.setY(startYAxis + getResources().getDimension(R.dimen.spacing_medium));
-//        mCardNumber.bringToFront();
-//        mCardHolder = findViewById(R.id.lblCardHolder);
-//        mCardHolder.setX(paddingLeft);
-//        mCardHolder.setY(creditCard.getHeight() * 80 / 100);
-//
-//        mCardExpiry = findViewById(R.id.lblExpiry);
-//        mCardExpiry.setX(creditCard.getWidth() / 2);
-//        mCardExpiry.setY(creditCard.getHeight() * 70 / 100);
-//    }
-
-//    private void onCardNumberChange(final CharSequence text){
-//        StringBuilder paddedText = new StringBuilder(text + "");
-//        for(int i = paddedText.length(); i < 16; i++){
-//            paddedText.append("X");
-//        }
-//
-//        String updatedText = paddedText.substring(0, 4) + "   " + paddedText.substring(4, 8) + "   "
-//                + paddedText.substring(8, 12) + "   " + paddedText.substring(12, 16);
-//
-//        mCardNumber.setText(updatedText);
-//    }
-
-    private int randomizeCardImage() {
-        int[] images = {
-                R.drawable.img_bca_card_template,
-                R.drawable.img_blank_kartukredit_anz,
-                R.drawable.img_blank_kartukredit_citi
-        };
-        int randomValue = (int)(Math.random() * images.length);
-        if(randomValue == images.length) randomValue = images.length - 1;
-        return images[randomValue];
-    }
-
 
 }

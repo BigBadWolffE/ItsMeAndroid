@@ -1,6 +1,9 @@
 package com.indocyber.itsmeandroid.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PromoMenuModel {
+
     private String title;
     private int color;
     private int banner;
@@ -34,4 +37,5 @@ public class PromoMenuModel {
     public void setBanner(int banner) {
         this.banner = banner;
     }
+
 }

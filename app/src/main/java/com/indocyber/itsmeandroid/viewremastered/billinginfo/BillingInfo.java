@@ -25,22 +25,46 @@ public class BillingInfo extends AppCompatActivity {
     private String mHolderName;
     private String mExpiryDate;
     private ImageView cardImage;
+    private ImageCardModel data;
+    private final static String[] MONTH_LIST = {"Januari", "Februari", "Maret", "April",
+            "Mei", "Juni", "Juli", "Agustus", "September",
+            "Oktober", "November", "Desember"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_billing_info);
         Bundle extras = getIntent().getExtras();
-        ImageCardModel data =
-                Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
         mNumber = data.getNumberCard();
         mHolderName = data.getNameCard();
         mExpiryDate = data.getExpireCard();
-
+        bindBillingInfo();
         cardImage = findViewById(R.id.imgCreditCard);
-        cardImage.setImageResource(R.drawable.img_blank_kartukredit_bca);
+        cardImage.setImageResource(data.getImage());
 
         createToolbar();
+    }
+
+    private void bindBillingInfo() {
+        String monthDue = data.getExpireCard().substring(0, 2);
+        String yearDue = data.getExpireCard().substring(3, 5);
+        int month = Integer.valueOf(monthDue);
+        String expiry = "1 " + MONTH_LIST[month - 1] + " 20" + yearDue;
+        TextView status = findViewById(R.id.cardStatusInfo);
+        status.setText(data.isBlockedCard() ? "Diblokir" : "Aktif");
+        TextView currentBilling = findViewById(R.id.cardBillingInfo);
+        currentBilling.setText("15.000.000");
+        TextView minimumPayment = findViewById(R.id.cardMinPayment);
+        minimumPayment.setText("1.500.000");
+        TextView printDate = findViewById(R.id.cardIssueDate);
+        printDate.setText("1 Januari 2020");
+        TextView dueDate = findViewById(R.id.cardDueDate);
+        dueDate.setText(expiry);
+        TextView creditLimit = findViewById(R.id.cardLimit);
+        creditLimit.setText("20.000.000");
+        TextView credit = findViewById(R.id.cardBalance);
+        credit.setText("5.000.000");
     }
 
     private  void createToolbar() {
@@ -57,10 +81,10 @@ public class BillingInfo extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView textView = findViewById(R.id.toolbar_text);
         VectorDrawable backButton = (VectorDrawable) getDrawable(R.drawable.ic_ico_arrow_back);
-        int iconDimension = (int) getResources().getDimension(R.dimen._20sdp);
+        int iconDimension = (int) getResources().getDimension(R.dimen._15sdp);
         Drawable resizedBackButton =
                 UtilitiesCore.resizeDrawable(backButton, this, iconDimension , iconDimension);
-        textView.setText("Tambah Limit");
+        textView.setText("Billing Info");
         textView.setAllCaps(false);
         toolbar.setNavigationIcon(resizedBackButton);
         setSupportActionBar(toolbar);
@@ -92,6 +116,7 @@ public class BillingInfo extends AppCompatActivity {
         mCardHolder.setY(cardImage.getHeight() * 80 / 100);
 
         TextView mCardExpiry = findViewById(R.id.lblExpiry);
+        mCardExpiry.setText(mExpiryDate);
         mCardExpiry.setX(cardImage.getWidth() / 2);
         mCardExpiry.setY(cardImage.getHeight() * 70 / 100);
     }

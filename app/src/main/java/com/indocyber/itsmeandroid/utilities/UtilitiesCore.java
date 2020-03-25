@@ -41,6 +41,7 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.signature.ObjectKey;
 import com.google.android.material.snackbar.Snackbar;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.services.network.Api;
@@ -60,6 +61,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  *
@@ -415,7 +418,24 @@ public final class UtilitiesCore {
                 .addHeader("Authorization", "Basic " + auth)
                 .build()
         );
-        RequestOptions option = new RequestOptions().placeholder(getProgressDrawable(context));
+        RequestOptions option = new RequestOptions().placeholder(R.drawable.img_nofotoprofile);
+        Glide.with(context)
+                .setDefaultRequestOptions(option)
+                .load(uri)
+                .into(imageView);
+    }
+
+    public static void loadImageFromUri(ImageView imageView, Context context, String url, String auth, String metaData) {
+        Log.d("Authorization", auth);
+        GlideUrl uri = new GlideUrl(
+                url, new LazyHeaders.Builder()
+                .addHeader("Authorization", "Basic " + auth)
+                .build()
+        );
+        RequestOptions option = new RequestOptions()
+                .placeholder(R.drawable.img_nofotoprofile)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true);
         Glide.with(context)
                 .setDefaultRequestOptions(option)
                 .load(uri)
@@ -436,6 +456,11 @@ public final class UtilitiesCore {
     }
 
     public static void loadImage(ImageView imageView, Bitmap bitmap, Context context) {
+        Glide.with(context)
+                .load(bitmap)
+                .into(imageView);
+    }
+    public static void loadCircleImage(CircleImageView imageView, Bitmap bitmap, Context context) {
         Glide.with(context)
                 .load(bitmap)
                 .into(imageView);

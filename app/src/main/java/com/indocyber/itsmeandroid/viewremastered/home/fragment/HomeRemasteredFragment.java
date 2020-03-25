@@ -31,11 +31,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.services.network.Api;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
+import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.home.adapter.CardRemasteredAdapter;
 import com.indocyber.itsmeandroid.viewremastered.notification.Activity.NotificationRemasteredActivity;
@@ -43,6 +49,8 @@ import com.indocyber.itsmeandroid.viewremastered.notification.Activity.Notificat
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,7 +62,7 @@ import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.dpToPx;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeRemasteredFragment extends Fragment {
+public class HomeRemasteredFragment extends BaseFragment {
 
     public HomeRemasteredFragment() {
         // Required empty public constructor
@@ -65,19 +73,26 @@ public class HomeRemasteredFragment extends Fragment {
     private CardRemasteredAdapter mCardAdapter;
     private TabLayout mTabDots;
     private RelativeLayout blockButton;
-    @BindView(R.id.imageView4)
-    FrameLayout mBtnNotif;
+
     private RelativeLayout mRltvBeliPulsa;
+    private RelativeLayout mRltvBlockAllCard;
     private RelativeLayout mRltvEmpty;
     private TextView txtTambhKartu;
     private HomeViewModel viewModel;
     private AlertDialog loader;
+    private ImageView userImage;
+    private Preference preference;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.fragment_home_remastered;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home_remastered, container, false);
+        View view = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, view);
         return view;
     }
@@ -92,8 +107,15 @@ public class HomeRemasteredFragment extends Fragment {
         mRltvEmpty = view.findViewById(R.id.rltvEmpty);
         mRltvBeliPulsa = view.findViewById(R.id.rltvBeliPulsa);
         txtTambhKartu = view.findViewById(R.id.txtTambhKartu);
+        mRltvBlockAllCard = view.findViewById(R.id.rltvBlockAllCard);
+        preference = new Preference(getActivity());
+        userImage = view.findViewById(R.id.circleImageView);
+        UtilitiesCore.loadImageFromUri(userImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
+        TextView userDisplayName = view.findViewById(R.id.userName);
+        userDisplayName.setText(preference.getLoggedUserFullname());
         viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
-        viewModel.fetchAllCardList();
+        viewModel.fetchCardList();
         observeViewModel();
         //mDotsLayout = view.findViewById(R.id.layoutDots);
 
@@ -110,6 +132,11 @@ public class HomeRemasteredFragment extends Fragment {
     private void onClick() {
         mRltvBeliPulsa.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), BeliPulsaActivity.class);
+            startActivity(intent);
+        });
+
+        mRltvBlockAllCard.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), BlockAllCardRemasterActivity.class);
             startActivity(intent);
         });
 
@@ -148,8 +175,7 @@ public class HomeRemasteredFragment extends Fragment {
     }
 
     private void initPromo() {
-        mPromoRecyclerView.setLayoutManager(
-                new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        mPromoRecyclerView.setLayoutManager( new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
         PromoPagerAdapter promoAdapter = new PromoPagerAdapter(new ArrayList<>(), getActivity());
         promoAdapter.refreshPromoList(generatePromoList());
@@ -207,5 +233,12 @@ public class HomeRemasteredFragment extends Fragment {
     void openNotifikasi(){
         Intent i = new Intent(getActivity(), NotificationRemasteredActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UtilitiesCore.loadImageFromUri(userImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
     }
 }

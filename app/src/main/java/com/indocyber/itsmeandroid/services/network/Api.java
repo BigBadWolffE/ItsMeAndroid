@@ -4,6 +4,8 @@ import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
 import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
 import com.indocyber.itsmeandroid.model.ProfilePassportModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.model.User;
 
@@ -27,7 +29,8 @@ import retrofit2.http.POST;
  */
 public interface Api {
 
-    String PROFILE_IMAGE = "http://10.100.10.251:7771/profile/getprofileimage/mobile";
+    String BASE_URL = "http://34.87.100.8:7771/";
+    String PROFILE_IMAGE = BASE_URL + "profile/getprofileimage/mobile";
     String KTP_IMAGE = "http://10.100.10.251:7771/profile/getktpimage/mobile";
     String NPWP_IMAGE = "http://10.100.10.251:7771/profile/getnpwpimage/mobile";
     String PASSPORT_IMAGE = "http://10.100.10.251:7771/profile/getpassportimage/mobile";
@@ -87,4 +90,12 @@ public interface Api {
     @POST(value = "authentication/login/mobile")
     @Headers({"Accept: " + ACCEPT})
     Single<ApiResponse<User>> login(@HeaderMap Map<String, String> authHeader);
+
+    @POST(value = "promo/getpromolist/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<List<PromoItemModel>>> getPromoList(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
+
+    @POST(value = "promo/getpromodetail/mobile")
+    @Headers({"Accept: " + ACCEPT})
+    Single<ApiResponse<PromoItemModel>> getPromoDetail(@HeaderMap Map<String, String> authHeader, @Body HashMap<String, String> body);
 }

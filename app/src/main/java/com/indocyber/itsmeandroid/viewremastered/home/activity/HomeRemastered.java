@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,21 +19,28 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.AddKartuPersonal.AddKartuPersonal;
 import com.indocyber.itsmeandroid.viewremastered.addkartumember.AddKartuMember;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
+import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.promo.fragment.PromoRemasteredFragment;
 
+import javax.inject.Inject;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.FRAGMENT_TYPE;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.fadeOutIn;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.showIn;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.showOut;
 
-public class HomeRemastered extends AppCompatActivity {
+public class HomeRemastered extends BaseActivity {
 
     //    @Override
 //    protected int layoutRes() {
@@ -43,12 +51,21 @@ public class HomeRemastered extends AppCompatActivity {
     private FloatingActionButton mFloatingActionButton;
     private LinearLayout mLinearPullUp, mLinearAddMembership,
             mLinearPersonalCard, mLinearAddCreditCard, mLinearBlockCC;
+    private int typeFragment = 0;
+    @Inject
+    ViewModelFactory factory;
+    private HomeViewModel viewModel;
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_home_remastered;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_remastered);
-
+        setContentView(layoutRes());
+        viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel.class);
         initView();
 
         if (savedInstanceState == null) {
@@ -58,11 +75,21 @@ public class HomeRemastered extends AppCompatActivity {
             fragmentTransaction.commit();
         }
 
+
+
         initComponent();
         initFab();
         initOnclick();
+        toFragmentPromo();
 
 
+    }
+
+    private void toFragmentPromo(){
+        typeFragment = getIntent().getIntExtra(FRAGMENT_TYPE, 0);
+        if (typeFragment == 1) {
+            onClickPromo();
+        }
     }
 
     private void initView() {
@@ -117,11 +144,12 @@ public class HomeRemastered extends AppCompatActivity {
             startActivity(intent);
         });
         mLinearAddCreditCard.setOnClickListener(v -> {
-                Intent intent = new Intent(this, AddCcActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(this, AddCcActivity.class);
+            startActivity(intent);
         });
         mLinearBlockCC.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, BlockAllCardRemasterActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -165,7 +193,7 @@ public class HomeRemastered extends AppCompatActivity {
         });
     }
 
-    public void onClickPromo(){
+    public void onClickPromo() {
         mNavigation.getMenu().findItem(R.id.action_promo).setChecked(true);
         Fragment fragment = null;
         fragment = new PromoRemasteredFragment();
@@ -185,7 +213,7 @@ public class HomeRemastered extends AppCompatActivity {
                 //if you want to kill app . from other then your main avtivity.(Launcher)
 //                android.os.Process.killProcess(android.os.Process.myPid());
 //                System.exit(1);
-                LoginAuthActivityRemastered.etusernameauth.setText("");
+                //LoginAuthActivityRemastered.etusernameauth.setText("");
                 Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

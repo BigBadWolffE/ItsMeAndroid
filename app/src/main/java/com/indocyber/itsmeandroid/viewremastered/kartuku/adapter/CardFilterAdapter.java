@@ -27,7 +27,7 @@ import java.util.List;
 public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.CardFilterViewHolder> {
     private List<String> filterList;
     private Context context;
-    private int activePosition;
+    private int activePosition = 0;
 
     public CardFilterAdapter(List<String> filterList, Context context) {
         this.filterList = filterList;
@@ -50,6 +50,7 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CardFilterViewHolder holder, int position) {
+
         View.OnClickListener listener = view -> {
             notifyItemChanged(activePosition);
             activePosition = position;

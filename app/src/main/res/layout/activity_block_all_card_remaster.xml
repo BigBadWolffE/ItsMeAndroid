@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".viewremastered.blockallcard.activity.BlockAllCardRemasterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/backgroundTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionBarSize"
+            android:background="@drawable/img_bg_top"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/actionBarSize"
+            android:orientation="horizontal">
+
+            <TextView
+               android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Pilih Kartu Kredit"
+                android:textAppearance="@style/quicksandSemiBold"
+                android:textColor="@color/grey_20"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:layout_centerVertical="true"
+                android:id="@+id/imageBtnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:padding="@dimen/spacing_medium"
+                android:src="@drawable/ic_ico_arrow_back" />
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_large"
+            android:layout_marginRight="@dimen/spacing_large"
+            android:descendantFocusability="blocksDescendants">
+
+            <androidx.core.widget.NestedScrollView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:scrollingCache="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/spacing_large"/>
+                    <CheckBox
+                        android:buttonTint="@color/colorPrimary"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:id="@+id/checkPlhSmuaKartu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pilih Semua Kartu"
+                        android:textAppearance="@style/quicksandSemiBold"
+                        android:textColor="@color/grey_20"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycBlockAllCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:padding="@dimen/spacing_medium"
+                        android:scrollbars="vertical"
+                        android:scrollingCache="true" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/actionBarSize"
+                        />
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+<Button
+    android:id="@+id/btnSelanjutnya"
+    android:text="Selanjutnya"
+    android:layout_alignParentBottom="true"
+    android:padding="@dimen/spacing_small"
+    android:textAppearance="@style/quicksandSemiBold"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/btn_rounded_red"
+    android:textColor="@color/colorwhite"/>
+</RelativeLayout>

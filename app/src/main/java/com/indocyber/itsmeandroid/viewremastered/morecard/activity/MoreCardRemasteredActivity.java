@@ -3,9 +3,12 @@ package com.indocyber.itsmeandroid.viewremastered.morecard.activity;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,11 +28,18 @@ import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimit
 import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
+import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.tagkartu.TagKartu;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.FRAGMENT_TYPE;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.MEMBER_CARD;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.PERSONAL_CARD;
 
 public class MoreCardRemasteredActivity extends AppCompatActivity {
 
@@ -42,22 +52,50 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
     private LinearLayout mLinearPromo;
     private LinearLayout mLinearChat;
     private LinearLayout mLinearCall;
+    private LinearLayout linearEditMember;
+    private LinearLayout linearShareMember;
+    private LinearLayout linearBlockirMember;
+    private LinearLayout linearMemberCard;
+    private LinearLayout linearCreditCard;
     private TextView mTtxtNumberCard;
+    private TextView txtTitle;
     private ImageButton mImageBtnBack;
     private ImageCardModel data;
     private String customerServicePhone = "021595929";
+    private int cardType;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_more_card_remastered);
-        initView();
 
         data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
+        cardType = Objects.requireNonNull(getIntent().getExtras()).getInt(CARD_TYPE,1);
+
+        initView();
+        initCheckCardType();
 
         onClick();
-        setData();
+
     }
+
+    private void initCheckCardType(){
+        if (cardType == CREDIT_CARD){
+            linearMemberCard.setVisibility(View.GONE);
+            linearCreditCard.setVisibility(View.VISIBLE);
+            setDataCreditCard();
+        }else if (cardType == MEMBER_CARD){
+            linearMemberCard.setVisibility(View.VISIBLE);
+            linearCreditCard.setVisibility(View.GONE);
+            setDataMemberCard();
+        }else if (cardType == PERSONAL_CARD){
+            linearMemberCard.setVisibility(View.VISIBLE);
+            linearCreditCard.setVisibility(View.GONE);
+            setDataPersonalCard();
+        }
+    }
+
 
     private void initView() {
         mLinearBilling = findViewById(R.id.linearBilling);
@@ -71,11 +109,39 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
         mLinearCall = findViewById(R.id.linearCall);
         mTtxtNumberCard = findViewById(R.id.txtNumberCard);
         mImageBtnBack = findViewById(R.id.imageBtnBack);
+        linearEditMember = findViewById(R.id.linearEditMember);
+        linearShareMember = findViewById(R.id.linearShareMember);
+        linearBlockirMember = findViewById(R.id.linearBlockirMember);
+        linearMemberCard = findViewById(R.id.linearMemberCard);
+        linearCreditCard = findViewById(R.id.linearCreditCard);
+        txtTitle = findViewById(R.id.txtTitle);
     }
 
-    private void setData(){
+
+
+    @SuppressLint("SetTextI18n")
+    private void setDataMemberCard(){
+        txtTitle.setText("Kartu Member");
         if (data != null) {
-            onCardNumberChange(data.getNumberCard());
+            mTtxtNumberCard.setText("Member Card");
+        }
+    }
+    @SuppressLint("SetTextI18n")
+    private void setDataPersonalCard(){
+        txtTitle.setText("Kartu Member");
+        if (data != null) {
+            mTtxtNumberCard.setText("Personal Card");
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setDataCreditCard(){
+        txtTitle.setText("Kartu Kredit");
+
+        if (data != null) {
+            if (data.getNumberCard() != null) {
+                onCardNumberChange(data.getNumberCard());
+            }
 
         }
     }
@@ -107,7 +173,7 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
 
         mLinearHastag.setOnClickListener(v -> {
             Intent intent = new Intent(this, TagKartu.class);
-            intent.putExtra(INTENT_ID, data);
+            intent.putExtra("cardId", data.getId());
             startActivity(intent);
         });
 
@@ -116,7 +182,9 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
         });
 
         mLinearPromo.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, HomeRemastered.class);
+            intent.putExtra(FRAGMENT_TYPE, 1);
+            startActivity(intent);
         });
 
         mLinearChat.setOnClickListener(v -> {
@@ -128,6 +196,20 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
 
         mImageBtnBack.setOnClickListener(v -> {
             finish();
+        });
+
+
+        //Button personal dan member
+        linearEditMember.setOnClickListener(v -> {
+
+        });
+
+        linearShareMember.setOnClickListener(v -> {
+
+        });
+
+        linearBlockirMember.setOnClickListener(v -> {
+
         });
 
     }

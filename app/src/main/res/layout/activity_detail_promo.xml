@@ -37,16 +37,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-
+                android:id="@+id/titleToolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_20sdp"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="Bakmi GM Promo Rp 20.200"
                 android:textColor="@color/brown_grey"
-                android:textSize="22sp"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/imageBtnBack"
+                app:layout_constraintStart_toEndOf="@+id/imageBtnBack"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -78,6 +79,7 @@
                     android:paddingVertical="@dimen/_10sdp">
 
                     <TextView
+                        android:id="@+id/lblTitlePromo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_bold"
@@ -111,6 +113,59 @@
                             android:src="@drawable/ico_share" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/layoutDiskon"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lblTitlePromo">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_local_offer" />
+
+                        <TextView
+                            android:id="@+id/lblDiskon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:text="  Discount 50%"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/layoutJarak"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+
+                        app:layout_constraintTop_toBottomOf="@id/lblTitlePromo">
+
+                        <ImageView
+                            android:layout_width="@dimen/_12sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ic_location" />
+
+                        <TextView
+                            android:id="@+id/lblJarak"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/quicksand_regular"
+                            android:text="  1.8 km"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -131,6 +186,7 @@
                         android:textSize="14sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
 
                     <TextView
                         android:id="@+id/lblSyaratKetentuan"
@@ -180,8 +236,9 @@
         android:id="@+id/bottom_sheet_share"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardElevation="@dimen/_5sdp"
         android:background="@drawable/rounded_corners"
+        android:visibility="gone"
+        app:cardElevation="@dimen/_5sdp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
 
@@ -189,8 +246,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@color/transparent"
+            android:orientation="vertical"
             android:paddingHorizontal="@dimen/_20sdp"
             android:paddingTop="@dimen/_20sdp">
 

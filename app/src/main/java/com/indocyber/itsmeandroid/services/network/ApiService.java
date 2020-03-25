@@ -5,6 +5,8 @@ import com.indocyber.itsmeandroid.model.ApiResponse;
 import com.indocyber.itsmeandroid.model.ProfileKTPModel;
 import com.indocyber.itsmeandroid.model.ProfileNPWPModel;
 import com.indocyber.itsmeandroid.model.ProfilePassportModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.model.PromoMenuModel;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.model.User;
 
@@ -136,5 +138,25 @@ public class ApiService {
 
     public Single<ApiResponse<User>> login(String authKey) {
         return api.login(generateAuthenticationHeader(authKey));
+    }
+
+    public Single<ApiResponse<List<PromoItemModel>>> getPromoList(String authKey, HashMap<String, String> body) {
+        return api.getPromoList(generateAuthenticationHeader(authKey), body);
+    }
+
+    public Single<ApiResponse<PromoItemModel>> getPromoDetail(String authKey, String id) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("promoId", id);
+        return api.getPromoDetail(generateAuthenticationHeader(authKey), body);
+    }
+
+    public Single<ApiResponse<String>> updateProfileNew(String authKey, String newEmail,
+                                                        String newPhone, String picture, String ext) {
+        HashMap<String, String> body = new HashMap<>();
+        body.put("userEmail", newEmail);
+        body.put("userPhone", newPhone);
+        body.put("imageBase64", picture);
+        body.put("imageExtension", ext);
+        return api.updateProfile(generateAuthenticationHeader(authKey), body);
     }
 }

@@ -52,7 +52,7 @@ public class CheckOutPulsaActivity extends AppCompatActivity {
     private void initData() {
         mTxtHargaPulsa.setText("Rp " + data.getHargaPulsa());
         mTxtOperator.setText(data.getOperator());
-        mTxtNomor.setText(data.getHargaPulsa());
+        mTxtNomor.setText(data.getNomorHp());
         mTxtHargaBayar.setText("Rp " + data.getHargaBayar());
     }
 

@@ -118,7 +118,7 @@
 
     <TextView
         android:gravity="center"
-        android:id="@+id/layout_two"
+        android:id="@+id/txt_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -140,7 +140,7 @@
         android:layout_height="@dimen/_40sdp"
         android:layout_marginVertical="@dimen/_20sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        app:cardBackgroundColor="@color/blue"
+        app:cardBackgroundColor="@color/grey_40"
         app:cardCornerRadius="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +163,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/layout_two"
+        app:layout_constraintBottom_toTopOf="@+id/txt_info"
         app:layout_constraintTop_toBottomOf="@+id/backgrnd_view">
 
         <ImageView
@@ -201,7 +201,6 @@
         style="@style/PinWidget.PinView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_gravity="center"
         android:cursorVisible="false"
         android:gravity="center"
@@ -218,13 +217,12 @@
         app:layout_constraintBottom_toTopOf="@+id/numberKeyboardOtp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_two"
+        app:layout_constraintTop_toBottomOf="@+id/txt_info"
         app:lineColor="@color/grey_40"
-        app:lineWidth="@dimen/_5sdp"
+        app:lineWidth="1dp"
         app:viewType="rectangle" />
-
     <com.davidmiguel.numberkeyboard.NumberKeyboard
-        android:id="@+id/numberKeyboardOtp"
+        android:id="@+id/numberKeyboardPin"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"

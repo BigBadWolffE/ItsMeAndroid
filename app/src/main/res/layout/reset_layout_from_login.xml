@@ -70,7 +70,7 @@
             android:text="Password Sekarang"
             android:textColor="@color/grey_main_medium"
             android:textSize="@dimen/_11sdp"
-            app:layout_constraintBottom_toTopOf="@+id/layout_input_login"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,8 +82,7 @@
             android:tooltipText="Password Sekarang"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tooltip_email" >
+            app:layout_constraintStart_toStartOf="parent">
 
             <EditText
                 android:id="@+id/ipt_email_reset"
@@ -121,7 +120,7 @@
             android:text="Password Baru"
             android:textColor="@color/grey_main_medium"
             android:textSize="@dimen/_11sdp"
-            app:layout_constraintBottom_toTopOf="@+id/layout_input_login"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -135,7 +134,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tooltip_email">
+           >
 
             <EditText
                 android:id="@+id/ipt_password_baru"
@@ -172,7 +171,6 @@
             android:text="Re-type Password Baru"
             android:textColor="@color/grey_main_medium"
             android:textSize="@dimen/_11sdp"
-            app:layout_constraintBottom_toTopOf="@+id/layout_input_login"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -186,7 +184,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tooltip_email">
+           >
 
             <EditText
                 android:id="@+id/ipt__baru_retype"

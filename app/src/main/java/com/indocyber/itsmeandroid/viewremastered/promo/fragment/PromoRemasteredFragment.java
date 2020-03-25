@@ -8,6 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,21 +17,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
+import com.indocyber.itsmeandroid.view.BaseFragment;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapter.Listener {
+public class PromoRemasteredFragment extends BaseFragment implements PromoMenuAdapter.Listener {
     @BindView(R.id.recyclerMenuPromoHorizontal)
     RecyclerView mPromoMenuRecycler;
     @BindView(R.id.layoutNoPromo)
@@ -38,20 +43,27 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
     FrameLayout mLayoutPromo;
     private MenuPromoAdapter mPromoMenuAdapter, mNearbyMenuAdapter, mDinigMenuAdapter, mCollectionMenuAdapter;
     private Fragment mFragmentIndicator = null;
-
+    private HomeViewModel viewModel;
+    @Inject
+    ViewModelFactory factory;
     private String[] titleList = {
 
     };
 
 
+    @Override
+    protected int layoutRes() {
+        return R.layout.fragment_promo_remastered;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View promoRemasteredView = inflater.inflate(R.layout.fragment_promo_remastered, container, false);
+        View promoRemasteredView = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, promoRemasteredView);
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(HomeViewModel.class);
         mPromoMenuAdapter = new MenuPromoAdapter(initializeMenu(), getActivity(), this);
         mNearbyMenuAdapter = new MenuPromoAdapter(nearbyActive(), getActivity(), this);
         mDinigMenuAdapter = new MenuPromoAdapter(dinningActive(), getActivity(), this);
@@ -63,6 +75,11 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         loadFragment(mFragmentIndicator);
         getPromo();
         return promoRemasteredView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void getPromo() {
@@ -80,7 +97,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         allActiveList.add(new PromoMenuModel("Semua Promo", R.color.colorPrimary, R.drawable.button_coloraccent));
         allActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         allActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
-        allActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
+        allActiveList.add(new PromoMenuModel("Special Discount", R.color.grey2, R.drawable.button_border_grey));
         return allActiveList;
     }
 
@@ -90,7 +107,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         nearbyActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         nearbyActiveList.add(new PromoMenuModel("Near By", R.color.colorPrimary, R.drawable.button_coloraccent));
         nearbyActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
-        nearbyActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
+        nearbyActiveList.add(new PromoMenuModel("Special Discount", R.color.grey2, R.drawable.button_border_grey));
         return nearbyActiveList;
     }
 
@@ -100,7 +117,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         dinningActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         dinningActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         dinningActiveList.add(new PromoMenuModel("Collection", R.color.grey2, R.drawable.button_border_grey));
-        dinningActiveList.add(new PromoMenuModel("Dinning", R.color.colorPrimary, R.drawable.button_coloraccent));
+        dinningActiveList.add(new PromoMenuModel("Special Discount", R.color.colorPrimary, R.drawable.button_coloraccent));
         return dinningActiveList;
     }
 
@@ -110,7 +127,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
         collectionActiveList.add(new PromoMenuModel("Semua Promo", R.color.grey2, R.drawable.button_border_grey));
         collectionActiveList.add(new PromoMenuModel("Near By", R.color.grey2, R.drawable.button_border_grey));
         collectionActiveList.add(new PromoMenuModel("Collection", R.color.colorPrimary, R.drawable.button_coloraccent));
-        collectionActiveList.add(new PromoMenuModel("Dinning", R.color.grey2, R.drawable.button_border_grey));
+        collectionActiveList.add(new PromoMenuModel("Special Discount", R.color.grey2, R.drawable.button_border_grey));
         return collectionActiveList;
     }
 
@@ -136,7 +153,7 @@ public class PromoRemasteredFragment extends Fragment implements PromoMenuAdapte
             loadFragment(new KoleksiPromoFragment());
             mPromoMenuRecycler.swapAdapter(mCollectionMenuAdapter, false);
         } else if (position == 3) {
-            loadFragment(new PromoMakananFragment());
+            loadFragment(new PromoSpesialDiscountFragment());
             mPromoMenuRecycler.swapAdapter(mDinigMenuAdapter, false);
         }
     }

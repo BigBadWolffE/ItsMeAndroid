@@ -10,6 +10,7 @@ public class Preference {
     public static final String LOGGED_USER_FULLNAME = "loggedUserFullName";
     public static final String LOGGED_USER_EMAIL = "loggedUserEmail";
     public static final String USER_AUTH = "userAuth";
+    public static final String META_DATA = "meta";
     private SharedPreferences prefs;
 
     public Preference(Context context) {
@@ -39,6 +40,12 @@ public class Preference {
         editor.apply();
     }
 
+    public void setMetaData(String metaData) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(META_DATA, metaData);
+        editor.apply();
+    }
+
     public String getLoggedUserFullname() {
         return prefs.getString(LOGGED_USER_FULLNAME, "");
     }
@@ -46,4 +53,5 @@ public class Preference {
         return prefs.getString(LOGGED_USER_EMAIL, "");
     }
     public String getUserAuth() { return prefs.getString(USER_AUTH, ""); }
+    public String getMetaData() { return prefs.getString(META_DATA, ""); }
 }

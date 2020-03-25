@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
@@ -29,7 +31,11 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.view.BaseActivity;
 import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
+import com.indocyber.itsmeandroid.view.otp.OtpActivity;
+import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.RegistrationModel;
@@ -38,40 +44,67 @@ import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.Registr
 import java.util.Objects;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 
-public class SetPinActivityRemastered extends AppCompatActivity implements NumberKeyboardListener {
+public class SetPinActivityRemastered extends BaseActivity implements NumberKeyboardListener {
     public static PinView firstPinView;
     public static AlertDialog alertDialog;
     private androidx.appcompat.app.AlertDialog customAlert;
     public static ImageView backButton;
     public static TextView submitPin;
     public static CardView lblSubmit;
-    int parentCode = -1;
-    String cardNumber = "";
-    ImageCardModel data;
+    private PinActivityViewModel viewModel;
+
+    private AlertDialog loader;
+    @Inject
+    ViewModelFactory factory;
+    private int parentCode = -1;
+    private String cardNumber = "";
+    private String cardHolder = "";
+    private String cardExpiry = "";
+    private String billingAddress = "";
+    private int id;
+//    private ImageCardModel data;
+
+
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_otp_remastered;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_remastered);
+        setContentView(layoutRes());
         parentCode = getIntent().getIntExtra("parentCode", -1);
-        if (parentCode >= 0) {
-            data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
-        }
-        if (data != null) {
-            cardNumber = data.getNumberCard();
-        }
+        cardNumber = getIntent().getStringExtra("cardNumber");
+        cardHolder = getIntent().getStringExtra("cardHolder");
+        cardExpiry = getIntent().getStringExtra("cardExpiry");
+        billingAddress = getIntent().getStringExtra("billingAddress");
+        id = getIntent().getIntExtra("cardId", -1);
+
+//        if (parentCode >= 0) {
+//            data = getIntent().getParcelableExtra(INTENT_ID);
+//        }
+//        if (data != null) {
+//            cardNumber = data.getNumberCard();
+//        }
         firstPinView = findViewById(R.id.firstPinView);
         hideKeyboard();
         setPinView();
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(SetPinActivityRemastered.this).build();
-
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(SetPinActivityRemastered.this)
+                .build();
         NumberKeyboard numberKeyboard = findViewById(R.id.numberKeyboardOtp);
         numberKeyboard.setListener(this);
-
+        viewModel = ViewModelProviders.of(this, factory).get(PinActivityViewModel.class);
         backButton = findViewById(R.id.imageView5);
         backButton = findViewById(R.id.imageView5);
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -94,55 +127,41 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
         submitPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                if (parentCode == GlobalVariabel.TAMBAH_LIMIT_ACTIVITY) {
-//                    showSuccessDialog(
-//                            R.drawable.ic_img_emotion_smile,
-//                            "Pengajuan Limit\nKartu Kredit Anda",
-//                            padCardNumber(cardNumber, 3) + "\nBerhasil",
-//                            dialogInterface -> {
-//                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(intent);
-//                            });
-//                } else if (parentCode == GlobalVariabel.BLOCK_KARTU) {
-//                    showSuccessDialog(
-//                            R.drawable.ic_img_emotion_smile,
-//                            "Kartu Kredit Anda",
-//                            padCardNumber(cardNumber, 3) + "\nBerhasil diblokir",
-//                            dialogInterface -> {
-//                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(intent);
-//                            });
-//                } else if (parentCode == GlobalVariabel.EDIT_KARTU) {
-//                    showSuccessDialog(
-//                            R.drawable.ic_img_emotion_smile,
-//                            "Perubahan Kartu Kredit Anda",
-//                            padCardNumber(cardNumber, 3) + "\nBerhasil",
-//                            dialogInterface -> {
-//                                finish();
-//                            });
-//                } else if (parentCode == GlobalVariabel.TAMBAH_PERSONAL) {
-//                    showSuccessDialog(
-//                            R.drawable.ic_img_emotion_smile,
-//                            "Penambahan Kartu Personal Anda",
-//                            "Berhasil",
-//                            dialogInterface -> {
-//                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(intent);
-//                            });
-//                } else if (parentCode == GlobalVariabel.TAMBAH_MEMBER) {
-//                    showSuccessDialog(
-//                            R.drawable.ic_img_emotion_smile,
-//                            "Penambahan Kartu Member Anda",
-//                            "Berhasil",
-//                            dialogInterface -> {
-//                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
-//                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                                startActivity(intent);
-//                            });
-//                } else {
+                if (parentCode == GlobalVariabel.TAMBAH_LIMIT_ACTIVITY) {
+                    showSuccessDialog(
+                            R.drawable.ic_img_emotion_smile,
+                            "Pengajuan Limit\nKartu Kredit Anda",
+                            padCardNumber(cardNumber, 3) + "\nBerhasil",
+                            dialogInterface -> {
+                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            });
+                } else if (parentCode == GlobalVariabel.BLOCK_KARTU) {
+                    viewModel.blockCard(id);
+                } else if (parentCode == GlobalVariabel.EDIT_KARTU) {
+                    viewModel.updateCard(id, cardNumber, cardHolder, cardExpiry, billingAddress);
+                } else if (parentCode == GlobalVariabel.TAMBAH_PERSONAL) {
+                    showSuccessDialog(
+                            R.drawable.ic_img_emotion_smile,
+                            "Penambahan Kartu Personal Anda",
+                            "Berhasil",
+                            dialogInterface -> {
+                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            });
+                } else if (parentCode == GlobalVariabel.TAMBAH_MEMBER) {
+                    showSuccessDialog(
+                            R.drawable.ic_img_emotion_smile,
+                            "Penambahan Kartu Member Anda",
+                            "Berhasil",
+                            dialogInterface -> {
+                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            });
+                } else {
                     new Handler().postDelayed(() -> {
                         alertDialog.show();
                         new Handler().postDelayed(() -> {
@@ -156,7 +175,9 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
                         }, 800);
                     }, 200);
                 }
+            }
         });
+        observeViewModel();
     }
 
     private void setPinView() {
@@ -251,54 +272,54 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
         return super.onOptionsItemSelected(item);
     }
 
-//    private void showSuccessDialog(int icon, String smallText, String bigText, DialogInterface.OnDismissListener onDismiss) {
-//        androidx.appcompat.app.AlertDialog.Builder builder =
-//                new androidx.appcompat.app.AlertDialog.Builder(SetPinActivityRemastered.this);
-//        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null);
-//        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
-//        alertIcon.setImageResource(icon);
-//        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
-//        txtSmallText.setText(smallText);
-//        TextView txtBigText = view.findViewById(R.id.txtBigText);
-//        txtBigText.setText(bigText);
-//        ImageView close = view.findViewById(R.id.closeAlert);
-//        builder.setView(view);
-//        builder.setOnDismissListener(onDismiss);
-//        customAlert = builder.create();
-//        close.setOnClickListener(view1 -> customAlert.dismiss());
-//        customAlert.show();
-//    }
+    private void showSuccessDialog(int icon, String smallText, String bigText, DialogInterface.OnDismissListener onDismiss) {
+        androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(SetPinActivityRemastered.this);
+        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_success, null);
+        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
+        alertIcon.setImageResource(icon);
+        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
+        txtSmallText.setText(smallText);
+        TextView txtBigText = view.findViewById(R.id.txtBigText);
+        txtBigText.setText(bigText);
+        ImageView close = view.findViewById(R.id.closeAlert);
+        builder.setView(view);
+        builder.setOnDismissListener(onDismiss);
+        customAlert = builder.create();
+        close.setOnClickListener(view1 -> customAlert.dismiss());
+        customAlert.show();
+    }
 
-//    private void showErrorDialog(int icon, String smallText, String bigText, String errorText, DialogInterface.OnDismissListener onDismiss) {
-//        androidx.appcompat.app.AlertDialog.Builder builder =
-//                new androidx.appcompat.app.AlertDialog.Builder(SetPinActivityRemastered.this);
-//        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_invalid, null);
-//        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
-//        alertIcon.setImageResource(icon);
-//        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
-//        txtSmallText.setText(smallText);
-//        TextView txtBigText = view.findViewById(R.id.txtBigText);
-//        txtBigText.setText(bigText);
-//        TextView txtErrorText = view.findViewById(R.id.txtErrorText);
-//        txtBigText.setText(errorText);
-//        ImageView close = view.findViewById(R.id.closeAlert);
-//        builder.setView(view);
-//        builder.setOnDismissListener(onDismiss);
-//        customAlert = builder.create();
-//        close.setOnClickListener(view1 -> customAlert.dismiss());
-//        customAlert.show();
-//    }
-//
-//    private String padCardNumber(String number, int pad) {
-//        StringBuilder padding = new StringBuilder();
-//        for(int i = 0; i < pad; i++){
-//            padding.append(" ");
-//        }
-//
-//        String paddedText = number + "";
-//        return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
-//                + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
-//    }
+    private void showErrorDialog(int icon, String smallText, String bigText, String errorText, DialogInterface.OnDismissListener onDismiss) {
+        androidx.appcompat.app.AlertDialog.Builder builder =
+                new androidx.appcompat.app.AlertDialog.Builder(SetPinActivityRemastered.this);
+        View view = LayoutInflater.from(this).inflate(R.layout.alert_dialog_invalid, null);
+        ImageView alertIcon = view.findViewById(R.id.imgAlertIcon);
+        alertIcon.setImageResource(icon);
+        TextView txtSmallText = view.findViewById(R.id.txtSmallText);
+        txtSmallText.setText(smallText);
+        TextView txtBigText = view.findViewById(R.id.txtBigText);
+        txtBigText.setText(bigText);
+        TextView txtErrorText = view.findViewById(R.id.txtErrorText);
+        txtBigText.setText(errorText);
+        ImageView close = view.findViewById(R.id.closeAlert);
+        builder.setView(view);
+        builder.setOnDismissListener(onDismiss);
+        customAlert = builder.create();
+        close.setOnClickListener(view1 -> customAlert.dismiss());
+        customAlert.show();
+    }
+
+    private String padCardNumber(String number, int pad) {
+        StringBuilder padding = new StringBuilder();
+        for(int i = 0; i < pad; i++){
+            padding.append(" ");
+        }
+
+        String paddedText = number + "";
+        return paddedText.substring(0, 4) + padding + paddedText.substring(4, 8) + padding
+                + paddedText.substring(8, 12) + padding + paddedText.substring(12, 16);
+    }
 
     public static void alertWrong (final Context activity ){
         AlertDialog.Builder builder1 = new AlertDialog.Builder(activity);
@@ -315,5 +336,40 @@ public class SetPinActivityRemastered extends AppCompatActivity implements Numbe
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+        viewModel.getIsDone().observe(this, isDone -> {
+            if (isDone) {
+                if (parentCode == GlobalVariabel.BLOCK_KARTU) {
+                    showSuccessDialog(
+                            R.drawable.ic_img_emotion_smile,
+                            "Kartu Kredit Anda",
+                            padCardNumber(cardNumber, 3) + "\nBerhasil diblokir",
+                            dialogInterface -> {
+                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            });
+                } else if (parentCode == GlobalVariabel.EDIT_KARTU) {
+                    showSuccessDialog(
+                            R.drawable.ic_img_emotion_smile,
+                            "Perubahan Kartu Kredit Anda",
+                            padCardNumber(cardNumber, 3) + "\nBerhasil",
+                            dialogInterface -> {
+                                Intent intent = new Intent(SetPinActivityRemastered.this, HomeRemastered.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            });
+                }
+            }
+        });
     }
 }

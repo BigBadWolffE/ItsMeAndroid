@@ -1,34 +1,41 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
-import com.indocyber.itsmeandroid.view.promo.adapter.PromoItemAdapter;
+import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.promo.Activity.DetailPromoActivity;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.ItemPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Listener {
+public class SemuaPromoFragment extends BaseFragment implements ItemPromoAdapter.Listener {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -36,9 +43,13 @@ public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Lis
     private String mParam1;
     private String mParam2;
 
+    private HomeViewModel viewModel;
+    @Inject
+    ViewModelFactory factory;
+    private AlertDialog loader;
     @BindView(R.id.recyclerSemuaPromoList)
     RecyclerView mPromoItemRecyler;
-    private List<PromoItemModel> mResourceList = new ArrayList<>();
+//    private List<PromoItemModel> mResourceList = new ArrayList<>();
     private ItemPromoAdapter mPromoItemAdapter;
 
     private  String[] titleList = {
@@ -92,22 +103,38 @@ public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Lis
 
 
     @Override
+    protected int layoutRes() {
+        return R.layout.fragment_semua_promo;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View semuaPromoFragment = inflater.inflate(R.layout.fragment_semua_promo, container, false);
+        View semuaPromoFragment = inflater.inflate(layoutRes(), container, false);
         ButterKnife.bind(this, semuaPromoFragment);
         if (getArguments() != null){
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-        mPromoItemAdapter = new ItemPromoAdapter(initialize(), getActivity(), this);
+        viewModel = ViewModelProviders.of(getParentFragment().getActivity(), factory).get(HomeViewModel.class);
+        viewModel.fetchPromoList("");
+        mPromoItemAdapter = new ItemPromoAdapter(new ArrayList<>(), getActivity(), this);
         GridLayoutManager horizontalLayourManager = new GridLayoutManager(getActivity(),2);
         mPromoItemRecyler.setLayoutManager(horizontalLayourManager);
         mPromoItemRecyler.setAdapter(mPromoItemAdapter);
 
         return  semuaPromoFragment;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(getParentFragment().getActivity())
+                .build();
+        observeViewModel();
     }
 
     private  List<PromoItemModel> initialize(){
@@ -119,12 +146,26 @@ public class SemuaPromoFragment extends Fragment implements ItemPromoAdapter.Lis
     }
 
     @Override
-    public void onClick(int position) {
+    public void onClick(PromoItemModel promo) {
         Intent intent = new Intent(getActivity(), DetailPromoActivity.class);
-//        intent.putExtra("titlePromo", titleList[position]);
-//        intent.putExtra("imgPromo", imgList[position]);
-//        intent.putExtra("descPromo", descList[position]);
-//        intent.putExtra("periodePromo", periodeList[position]);
+        intent.putExtra("idPromo", promo.getId());
+        intent.putExtra("titlePromo", promo.getTitle());
+        intent.putExtra("imgPromo", promo.getBanner());
+        intent.putExtra("descPromo", promo.getDesc());
+        intent.putExtra("periodePromo", promo.getPeriode());
+        intent.putExtra("jarak", "");
+        intent.putExtra("diskon", "");
         startActivity(intent);
+    }
+
+    private void observeViewModel(){
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) loader.show();
+            else loader.dismiss();
+        });
+
+        viewModel.getPromoList().observe(this, promoMenuModels -> {
+            mPromoItemAdapter.refreshList(promoMenuModels);
+        });
     }
 }

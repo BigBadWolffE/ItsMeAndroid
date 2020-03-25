@@ -18,6 +18,9 @@ import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardListAdapter
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.MEMBER_CARD;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.PERSONAL_CARD;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PersonalCardList#newInstance} factory method to
@@ -73,7 +76,7 @@ public class PersonalCardList extends Fragment {
         RecyclerView cardListRecycler = view.findViewById(R.id.recyclerCardList);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CardListAdapter cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        CardListAdapter cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(),PERSONAL_CARD);
         filterRecycler.setLayoutManager(horizontalLayoutManager);
         CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
         cardAdapter.refreshCardList(generateCardList());

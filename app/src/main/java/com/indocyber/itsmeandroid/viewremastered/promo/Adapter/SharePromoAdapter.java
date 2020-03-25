@@ -24,7 +24,7 @@ public class SharePromoAdapter extends RecyclerView.Adapter<SharePromoAdapter.It
     private Context mContext;
     Listener mListener;
     public interface Listener {
-        void onClick(ItemShareModel mItemShareModel);
+        void SharePromoonClick(ItemShareModel mItemShareModel);
     }
 
     public SharePromoAdapter(List<ItemShareModel> itemShareModelList, Context mContext, Listener mListener){
@@ -49,7 +49,7 @@ public class SharePromoAdapter extends RecyclerView.Adapter<SharePromoAdapter.It
         holder.mImageShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onClick(itemShareModelList.get(position));
+                mListener.SharePromoonClick(itemShareModelList.get(position));
             }
         });
     }

@@ -1,22 +1,26 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.fragment;
 
+import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
-import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.CreditCardAdapter;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
@@ -25,11 +29,16 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dmax.dialog.SpotsDialog;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.Listener {
+public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.Listener, CreditCardAdapter.Listener {
     @BindView(R.id.recyclerMenuKoleksiPromoHorizontal)
     RecyclerView mMenuPromoKoleksiRecycler;
     @BindView(R.id.recyclerCardCollection)
@@ -37,6 +46,8 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
     private MenuPromoAdapter mMenuSemuaKartuAdapter, mMenuBussinesAdapter, mMenuVacationAdapter;
     private CreditCardAdapter mCardViewAdapter;
     private Fragment mFragmentIndicator = null;
+    private HomeViewModel mViewModel;
+    private AlertDialog loader;
 
     public KoleksiPromoFragment() {
         // Required empty public constructor
@@ -49,6 +60,7 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
         // Inflate the layout for this fragment
         View koleksiPromoFragment = inflater.inflate(R.layout.fragment_koleksi_promo, container, false);
         ButterKnife.bind(this, koleksiPromoFragment);
+
         mMenuSemuaKartuAdapter = new MenuPromoAdapter(semuaKartuMenu(), getActivity(), this);
         mMenuBussinesAdapter = new MenuPromoAdapter(bussinesMenu(), getActivity(), this);
         mMenuVacationAdapter = new MenuPromoAdapter(vacationMenu(), getActivity(), this);
@@ -57,8 +69,10 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
         mMenuPromoKoleksiRecycler.setAdapter(mMenuSemuaKartuAdapter);
         initCard();
 
+
         return koleksiPromoFragment;
     }
+
 
     private List<PromoMenuModel> semuaKartuMenu() {
         List<PromoMenuModel> semuaKartuList = new ArrayList<>();
@@ -72,16 +86,16 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
 
     private void initCard(){
         mRecyclerCardCollection.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        mCardViewAdapter = new CreditCardAdapter(new ArrayList<>(), getActivity());
+        mCardViewAdapter = new CreditCardAdapter(new ArrayList<>(), getActivity(),this);
         mCardViewAdapter.refreshCardList(generateCardList());
         mRecyclerCardCollection.setAdapter(mCardViewAdapter);
     }
 
     private List<ImageCardModel> generateCardList(){
         List<ImageCardModel> cardList =  new ArrayList<>();
-        cardList.add(new ImageCardModel(R.drawable.img_kartukredit_bca,"12345","","","","","",false));
-        cardList.add(new ImageCardModel(R.drawable.img_kartukredit_citi,"12345","","","","","",false));
-        cardList.add(new ImageCardModel(R.drawable.img_kartukredit_anz,"12345","","","","","",false));
+        cardList.add(new ImageCardModel(R.drawable.img_kartukredit_bca,"1112113131611512","mudiono ","12/13","20.000.000","12/19 12/24",null,false));
+        cardList.add(new ImageCardModel(R.drawable.img_kartukredit_bca,"1112113131611512","mudiono ","12/13","20.000.000","12/19 12/24",null,false));
+        cardList.add(new ImageCardModel(R.drawable.img_kartukredit_bca,"1112113131611512","mudiono ","12/13","20.000.000","12/19 12/24",null,false));
 
         return cardList;
     }
@@ -119,5 +133,13 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
     @Override
     public void onClick(int position) {
 
+    }
+
+    @Override
+    public void MoreCardonClick(ImageCardModel imgCardModel) {
+        Intent intent = new Intent(getActivity(), MoreCardRemasteredActivity.class);
+        intent.putExtra(CARD_TYPE,CREDIT_CARD);
+        intent.putExtra(INTENT_ID,(Parcelable)imgCardModel);
+        startActivity(intent);
     }
 }

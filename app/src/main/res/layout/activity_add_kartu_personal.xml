@@ -45,7 +45,7 @@
                     android:background="@drawable/button_border_grey">
 
                     <ImageView
-                        android:id="@+id/imgCreditCard"
+                        android:id="@+id/addPicture"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -56,14 +56,23 @@
                         android:src="@drawable/ic_ico_tambah_limit" />
 
                     <TextView
+                        android:id="@+id/labelAmbilFoto"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/imgCreditCard"
+                        android:layout_below="@id/addPicture"
                         android:text="Ambil Foto"
-                        android:layout_alignLeft="@id/imgCreditCard"
-                        android:layout_alignRight="@id/imgCreditCard"
+                        android:layout_alignLeft="@id/addPicture"
+                        android:layout_alignRight="@id/addPicture"
                         />
 
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:scaleType="fitXY"
+                        android:visibility="gone"
+                        android:adjustViewBounds="true"
+                        android:id="@+id/fotoKtpResult" />
 
                 </RelativeLayout>
             </LinearLayout>
@@ -117,10 +126,10 @@
                     <EditText
                         android:id="@+id/txtNik"
                         android:inputType="text"
-                        android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                        android:digits="0123456789"
                         style="@style/quicksandSemiBold"
                         android:textColor="@color/support_black"
-                        android:maxLength="30"
+                        android:maxLength="16"
                         android:textSize="14sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

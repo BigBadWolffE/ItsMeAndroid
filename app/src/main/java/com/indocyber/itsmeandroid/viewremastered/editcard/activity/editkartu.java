@@ -304,17 +304,18 @@ public class editkartu extends AppCompatActivity {
         }
 
         Intent intent = new Intent(this, SetPinActivityRemastered.class);
-        data.setNumberCard(mCardNumberInput.getText().toString());
-        data.setNameCard(mCardHolderInput.getText().toString());
-        data.setExpireCard(mCardExpiry.getText().toString());
-        data.setBillingAddress(mBillingAddressInput.getText().toString());
-        intent.putExtra("parentCode", GlobalVariabel.EDIT_KARTU);
-        intent.putExtra(INTENT_ID, data);
+        intent.putExtra("cardHolder", mCardHolderInput.getText().toString());
+        intent.putExtra("cardExpiry", mCardExpiry.getText().toString());
+        intent.putExtra("billingAddress", mBillingAddressInput.getText().toString());
+        intent.putExtra("cardId", data.getId());
+        intent.putExtra("cardNumber", mCardNumberInput.getText().toString());
+        intent.putExtra("parentCode", 2);
         startActivity(intent);
     }
 
     private void formatCreditCard(){
         ImageView creditCard = findViewById(R.id.imgCreditCard);
+        creditCard.setImageResource(data.getImage());
         int[] position = {0, 0};
         creditCard.getLocationOnScreen(position);
 

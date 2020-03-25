@@ -43,373 +43,500 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        <TextView
-            android:padding="@dimen/spacing_small"
-            android:text="Kartu Kredit"
-            android:layout_width="wrap_content"
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:padding="@dimen/spacing_small"
+                android:text="Kartu Kredit"
+                android:textColor="@color/grey_40"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/actionBarSize"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_centerVertical="true"
+                    android:id="@+id/imageBtnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:padding="@dimen/spacing_medium"
+                    android:src="@drawable/ic_ico_arrow_back" />
+
+                <TextView
+                    android:id="@+id/txtNumberCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                   android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:padding="@dimen/spacing_medium"
+                    android:text="3454 XXXX XXXX 3455"
+                    android:textColor="@color/grey_40"
+
+                    android:textSize="20sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearCreditCard"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:textColor="@color/grey_40"/>
+            android:orientation="vertical">
 
             <LinearLayout
-                android:layout_gravity="center"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+
+                <LinearLayout
+                    android:id="@+id/linearBilling"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_menu_billing" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Billing Info"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+
+                <LinearLayout
+                    android:id="@+id/linearEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_edit_card" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Kartu"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.2" />
+
+                <LinearLayout
+                    android:id="@+id/linearBlokir"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ico_block_all_card" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Blokir Kartu"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+
+                <LinearLayout
+                    android:id="@+id/linearTambahLimit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_tambah_limit" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tambah Limit"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+
+                <LinearLayout
+                    android:id="@+id/linearHastag"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_tag" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hastag"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.2" />
+
+                <LinearLayout
+                    android:id="@+id/linearShare"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_share" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+            </LinearLayout>
+
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ImageButton
-                    android:layout_marginStart="@dimen/spacing_large"
-                    android:layout_gravity="center"
-                    android:id="@+id/imageBtnBack"
-                    android:clickable="true"
-                    android:padding="@dimen/spacing_medium"
-                    android:background="?attr/selectableItemBackground"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_ico_arrow_back"/>
-                <TextView
-                    android:id="@+id/txtNumberCard"
-                    android:padding="@dimen/spacing_medium"
-                    android:text="3454 XXXX XXXX 3455"
+                <View
                     android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+
+                <LinearLayout
+                    android:id="@+id/linearPromo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
                     android:gravity="center"
-                    android:textSize="20sp"
-                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    android:textColor="@color/grey_40"/>
+                    <ImageView
+
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_menu_promo" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Promo"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
+
+                <LinearLayout
+                    android:id="@+id/linearChat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_menu_chat" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Chat"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.2" />
+
+                <LinearLayout
+                    android:id="@+id/linearCall"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_menu_call" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Call"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
             </LinearLayout>
+
+
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="visible"
+            android:id="@+id/linearMemberCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xlarge"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
+            android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/linearBilling"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:orientation="horizontal">
 
-                <ImageView
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
 
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_menu_billing" />
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearEditMember"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Billing Info"
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:textAppearance="@style/quicksandRegular" />
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_edit_card" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Edit Kartu"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:id="@+id/linearEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_edit_card" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
 
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/linearShareMember"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Edit Kartu"
-                    android:textAppearance="@style/quicksandRegular" />
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <ImageView
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.2" />
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_ico_share" />
 
-            <LinearLayout
-                android:id="@+id/linearBlokir"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Share"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
 
-                <ImageView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ico_block_all_card" />
+                </LinearLayout>
 
-                <TextView
 
-                    android:layout_width="wrap_content"
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.2" />
+
+                <LinearLayout
+                    android:id="@+id/linearBlockirMember"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Blokir Kartu"
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:textAppearance="@style/quicksandRegular" />
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ico_block_all_card" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hapus Kartu"
+                        android:textAppearance="@style/quicksandRegular"
+                        android:textColor="@color/grey_40"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="0.3" />
             </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
-
-            <LinearLayout
-                android:id="@+id/linearTambahLimit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_tambah_limit" />
-
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tambah Limit"
-                    android:textAppearance="@style/quicksandRegular" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
-
-            <LinearLayout
-                android:id="@+id/linearHastag"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_tag" />
-
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Hastag"
-                    android:textAppearance="@style/quicksandRegular" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.2" />
-
-            <LinearLayout
-                android:id="@+id/linearShare"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_share" />
-
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Share"
-                    android:textAppearance="@style/quicksandRegular" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
-
-            <LinearLayout
-                android:id="@+id/linearPromo"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_menu_promo" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Promo"
-                    android:textAppearance="@style/quicksandRegular"
-                    android:textColor="@color/grey_40"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
-
-            <LinearLayout
-                android:id="@+id/linearChat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_menu_chat" />
-
-                <TextView
-
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chat"
-                    android:textAppearance="@style/quicksandRegular" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.2" />
-
-            <LinearLayout
-                android:id="@+id/linearCall"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_ico_menu_call" />
-
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/grey_40"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Call"
-                    android:textAppearance="@style/quicksandRegular" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="0.3" />
-        </LinearLayout>
-
-
     </LinearLayout>
 
     <!--<androidx.constraintlayout.widget.ConstraintLayout

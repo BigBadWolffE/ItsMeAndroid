@@ -17,14 +17,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.davidmiguel.numberkeyboard.NumberKeyboard;
+import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class PinPromoActivity extends AppCompatActivity {
+public class PinPromoActivity extends AppCompatActivity implements NumberKeyboardListener {
 
     @BindView(R.id.pinView)
     PinView mPinView;
@@ -32,19 +36,8 @@ public class PinPromoActivity extends AppCompatActivity {
     TextView mBtnInputPin;
     @BindView(R.id.btn_submit)
     CardView mBtnSubmit;
-
-//    @BindView(R.id.txtPin1)
-//    EditText mTxtPin1;
-//    @BindView(R.id.txtPin2)
-//    EditText mTxtPin2;
-//    @BindView(R.id.txtPin3)
-//    EditText mTxtPin3;
-//    @BindView(R.id.txtPin4)
-//    EditText mTxtPin4;
-//    @BindView(R.id.txtPin5)
-//    EditText mTxtPin5;
-//    @BindView(R.id.txtPin6)
-//    EditText mTxtPin6;
+    @BindView(R.id.numberKeyboardPin)
+    NumberKeyboard mNumberkeyboardPin;
 
 
     @Override
@@ -54,115 +47,8 @@ public class PinPromoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         hideKeyboard();
         setPinView();
-
-//        mTxtPin1.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (mTxtPin1.getText().toString().length() == 1) {
-//                    mTxtPin2.requestFocus();
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        mTxtPin2.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (mTxtPin2.getText().toString().length() == 1) {
-//                    mTxtPin3.requestFocus();
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        mTxtPin3.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (mTxtPin3.getText().toString().length() == 1) {
-//                    mTxtPin4.requestFocus();
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        mTxtPin4.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (mTxtPin4.getText().toString().length() == 1) {
-//                    mTxtPin5.requestFocus();
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        mTxtPin5.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                if (mTxtPin5.getText().toString().length() == 1) {
-//                    mTxtPin6.requestFocus();
-//                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
-//        mTxtPin6.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-////                if (mTxtPin6.getText().toString().length() == 1) {
-////                    mTxtPin6.clearFocus();
-////                }
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+        mNumberkeyboardPin.setListener(this);
+        mBtnSubmit.setEnabled(false);
 
     }
 
@@ -229,5 +115,24 @@ public class PinPromoActivity extends AppCompatActivity {
         mPinView.setItemBackgroundColor(Color.WHITE);
 
         mPinView.setHideLineWhenFilled(false);
+    }
+
+    @Override
+    public void onLeftAuxButtonClicked() {
+
+    }
+
+    @Override
+    public void onNumberClicked(int number) {
+        mPinView.setText(Objects.requireNonNull(mPinView.getText()).append(String.valueOf(number)));
+    }
+
+    @Override
+    public void onRightAuxButtonClicked() {
+        if (!Objects.requireNonNull(mPinView.getText()).toString().equals("")) {
+            StringBuilder build = new StringBuilder(mPinView.getText().toString());
+            build.deleteCharAt(mPinView.getText().toString().length() - 1);
+            mPinView.setText(build.toString());
+        }
     }
 }
