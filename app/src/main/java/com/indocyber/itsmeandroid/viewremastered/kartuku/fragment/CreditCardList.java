@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
@@ -24,6 +25,9 @@ import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -96,16 +100,21 @@ public class CreditCardList extends BaseFragment {
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         filterRecycler.setLayoutManager(horizontalLayoutManager);
-        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(), CREDIT_CARD);
+//        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
         cardFilterAdapter = new CardFilterAdapter(cardFilterList, getActivity(), tag -> {
             if (tag.equalsIgnoreCase("Semua")) {
                 viewModel.fetchAllCardList();
             } else {
                 viewModel.getCardByTag(tag);
             }
-        });
+        }, position -> {
+            return;
+        }, CardFilterAdapter.CREDIT_CARD);
         cardListRecycler.setAdapter(cardAdapter);
         filterRecycler.setAdapter(cardFilterAdapter);
+        cardListRecycler.setHasFixedSize(true);
+        filterRecycler.setHasFixedSize(true);
         return view;
     }
 

@@ -27,8 +27,11 @@ public interface ImageCardDao {
     @Insert
     Completable insert(ImageCardModel card);
 
-    @Query("Select * from imageCardModel order by id")
+    @Query("Select * from imageCardModel order by id ")
     Flowable<List<ImageCardModel>> getAll();
+
+    @Query("Select * from imageCardModel order by isBlockedCard ASC")
+    Flowable<List<ImageCardModel>> getCardOrderBlocking();
 
     @Query("Select * from imageCardModel where id = :id")
     Flowable<ImageCardModel> getCardById(int id);

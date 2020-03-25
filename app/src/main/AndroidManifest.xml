@@ -121,7 +121,7 @@
             android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".viewremastered.loginandregister.LoginActivityRemastered"
+            android:name=".view.splashscreen.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -232,7 +232,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.splashscreen.SplashScreenActivity"
+            android:name=".viewremastered.loginandregister.LoginActivityRemastered"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 

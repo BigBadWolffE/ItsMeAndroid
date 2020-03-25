@@ -39,6 +39,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dmax.dialog.SpotsDialog;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 /**
@@ -76,14 +78,16 @@ public class KoleksiPromoFragment extends BaseFragment implements PromoMenuAdapt
 //        mMenuVacationAdapter = new MenuPromoAdapter(vacationMenu(), getActivity(), this);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardFilterRecycler.setLayoutManager(horizontalLayoutManager);
-        cardListAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        cardListAdapter = new CardListAdapter(new ArrayList<>(), getActivity(), CREDIT_CARD);
         cardFilterAdapter = new CardFilterAdapter(cardFilterList, getActivity(), tag -> {
             if (tag.equalsIgnoreCase("Semua")) {
                 viewModel.fetchAllCardList();
             } else {
                 viewModel.getCardByTag(tag);
             }
-        });
+        }, position -> {
+            return;
+        }, CardFilterAdapter.CREDIT_CARD);
         cardListRecycler.setAdapter(cardListAdapter);
         cardFilterRecycler.setAdapter(cardFilterAdapter);
 //        initCard();
@@ -164,6 +168,7 @@ public class KoleksiPromoFragment extends BaseFragment implements PromoMenuAdapt
     @Override
     public void MoreCardonClick(ImageCardModel imgCardModel) {
         Intent intent = new Intent(getActivity(), MoreCardRemasteredActivity.class);
+        intent.putExtra(CARD_TYPE,CREDIT_CARD);
         intent.putExtra(INTENT_ID,(Parcelable)imgCardModel);
         startActivity(intent);
     }

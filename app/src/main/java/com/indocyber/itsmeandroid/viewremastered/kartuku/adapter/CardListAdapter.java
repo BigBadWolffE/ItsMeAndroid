@@ -23,7 +23,10 @@ import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemas
 
 import java.util.List;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.MEMBER_CARD;
 
 /*
  *
@@ -34,10 +37,12 @@ import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardViewHolder> {
     private List<ImageCardModel> cardList;
     private Context context;
+    private int cardType;
 
-    public CardListAdapter(List<ImageCardModel> cardList, Context context) {
+    public CardListAdapter(List<ImageCardModel> cardList, Context context, int cardType) {
         this.cardList = cardList;
         this.context = context;
+        this.cardType = cardType;
     }
 
     public void refreshCardList(List<ImageCardModel> newCardList) {
@@ -60,12 +65,14 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
         ImageCardModel model = cardList.get(position);
         View.OnClickListener listener = view -> {
             Intent intent = new Intent(context, MoreCardRemasteredActivity.class);
+
 //            intent.putExtra("cardNumber", model.getNumberCard());
 //            intent.putExtra("cardHolder", model.getNameCard());
 //            intent.putExtra("cardImage", model.getImage());
 //            intent.putExtra("expiryDate", model.getExpireCard());
 //            intent.putExtra("billingAddress", model.getBillingAddress());
             intent.putExtra(INTENT_ID, model);
+            intent.putExtra(CARD_TYPE,cardType);
             context.startActivity(intent);
         };
         holder.bind(model, listener);
@@ -125,7 +132,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             }
         }
 
-        public void formatCreditCard(){
+        public void formatCreditCard() {
             int[] position = {0, 0};
             cardImage.getLocationOnScreen(position);
 
@@ -147,7 +154,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
             }
 
             StringBuilder padding = new StringBuilder();
-            for(int i = 0; i < pad; i++){
+            for (int i = 0; i < pad; i++) {
                 padding.append(" ");
             }
 

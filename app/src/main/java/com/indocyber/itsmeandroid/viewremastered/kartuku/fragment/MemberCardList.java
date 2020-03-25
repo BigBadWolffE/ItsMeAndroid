@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.viewremastered.kartuku.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +19,9 @@ import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardListAdapter
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.MEMBER_CARD;
+import static com.indocyber.itsmeandroid.utilities.core.Animations.fadeOutIn;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MemberCardList#newInstance} factory method to
@@ -33,6 +37,9 @@ public class MemberCardList extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private CardFilterAdapter cardFilterAdapter;
+    private CardListAdapter cardAdapter;
+    private RecyclerView cardListRecycler;
     public MemberCardList() {
         // Required empty public constructor
     }
@@ -70,18 +77,35 @@ public class MemberCardList extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_member_card_list, container, false);
         RecyclerView filterRecycler = view.findViewById(R.id.recyclerCardFilter);
-        RecyclerView cardListRecycler = view.findViewById(R.id.recyclerCardList);
+        cardListRecycler = view.findViewById(R.id.recyclerCardList);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CardListAdapter cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(),MEMBER_CARD);
         filterRecycler.setLayoutManager(horizontalLayoutManager);
-        CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity(), tag -> {
+        cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity(), tag -> {
             return;
-        });
+        }, position -> {
+            if (position == 0) {
+                fadeOutIn(cardListRecycler);
+                cardAdapter.refreshCardList(generateCardList());
+            } else if (position == 1) {
+                fadeOutIn(cardListRecycler);
+                cardAdapter.refreshCardList(generateCardListBusiness());
+            } else if (position == 2) {
+                fadeOutIn(cardListRecycler);
+                cardAdapter.refreshCardList(generateCardListVacation());
+            }
+        }, "");
         cardAdapter.refreshCardList(generateCardList());
         cardListRecycler.setAdapter(cardAdapter);
         filterRecycler.setAdapter(cardFilterAdapter);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        onClick();
     }
 
     private List<ImageCardModel> generateCardList() {
@@ -91,6 +115,20 @@ public class MemberCardList extends Fragment {
         cardList.add(new ImageCardModel(R.drawable.img_membercard_ancol, "", "", "", "Rp 15.000.000", "", "", false));
         return cardList;
     }
+    private List<ImageCardModel> generateCardListBusiness() {
+        List<ImageCardModel> cardList = new ArrayList<>();
+        cardList.add(new ImageCardModel(R.drawable.img_membercard_starbuck, "", "", "", "Rp 15.000.000", "", "", false));
+        cardList.add(new ImageCardModel(R.drawable.img_membercard_celebrity_fitnest, "", "", "", "Rp 15.000.000", "", "12/21", false));
+        return cardList;
+    }
+
+    private List<ImageCardModel> generateCardListVacation() {
+        List<ImageCardModel> cardList = new ArrayList<>();
+        cardList.add(new ImageCardModel(R.drawable.img_membercard_ancol, "", "", "", "Rp 15.000.000", "", "", false));
+        return cardList;
+    }
+
+
 
     private List<String> generateCardFilter() {
         List<String> filterList = new ArrayList<>();
@@ -100,4 +138,22 @@ public class MemberCardList extends Fragment {
 
         return filterList;
     }
+
+//    private void onClick() {
+//        cardFilterAdapter.setListener(new CardFilterAdapter.Listener() {
+//            @Override
+//            public void onItemClick(int position) {
+//                if (position == 0) {
+//                    fadeOutIn(cardListRecycler);
+//                    cardAdapter.refreshCardList(generateCardList());
+//                } else if (position == 1) {
+//                    fadeOutIn(cardListRecycler);
+//                    cardAdapter.refreshCardList(generateCardListBusiness());
+//                } else if (position == 2) {
+//                    fadeOutIn(cardListRecycler);
+//                    cardAdapter.refreshCardList(generateCardListVacation());
+//                }
+//            }
+//        });
+//    }
 }

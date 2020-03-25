@@ -99,6 +99,23 @@ public class HomeViewModel extends ViewModel {
         );
     }
 
+    public void fetchAllCardListOrderBlock() {
+        isLoading.setValue(true);
+        disposable.add(
+                dao.getCardOrderBlocking()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(imageCardModels -> {
+                            isLoading.setValue(false);
+                            if (imageCardModels != null) cardList.setValue(imageCardModels);
+                        }, e -> {
+                            isLoading.setValue(false);
+                            error.setValue(e.getMessage());
+
+                        })
+        );
+    }
+
     public void fetchCardList() {
         isLoading.setValue(true);
         disposable.add(
