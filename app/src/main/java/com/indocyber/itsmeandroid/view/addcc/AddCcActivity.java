@@ -114,22 +114,22 @@ public final class AddCcActivity extends AppCompatActivity {
         mCardImage = findViewById(R.id.imgCreditCard);
         mCardNumberInput = findViewById(R.id.txtCardNumber);
         mCardNumberInput.setInputType(InputType.TYPE_CLASS_NUMBER);
-        mCardNumberInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-                                          int count) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
-                onCardNumberChange(charSequence);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mCardNumber.setVisibility(View.VISIBLE);
-            }
-        });
+//        mCardNumberInput.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int before, int after,
+//                                          int count) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int before, int after, int count) {
+////                onCardNumberChange(charSequence);
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//                mCardNumber.setVisibility(View.VISIBLE);
+//            }
+//        });
 
         mCardNumberInput.setOnFocusChangeListener((view, onFocus) -> {
             if (!onFocus && mCardNumberInput.getText().length() == 16) {
@@ -145,32 +145,40 @@ public final class AddCcActivity extends AppCompatActivity {
                 }
                 mCardImageResource = randomizeCardImage();
                 mCardImage.setImageResource(mCardImageResource);
+                mCardNumber.setVisibility(View.VISIBLE);
+                mCardNumber.setText(mCardNumberInput.getText().toString());
+                mCardHolder.setVisibility(View.VISIBLE);
+                mCardHolder.setText(mCardHolderInput.getText().toString());
             }
         });
     }
 
     private void initializeCardHolder() {
         mCardHolderInput = findViewById(R.id.txtCardHolder);
-        mCardHolderInput.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int before, int after,
-                                          int count) {
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int before, int after,
-                                      int count) {
-                mCardHolder.setText(WordUtils.capitalizeFully(charSequence.toString()));
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
+//        mCardHolderInput.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence charSequence, int before, int after,
+//                                          int count) {
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence charSequence, int before, int after,
+//                                      int count) {
+//                mCardHolder.setText(WordUtils.capitalizeFully(charSequence.toString()));
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable editable) {
+//            }
+//        });
     }
 
     private void initializeCardExpiry() {
         mExpiryMonthInput = findViewById(R.id.txtExpiryDateMonth);
+        mExpiryMonthInput.setOnFocusChangeListener((view, b) -> {
+            if (b) mCardExpiry.setVisibility(View.VISIBLE);
+        });
         mExpiryYearInput = findViewById(R.id.txtExpiryDateYear);
         mExpiryMonthInput.setInputType(InputType.TYPE_CLASS_NUMBER);
         mExpiryMonthInput.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -366,17 +374,17 @@ public final class AddCcActivity extends AppCompatActivity {
         mCardExpiry.setY(creditCard.getHeight() * 70 / 100);
     }
 
-    private void onCardNumberChange(final CharSequence text){
-        StringBuilder paddedText = new StringBuilder(text + "");
-        for(int i = paddedText.length(); i < 16; i++){
-            paddedText.append("X");
-        }
-
-        String updatedText = paddedText.substring(0, 4) + "   " + paddedText.substring(4, 8) + "   "
-                + paddedText.substring(8, 12) + "   " + paddedText.substring(12, 16);
-
-        mCardNumber.setText(updatedText);
-    }
+//    private void onCardNumberChange(final CharSequence text){
+//        StringBuilder paddedText = new StringBuilder(text + "");
+//        for(int i = paddedText.length(); i < 16; i++){
+//            paddedText.append("X");
+//        }
+//
+//        String updatedText = paddedText.substring(0, 4) + "   " + paddedText.substring(4, 8) + "   "
+//                + paddedText.substring(8, 12) + "   " + paddedText.substring(12, 16);
+//
+//        mCardNumber.setText(updatedText);
+//    }
 
     private int randomizeCardImage() {
         int[] images = {

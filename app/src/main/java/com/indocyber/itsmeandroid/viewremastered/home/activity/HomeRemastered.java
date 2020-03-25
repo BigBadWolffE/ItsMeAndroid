@@ -1,11 +1,13 @@
 package com.indocyber.itsmeandroid.viewremastered.home.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,6 +29,8 @@ import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.promo.fragment.PromoRemasteredFragment;
 
 import javax.inject.Inject;
@@ -195,6 +199,38 @@ public class HomeRemastered extends BaseActivity {
         fragment = new PromoRemasteredFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.content_main, fragment)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder ab = new AlertDialog.Builder(HomeRemastered.this);
+        ab.setTitle("Its Me!");
+        ab.setMessage("Apakah anda yakin untuk keluar?");
+        ab.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //if you want to kill app . from other then your main avtivity.(Launcher)
+//                android.os.Process.killProcess(android.os.Process.myPid());
+//                System.exit(1);
+                LoginAuthActivityRemastered.etusernameauth.setText("");
+                Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+                //if you want to finish just current activity
+
+                HomeRemastered.this.finish();
+            }
+        });
+        ab.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        ab.show();
     }
 
 }

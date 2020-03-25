@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.ConfirmPinResetPasswordActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 
@@ -26,8 +28,10 @@ public class PopUpSuccessResetPassword {
     public static ImageView closeDialog;
     public static AlertDialog dialog;
 
+        Context mContext;
 
-    public static void showDialog(final Activity activity) {
+    public static void showDialog(final Activity activity ) {
+
 
         ViewGroup viewGroup = activity.findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(activity).
@@ -47,8 +51,9 @@ public class PopUpSuccessResetPassword {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-                Intent register = new Intent(activity, ResetPasswordFromForgotActivity.class);
-                activity.startActivityForResult(register,1);
+//                Intent intent = new Intent(activity, ConfirmPinResetPasswordActivityRemastered.class);
+//                activity.startActivity(intent);
+                ((ConfirmPinResetPasswordActivityRemastered) activity).finish();
             }
         });
         dialog.show();
