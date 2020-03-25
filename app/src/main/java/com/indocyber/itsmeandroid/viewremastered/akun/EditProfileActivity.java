@@ -66,7 +66,7 @@ public class EditProfileActivity extends BaseActivity {
 
     protected static final int CAMERA_REQUEST = 0;
     protected static final int GALLERY_PICTURE = 1;
-    private String extension = ".jpg";
+    private String extension = "";
     private String profileImage = "";
 
 
@@ -196,6 +196,7 @@ public class EditProfileActivity extends BaseActivity {
 
                     UtilitiesCore.loadCircleImage(imgPhotoProfile, imageBitmap, this);
                     profileImage = UtilitiesCore.encodeToBase64Only(imageBitmap, extension);
+                    extension = ".jpg";
 //                    Log.d("Base64", encode);
 //                    viewModel.updateProfilePicture(authKey, encode, ".jpg");
 //                    saveToSharedPreferences(encode);

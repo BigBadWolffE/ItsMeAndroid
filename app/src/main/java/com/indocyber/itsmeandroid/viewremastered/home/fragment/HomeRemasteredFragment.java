@@ -82,6 +82,7 @@ public class HomeRemasteredFragment extends BaseFragment {
     private HomeViewModel viewModel;
     private AlertDialog loader;
     private ImageView userImage;
+    private Preference preference;
 
     @Override
     protected int layoutRes() {
@@ -108,7 +109,7 @@ public class HomeRemasteredFragment extends BaseFragment {
         mRltvBeliPulsa = view.findViewById(R.id.rltvBeliPulsa);
         txtTambhKartu = view.findViewById(R.id.txtTambhKartu);
         mRltvBlockAllCard = view.findViewById(R.id.rltvBlockAllCard);
-        Preference preference = new Preference(getActivity());
+        preference = new Preference(getActivity());
         userImage = view.findViewById(R.id.circleImageView);
         UtilitiesCore.loadImageFromUri(userImage, getActivity(), Api.PROFILE_IMAGE,
                 preference.getUserAuth(), preference.getMetaData());
@@ -233,5 +234,12 @@ public class HomeRemasteredFragment extends BaseFragment {
     void openNotifikasi(){
         Intent i = new Intent(getActivity(), NotificationRemasteredActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UtilitiesCore.loadImageFromUri(userImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
     }
 }

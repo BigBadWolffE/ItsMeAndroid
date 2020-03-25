@@ -34,6 +34,7 @@ public class AkunRemasteredFragment extends BaseFragment {
     private ImageView profileImage;
     @BindView(R.id.textView9)
     TextView tvHistory;
+    Preference preference;
 
     public static TextView tvReset,tvSecurity,tvMetodePembayaran;
 
@@ -51,7 +52,7 @@ public class AkunRemasteredFragment extends BaseFragment {
 
         ButterKnife.bind(this, rootView);
         TextView profileName = rootView.findViewById(R.id.userProfileName);
-        Preference preference = new Preference(getActivity());
+        preference = new Preference(getActivity());
         profileName.setText(preference.getLoggedUserFullname());
         profileImage = rootView.findViewById(R.id.circleImageProfile);
         UtilitiesCore.loadImageFromUri(profileImage, getActivity(), Api.PROFILE_IMAGE,
@@ -101,5 +102,12 @@ public class AkunRemasteredFragment extends BaseFragment {
     void editProfile(){
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UtilitiesCore.loadImageFromUri(profileImage, getActivity(), Api.PROFILE_IMAGE,
+                preference.getUserAuth(), preference.getMetaData());
     }
 }

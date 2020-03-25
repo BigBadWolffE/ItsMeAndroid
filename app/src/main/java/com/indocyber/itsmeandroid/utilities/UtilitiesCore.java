@@ -306,7 +306,7 @@ public final class UtilitiesCore {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(compress,50,baos);
         byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.NO_WRAP);
+        String encImage = Base64.encodeToString(b, Base64.NO_WRAP | Base64.URL_SAFE);
 
         return encImage;
     }
