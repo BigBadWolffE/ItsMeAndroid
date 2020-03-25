@@ -69,6 +69,7 @@ public class LupaPinActivityRemastered extends AppCompatActivity implements Numb
                     alertDialog.show();
                     new Handler().postDelayed(() -> {
                         alertDialog.dismiss();
+                        finish();
                         Intent intent = new Intent(LupaPinActivityRemastered.this, ResetPinFromAkunActivityRemastered.class);
                         startActivity(intent);
                     }, 800);

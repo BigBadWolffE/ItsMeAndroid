@@ -45,7 +45,6 @@ public class AkunRemasteredFragment extends Fragment {
         tvMetodePembayaran.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getActivity(), MetodePembayaranActivityRemastered.class);
                 getActivity().startActivityForResult(intent,8);
 

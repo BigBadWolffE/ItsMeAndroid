@@ -62,6 +62,7 @@ public class MetodePembayaranActivityRemastered extends AppCompatActivity implem
             public void onClick(View view) {
                 Intent tambah = new Intent(MetodePembayaranActivityRemastered.this,TambahMetodePembayaranActivityRemastered.class);
                 startActivityForResult(tambah, 71);
+                finish();
             }
         });
 

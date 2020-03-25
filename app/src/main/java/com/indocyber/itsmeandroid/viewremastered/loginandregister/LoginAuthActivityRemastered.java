@@ -97,11 +97,13 @@ public class LoginAuthActivityRemastered extends AppCompatActivity {
                     Intent newIntent = new Intent(LoginAuthActivityRemastered.this, HomeRemastered.class);
                     startActivityForResult(newIntent, 0);
                 }
-
+                finish();
             }
         });
 
     }
+
+
 
     public TextWatcher usernameauthWatcher = new TextWatcher() {
         @Override
