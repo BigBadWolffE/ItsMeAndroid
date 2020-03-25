@@ -27,7 +27,7 @@ public interface ImageCardDao {
     @Insert
     Completable insert(ImageCardModel card);
 
-    @Query("Select * from imageCardModel order by id ")
+    @Query("Select * from imageCardModel order by isBlockedCard ASC ")
     Flowable<List<ImageCardModel>> getAll();
 
     @Query("Select * from imageCardModel order by isBlockedCard ASC")
@@ -60,7 +60,7 @@ public interface ImageCardDao {
     @Query("Update ImageCardModel set newTagList = :newTagList where id = :id")
     Completable updateCardTagList(int id, String newTagList);
 
-    @Query("Select tagList from ImageCardModel where tagList is not null")
+    @Query("Select tagList from ImageCardModel where tagList is not null order by isBlockedCard ASC")
     Observable<List<String>> getAllTagList();
 
     @Query("Select * from ImageCardModel where id = :id")
