@@ -28,6 +28,7 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
     private List<String> filterList;
     private Context context;
     private int activePosition = 0;
+    private onItemClickListener clicklistener;
 
     public CardFilterAdapter(List<String> filterList, Context context) {
         this.filterList = filterList;
@@ -38,6 +39,11 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
         filterList.clear();
         filterList = newFilterList;
     }
+
+    public void SetItemOnclickListener(onItemClickListener clicklistener) {
+        this.clicklistener = clicklistener;
+    }
+
 
     @NonNull
     @Override
@@ -55,6 +61,9 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
             notifyItemChanged(activePosition);
             activePosition = position;
             notifyItemChanged(activePosition);
+            if (clicklistener != null){
+                clicklistener.onItemClick(position);
+            }
         };
         holder.bind(filterList.get(position), listener);
         holder.activateButton(position == activePosition);
@@ -87,5 +96,10 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
             filterButton.setText(label);
             filterButton.setOnClickListener(listener);
         }
+    }
+
+    public interface onItemClickListener {
+        void onItemClick(int position);
+
     }
 }

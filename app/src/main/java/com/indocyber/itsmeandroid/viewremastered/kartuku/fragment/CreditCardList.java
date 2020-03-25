@@ -107,7 +107,7 @@ public class CreditCardList extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = ViewModelProviders.of(getParentFragment().getActivity()).get(HomeViewModel.class);
-        viewModel.fetchAllCardList();
+        viewModel.fetchAllCardListOrderBlock();
         observeViewModel();
     }
 

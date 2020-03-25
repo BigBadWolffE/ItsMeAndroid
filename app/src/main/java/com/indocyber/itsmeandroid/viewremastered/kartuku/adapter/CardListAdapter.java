@@ -48,6 +48,7 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     public void refreshCardList(List<ImageCardModel> newCardList) {
         cardList.clear();
         cardList = newCardList;
+        notifyDataSetChanged();
     }
 
     @NonNull

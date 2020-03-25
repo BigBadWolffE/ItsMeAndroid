@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.viewremastered.kartuku.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ import java.util.List;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.MEMBER_CARD;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.PERSONAL_CARD;
+import static com.indocyber.itsmeandroid.utilities.core.Animations.fadeOutIn;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +37,9 @@ public class PersonalCardList extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private CardFilterAdapter cardFilterAdapter;
+    private CardListAdapter cardAdapter;
+    private RecyclerView cardListRecycler;
 
     public PersonalCardList() {
         // Required empty public constructor
@@ -73,16 +78,27 @@ public class PersonalCardList extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_personal_card_list, container, false);
         RecyclerView filterRecycler = view.findViewById(R.id.recyclerCardFilter);
-        RecyclerView cardListRecycler = view.findViewById(R.id.recyclerCardList);
+        cardListRecycler = view.findViewById(R.id.recyclerCardList);
+
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        CardListAdapter cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(),PERSONAL_CARD);
+        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(), PERSONAL_CARD);
+
         filterRecycler.setLayoutManager(horizontalLayoutManager);
-        CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
+
+        cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
         cardAdapter.refreshCardList(generateCardList());
+
         cardListRecycler.setAdapter(cardAdapter);
         filterRecycler.setAdapter(cardFilterAdapter);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        onClick();
+
     }
 
     private List<ImageCardModel> generateCardList() {
@@ -93,12 +109,53 @@ public class PersonalCardList extends Fragment {
         return cardList;
     }
 
+    private List<ImageCardModel> generateCardListKtp() {
+        List<ImageCardModel> cardList = new ArrayList<>();
+        cardList.add(new ImageCardModel(R.drawable.img_ktp, "", "", "", "Rp 15.000.000", "", "", false));
+
+        return cardList;
+    }
+
+    private List<ImageCardModel> generateCardListNpwp() {
+        List<ImageCardModel> cardList = new ArrayList<>();
+        cardList.add(new ImageCardModel(R.drawable.img_npwp, "", "", "", "Rp 15.000.000", "", "", false));
+        return cardList;
+    }
+
+    private List<ImageCardModel> generateCardListSim() {
+        List<ImageCardModel> cardList = new ArrayList<>();
+        cardList.add(new ImageCardModel(R.drawable.img_sim, "", "", "", "Rp 15.000.000", "", "", false));
+        return cardList;
+    }
+
     private List<String> generateCardFilter() {
         List<String> filterList = new ArrayList<>();
+        filterList.add("Semua");
         filterList.add("Ktp");
         filterList.add("Npwp");
         filterList.add("Sim");
 
         return filterList;
+    }
+
+    private void onClick() {
+        cardFilterAdapter.SetItemOnclickListener(new CardFilterAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (position == 0) {
+                    fadeOutIn(cardListRecycler);
+                    cardAdapter.refreshCardList(generateCardList());
+                } else if (position == 1) {
+                    fadeOutIn(cardListRecycler);
+                    cardAdapter.refreshCardList(generateCardListKtp());
+                } else if (position == 2) {
+                    fadeOutIn(cardListRecycler);
+                    cardAdapter.refreshCardList(generateCardListNpwp());
+                } else if (position == 3) {
+                    fadeOutIn(cardListRecycler);
+                    cardAdapter.refreshCardList(generateCardListSim());
+                }
+            }
+        });
     }
 }
