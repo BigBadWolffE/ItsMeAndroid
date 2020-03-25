@@ -16,4 +16,5 @@ public class GlobalVariabel {
     public static final int MEMBER_CARD = 2;
     public static final int PERSONAL_CARD = 3;
     public static final String CARD_TYPE = "CARD_TYPE";
+    public static final String FRAGMENT_TYPE = "FRAGMENT_TYPE";
 }

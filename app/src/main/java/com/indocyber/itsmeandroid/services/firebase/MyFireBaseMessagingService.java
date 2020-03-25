@@ -130,7 +130,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
                         // Log and toast
                         String msg = "Token : " + token;
                         Log.d(TAG, msg);
-                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

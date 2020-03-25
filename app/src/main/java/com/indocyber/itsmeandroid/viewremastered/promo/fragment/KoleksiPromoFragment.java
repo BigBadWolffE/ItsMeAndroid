@@ -31,6 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dmax.dialog.SpotsDialog;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 /**
@@ -136,6 +138,7 @@ public class KoleksiPromoFragment extends Fragment implements PromoMenuAdapter.L
     @Override
     public void MoreCardonClick(ImageCardModel imgCardModel) {
         Intent intent = new Intent(getActivity(), MoreCardRemasteredActivity.class);
+        intent.putExtra(CARD_TYPE,CREDIT_CARD);
         intent.putExtra(INTENT_ID,(Parcelable)imgCardModel);
         startActivity(intent);
     }

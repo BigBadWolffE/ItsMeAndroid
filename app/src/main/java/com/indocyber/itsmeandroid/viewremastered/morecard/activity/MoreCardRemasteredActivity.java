@@ -28,6 +28,7 @@ import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimit
 import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;
+import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
 import com.indocyber.itsmeandroid.viewremastered.tagkartu.TagKartu;
 
 import java.io.Serializable;
@@ -35,6 +36,7 @@ import java.util.Objects;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.FRAGMENT_TYPE;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.MEMBER_CARD;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.PERSONAL_CARD;
@@ -69,10 +71,16 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
         setContentView(R.layout.activity_more_card_remastered);
 
         data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
-        cardType = Objects.requireNonNull(getIntent().getExtras()).getInt(CARD_TYPE);
+        cardType = Objects.requireNonNull(getIntent().getExtras()).getInt(CARD_TYPE,1);
 
         initView();
+        initCheckCardType();
 
+        onClick();
+
+    }
+
+    private void initCheckCardType(){
         if (cardType == CREDIT_CARD){
             linearMemberCard.setVisibility(View.GONE);
             linearCreditCard.setVisibility(View.VISIBLE);
@@ -81,17 +89,13 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
             linearMemberCard.setVisibility(View.VISIBLE);
             linearCreditCard.setVisibility(View.GONE);
             setDataMemberCard();
-            Toast.makeText(this, cardType+"", Toast.LENGTH_SHORT).show();
         }else if (cardType == PERSONAL_CARD){
             linearMemberCard.setVisibility(View.VISIBLE);
             linearCreditCard.setVisibility(View.GONE);
             setDataPersonalCard();
         }
-
-
-        onClick();
-
     }
+
 
     private void initView() {
         mLinearBilling = findViewById(R.id.linearBilling);
@@ -112,6 +116,8 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
         linearCreditCard = findViewById(R.id.linearCreditCard);
         txtTitle = findViewById(R.id.txtTitle);
     }
+
+
 
     @SuppressLint("SetTextI18n")
     private void setDataMemberCard(){
@@ -176,7 +182,9 @@ public class MoreCardRemasteredActivity extends AppCompatActivity {
         });
 
         mLinearPromo.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, HomeRemastered.class);
+            intent.putExtra(FRAGMENT_TYPE, 1);
+            startActivity(intent);
         });
 
         mLinearChat.setOnClickListener(v -> {

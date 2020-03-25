@@ -250,9 +250,14 @@
                     android:id="@+id/recPromoView"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/card_pager_item"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+
+                    android:paddingEnd="30dp"
                     app:layout_constraintBottom_toTopOf="@+id/otherMenuContainer"
                     app:layout_constraintTop_toBottomOf="@+id/linearCard"
-                    tools:layout_editor_absoluteX="28dp">
+                    tools:layout_editor_absoluteX="28dp"
+                    tools:ignore="RtlSymmetry">
 
                 </androidx.recyclerview.widget.RecyclerView>
 

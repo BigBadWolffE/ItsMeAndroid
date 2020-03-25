@@ -24,12 +24,14 @@ import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.AddKartuPersonal.AddKartuPersonal;
 import com.indocyber.itsmeandroid.viewremastered.addkartumember.AddKartuMember;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
+import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.promo.fragment.PromoRemasteredFragment;
 
 import javax.inject.Inject;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.FRAGMENT_TYPE;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.fadeOutIn;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.showIn;
 import static com.indocyber.itsmeandroid.utilities.core.Animations.showOut;
@@ -45,6 +47,7 @@ public class HomeRemastered extends BaseActivity {
     private FloatingActionButton mFloatingActionButton;
     private LinearLayout mLinearPullUp, mLinearAddMembership,
             mLinearPersonalCard, mLinearAddCreditCard, mLinearBlockCC;
+    private int typeFragment = 0;
     @Inject
     ViewModelFactory factory;
     private HomeViewModel viewModel;
@@ -68,9 +71,21 @@ public class HomeRemastered extends BaseActivity {
             fragmentTransaction.commit();
         }
 
+
+
         initComponent();
         initFab();
         initOnclick();
+        toFragmentPromo();
+
+
+    }
+
+    private void toFragmentPromo(){
+        typeFragment = getIntent().getIntExtra(FRAGMENT_TYPE, 0);
+        if (typeFragment == 1) {
+            onClickPromo();
+        }
     }
 
     private void initView() {
@@ -125,11 +140,12 @@ public class HomeRemastered extends BaseActivity {
             startActivity(intent);
         });
         mLinearAddCreditCard.setOnClickListener(v -> {
-                Intent intent = new Intent(this, AddCcActivity.class);
-                startActivity(intent);
+            Intent intent = new Intent(this, AddCcActivity.class);
+            startActivity(intent);
         });
         mLinearBlockCC.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, BlockAllCardRemasterActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -173,7 +189,7 @@ public class HomeRemastered extends BaseActivity {
         });
     }
 
-    public void onClickPromo(){
+    public void onClickPromo() {
         mNavigation.getMenu().findItem(R.id.action_promo).setChecked(true);
         Fragment fragment = null;
         fragment = new PromoRemasteredFragment();
