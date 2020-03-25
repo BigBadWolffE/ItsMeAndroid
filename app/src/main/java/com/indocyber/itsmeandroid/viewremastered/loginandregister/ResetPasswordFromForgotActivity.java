@@ -68,6 +68,7 @@ public class ResetPasswordFromForgotActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             if(pwBaru.getText().toString().trim().length() != 0)
                 if (!passCustom.matcher(pwBaru.getText().toString()).matches()){
+
                     pwBaru.setError("Minimal 1 Huruf Besar 1 Angka dan Spesial Karakter @!^?");
                 }else {
                     pwBaru.setError(null);
@@ -93,6 +94,11 @@ public class ResetPasswordFromForgotActivity extends AppCompatActivity {
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             if(!retypePwBaru.getText().toString().equals(pwBaru.getText().toString())){
+                btnSubmit.setEnabled(false);
+                lblButton.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+                btnSubmit.setTextColor(getResources().getColor(R.color.support_darker_grey));
+            }else if(!passCustom.matcher(retypePwBaru.getText().toString()).matches()){
+                retypePwBaru.setError("Minimal 1 Huruf Besar 1 Angka dan Spesial Karakter @!^?");
                 btnSubmit.setEnabled(false);
                 lblButton.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
                 btnSubmit.setTextColor(getResources().getColor(R.color.support_darker_grey));
