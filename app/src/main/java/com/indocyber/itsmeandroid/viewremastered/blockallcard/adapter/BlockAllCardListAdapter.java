@@ -21,7 +21,6 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.BlockAllCardModel;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.ListBlockAllCard;
-import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,6 +21,8 @@ import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemas
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.loadImage;
 
@@ -61,6 +63,7 @@ public class CardRemasteredAdapter extends PagerAdapter {
         cardMenuButton.setOnClickListener(v ->{
             Intent intent = new Intent(activity, MoreCardRemasteredActivity.class);
             intent.putExtra(INTENT_ID,data);
+            intent.putExtra(CARD_TYPE,CREDIT_CARD);
             activity.startActivity(intent);
             Log.d("data image" , "datanya " +data.getId() + " "+data.getImage() + " "+data.getNumberCard() + " "+data.getNameCard() + " "+data.getExpireCard() + " "+data.getCost() + " "+data.getPrintDate() + " "+data.getPrintDueDate() + " "+data.isBlockedCard() + " "+data.getBillingAddress() + " "+data.getCountry() + " "+data.getCity() + " "+data.getPostalCode() + " "+data.getLastBill() + " "+data.getMinPayment() + " "+data.getAvailableCredit() + " "+data.getTagList() + " "+data.getNewTagList() + " " );
         });

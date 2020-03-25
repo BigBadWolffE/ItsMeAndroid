@@ -43,7 +43,7 @@ public class HomeViewModel extends ViewModel {
     ApiService service;
 
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
-    private MutableLiveData<List<ImageCardModel>> cardList = new MutableLiveData<>();
+    public MutableLiveData<List<ImageCardModel>> cardList = new MutableLiveData<>();
     private MutableLiveData<List<BlockAllCardModel>> blockAllCardList = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
     private MutableLiveData<List<PromoItemModel>> promoList = new MutableLiveData<>();

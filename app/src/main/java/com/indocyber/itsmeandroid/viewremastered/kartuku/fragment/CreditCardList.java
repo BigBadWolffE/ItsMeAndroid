@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
@@ -24,6 +25,9 @@ import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+
+import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +41,7 @@ public class CreditCardList extends BaseFragment {
     private static final String ARG_PARAM2 = "param2";
     private HomeViewModel viewModel;
     private CardListAdapter cardAdapter;
+    private RecyclerView cardListRecycler;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -84,15 +89,17 @@ public class CreditCardList extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(layoutRes(), container, false);
         RecyclerView filterRecycler = view.findViewById(R.id.recyclerCardFilter);
-        RecyclerView cardListRecycler = view.findViewById(R.id.recyclerCardList);
+        cardListRecycler = view.findViewById(R.id.recyclerCardList);
 
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(),CREDIT_CARD);
         filterRecycler.setLayoutManager(horizontalLayoutManager);
         CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
-        cardListRecycler.setAdapter(cardAdapter);
+
         filterRecycler.setAdapter(cardFilterAdapter);
+        cardListRecycler.setHasFixedSize(true);
+        filterRecycler.setHasFixedSize(true);
         return view;
     }
 
@@ -100,7 +107,7 @@ public class CreditCardList extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = ViewModelProviders.of(getParentFragment().getActivity()).get(HomeViewModel.class);
-        viewModel.getCardList();
+        viewModel.fetchAllCardList();
         observeViewModel();
     }
 
@@ -125,9 +132,15 @@ public class CreditCardList extends BaseFragment {
     }
 
     private void observeViewModel() {
-        viewModel.getCardList().observe(this, imageCardModels -> {
-            cardAdapter.refreshCardList(imageCardModels);
+
+       viewModel.getCardList().observe(this, imageCardModels -> {
+            if (imageCardModels.size() > 0) {
+                cardAdapter.refreshCardList(imageCardModels);
+                cardListRecycler.setAdapter(cardAdapter);
+
+            }
         });
+
     }
 
 }
