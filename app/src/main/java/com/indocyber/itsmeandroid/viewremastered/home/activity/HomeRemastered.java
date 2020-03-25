@@ -213,7 +213,7 @@ public class HomeRemastered extends BaseActivity {
                 //if you want to kill app . from other then your main avtivity.(Launcher)
 //                android.os.Process.killProcess(android.os.Process.myPid());
 //                System.exit(1);
-                LoginAuthActivityRemastered.etusernameauth.setText("");
+                //LoginAuthActivityRemastered.etusernameauth.setText("");
                 Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
