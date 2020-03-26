@@ -185,6 +185,10 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     private void submit() {
         CheckBox termsAgreement = findViewById(R.id.chkTermsAgreement);
         alertBox.setVisibility(View.GONE);
+        alertPengajuan.setVisibility(View.GONE);
+        alertPengajuanUntuk.setVisibility(View.GONE);
+        alertNominal.setVisibility(View.GONE);
+        alertAgreement.setVisibility(View.GONE);
         if (mRequestForSpinner.getSelectedItemPosition() == 0) {
             alertBox.setVisibility(View.VISIBLE);
             alertPengajuan.setVisibility(View.VISIBLE);

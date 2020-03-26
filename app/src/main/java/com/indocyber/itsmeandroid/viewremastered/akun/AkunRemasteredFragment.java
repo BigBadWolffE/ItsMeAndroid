@@ -84,7 +84,6 @@ public class AkunRemasteredFragment extends BaseFragment {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         //if you want to finish just current activity
-                        getActivity().finish();
                     }
                 });
                 ab.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {

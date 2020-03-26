@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -51,6 +52,12 @@ public final class AddCcActivity extends AppCompatActivity {
     private EditText mPostalCodeInput;
     private ImageView mCardImage;
     private int mCardImageResource;
+    private LinearLayout alertBox;
+    private TextView alertNama;
+    private TextView alertNumber;
+    private TextView alertExpiry;
+    private TextView alertAddress;
+    private TextView alertAgreement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,12 @@ public final class AddCcActivity extends AppCompatActivity {
         initializeCardExpiry();
         initializeCardDetailInput();
         initializeButton();
+        alertBox = findViewById(R.id.alertbox);
+        alertNama = findViewById(R.id.namaError);
+        alertNumber = findViewById(R.id.numberError);
+        alertExpiry = findViewById(R.id.expiryError);
+        alertAddress = findViewById(R.id.addressError);
+        alertAgreement = findViewById(R.id.agreementError);
     }
 
     @Override
@@ -269,29 +282,56 @@ public final class AddCcActivity extends AppCompatActivity {
     }
 
     private boolean formIsValid(){
-        if (mCardNumberInput.getText().length() < 16) return false;
+        alertBox.setVisibility(View.GONE);
+        alertNama.setVisibility(View.GONE);
+        alertNumber.setVisibility(View.GONE);
+        alertExpiry.setVisibility(View.GONE);
+        alertAddress.setVisibility(View.GONE);
+        alertAgreement.setVisibility(View.GONE);
+        boolean valid = true;
+        if (mCardNumberInput.getText().length() < 16) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertNumber.setVisibility(View.VISIBLE);
+            valid = false;
+        }
 
-        if (mExpiryYearInput.getText().length() < 2) return false;
+        if (mExpiryYearInput.getText().length() < 2) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertExpiry.setVisibility(View.VISIBLE);
+            valid = false;
+        }
 
-        if (mExpiryMonthInput.getText().length() < 2) return false;
+        if (mExpiryMonthInput.getText().length() < 2) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertExpiry.setVisibility(View.VISIBLE);
+            valid = false;
+        }
 
-        if (mCardHolderInput.getText().length() < 1) return false;
+        if (mCardHolderInput.getText().length() < 1) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertNama.setVisibility(View.VISIBLE);
+            valid = false;
+        }
 
-        if (mBillingAddressInput.getText().toString().trim().length() < 1) return false;
+        if (mBillingAddressInput.getText().toString().trim().length() < 1) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertAddress.setVisibility(View.VISIBLE);
+            valid = false;
+        }
+
+//        if (!termsAgreement.isChecked()){
+//            alertBox.setVisibility(View.VISIBLE);
+//            alertAgreement.setVisibility(View.VISIBLE);
+//            return;
+//        }
 
         if (mCardImageResource == 0) mCardImageResource = randomizeCardImage();
 
-        return true;
+        return valid;
     }
 
     private void requestIncreaseCreditLimit() {
         if(!formIsValid()){
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    getString(R.string.form_incomplete_warning),
-                    R.drawable.ic_invalid,
-                    null
-            );
             return;
         }
 
@@ -312,23 +352,13 @@ public final class AddCcActivity extends AppCompatActivity {
 
     private void submit() {
         if(!formIsValid()){
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    getString(R.string.form_incomplete_warning),
-                    R.drawable.ic_invalid,
-                    null
-            );
             return;
         }
 
         CheckBox termsAgreement = findViewById(R.id.chkTermsAgreement);
         if (!termsAgreement.isChecked()) {
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    "Please read and indicate your acceptance of the site's Terms of Service",
-                    R.drawable.ic_invalid,
-                    null
-            );
+            alertBox.setVisibility(View.VISIBLE);
+            alertAgreement.setVisibility(View.VISIBLE);
             return;
         }
 
