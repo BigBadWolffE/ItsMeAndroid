@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
-import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.PromoMenuAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

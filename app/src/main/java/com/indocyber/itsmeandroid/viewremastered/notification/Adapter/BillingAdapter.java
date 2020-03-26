@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.view.billing.adapter;
+package com.indocyber.itsmeandroid.viewremastered.notification.Adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

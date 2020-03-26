@@ -206,9 +206,9 @@ public class HomeRemastered extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 //if you want to kill app . from other then your main avtivity.(Launcher)
-                System.exit(1);
                 Preference preference = new Preference(HomeRemastered.this);
                 preference.clearPref();
+                System.exit(1);
                 android.os.Process.killProcess(android.os.Process.myPid());
                 //LoginAuthActivityRemastered.etusernameauth.setText("");
 //                Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);

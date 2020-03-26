@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.Notification;
-import com.indocyber.itsmeandroid.view.notification.adapter.NotificationAdapter;
+import com.indocyber.itsmeandroid.viewremastered.notification.Adapter.NotificationAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

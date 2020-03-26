@@ -1,6 +1,5 @@
 package com.indocyber.itsmeandroid.di.FragmentBindingModules;
 
-import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.CreditCardList;
 
 import dagger.Module;

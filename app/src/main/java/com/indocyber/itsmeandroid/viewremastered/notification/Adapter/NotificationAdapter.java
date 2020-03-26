@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.view.notification.adapter;
+package com.indocyber.itsmeandroid.viewremastered.notification.Adapter;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
