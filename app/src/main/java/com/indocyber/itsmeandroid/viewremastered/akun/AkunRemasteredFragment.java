@@ -81,6 +81,7 @@ public class AkunRemasteredFragment extends BaseFragment {
 //                        android.os.Process.killProcess(android.os.Process.myPid());
 //                        System.exit(1);
                         //LoginAuthActivityRemastered.etusernameauth.setText("");
+                        preference.clearPref();
                         Intent intent = new Intent(getActivity(), LoginActivityRemastered.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
