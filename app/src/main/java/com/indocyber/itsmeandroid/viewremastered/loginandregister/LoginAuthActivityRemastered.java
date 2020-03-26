@@ -5,13 +5,16 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -33,11 +36,11 @@ import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class LoginAuthActivityRemastered extends BaseActivity {
 
-    public static EditText etusernameauth,etpasswordauth;
+    public static EditText etusernameauth, etpasswordauth;
     private ImageView backButton;
     private ImageView imgWarning;
-    private TextView btnLoginAuth,btnLupaPass,txtWarning;
-    private CardView cdCaution,cdlblAuthlogin;
+    private TextView btnLoginAuth, btnLupaPass, txtWarning;
+    private CardView cdCaution, cdlblAuthlogin;
     private Pattern emailCustom;
     private Pattern phoneCustom;
     private Preference preference;
@@ -47,6 +50,8 @@ public class LoginAuthActivityRemastered extends BaseActivity {
     private String username = "";
     private LoginViewModel viewModel;
     private Pattern passwordCustom;
+    private int hide_password;
+    private ImageButton txtPass;
 
     @Inject
     ViewModelFactory factory;
@@ -55,6 +60,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
     protected int layoutRes() {
         return R.layout.activity_login_auth_remastered;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +75,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null)
-        username = bundle.getString(INTENT_ID);
+            username = bundle.getString(INTENT_ID);
 
         etusernameauth = findViewById(R.id.ipt_username);
         etpasswordauth = findViewById(R.id.ipt_password);
@@ -81,6 +87,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
         txtWarning = findViewById(R.id.txtWarning);
         imgWarning = findViewById(R.id.imgWarning);
         progressBar = findViewById(R.id.progressBar);
+        txtPass = findViewById(R.id.txtPass);
 
         final String Password_Pattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$";
 
@@ -104,7 +111,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
         );
 
         phoneCustom
-                = Pattern.compile("08"+"[0-9]{9,13}");
+                = Pattern.compile("08" + "[0-9]{9,13}");
 
         btnLoginAuth.setEnabled(false);
         etusernameauth.addTextChangedListener(usernameauthWatcher);
@@ -117,7 +124,9 @@ public class LoginAuthActivityRemastered extends BaseActivity {
         observeViewModel();
 
         etusernameauth.setText(username);
+        showAndHidePassword(etpasswordauth, txtPass);
         //etpasswordauth.setText("rahasia");
+
 
     }
 
@@ -159,7 +168,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
         });
     }
 
-    private void onClick(){
+    private void onClick() {
         btnLupaPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -171,7 +180,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
             @Override
             public void onClick(View view) {
                 loader.show();
-                if(etpasswordauth.getText().toString().length()<=5){
+                if (etpasswordauth.getText().toString().length() <= 5) {
                     etusernameauth.getBackground().setColorFilter(getResources().getColor(R.color.red_main), PorterDuff.Mode.SRC_ATOP);
                     etpasswordauth.getBackground().setColorFilter(getResources().getColor(R.color.red_main), PorterDuff.Mode.SRC_ATOP);
                     cdCaution.setVisibility(View.VISIBLE);
@@ -180,7 +189,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
 
                     loader.dismiss();
 
-                }else if(etpasswordauth.getText().toString().length()>5){
+                } else if (etpasswordauth.getText().toString().length() > 5) {
                     etusernameauth.getBackground().setColorFilter(getResources().getColor(R.color.grey_main_medium), PorterDuff.Mode.SRC_ATOP);
                     etpasswordauth.getBackground().setColorFilter(getResources().getColor(R.color.grey_main_medium), PorterDuff.Mode.SRC_ATOP);
                     cdCaution.setVisibility(View.GONE);
@@ -228,8 +237,8 @@ public class LoginAuthActivityRemastered extends BaseActivity {
 //                if (etEmail.getText().toString().trim().length()>0){
 //                    etEmail.setError(null);
 //                }else
-            if(etusernameauth.getText().toString().trim().length() != 0)
-                if (!emailCustom.matcher(etusernameauth.getText().toString()).matches()){
+            if (etusernameauth.getText().toString().trim().length() != 0)
+                if (!emailCustom.matcher(etusernameauth.getText().toString()).matches()) {
                     etusernameauth.setError("Email atau nomor telpon");
                 } else {
                     etusernameauth.setError(null);
@@ -237,7 +246,6 @@ public class LoginAuthActivityRemastered extends BaseActivity {
 
         }
     };
-
 
 
     private TextWatcher passauthWatcher = new TextWatcher() {
@@ -248,18 +256,18 @@ public class LoginAuthActivityRemastered extends BaseActivity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(etpasswordauth.getText().toString().trim().length() < 1){
+            if (etpasswordauth.getText().toString().trim().length() < 1) {
 //                if(etpasswordauth.getText().toString().trim().length() != 0){
 //                if (!passwordCustom.matcher(etpasswordauth.getText().toString()).matches()){
-                    etpasswordauth.setError("Berisi 1 huruf kapital 1 angka 1 symbol");
-                    btnLoginAuth.setEnabled(false);
-                    cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
-                } else {
-                    etpasswordauth.setError(null);
-                    cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.blue));
-                    btnLoginAuth.setEnabled(true);
-                    btnLoginAuth.setTextColor(getResources().getColor(R.color.colorwhite));
-                }
+                etpasswordauth.setError("Berisi 1 huruf kapital 1 angka 1 symbol");
+                btnLoginAuth.setEnabled(false);
+                cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
+            } else {
+                etpasswordauth.setError(null);
+                cdlblAuthlogin.setCardBackgroundColor(getResources().getColor(R.color.blue));
+                btnLoginAuth.setEnabled(true);
+                btnLoginAuth.setTextColor(getResources().getColor(R.color.colorwhite));
+            }
 //            }
         }
 
@@ -270,4 +278,29 @@ public class LoginAuthActivityRemastered extends BaseActivity {
         }
     };
 
+    private void showAndHidePassword(final EditText editText, final ImageButton imageButton) {
+        hide_password = 1;
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (hide_password == 1) {
+                    hide_password = 0;
+                    editText.setTransformationMethod(null);
+                    if (editText.getText().length() > 0)
+                        //imageButton.setBackgroundColor(Color.WHITE);
+                        editText.setSelection(editText.getText().length());
+                    imageButton.setImageResource(R.drawable.ic_remove_red_eye_primary_24dp);
+                } else {
+                    hide_password = 1;
+                    editText.setTransformationMethod(new PasswordTransformationMethod());
+                    if (editText.getText().length() > 0)
+                        editText.setSelection(editText.getText().length());
+
+                    imageButton.setImageResource(R.drawable.ic_remove_red_eye_grey_24dp);
+
+
+                }
+            }
+        });
+    }
 }
