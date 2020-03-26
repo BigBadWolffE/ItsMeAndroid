@@ -28,7 +28,7 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.view.chat.ChatActivity;
-import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
+import com.indocyber.itsmeandroid.viewremastered.requestincreaselimit.RequestIncreaseLimitActivity;
 import com.indocyber.itsmeandroid.viewremastered.billinginfo.BillingInfo;
 import com.indocyber.itsmeandroid.viewremastered.blockkartu.BlockKartu;
 import com.indocyber.itsmeandroid.viewremastered.editcard.activity.editkartu;

@@ -2,7 +2,6 @@ package com.indocyber.itsmeandroid.viewremastered.home.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -16,11 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.BaseActivity;
-import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
+import com.indocyber.itsmeandroid.utilities.Preference;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.AddKartuPersonal.AddKartuPersonal;
@@ -29,8 +28,6 @@ import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.promo.fragment.PromoRemasteredFragment;
 
 import javax.inject.Inject;
@@ -209,8 +206,10 @@ public class HomeRemastered extends BaseActivity {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 //if you want to kill app . from other then your main avtivity.(Launcher)
-                android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);
+                Preference preference = new Preference(HomeRemastered.this);
+                preference.clearPref();
+                android.os.Process.killProcess(android.os.Process.myPid());
                 //LoginAuthActivityRemastered.etusernameauth.setText("");
 //                Intent intent = new Intent(HomeRemastered.this, LoginAuthActivityRemastered.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

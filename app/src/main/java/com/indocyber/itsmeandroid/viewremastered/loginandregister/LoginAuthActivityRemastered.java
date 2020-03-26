@@ -1,12 +1,10 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,22 +12,16 @@ import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
-import com.indocyber.itsmeandroid.view.BaseActivity;
-import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
-import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
-import com.indocyber.itsmeandroid.view.splashscreen.SplashScreenActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
 
 import java.util.regex.Pattern;
 
@@ -38,7 +30,6 @@ import javax.inject.Inject;
 import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
-import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 
 public class LoginAuthActivityRemastered extends BaseActivity {
 

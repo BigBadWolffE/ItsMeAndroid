@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.view;
+package com.indocyber.itsmeandroid.viewremastered;
 
 import android.app.Application;
 

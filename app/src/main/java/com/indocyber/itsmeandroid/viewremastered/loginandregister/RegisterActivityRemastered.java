@@ -1,6 +1,5 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,7 +11,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -26,13 +24,10 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.SecretQuestion;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.utilities.commonclass.CustomSpinnerAdapter;
-import com.indocyber.itsmeandroid.view.BaseActivity;
-import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
-import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
-import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -40,8 +35,6 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
-
-import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
 
 public class RegisterActivityRemastered extends BaseActivity implements View.OnClickListener {
     public static EditText etNama, etEmail,etHandphone,etPassword,etRtPass,etIptSecurity;

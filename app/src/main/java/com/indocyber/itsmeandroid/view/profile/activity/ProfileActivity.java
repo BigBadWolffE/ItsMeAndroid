@@ -19,7 +19,7 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
 import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;

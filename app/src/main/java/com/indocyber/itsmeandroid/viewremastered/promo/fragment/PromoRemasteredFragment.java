@@ -8,7 +8,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +19,7 @@ import android.widget.FrameLayout;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
-import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
 import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;

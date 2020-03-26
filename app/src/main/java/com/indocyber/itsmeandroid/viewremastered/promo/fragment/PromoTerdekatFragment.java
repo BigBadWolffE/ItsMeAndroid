@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ItemPromoNearbyModel;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
-import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.promo.Activity.DetailPromoActivity;

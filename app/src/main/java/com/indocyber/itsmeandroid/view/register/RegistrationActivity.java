@@ -23,7 +23,7 @@ import com.indocyber.itsmeandroid.model.User;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.utilities.commonclass.CustomSpinnerAdapter;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;

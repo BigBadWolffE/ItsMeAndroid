@@ -6,9 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,12 +14,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
 import android.text.InputType;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +36,7 @@ import com.indocyber.itsmeandroid.model.ProfilePassportModel;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
 import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 
@@ -50,8 +46,6 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import javax.inject.Inject;
-
-import okhttp3.internal.Util;
 
 public class ProfilePassportFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";

@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.view;
+package com.indocyber.itsmeandroid.viewremastered;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;

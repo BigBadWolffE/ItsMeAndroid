@@ -14,7 +14,7 @@
         tools:node="replace" />
 
     <application
-        android:name=".view.App"
+        android:name=".viewremastered.App"
         android:allowBackup="true"
         android:allowClearUserData="true"
         android:hardwareAccelerated="true"
@@ -65,11 +65,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.tagkartu.TagKartu"
-            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.billinginfo.BillingInfo"
-            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.promo.Activity.PinPromoActivity"
@@ -109,12 +109,12 @@
 
         <activity
             android:name=".viewremastered.editcard.activity.editkartu"
-            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".viewremastered.blockkartu.BlockKartu"
-            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.loginandregister.SetPinActivityRemastered"
@@ -132,7 +132,7 @@
             android:name=".viewremastered.loginandregister.ResetPasswordFromForgotActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.splashscreen.SplashScreenActivity"
+            android:name=".viewremastered.splashscreen.SplashScreenActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -194,15 +194,15 @@
             android:launchMode="singleTop"
             android:parentActivityName=".view.inbox.InboxActivity" />
         <activity
-            android:name=".view.otp.OtpActivity"
-            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:name=".viewremastered.otp.OtpActivity"
+            android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".view.requestincreaselimit.RequestIncreaseLimitActivity"
-            android:parentActivityName=".view.addcc.AddCcActivity"
+            android:name=".viewremastered.requestincreaselimit.RequestIncreaseLimitActivity"
+            android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".view.addcc.AddCcActivity"
+            android:name=".viewremastered.addcc.AddCcActivity"
             android:launchMode="singleTop"
             android:parentActivityName=".view.home.activity.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -225,7 +225,7 @@
             android:name=".view.register.RegistrationActivity"
             android:screenOrientation="portrait" /> <!-- <activity android:name=".view.login.LoginOptionActivity" /> -->
         <activity android:name=".view.login.LoginWithEmailActivity" />
-        <activity android:name=".view.BaseActivity" />
+        <activity android:name=".viewremastered.BaseActivity" />
         <activity
             android:name=".viewremastered.notification.Activity.DetailNotificationBillingActivity"
             android:theme="@style/AppTheme.NoActionBar" />

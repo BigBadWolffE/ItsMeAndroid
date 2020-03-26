@@ -1,7 +1,6 @@
-package com.indocyber.itsmeandroid.view.addcc;
+package com.indocyber.itsmeandroid.viewremastered.addcc;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
@@ -9,11 +8,8 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -30,10 +26,8 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
-import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
-
-import org.apache.commons.text.WordUtils;
+import com.indocyber.itsmeandroid.viewremastered.otp.OtpActivity;
+import com.indocyber.itsmeandroid.viewremastered.requestincreaselimit.RequestIncreaseLimitActivity;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 

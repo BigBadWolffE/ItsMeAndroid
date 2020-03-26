@@ -2,12 +2,9 @@ package com.indocyber.itsmeandroid.viewremastered.loginandregister.helper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.indocyber.itsmeandroid.view.BaseActivity;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 import com.squareup.okhttp.Callback;

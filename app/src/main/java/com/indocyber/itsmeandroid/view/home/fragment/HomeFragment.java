@@ -34,7 +34,7 @@ import com.indocyber.itsmeandroid.view.home.adapter.ImageCardAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.ImageHomeDashboardAdapter;
 import com.indocyber.itsmeandroid.view.inbox.InboxActivity;
 import com.indocyber.itsmeandroid.view.membershipsecuritycode.MembershipSecurityCodeActivity;
-import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
+import com.indocyber.itsmeandroid.viewremastered.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.profile.activity.ProfileActivity;
 import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;

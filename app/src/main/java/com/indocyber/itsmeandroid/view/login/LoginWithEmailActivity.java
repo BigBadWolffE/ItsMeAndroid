@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.view.forgotpassword.activity.ForgotPasswordActivity;
 import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;

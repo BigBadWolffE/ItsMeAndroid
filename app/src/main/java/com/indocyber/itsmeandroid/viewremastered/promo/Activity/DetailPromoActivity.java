@@ -1,22 +1,14 @@
 package com.indocyber.itsmeandroid.viewremastered.promo.Activity;
 
 import android.app.AlertDialog;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -28,14 +20,10 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ItemShareModel;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.DetailPromoViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.SharePromoAdapter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -67,6 +55,8 @@ public class DetailPromoActivity extends BaseActivity implements SharePromoAdapt
     LinearLayout mLayoutDiskon;
     @BindView(R.id.layoutJarak)
     LinearLayout mLayoutJarak;
+    @BindView(R.id.syaratKetentuan)
+    TextView syaratKetentuan;
     private DetailPromoViewModel viewModel;
     private AlertDialog dialog;
     @Inject
@@ -144,6 +134,7 @@ public class DetailPromoActivity extends BaseActivity implements SharePromoAdapt
             titlePromo.setText(promoItemModel.getTitle());
             titleToolbar.setText(promoItemModel.getTitle());
             promoDesc.setText(promoItemModel.getDesc());
+            syaratKetentuan.setText(promoItemModel.getSyaratKetentuan());
         });
     }
 

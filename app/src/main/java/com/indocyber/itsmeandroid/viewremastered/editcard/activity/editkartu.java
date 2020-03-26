@@ -11,25 +11,20 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
-import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
+import com.indocyber.itsmeandroid.viewremastered.requestincreaselimit.RequestIncreaseLimitActivity;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.promo.Activity.PinPromoActivity;
 
 import org.apache.commons.text.WordUtils;
 

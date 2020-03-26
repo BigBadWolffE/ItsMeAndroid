@@ -14,14 +14,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.BlockAllCardModel;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.adapter.BlockAllCardListAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 

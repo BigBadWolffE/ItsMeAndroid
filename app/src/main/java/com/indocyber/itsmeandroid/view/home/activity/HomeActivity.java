@@ -2,7 +2,6 @@ package com.indocyber.itsmeandroid.view.home.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,14 +20,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.view.aboutus.activity.AboutUsActivity;
 import com.indocyber.itsmeandroid.view.blockcc.activity.BlockCCActivity;
 
 import com.indocyber.itsmeandroid.view.contactcc.activity.ContactCCActivity;
 import com.indocyber.itsmeandroid.view.home.fragment.HomeFragment;
 import com.indocyber.itsmeandroid.view.promo.activity.PromoActivity;
-import com.indocyber.itsmeandroid.view.splashscreen.SplashScreenActivity;
+import com.indocyber.itsmeandroid.viewremastered.splashscreen.SplashScreenActivity;
 
 import dmax.dialog.SpotsDialog;
 

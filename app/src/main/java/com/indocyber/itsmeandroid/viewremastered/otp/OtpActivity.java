@@ -1,4 +1,4 @@
-package com.indocyber.itsmeandroid.view.otp;
+package com.indocyber.itsmeandroid.viewremastered.otp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -8,7 +8,6 @@ import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.Html;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,10 +25,8 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
 import com.indocyber.itsmeandroid.viewmodel.AddCcViewModel;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import java.util.Objects;
 
