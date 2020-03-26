@@ -194,7 +194,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
                     etpasswordauth.getBackground().setColorFilter(getResources().getColor(R.color.grey_main_medium), PorterDuff.Mode.SRC_ATOP);
                     cdCaution.setVisibility(View.GONE);
 
-                    String key = etusernameauth.getText().toString() + ":" + etpasswordauth.getText().toString();
+                    String key = etusernameauth.getText().toString().trim() + ":" + etpasswordauth.getText().toString().trim();
                     base64key = Base64.encodeToString(key.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
                     viewModel.login(base64key);
 
