@@ -144,11 +144,11 @@
         </androidx.cardview.widget.CardView>
 
         <ProgressBar
-            android:visibility="gone"
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:indeterminateTint="@color/colorPrimary"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -179,7 +179,7 @@
                 android:gravity="center"
                 android:text="Masuk"
                 android:textColor="@color/grey_40"
-                android:textSize="16sp"  />
+                android:textSize="16sp" />
         </androidx.cardview.widget.CardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -204,21 +204,21 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/ipt_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/grey_main_medium"
-                    android:fontFamily="@font/quicksand_semibold"
-                    android:textSize="14sp"
-                    android:hint="username"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tooltip_username"
-                    android:imeOptions="actionNext"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/support_darker_grey" />
+            <EditText
+                android:id="@+id/ipt_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/grey_main_medium"
+                android:fontFamily="@font/quicksand_semibold"
+                android:hint="username"
+                android:imeOptions="actionNext"
+                android:textColor="@color/black"
+                android:textColorHint="@color/support_darker_grey"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tooltip_username" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,8 +239,8 @@
                 android:layout_height="0dp"
                 android:layout_marginLeft="@dimen/_4sdp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginRight="0dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/quicksand_medium"
                 android:gravity="center"
                 android:text="Lupa "
@@ -262,9 +262,9 @@
                 android:textColor="@color/grey_40"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/lupa"
                 app:layout_constraintEnd_toStartOf="@+id/passwordLupa"
                 app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/lupa"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -307,11 +307,19 @@
                 android:text="Password"
                 android:textColor="@color/grey_main_medium"
                 android:textSize="@dimen/_11sdp"
-                app:layout_constraintBottom_toTopOf="@+id/layout_input_password"
+                app:layout_constraintBottom_toTopOf="@+id/rltvPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <RelativeLayout
+                android:id="@+id/rltvPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tooltip_password">
 
                 <EditText
                     android:id="@+id/ipt_password"
@@ -319,17 +327,40 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/grey_main_medium"
                     android:fontFamily="@font/quicksand_semibold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tooltip_password"
                     android:hint="password"
-                    android:textSize="14sp"
                     android:imeOptions="actionNext"
                     android:inputType="textPassword"
                     android:textColor="@color/black"
-                    android:textColorHint="@color/support_darker_grey" />
+                    android:textColorHint="@color/support_darker_grey"
+                    android:textSize="14sp" />
+                <ImageButton
+                    android:clickable="true"
+                    android:layout_centerInParent="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:id="@+id/txtPass"
+                    android:background="@null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_remove_red_eye_grey_24dp"
+                    android:focusable="true" />
+            </RelativeLayout>
 
+            <!-- <EditText
+                 android:id="@+id/ipt_password"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:backgroundTint="@color/grey_main_medium"
+                 android:fontFamily="@font/quicksand_semibold"
+                 android:hint="password"
+                 android:imeOptions="actionNext"
+                 android:inputType="textPassword"
+                 android:textColor="@color/black"
+                 android:textColorHint="@color/support_darker_grey"
+                 android:textSize="14sp"
+                  />
+ -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
