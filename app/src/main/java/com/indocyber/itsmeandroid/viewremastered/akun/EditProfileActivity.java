@@ -211,7 +211,7 @@ public class EditProfileActivity extends BaseActivity {
                         }
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                         UtilitiesCore.loadCircleImage(imgPhotoProfile, bitmap, this);
-                        profileImage = UtilitiesCore.encodeBase64UsingStream(this, uri);
+                        profileImage = UtilitiesCore.encodeToBase64Only(bitmap, extension);
 //                        Log.d("Base64", end);
 //                        viewModel.updateProfilePicture(authKey, end, extension);
                     } catch (IOException e) {

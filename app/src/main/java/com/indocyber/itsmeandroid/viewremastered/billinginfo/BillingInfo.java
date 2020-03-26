@@ -49,8 +49,14 @@ public class BillingInfo extends AppCompatActivity {
     private void bindBillingInfo() {
         String monthDue = data.getExpireCard().substring(0, 2);
         String yearDue = data.getExpireCard().substring(3, 5);
-        int month = Integer.valueOf(monthDue);
-        String expiry = "1 " + MONTH_LIST[month - 1] + " 20" + yearDue;
+        String expiry = "";
+        try {
+            int month = Integer.valueOf(monthDue);
+            expiry = "1 " + MONTH_LIST[month - 1] + " 20" + yearDue;
+        } catch (Exception e) {
+            expiry = "1 Januari 2025";
+        }
+
         TextView status = findViewById(R.id.cardStatusInfo);
         status.setText(data.isBlockedCard() ? "Diblokir" : "Aktif");
         TextView currentBilling = findViewById(R.id.cardBillingInfo);

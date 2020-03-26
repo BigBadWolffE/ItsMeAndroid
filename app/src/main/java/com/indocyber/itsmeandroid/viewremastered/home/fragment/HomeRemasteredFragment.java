@@ -35,6 +35,7 @@ import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
 import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
 import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.view.otp.OtpActivity;
@@ -154,6 +155,10 @@ public class HomeRemasteredFragment extends BaseFragment {
 
     private void dataCardEmpty() {
         mRltvEmpty.setVisibility(View.VISIBLE);
+        mRltvEmpty.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), AddCcActivity.class);
+            startActivity(intent);
+        });
         txtTambhKartu.bringToFront();
         mViewPagerCard.setVisibility(View.GONE);
         mTabDots.setVisibility(View.GONE);

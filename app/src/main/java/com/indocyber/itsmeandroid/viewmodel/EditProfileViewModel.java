@@ -79,7 +79,7 @@ public class EditProfileViewModel extends ViewModel {
 
     public void updateProfile(String auth, String email, String phone, String image, String ext) {
         isDone.setValue(false);
-        isLoading.setValue(false);
+        isLoading.setValue(true);
         disposable.add(
                 service.updateProfileNew(auth, email, phone, image, ext)
                 .subscribeOn(Schedulers.io())
