@@ -68,6 +68,8 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
     private String cardHolder = "";
     private String cardExpiry = "";
     private String billingAddress = "";
+    private TextView titleText;
+    private TextView toolbarText;
     private int id;
 //    private ImageCardModel data;
 
@@ -87,7 +89,12 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
         cardExpiry = getIntent().getStringExtra("cardExpiry");
         billingAddress = getIntent().getStringExtra("billingAddress");
         id = getIntent().getIntExtra("cardId", -1);
-
+        titleText = findViewById(R.id.txt_info);
+        toolbarText = findViewById(R.id.textView4);
+        if (parentCode >= 0) {
+            toolbarText.setText("Security Code");
+            titleText.setText("PIN (6 digits) Anda");
+        }
 //        if (parentCode >= 0) {
 //            data = getIntent().getParcelableExtra(INTENT_ID);
 //        }
@@ -165,7 +172,6 @@ public class SetPinActivityRemastered extends BaseActivity implements NumberKeyb
                     new Handler().postDelayed(() -> {
                         alertDialog.show();
                         new Handler().postDelayed(() -> {
-                            alertDialog.dismiss();
 //                        Intent intent = new Intent(SetPinActivityRemastered.this, PopUpRegisterSucceedRemastered.class);
 //                        startActivity(intent);
 //                            PopUpRegisterSucceedRemastered.showDialog(SetPinActivityRemastered.this);

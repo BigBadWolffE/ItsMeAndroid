@@ -1,5 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.kartuku.fragment;
 
+import android.app.AlertDialog;
 import android.app.Person;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
@@ -22,6 +24,12 @@ import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
 import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
+import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
+
+import javax.inject.Inject;
+
+import dmax.dialog.SpotsDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +37,11 @@ import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 public class KartukuRemasteredFragment extends BaseFragment {
 
     private HomeViewModel viewModel;
+    private AlertDialog loader;
+    private LinearLayout cardLayout;
+    private LinearLayout emptyLayout;
+    @Inject
+    ViewModelFactory factory;
     public KartukuRemasteredFragment() {
         // Required empty public constructor
     }
@@ -56,9 +69,34 @@ public class KartukuRemasteredFragment extends BaseFragment {
         mTabAdapter.addFragment(new PersonalCardList(), "Kartu Personal");
         ViewPager mViewPager = view.findViewById(R.id.viewPagerKartuku);
         TabLayout mTabLayout = view.findViewById(R.id.tabLayoutKartuku);
-        viewModel = ViewModelProviders.of(getActivity()).get(HomeViewModel.class);
+        emptyLayout = view.findViewById(R.id.emptyCard);
+        cardLayout = view.findViewById(R.id.cardContent);
+        viewModel = ViewModelProviders.of(getActivity(), factory).get(HomeViewModel.class);
+        loader = new SpotsDialog.Builder().setCancelable(false).setContext(getActivity()).build();
+        viewModel.countCard();
         mViewPager.setAdapter(mTabAdapter);
         mViewPager.setOffscreenPageLimit(3);
         mTabLayout.setupWithViewPager(mViewPager);
+        observeViewModel();
+    }
+
+    public void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+        viewModel.getCardCount().observe(this, integer -> {
+            if (integer > 0) {
+                emptyLayout.setVisibility(View.GONE);
+                cardLayout.setVisibility(View.VISIBLE);
+            } else {
+                emptyLayout.setVisibility(View.VISIBLE);
+                cardLayout.setVisibility(View.GONE);
+            }
+        });
     }
 }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
@@ -40,6 +41,8 @@ public class CreditCardList extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private HomeViewModel viewModel;
+//    private LinearLayout emptyLayout;
+    private LinearLayout collectionLayout;
     private CardListAdapter cardAdapter;
     private List<String> cardFilterList;
     private CardFilterAdapter cardFilterAdapter;
@@ -96,7 +99,8 @@ public class CreditCardList extends BaseFragment {
         View view = inflater.inflate(layoutRes(), container, false);
         filterRecycler = view.findViewById(R.id.recyclerCardFilter);
         cardListRecycler = view.findViewById(R.id.recyclerCardList);
-
+//        emptyLayout = view.findViewById(R.id.emptyCard);
+        collectionLayout = view.findViewById(R.id.collection);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         filterRecycler.setLayoutManager(horizontalLayoutManager);
@@ -149,7 +153,13 @@ public class CreditCardList extends BaseFragment {
 
     private void observeViewModel() {
         viewModel.getCardList().observe(this, imageCardModels -> {
-            cardAdapter.refreshCardList(imageCardModels);
+//            if (imageCardModels != null) {
+//                if (imageCardModels.size() > 0)
+                cardAdapter.refreshCardList(imageCardModels);
+//            } else {
+//                emptyLayout.setVisibility(View.VISIBLE);
+//                collectionLayout.setVisibility(View.GONE);
+//            }
         });
 
         viewModel.getTagList().observe(this, strings -> {

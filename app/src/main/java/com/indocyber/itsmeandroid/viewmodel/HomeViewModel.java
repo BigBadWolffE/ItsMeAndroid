@@ -49,6 +49,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<List<String>> tagList = new MutableLiveData<>();
     private MutableLiveData<List<BlockAllCardModel>> blockAllCardList = new MutableLiveData<>();
     private MutableLiveData<String> error = new MutableLiveData<>();
+    private MutableLiveData<Integer> cardCount = new MutableLiveData<>();
     private MutableLiveData<List<PromoItemModel>> promoList = new MutableLiveData<>();
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -80,6 +81,10 @@ public class HomeViewModel extends ViewModel {
 
     public MutableLiveData<List<PromoItemModel>> getPromoList() {
         return promoList;
+    }
+
+    public MutableLiveData<Integer> getCardCount() {
+        return cardCount;
     }
 
     public void fetchAllCardList() {
@@ -279,6 +284,28 @@ public class HomeViewModel extends ViewModel {
                             e.printStackTrace();
                             isLoading.setValue(false);
                         })
+        );
+    }
+
+    public void countCard() {
+        isLoading.setValue(true);
+        disposable.add(
+                dao.getCardCount()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableSingleObserver<Integer>() {
+                    @Override
+                    public void onSuccess(Integer integer) {
+                        isLoading.setValue(false);
+                        cardCount.setValue(integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        isLoading.setValue(false);
+                        error.setValue("Fail to retrieve data");
+                    }
+                })
         );
     }
 

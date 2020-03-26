@@ -68,4 +68,7 @@ public interface ImageCardDao {
 
     @Query("Select * from ImageCardModel A where tagList like :tag")
     Observable<List<ImageCardModel>> getCardByTag(String tag);
+
+    @Query("Select count(0) from ImageCardModel")
+    Single<Integer> getCardCount();
 }
