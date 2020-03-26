@@ -36,7 +36,7 @@ public class RegistrationRequest  {
         String phone = SavePref.readPhone(activity);
         String password = SavePref.readPass(activity);
         String pin = SetPinActivityRemastered.firstPinView.getText().toString();
-        String secretQuestionId = "secretQuestionId";
+        String secretQuestionId = SavePref.readSecretQuestion(activity);
         String answer = SavePref.readSecretAnswer(activity);
 
         registrationModel.setUserFullName(name);
