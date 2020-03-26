@@ -53,7 +53,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:cropToPadding="false"
-                        android:src="@drawable/ic_ico_tambah_limit" />
+                        android:src="@drawable/ic_ico_take_picture_personal" />
 
                     <TextView
                         android:id="@+id/labelAmbilFoto"

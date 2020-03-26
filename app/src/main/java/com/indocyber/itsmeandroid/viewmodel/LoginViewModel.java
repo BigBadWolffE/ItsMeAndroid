@@ -61,7 +61,7 @@ public class LoginViewModel extends ViewModel {
                                 error.setValue(response.getMessage());
                                 return;
                             }
-                            Log.e("ViewModelLogin",response.getMessage());
+                            Log.e("ViewModelLogin",response.getStatus()+"");
                             user.setValue(response.getContent());
                         }
 
