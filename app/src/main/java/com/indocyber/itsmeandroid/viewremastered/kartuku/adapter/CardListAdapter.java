@@ -13,6 +13,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,20 +70,30 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
     public void onBindViewHolder(@NonNull CardViewHolder holder, int position) {
         ImageCardModel model = cardList.get(position);
         View.OnClickListener listener = view -> {
-            Intent intent = new Intent(context, MoreCardRemasteredActivity.class);
+
+
+            if (cardType == CREDIT_CARD) {
+                Intent intent = new Intent(context, MoreCardRemasteredActivity.class);
 
 //            intent.putExtra("cardNumber", model.getNumberCard());
 //            intent.putExtra("cardHolder", model.getNameCard());
 //            intent.putExtra("cardImage", model.getImage());
 //            intent.putExtra("expiryDate", model.getExpireCard());
 //            intent.putExtra("billingAddress", model.getBillingAddress());
-            holder.toggleButtonVisibility();
-            Bitmap sharable = getBitmapFromView(holder.itemView);
-            intent.putExtra("BITMAP_KARTU", convertBitmapToBytes(sharable));
-            holder.toggleButtonVisibility();
-            intent.putExtra(INTENT_ID, model);
-            intent.putExtra(CARD_TYPE,cardType);
-            context.startActivity(intent);
+                holder.toggleButtonVisibility();
+                Bitmap sharable = getBitmapFromView(holder.itemView);
+                intent.putExtra("BITMAP_KARTU", convertBitmapToBytes(sharable));
+                holder.toggleButtonVisibility();
+                intent.putExtra(INTENT_ID, model);
+                intent.putExtra(CARD_TYPE, cardType);
+                context.startActivity(intent);
+            } else {
+                Intent intent = new Intent(context, MoreCardRemasteredActivity.class);
+                intent.putExtra(INTENT_ID, model);
+                intent.putExtra(CARD_TYPE, cardType);
+                context.startActivity(intent);
+            }
+
         };
         holder.bind(model, listener);
         holder.cardImage.setImageResource(cardList.get(position).getImage());
@@ -182,12 +193,12 @@ public class CardListAdapter extends RecyclerView.Adapter<CardListAdapter.CardVi
 
     public static Bitmap getBitmapFromView(View view) {
         //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
-        Drawable bgDrawable =view.getBackground();
-        if (bgDrawable!=null)
+        Drawable bgDrawable = view.getBackground();
+        if (bgDrawable != null)
             //has background drawable, then draw it on the canvas
             bgDrawable.draw(canvas);
         else
