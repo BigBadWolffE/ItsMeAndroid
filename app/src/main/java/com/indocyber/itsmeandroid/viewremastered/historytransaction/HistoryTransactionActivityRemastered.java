@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.PromoItemModel;
-import com.indocyber.itsmeandroid.view.promo.adapter.PromoItemAdapter;
+import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.PromoItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

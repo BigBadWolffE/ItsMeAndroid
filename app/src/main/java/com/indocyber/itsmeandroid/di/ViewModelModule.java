@@ -8,10 +8,8 @@ import com.indocyber.itsmeandroid.viewmodel.EditProfileViewModel;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
 import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
-import com.indocyber.itsmeandroid.viewmodel.ProfileDetailViewModel;
 import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
 import com.indocyber.itsmeandroid.viewmodel.TagKartuViewModel;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
 
 import dagger.Binds;
 import dagger.Module;
@@ -37,12 +35,6 @@ public abstract class ViewModelModule {
     @ViewModelKey(LoginViewModel.class)
     @SuppressWarnings("unused")
     abstract ViewModel bindsLoginViewModel(LoginViewModel loginViewModel);
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(ProfileDetailViewModel.class)
-    @SuppressWarnings("unused")
-    abstract ViewModel bindsProfileDetailViewModel(ProfileDetailViewModel profileDetailViewModel);
 
     @Binds
     @IntoMap

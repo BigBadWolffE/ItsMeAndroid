@@ -1,9 +1,5 @@
 package com.indocyber.itsmeandroid.di.FragmentBindingModules;
 
-import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
-import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
-import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
-import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
 import com.indocyber.itsmeandroid.viewremastered.akun.AkunRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.home.fragment.HomeRemasteredFragment;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.KartukuRemasteredFragment;

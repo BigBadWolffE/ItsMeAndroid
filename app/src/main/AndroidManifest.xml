@@ -144,56 +144,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".view.forgotpassword.activity.ForgotPasswordActivity"
-            android:parentActivityName=".view.login.LoginOptionActivity" />
-        <activity
-            android:name=".view.promo.activity.PromoDetailActivity"
-            android:parentActivityName=".view.promo.activity.PromoActivity" />
-        <activity
-            android:name=".view.aboutus.activity.AboutUsActivity"
-            android:parentActivityName=".view.home.activity.HomeActivity" />
-        <activity android:name=".view.blockallconfirmation.BlockAllConfirmationActivity" />
-        <activity
-            android:name=".view.editcreditcard.EditCreditCardActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.addmembership.AddMembershipActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".view.contactcc.activity.ContactCCActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".view.blockcc.activity.BlockCCActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".view.membershipsecuritycode.MembershipSecurityCodeActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".view.editcardsecuritycode.EditCardSecurityCodeActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".view.blockconfirmationpin.BlockConfirmationPinActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".view.notificationdetail.NotificationDetail"
-            android:parentActivityName=".view.notification.activity.NotificationActivity" />
-        <activity
-            android:name=".view.billingdetail.BillingDetailActivity"
-            android:parentActivityName=".view.billing.activity.BillingActivity" />
-        <activity
-            android:name=".view.billing.activity.BillingActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".view.inbox.InboxActivity" />
-        <activity
-            android:name=".view.notification.activity.NotificationActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName=".view.inbox.InboxActivity" />
-        <activity
             android:name=".viewremastered.otp.OtpActivity"
             android:parentActivityName=".viewremastered.addcc.AddCcActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
@@ -204,27 +154,13 @@
         <activity
             android:name=".viewremastered.addcc.AddCcActivity"
             android:launchMode="singleTop"
-            android:parentActivityName=".view.home.activity.HomeActivity"
+            android:parentActivityName=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".view.home.activity.HomeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".view.message.MessageActivity" />
-        <activity
-            android:name=".view.promo.activity.PromoActivity"
-            android:parentActivityName=".view.home.activity.HomeActivity" />
+
         <activity
             android:name=".viewremastered.akun.EditProfileActivity"
             android:parentActivityName=".viewremastered.home.activity.HomeRemastered"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".view.inbox.InboxActivity"
-            android:parentActivityName=".view.home.activity.HomeActivity" />
-        <activity
-            android:name=".view.register.RegistrationActivity"
-            android:screenOrientation="portrait" /> <!-- <activity android:name=".view.login.LoginOptionActivity" /> -->
-        <activity android:name=".view.login.LoginWithEmailActivity" />
         <activity android:name=".viewremastered.BaseActivity" />
         <activity
             android:name=".viewremastered.notification.Activity.DetailNotificationBillingActivity"
@@ -233,10 +169,7 @@
             android:name=".viewremastered.notification.Activity.NotificationRemasteredActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.chat.ChatActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".view.login.LoginOptionActivity"
+            android:name=".viewremastered.chat.ChatActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewremastered.promo.Activity.DetailPromoActivity"

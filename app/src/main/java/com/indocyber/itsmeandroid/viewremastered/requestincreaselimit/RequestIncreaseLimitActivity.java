@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -47,6 +48,11 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
     private Spinner mRequestLimitSpinner;
     private Spinner mRequestForSpinner;
     private ImageView cardImage;
+    private LinearLayout alertBox;
+    private TextView alertPengajuan;
+    private TextView alertPengajuanUntuk;
+    private TextView alertNominal;
+    private TextView alertAgreement;
     int parentCode = -1;
     ImageCardModel data;
     AlertDialog customAlert;
@@ -110,7 +116,11 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
 
         Button mSubmitButton = findViewById(R.id.btnSubmit);
         mSubmitButton.setOnClickListener(view -> submit());
-
+        alertBox = findViewById(R.id.alertbox);
+        alertPengajuan = findViewById(R.id.pengajuanError);
+        alertPengajuanUntuk = findViewById(R.id.pengajuanUntukError);
+        alertNominal = findViewById(R.id.nominalError);
+        alertAgreement = findViewById(R.id.agreementError);
         mRequestLimitSpinner = findViewById(R.id.spnRequestLimit);
         mRequestLimitSpinner.setAdapter(new ArrayAdapter<>(this,
                 R.layout.spinner_item_text, REQUEST_LIMIT_OPTIONS));
@@ -174,25 +184,28 @@ public class RequestIncreaseLimitActivity extends AppCompatActivity {
 
     private void submit() {
         CheckBox termsAgreement = findViewById(R.id.chkTermsAgreement);
-        if(mRequestForSpinner.getSelectedItemPosition() == 0 ||
-                mRequestLimitSpinner.getSelectedItemPosition() == 0
-                || mNominalRequestInput.getText().length() < 1){
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    getString(R.string.form_incomplete_warning),
-                    R.drawable.ic_invalid,
-                    null
-            );
+        alertBox.setVisibility(View.GONE);
+        if (mRequestForSpinner.getSelectedItemPosition() == 0) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertPengajuan.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (mRequestLimitSpinner.getSelectedItemPosition() == 0) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertPengajuan.setVisibility(View.VISIBLE);
+            return;
+        }
+
+        if (mNominalRequestInput.getText().length() < 1) {
+            alertBox.setVisibility(View.VISIBLE);
+            alertNominal.setVisibility(View.VISIBLE);
             return;
         }
 
         if (!termsAgreement.isChecked()){
-            UtilitiesCore.buildAlertDialog(
-                    this,
-                    getString(R.string.agreement_warning),
-                    R.drawable.ic_invalid,
-                    null
-            );
+            alertBox.setVisibility(View.VISIBLE);
+            alertAgreement.setVisibility(View.VISIBLE);
             return;
         }
 

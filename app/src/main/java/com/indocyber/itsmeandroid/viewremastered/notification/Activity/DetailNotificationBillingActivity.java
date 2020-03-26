@@ -4,32 +4,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.barteksc.pdfviewer.PDFView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.billingdetail.BillingDetailActivity;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

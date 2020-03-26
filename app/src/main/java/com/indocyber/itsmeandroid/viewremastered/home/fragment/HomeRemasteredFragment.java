@@ -28,7 +28,7 @@ import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
 import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
 import com.indocyber.itsmeandroid.viewremastered.addcc.AddCcActivity;
-import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
+import com.indocyber.itsmeandroid.viewremastered.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;

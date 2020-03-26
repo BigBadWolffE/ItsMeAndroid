@@ -16,8 +16,8 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.Billing;
 import com.indocyber.itsmeandroid.model.Notification;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.billing.adapter.BillingAdapter;
-import com.indocyber.itsmeandroid.view.billingdetail.BillingDetailActivity;
+import com.indocyber.itsmeandroid.viewremastered.notification.Adapter.BillingAdapter;
+//import com.indocyber.itsmeandroid.view.billingdetail.BillingDetailActivity;
 import com.indocyber.itsmeandroid.viewremastered.notification.Activity.DetailNotificationBillingActivity;
 
 import java.util.ArrayList;
