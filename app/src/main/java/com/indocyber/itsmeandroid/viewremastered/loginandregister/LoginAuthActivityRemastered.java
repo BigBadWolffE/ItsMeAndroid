@@ -127,6 +127,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
         showAndHidePassword(etpasswordauth, txtPass);
         //etpasswordauth.setText("rahasia");
 
+
     }
 
     private void observeViewModel() {
