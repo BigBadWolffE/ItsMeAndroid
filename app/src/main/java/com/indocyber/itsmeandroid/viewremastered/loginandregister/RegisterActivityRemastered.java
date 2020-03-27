@@ -143,7 +143,7 @@ public class RegisterActivityRemastered extends BaseActivity implements View.OnC
         );
 
         phoneCustom
-                = Pattern.compile("08"+"[0-9]{9,13}");
+                = Pattern.compile("08"+"[0-9]{10,12}");
 
         etEmail.addTextChangedListener(emailWatcher);
         etEmail.requestFocus();
@@ -276,7 +276,11 @@ public class RegisterActivityRemastered extends BaseActivity implements View.OnC
         }else if (etHandphone.getText().toString().trim().length() == 0){
             isEmpty = true;
             Toast.makeText(this,"Phone number kosong",Toast.LENGTH_SHORT).show();
-        }else if (etPassword.getText().toString().trim().length() == 0){
+        }else if(!phoneCustom.matcher(etHandphone.getText().toString()).matches()){
+            isEmpty = true;
+            Toast.makeText(this,"Mohon cek kembali phone number anda",Toast.LENGTH_SHORT).show();
+        }
+        else if (etPassword.getText().toString().trim().length() == 0){
             isEmpty = true;
             etPassword.setError("Input minimal 8 karakter");
             Toast.makeText(this,"Input minimal 8 karakter",Toast.LENGTH_SHORT).show();

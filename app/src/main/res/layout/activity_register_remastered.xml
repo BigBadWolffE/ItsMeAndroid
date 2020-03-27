@@ -199,7 +199,7 @@
                         android:fontFamily="@font/__quicksand_medium"
                         android:imeOptions="actionNext"
                         android:inputType="number"
-                        android:maxLength="15"
+                        android:maxLength="12"
                         android:textColor="@color/grey_40"
                         android:textSize="@dimen/_14sdp" />
                 </com.google.android.material.textfield.TextInputLayout>
