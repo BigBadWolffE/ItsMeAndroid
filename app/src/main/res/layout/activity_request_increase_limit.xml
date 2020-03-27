@@ -249,11 +249,13 @@
                         android:layout_weight="7">
                         
                         <TextView
+                            android:id="@+id/nominalError"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/quicksand_semibold"
                             android:textColor="@color/support_red"
                             android:text="- Nominal pengajuan harus diisi"/>
+
                     </LinearLayout>
                 </LinearLayout>
 

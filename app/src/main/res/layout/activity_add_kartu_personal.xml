@@ -53,7 +53,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:cropToPadding="false"
-                        android:src="@drawable/ic_ico_tambah_limit" />
+                        android:src="@drawable/ic_ico_take_picture_personal" />
 
                     <TextView
                         android:id="@+id/labelAmbilFoto"
@@ -116,6 +116,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/lblNik"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_medium"
@@ -134,6 +135,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="" />
+
+                    <TextView
+                        android:id="@+id/lblNPWP"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="No NPWP"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/txtNPWP"
+                        android:inputType="text"
+                        android:digits="0123456789"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="20"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=""
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/lblSIM"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="No SIM"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/txtSIM"
+                        android:inputType="text"
+                        android:digits="0123456789"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="12"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=""
+                        android:visibility="gone"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -156,6 +203,56 @@
                         android:hint="" />
 
                     <TextView
+                        android:id="@+id/lblTipeSIM"
+                        android:layout_marginTop="8dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12sp"
+                        android:text="Tipe SIM"
+                        android:visibility="gone"/>
+
+                    <Spinner
+                        android:id="@+id/spnTipeSIM"
+                        android:inputType="text"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:padding="0dp"
+                        android:background="@drawable/bgspinner"
+                        android:hint="@string/username"
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/lblMasaBerlaku"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="Masa Berlaku"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/txtMasaBerlaku"
+                        android:inputType="text"
+                        android:digits="0123456789"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="4"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=""
+                        android:visibility="gone"/>
+
+                    <TextView
+                        android:id="@+id/txtJenisKelamin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/quicksand_medium"
@@ -191,6 +288,7 @@
                     </RadioGroup>
 
                     <RelativeLayout
+                        android:id="@+id/layoutTglLahir"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
@@ -230,6 +328,7 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/txtAgama"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -253,6 +352,7 @@
                         android:hint="@string/username" />
 
                     <TextView
+                        android:id="@+id/txtStatus"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -276,6 +376,7 @@
                         android:hint="@string/username" />
 
                     <TextView
+                        android:id="@+id/txtPekerjaan"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -299,6 +400,7 @@
                         android:hint="@string/username" />
 
                     <TextView
+                        android:id="@+id/txtKewarganegaraan"
                         android:layout_marginTop="8dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -449,6 +551,29 @@
                         android:padding="0dp"
                         android:background="@drawable/bgspinner"
                         android:hint="@string/username" />
+
+                    <TextView
+                        android:id="@+id/txtKantorPajak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/quicksand_medium"
+                        android:textColor="@color/support_darker_grey"
+                        android:textSize="12dp"
+                        android:text="Kantor Pelayanan Pajak"
+                        android:visibility="gone"/>
+
+                    <EditText
+                        android:id="@+id/txtAlamatKantorPajak"
+                        android:inputType="text"
+                        android:digits="0123456789.qwertzuiopasdfghjklyxcvbnm QWERTZUIOPASDFGHJKLYXCVBNM"
+                        style="@style/quicksandSemiBold"
+                        android:textColor="@color/support_black"
+                        android:maxLength="30"
+                        android:textSize="14sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=""
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 

@@ -42,7 +42,7 @@ import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconErr
 
 public class LoginAuthActivityRemastered extends BaseActivity {
 
-    private EditText etusernameauth,etpasswordauth;
+    public static EditText etusernameauth,etpasswordauth;
     private ImageView backButton;
     private ImageView imgWarning;
     private TextView btnLoginAuth,btnLupaPass,txtWarning;
@@ -76,7 +76,9 @@ public class LoginAuthActivityRemastered extends BaseActivity {
                 .setContext(LoginAuthActivityRemastered.this)
                 .build();
 
-        username = getIntent().getExtras().getString(INTENT_ID);
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null)
+        username = bundle.getString(INTENT_ID);
 
         etusernameauth = findViewById(R.id.ipt_username);
         etpasswordauth = findViewById(R.id.ipt_password);
@@ -192,7 +194,7 @@ public class LoginAuthActivityRemastered extends BaseActivity {
                     etpasswordauth.getBackground().setColorFilter(getResources().getColor(R.color.grey_main_medium), PorterDuff.Mode.SRC_ATOP);
                     cdCaution.setVisibility(View.GONE);
 
-                    String key = etusernameauth.getText().toString() + ":" + etpasswordauth.getText().toString();
+                    String key = etusernameauth.getText().toString().trim() + ":" + etpasswordauth.getText().toString().trim();
                     base64key = Base64.encodeToString(key.getBytes(), Base64.URL_SAFE | Base64.NO_WRAP);
                     viewModel.login(base64key);
 

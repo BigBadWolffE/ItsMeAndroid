@@ -38,7 +38,7 @@ public class SavePref {
 
     public static String readPhone(Activity activity) {
         SharedPreferences sharedPref = activity.getSharedPreferences(Api.TAG, Context.MODE_PRIVATE);
-        return sharedPref.getString("name", null);
+        return sharedPref.getString("phone", null);
     }
     //pass
     public static void savePass(Activity activity, String pass) {
@@ -62,6 +62,18 @@ public class SavePref {
         SharedPreferences sharedPref = activity.getSharedPreferences(Api.TAG, Context.MODE_PRIVATE);
         return sharedPref.getString("pin", null);
     }
+
+    public static void saveSecretQuestion(Activity activity, String sqId) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(Api.TAG, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("secretQuestion", sqId);
+        editor.commit();
+    }
+    public static String readSecretQuestion(Activity activity) {
+        SharedPreferences sharedPref = activity.getSharedPreferences(Api.TAG, Context.MODE_PRIVATE);
+        return sharedPref.getString("secretQuestion", null);
+    }
+
     //Secret Answer
     public static void saveSecretAnswer(Activity activity, String scAnswer) {
         SharedPreferences sharedPref = activity.getSharedPreferences(Api.TAG, Context.MODE_PRIVATE);

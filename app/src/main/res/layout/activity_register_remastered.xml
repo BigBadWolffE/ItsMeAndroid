@@ -224,6 +224,7 @@
                     android:textColor="@color/grey_40" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tfInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:passwordToggleEnabled="true"
@@ -302,7 +303,8 @@
                 <Spinner
                     android:id="@+id/sp_security"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"/>
 
 
             </LinearLayout>

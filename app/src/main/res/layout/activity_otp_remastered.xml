@@ -33,11 +33,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:fontFamily="@font/__interstate_regular"
+        android:fontFamily="@font/quicksand_medium"
         android:text="Buat Security Code PIN (6 digits) Anda"
         android:textAlignment="center"
         android:textColor="@color/grey_40"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/firstPinView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +52,7 @@
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@color/grey_40"
         app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +66,7 @@
             android:gravity="center"
             android:text="Submit"
             android:textColor="@color/colorwhite"
-            android:textSize="@dimen/_15sdp" />
+            android:textSize="16sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,8 +78,8 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_arrow_back_black"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -92,11 +93,11 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="@font/__interstate_regular"
+            android:fontFamily="@font/quicksand_medium"
             android:gravity="center"
             android:text="Register 2/2"
             android:textColor="@color/grey_40"
-            android:textSize="@dimen/_14sdp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

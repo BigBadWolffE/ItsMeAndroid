@@ -15,7 +15,10 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
+import com.indocyber.itsmeandroid.model.PromoItemModel;
+import com.indocyber.itsmeandroid.viewremastered.kartuku.fragment.CreditCardList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -27,16 +30,38 @@ import java.util.List;
 public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.CardFilterViewHolder> {
     private List<String> filterList;
     private Context context;
-    private int activePosition = 0;
+    private int activePosition;
+    private Listener listener;
+    private OtherListener otherCardListener;
+    private String type = "";
 
-    public CardFilterAdapter(List<String> filterList, Context context) {
-        this.filterList = filterList;
-        this.context = context;
+    public static final String CREDIT_CARD = "credit";
+
+    public interface Listener {
+        void onClick(String tag);
     }
 
-    public void refreshCardList(List<String> newFilterList) {
+    public interface OtherListener {
+        void onClick(int position);
+    }
+
+    public CardFilterAdapter(List<String> filterList, Context context, Listener listener,
+                             OtherListener otherCardListener, String type) {
+        this.filterList = filterList;
+        this.context = context;
+        this.listener = listener;
+        this.type = type;
+        this.otherCardListener = otherCardListener;
+
+    }
+
+    public void refreshFilterList(final List<String> newFilterList) {
         filterList.clear();
-        filterList = newFilterList;
+        List<String> nextFilterList = new ArrayList<>();
+        nextFilterList.add("Semua");
+        nextFilterList.addAll(newFilterList);
+        filterList.addAll(nextFilterList);
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -50,11 +75,13 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CardFilterViewHolder holder, int position) {
-
         View.OnClickListener listener = view -> {
             notifyItemChanged(activePosition);
             activePosition = position;
             notifyItemChanged(activePosition);
+            if (this.type.equals(CREDIT_CARD))
+            this.listener.onClick(filterList.get(position));
+            else this.otherCardListener.onClick(position);
         };
         holder.bind(filterList.get(position), listener);
         holder.activateButton(position == activePosition);

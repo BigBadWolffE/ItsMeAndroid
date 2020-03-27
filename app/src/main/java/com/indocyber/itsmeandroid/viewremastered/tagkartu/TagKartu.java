@@ -47,8 +47,9 @@ public class TagKartu extends BaseActivity {
     private String cardBillingAddress;
     private String expiryDate;
     private TagKartuViewModel viewModel;
-    private List<String> tags = new ArrayList<>();
+    private List<String> tags;
     private AlertDialog loader;
+    private ImageCardModel data;
     private int cardId;
     @Inject
     ViewModelFactory factory;
@@ -65,6 +66,7 @@ public class TagKartu extends BaseActivity {
         setContentView(layoutRes());
         Bundle extras = getIntent().getExtras();
         cardId = extras.getInt("cardId");
+        tags = new ArrayList<>();
 //        data = Objects.requireNonNull(getIntent().getExtras()).getParcelable(INTENT_ID);
         viewModel = ViewModelProviders.of(this, factory).get(TagKartuViewModel.class);
         viewModel.getCardById(cardId);
@@ -84,9 +86,12 @@ public class TagKartu extends BaseActivity {
             expiryDate = data.getExpireCard();
             cardBillingAddress = data.getBillingAddress();
             mCardImage.setImageResource(cardImage);
+            this.data = data;
 //            txtEditTag.setText(data.getNewTagList());
-            tags = data.getTagList();
-            savedTag.setText(formatTagsToString());
+            if (data.getTagList() != null) {
+                tags = data.getTagList();
+                savedTag.setText(formatTagsToString());
+            }
         });
 
         viewModel.getIsLoading().observe(this, isLoading -> {
@@ -95,7 +100,7 @@ public class TagKartu extends BaseActivity {
         });
 
         viewModel.getIsDone().observe(this, isDone -> {
-            savedTag.setText(txtEditTag.getText().toString());
+//            savedTag.setText(formatTagsToString());
         });
     }
 
@@ -146,7 +151,11 @@ public class TagKartu extends BaseActivity {
     }
 
     private void submit() {
-        if (formIsValid()) viewModel.saveTag(cardId, txtEditTag.getText().toString());
+        if (formIsValid()) {
+            tags.add(txtEditTag.getText().toString());
+            data.setTagList(tags);
+            viewModel.saveTag(data);
+        }
     }
 
 
@@ -208,7 +217,7 @@ public class TagKartu extends BaseActivity {
     private String formatTagsToString() {
         StringBuilder tagString = new StringBuilder();
         for (String tag : tags ) {
-            tagString.append("#" + tag);
+            tagString.append("#" + tag + " ");
         }
         return tagString.toString();
     }

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
@@ -40,8 +41,13 @@ public class CreditCardList extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private HomeViewModel viewModel;
+//    private LinearLayout emptyLayout;
+    private LinearLayout collectionLayout;
     private CardListAdapter cardAdapter;
+    private List<String> cardFilterList;
+    private CardFilterAdapter cardFilterAdapter;
     private RecyclerView cardListRecycler;
+    private RecyclerView filterRecycler;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -76,6 +82,8 @@ public class CreditCardList extends BaseFragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        cardFilterList = new ArrayList<>();
+//        setRetainInstance(true);
     }
 
     @Override
@@ -87,16 +95,27 @@ public class CreditCardList extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        cardFilterList.add("Semua");
         View view = inflater.inflate(layoutRes(), container, false);
-        RecyclerView filterRecycler = view.findViewById(R.id.recyclerCardFilter);
+        filterRecycler = view.findViewById(R.id.recyclerCardFilter);
         cardListRecycler = view.findViewById(R.id.recyclerCardList);
-
+//        emptyLayout = view.findViewById(R.id.emptyCard);
+        collectionLayout = view.findViewById(R.id.collection);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         cardListRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(),CREDIT_CARD);
         filterRecycler.setLayoutManager(horizontalLayoutManager);
-        CardFilterAdapter cardFilterAdapter = new CardFilterAdapter(generateCardFilter(), getActivity());
-
+        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity(), CREDIT_CARD);
+//        cardAdapter = new CardListAdapter(new ArrayList<>(), getActivity());
+        cardFilterAdapter = new CardFilterAdapter(cardFilterList, getActivity(), tag -> {
+            if (tag.equalsIgnoreCase("Semua")) {
+                viewModel.fetchAllCardList();
+            } else {
+                viewModel.getCardByTag(tag);
+            }
+        }, position -> {
+            return;
+        }, CardFilterAdapter.CREDIT_CARD);
+        cardListRecycler.setAdapter(cardAdapter);
         filterRecycler.setAdapter(cardFilterAdapter);
         cardListRecycler.setHasFixedSize(true);
         filterRecycler.setHasFixedSize(true);
@@ -107,7 +126,8 @@ public class CreditCardList extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = ViewModelProviders.of(getParentFragment().getActivity()).get(HomeViewModel.class);
-        viewModel.fetchAllCardList();
+        viewModel.getAllTaglist();
+//        viewModel.getCardList();
         observeViewModel();
     }
 
@@ -132,15 +152,21 @@ public class CreditCardList extends BaseFragment {
     }
 
     private void observeViewModel() {
-
-       viewModel.getCardList().observe(this, imageCardModels -> {
-            if (imageCardModels.size() > 0) {
+        viewModel.getCardList().observe(this, imageCardModels -> {
+//            if (imageCardModels != null) {
+//                if (imageCardModels.size() > 0)
                 cardAdapter.refreshCardList(imageCardModels);
-                cardListRecycler.setAdapter(cardAdapter);
-
-            }
+//            } else {
+//                emptyLayout.setVisibility(View.VISIBLE);
+//                collectionLayout.setVisibility(View.GONE);
+//            }
         });
 
+        viewModel.getTagList().observe(this, strings -> {
+            if (strings != null) {
+                cardFilterAdapter.refreshFilterList(strings);
+            }
+        });
     }
 
 }

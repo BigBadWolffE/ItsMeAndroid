@@ -75,8 +75,6 @@ public class HomeRemastered extends BaseActivity {
             fragmentTransaction.commit();
         }
 
-
-
         initComponent();
         initFab();
         initOnclick();
@@ -144,8 +142,8 @@ public class HomeRemastered extends BaseActivity {
             startActivity(intent);
         });
         mLinearAddCreditCard.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AddCcActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(this, AddCcActivity.class);
+                startActivity(intent);
         });
         mLinearBlockCC.setOnClickListener(v -> {
             Intent intent = new Intent(this, BlockAllCardRemasterActivity.class);

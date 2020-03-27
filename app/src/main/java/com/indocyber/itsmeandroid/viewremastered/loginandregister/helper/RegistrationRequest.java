@@ -1,6 +1,7 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister.helper;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.util.Log;
 
@@ -22,6 +23,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import dmax.dialog.SpotsDialog;
+
 
 public class RegistrationRequest  {
     public static String message;
@@ -30,15 +33,14 @@ public class RegistrationRequest  {
 
 
     public static void postRegistrationData(final Activity activity, RegistrationModel registrationModel){
-
         String name = SavePref.readName(activity);
         String email = SavePref.readEmail(activity);
         String phone = SavePref.readPhone(activity);
         String password = SavePref.readPass(activity);
         String pin = SetPinActivityRemastered.firstPinView.getText().toString();
-        String secretQuestionId = "secretQuestionId";
+        String secretQuestionId = SavePref.readSecretQuestion(activity);
         String answer = SavePref.readSecretAnswer(activity);
-
+        AlertDialog dialog = new SpotsDialog.Builder().setCancelable(false).setContext(activity).build();
         registrationModel.setUserFullName(name);
         registrationModel.setUserEmail(email);
         registrationModel.setUserPhone(phone);
@@ -75,15 +77,19 @@ public class RegistrationRequest  {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        dialog.show();
                         try {
                             JSONObject json = new JSONObject(responseData);
                             if(response.code() == 200){
+                                dialog.dismiss();
                                 PopUpRegisterSucceedRemastered.showDialog(activity);
 //                                activity.finish();
                             }else {
+                                dialog.dismiss();
                                 SetPinActivityRemastered.alertWrong(activity);
                             }
                         } catch (JSONException e) {
+                            dialog.dismiss();
                             e.printStackTrace();
                         }
                     }

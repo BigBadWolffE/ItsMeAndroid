@@ -2,6 +2,7 @@ package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -21,15 +22,29 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.indocyber.itsmeandroid.R;
+import com.indocyber.itsmeandroid.model.SecretQuestion;
+import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
+import com.indocyber.itsmeandroid.utilities.commonclass.CustomSpinnerAdapter;
+import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.view.login.LoginWithEmailActivity;
+import com.indocyber.itsmeandroid.view.register.RegistrationActivity;
+import com.indocyber.itsmeandroid.viewmodel.RegisterViewModel;
+import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.SavePref;
 import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 
+import java.util.List;
 import java.util.regex.Pattern;
+
+import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
 
-public class RegisterActivityRemastered extends AppCompatActivity implements View.OnClickListener {
+import static com.indocyber.itsmeandroid.utilities.UtilitiesCore.snackBarIconError;
+
+public class RegisterActivityRemastered extends BaseActivity implements View.OnClickListener {
     public static EditText etNama, etEmail,etHandphone,etPassword,etRtPass,etIptSecurity;
     public static TextView register;
     public static CardView registerLayout;
@@ -39,17 +54,30 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
     public static Spinner spinnerSecuitySelection;
     public static Pattern emailCustom,nameCustom,passCustom;
     public static Pattern phoneCustom;
+    private TextInputLayout tfInput;
     boolean isEmpty;
     public static AlertDialog alertDialog;
+    private RegisterViewModel viewModel;
+    private AlertDialog loader;
+    @Inject
+    ViewModelFactory factory;
 
 
-
+    @Override
+    protected int layoutRes() {
+        return R.layout.activity_register_remastered;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_remastered);
-
+        setContentView(layoutRes());
+        loader = new SpotsDialog.Builder()
+                .setCancelable(false)
+                .setContext(RegisterActivityRemastered.this)
+                .build();
+        viewModel = ViewModelProviders.of(this, factory).get(RegisterViewModel.class);
+        viewModel.fetchQuestionList();
         etNama = findViewById(R.id.hdr_ipt_name);
         etEmail = findViewById(R.id.hdr_ipt_email);
         etHandphone = findViewById(R.id.hdr_ipt_handphone);
@@ -61,6 +89,7 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
         cbAgreement = findViewById(R.id.cb_agree);
         securityLayout = findViewById(R.id.layout_answer);
         registerLayout = findViewById(R.id.lbl_btn_next);
+        tfInput = findViewById(R.id.tfInput);
         backButton = findViewById(R.id.imageView5);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,18 +97,12 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
                 finish();
             }
         });
-
-        String[] arraySpinner = new String[]{
-                "Select Question","What is your hobby?", "When is your mom birthday?", "First Pet Name?"
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, arraySpinner);
-        spinnerSecuitySelection.setAdapter(adapter);
-
         spinnerSecuitySelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(spinnerSecuitySelection.getSelectedItem().toString()!= "Select Question"){
                     securityLayout.setVisibility(View.VISIBLE);
+
                 }else{
                     securityLayout.setVisibility(View.GONE);
                 }
@@ -91,22 +114,7 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
 
             }
         });
-
-
         register.setEnabled(false);
-//        cbAgreement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-//                if(cbAgreement.isChecked()){
-//                    register.setEnabled(true);
-//                    registerLayout.setCardBackgroundColor(getResources().getColor(R.color.blue));
-//                }else{
-//                    registerLayout.setEnabled(false);
-//                    registerLayout.setCardBackgroundColor(getResources().getColor(R.color.grey_login));
-//                }
-//
-//            }
-//        });
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(RegisterActivityRemastered.this).build();
         alertDialog = new SpotsDialog.Builder().setCancelable(false).setContext(RegisterActivityRemastered.this).build();
         register.setOnClickListener(this);
@@ -150,7 +158,7 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
         etHandphone.addTextChangedListener(phoneWatcher);
         etNama.addTextChangedListener(generalWatcher);
         etPassword.addTextChangedListener(passwordWatcher);
-
+        observeViewModel();
     }
 
     public TextWatcher emailWatcher = new TextWatcher() {
@@ -187,9 +195,12 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             if(etPassword.getText().toString().trim().length() != 0)
                 if (!passCustom.matcher(etPassword.getText().toString()).matches()){
+                    tfInput.setPasswordVisibilityToggleEnabled(false);
                     etPassword.setError("Minimal 1 Huruf Besar 1 Angka dan Spesial Karakter");
                 }else {
                     etPassword.setError(null);
+                        tfInput.setPasswordVisibilityToggleEnabled(true);
+
                 }
         }
 
@@ -294,6 +305,8 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
                 SavePref.saveEmail(this,etEmail.getText().toString());
                 SavePref.savePhone(this,etHandphone.getText().toString());
                 SavePref.savePass(this,etRtPass.getText().toString());
+                SecretQuestion selectedQuestion = (SecretQuestion) spinnerSecuitySelection.getSelectedItem();
+                SavePref.saveSecretQuestion(this, selectedQuestion.getSecretQuestionId());
                 SavePref.saveSecretAnswer(this,etIptSecurity.getText().toString());
                 new Handler().postDelayed(() -> {
                     alertDialog.dismiss();
@@ -302,5 +315,40 @@ public class RegisterActivityRemastered extends AppCompatActivity implements Vie
                 }, 800);
             }
         }, 200);
+    }
+
+    private void observeViewModel() {
+        viewModel.getIsLoading().observe(this, isLoading -> {
+            if (isLoading) {
+                loader.show();
+            } else {
+                loader.dismiss();
+            }
+        });
+
+//        viewModel.getIsSaved().observe(this, saveSuccess -> {
+//            if (saveSuccess)
+//        });
+
+        viewModel.getQuestionList().observe(this,
+                secretQuestions -> setSpinnerQuestion(secretQuestions));
+
+        viewModel.getDataError().observe(this,
+                message -> UtilitiesCore.buildAlertDialog(
+                        this,
+                        message,
+                        R.drawable.ic_invalid,
+                        dialogInterface -> {
+                            dialogInterface.dismiss();
+                            finish();
+                        }));
+
+    }
+
+    private void setSpinnerQuestion(List<SecretQuestion> questionList) {
+        CustomSpinnerAdapter<SecretQuestion> spinnerAdapter =
+                new CustomSpinnerAdapter<>(this, R.layout.spinner_item_text, questionList);
+        spinnerSecuitySelection.setAdapter(spinnerAdapter);
+        spinnerSecuitySelection.setSelection(0);
     }
 }

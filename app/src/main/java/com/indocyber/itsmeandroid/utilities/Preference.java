@@ -46,6 +46,12 @@ public class Preference {
         editor.apply();
     }
 
+    public void clearPref() {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+    }
+
     public String getLoggedUserFullname() {
         return prefs.getString(LOGGED_USER_FULLNAME, "");
     }
