@@ -20,15 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.model.PromoMenuModel;
-import com.indocyber.itsmeandroid.view.BaseFragment;
-import com.indocyber.itsmeandroid.view.promo.adapter.PromoMenuAdapter;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.PromoMenuAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardFilterAdapter;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardListAdapter;
 import com.indocyber.itsmeandroid.viewremastered.morecard.activity.MoreCardRemasteredActivity;
 import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.CreditCardAdapter;
-import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dmax.dialog.SpotsDialog;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CARD_TYPE;
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;

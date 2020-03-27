@@ -1,16 +1,13 @@
 package com.indocyber.itsmeandroid.viewremastered.tagkartu;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ScrollView;
@@ -20,20 +17,16 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.TagKartuViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
-
-import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class TagKartu extends BaseActivity {
 

@@ -1,7 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.blockallcard.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProviders;
@@ -13,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -31,17 +29,10 @@ import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ListBlockAllCard;
-import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
-import com.indocyber.itsmeandroid.view.BaseActivity;
-import com.indocyber.itsmeandroid.viewmodel.LoginViewModel;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
-import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.WebviewPembayaranActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginAuthActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.popUp.PopUpResetPinSuccess;
 
 import java.util.Objects;
 

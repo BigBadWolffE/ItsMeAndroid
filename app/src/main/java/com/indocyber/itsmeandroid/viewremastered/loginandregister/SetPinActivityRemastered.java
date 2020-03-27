@@ -1,7 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.loginandregister;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProviders;
@@ -22,33 +21,24 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.davidmiguel.numberkeyboard.NumberKeyboard;
 import com.davidmiguel.numberkeyboard.NumberKeyboardListener;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
-import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseActivity;
-import com.indocyber.itsmeandroid.view.addmembership.AddMembershipActivity;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseActivity;
 import com.indocyber.itsmeandroid.viewmodel.PinActivityViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.PopUp.PopUpRegisterSucceedRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.RegistrationModel;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.helper.RegistrationRequest;
 
 import java.util.Objects;
-import java.util.Set;
 
 import javax.inject.Inject;
 
 import dmax.dialog.SpotsDialog;
-
-import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 
 public class SetPinActivityRemastered extends BaseActivity implements NumberKeyboardListener {

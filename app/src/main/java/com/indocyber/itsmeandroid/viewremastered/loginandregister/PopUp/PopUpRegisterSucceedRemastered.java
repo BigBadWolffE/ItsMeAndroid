@@ -54,7 +54,8 @@ public class PopUpRegisterSucceedRemastered {
             public void onClick(View view) {
                 dialog.dismiss();
                 Intent register = new Intent(activity, LoginActivityRemastered.class);
-                activity.startActivityForResult(register,1);
+                register.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                activity.startActivity(register);
             }
         });
         dialog.show();

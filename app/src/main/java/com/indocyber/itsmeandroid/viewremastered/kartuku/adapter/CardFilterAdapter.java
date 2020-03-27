@@ -79,9 +79,13 @@ public class CardFilterAdapter extends RecyclerView.Adapter<CardFilterAdapter.Ca
             notifyItemChanged(activePosition);
             activePosition = position;
             notifyItemChanged(activePosition);
-            if (this.type.equals(CREDIT_CARD))
-            this.listener.onClick(filterList.get(position));
-            else this.otherCardListener.onClick(position);
+            if (this.type.equals(CREDIT_CARD)) {
+                this.listener.onClick(filterList.get(position));
+            } else {
+                this.otherCardListener.onClick(position);
+            }
+
+
         };
         holder.bind(filterList.get(position), listener);
         holder.activateButton(position == activePosition);

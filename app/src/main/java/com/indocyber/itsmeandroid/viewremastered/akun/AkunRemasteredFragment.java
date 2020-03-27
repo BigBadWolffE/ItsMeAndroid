@@ -17,10 +17,8 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseFragment;
-import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.LoginActivityRemastered;
-import com.indocyber.itsmeandroid.viewremastered.resetpinfromaccount.ResetPinFromAkunActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.historytransaction.HistoryTransactionActivityRemastered;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.ResetPasswordFromForgotActivity;
 import com.indocyber.itsmeandroid.viewremastered.metodepembayaran.MetodePembayaranActivityRemastered;
@@ -86,7 +84,6 @@ public class AkunRemasteredFragment extends BaseFragment {
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         //if you want to finish just current activity
-                        getActivity().finish();
                     }
                 });
                 ab.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {

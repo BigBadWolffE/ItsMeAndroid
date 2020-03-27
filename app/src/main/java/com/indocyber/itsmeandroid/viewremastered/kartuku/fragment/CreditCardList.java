@@ -13,20 +13,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
-import com.indocyber.itsmeandroid.model.PromoMenuModel;
-import com.indocyber.itsmeandroid.view.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardFilterAdapter;
 import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.CardListAdapter;
-import com.indocyber.itsmeandroid.viewremastered.promo.Adapter.MenuPromoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.CREDIT_CARD;
 

@@ -2,30 +2,22 @@ package com.indocyber.itsmeandroid.viewremastered.home.fragment;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.SnapHelper;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
@@ -34,13 +26,10 @@ import com.indocyber.itsmeandroid.model.PromoItemModel;
 import com.indocyber.itsmeandroid.services.network.Api;
 import com.indocyber.itsmeandroid.utilities.Preference;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.BaseFragment;
-import com.indocyber.itsmeandroid.view.addcc.AddCcActivity;
-import com.indocyber.itsmeandroid.view.home.adapter.CardViewAdapter;
-import com.indocyber.itsmeandroid.view.home.adapter.PromoPagerAdapter;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.addcc.AddCcActivity;
+import com.indocyber.itsmeandroid.viewremastered.home.adapter.PromoPagerAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
-import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
 import com.indocyber.itsmeandroid.viewremastered.belipulsa.activity.BeliPulsaActivity;
 import com.indocyber.itsmeandroid.viewremastered.blockallcard.activity.BlockAllCardRemasterActivity;
 import com.indocyber.itsmeandroid.viewremastered.home.activity.HomeRemastered;
@@ -51,9 +40,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.inject.Inject;
-
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dmax.dialog.SpotsDialog;

@@ -1,7 +1,6 @@
 package com.indocyber.itsmeandroid.viewremastered.kartuku.fragment;
 
 import android.app.AlertDialog;
-import android.app.Person;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -17,15 +16,10 @@ import android.widget.LinearLayout;
 
 import com.google.android.material.tabs.TabLayout;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.BaseFragment;
-import com.indocyber.itsmeandroid.view.profile.adapter.TabAdapter;
-import com.indocyber.itsmeandroid.view.profile.fragment.DetailProfileFragment;
-import com.indocyber.itsmeandroid.view.profile.fragment.ProfileKTPFragment;
-import com.indocyber.itsmeandroid.view.profile.fragment.ProfileNPWPFragment;
-import com.indocyber.itsmeandroid.view.profile.fragment.ProfilePassportFragment;
+import com.indocyber.itsmeandroid.viewremastered.BaseFragment;
+import com.indocyber.itsmeandroid.viewremastered.kartuku.adapter.TabAdapter;
 import com.indocyber.itsmeandroid.viewmodel.HomeViewModel;
 import com.indocyber.itsmeandroid.viewmodel.ViewModelFactory;
-import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
 import javax.inject.Inject;
 

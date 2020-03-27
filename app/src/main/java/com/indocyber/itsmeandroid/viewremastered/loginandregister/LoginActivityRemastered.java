@@ -117,6 +117,7 @@ public class LoginActivityRemastered extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                finishAffinity();
                 //if you want to kill app . from other then your main avtivity.(Launcher)
                 android.os.Process.killProcess(android.os.Process.myPid());
                 System.exit(1);

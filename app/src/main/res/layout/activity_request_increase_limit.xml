@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.requestincreaselimit.RequestIncreaseLimitActivity">
+    tools:context=".viewremastered.requestincreaselimit.RequestIncreaseLimitActivity">
 
     <include
         layout="@layout/action_bar"
@@ -224,6 +224,7 @@
                 </LinearLayout>
                 
                 <LinearLayout
+                    android:id="@+id/alertbox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="@dimen/_12sdp"
@@ -246,15 +247,43 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:orientation="vertical"
                         android:layout_weight="7">
+
+                        <TextView
+                            android:id="@+id/pengajuanError"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_semibold"
+                            android:textColor="@color/support_red"
+                            android:text="- Pengajuan Limit harus diisi"/>
+
+                        <TextView
+                            android:id="@+id/pengajuanUntukError"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_semibold"
+                            android:textColor="@color/support_red"
+                            android:text="- Pengajuan untuk harus diisi"/>
                         
                         <TextView
                             android:id="@+id/nominalError"
+                            android:layout_marginTop="5dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/quicksand_semibold"
                             android:textColor="@color/support_red"
                             android:text="- Nominal pengajuan harus diisi"/>
+
+                        <TextView
+                            android:id="@+id/agreementError"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_semibold"
+                            android:textColor="@color/support_red"
+                            android:text="- Persetujuan harus diisi"/>
 
                     </LinearLayout>
                 </LinearLayout>

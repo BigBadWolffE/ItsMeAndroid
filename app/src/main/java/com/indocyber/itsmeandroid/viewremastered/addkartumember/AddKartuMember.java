@@ -9,10 +9,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +18,6 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -31,15 +26,9 @@ import com.indocyber.itsmeandroid.R;
 import com.indocyber.itsmeandroid.model.ImageCardModel;
 import com.indocyber.itsmeandroid.utilities.GlobalVariabel;
 import com.indocyber.itsmeandroid.utilities.UtilitiesCore;
-import com.indocyber.itsmeandroid.view.otp.OtpActivity;
-import com.indocyber.itsmeandroid.view.requestincreaselimit.RequestIncreaseLimitActivity;
 import com.indocyber.itsmeandroid.viewremastered.loginandregister.SetPinActivityRemastered;
 
-import org.apache.commons.text.WordUtils;
-
 import java.util.Calendar;
-
-import static com.indocyber.itsmeandroid.utilities.GlobalVariabel.INTENT_ID;
 
 public class AddKartuMember extends AppCompatActivity {
 

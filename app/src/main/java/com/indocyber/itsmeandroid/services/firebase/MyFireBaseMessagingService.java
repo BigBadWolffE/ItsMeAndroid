@@ -21,7 +21,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.indocyber.itsmeandroid.R;
-import com.indocyber.itsmeandroid.view.home.activity.HomeActivity;
+import com.indocyber.itsmeandroid.viewremastered.splashscreen.SplashScreenActivity;
 
 /*
  *
@@ -159,7 +159,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, SplashScreenActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

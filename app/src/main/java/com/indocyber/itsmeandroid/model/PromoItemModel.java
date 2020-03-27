@@ -19,6 +19,8 @@ public class PromoItemModel {
     private String title;
     @SerializedName("distance")
     private String distance;
+    @SerializedName("promoSK")
+    private String syaratKetentuan;
     public String periode;
     public int banner;
 
@@ -108,5 +110,13 @@ public class PromoItemModel {
 
     public void setDistance(String distance) {
         this.distance = distance;
+    }
+
+    public String getSyaratKetentuan() {
+        return syaratKetentuan;
+    }
+
+    public void setSyaratKetentuan(String syaratKetentuan) {
+        this.syaratKetentuan = syaratKetentuan;
     }
 }
