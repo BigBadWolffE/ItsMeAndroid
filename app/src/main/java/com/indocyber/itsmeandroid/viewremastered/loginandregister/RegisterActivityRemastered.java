@@ -143,7 +143,7 @@ public class RegisterActivityRemastered extends BaseActivity implements View.OnC
         );
 
         phoneCustom
-                = Pattern.compile("08"+"[0-9]{10,12}");
+                = Pattern.compile("08"+"[0-9]{11,12}");
 
         etEmail.addTextChangedListener(emailWatcher);
         etEmail.requestFocus();
